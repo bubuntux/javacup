@@ -185,6 +185,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         this.getContentPane().setBackground(Color.black);
         directorios.add(new File("build" + File.separator + "classes"));
         directorios.add(new File("bin"));
+        directorios.add(new File("target/classes"));
         load();
         updateLocalVisita();
         jfc = new JFileChooser(datos.dir);
