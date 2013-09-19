@@ -1,2 +1,2 @@
-javacup
+JavaCup
 =======

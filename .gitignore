@@ -1,4 +1,13 @@
+# TODO
+config.xml
+
+# Idea Files #
+*.iml
+.idea
+
+# Binary Files #
 *.class
+target
 
 # Package Files #
 *.jar
