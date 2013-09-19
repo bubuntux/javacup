@@ -117,7 +117,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         df.setMinimumFractionDigits(2);
         try {
             for (int i = 0; i < data.length; i++) {
-                data[i] = (PoligonosData) xs.fromXML(getClass().getResourceAsStream("estilos/" + (i + 1)));
+                data[i] = (PoligonosData) xs.fromXML(getClass().getResourceAsStream("/styles/" + (i + 1)));
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Debe limpiar y construir el proyecto");
