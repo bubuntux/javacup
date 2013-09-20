@@ -1,19 +1,7 @@
 package org.javahispano.javacup.gui.asistente;
 
-import org.javahispano.javacup.model.engine.GameSituations;
-import org.javahispano.javacup.model.util.Position;
-import org.javahispano.javacup.model.util.Constants;
-import org.javahispano.javacup.model.util.TacticValidate;
-import org.javahispano.javacup.model.command.Command;
-import org.javahispano.javacup.model.trajectory.AbstractTrajectory;
-import org.javahispano.javacup.model.trajectory.AirTrajectory;
-import com.thoughtworks.xstream.XStream;
-import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
-import java.awt.Image;
+import javax.swing.*;
+import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.io.File;
@@ -23,88 +11,146 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JColorChooser;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import org.javahispano.javacup.model.*;
+import java.util.Properties;
+import com.thoughtworks.xstream.XStream;
+import org.javahispano.javacup.model.PlayerDetail;
+import org.javahispano.javacup.model.Tactic;
+import org.javahispano.javacup.model.TacticDetail;
+import org.javahispano.javacup.model.command.Command;
+import org.javahispano.javacup.model.engine.GameSituations;
+import org.javahispano.javacup.model.trajectory.AbstractTrajectory;
+import org.javahispano.javacup.model.trajectory.AirTrajectory;
+import org.javahispano.javacup.model.util.Constants;
+import org.javahispano.javacup.model.util.Position;
+import org.javahispano.javacup.model.util.TacticValidate;
+import org.javahispano.javacup.render.EstiloUniforme;
+import org.javahispano.javacup.render.PintaJugador;
 import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.opengl.InternalTextureLoader;
-import java.util.Properties;
-import javax.swing.JProgressBar;
-import org.javahispano.javacup.render.EstiloUniforme;
-import org.javahispano.javacup.render.PintaJugador;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/**Aplicacion que permite generar codigo para la implementacion de la clase TacticDetail.
- * Ademas permite gestionar alineaciones y simular remates*/
+import static javax.swing.GroupLayout.Alignment.BASELINE;
+import static javax.swing.GroupLayout.Alignment.LEADING;
+import static javax.swing.LayoutStyle.ComponentPlacement.RELATED;
+
+/**
+ * Aplicacion que permite generar codigo para la implementacion de la clase TacticDetail.
+ * Ademas permite gestionar alineaciones y simular remates
+ */
 public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
-    private boolean pintando = false;
-    private static Logger logger = LoggerFactory.getLogger(AsistenteFrame.class);
-    private static final String[] paises = new String[]{
-        "", "Afganistán", "Albania", "Argelia", "Samoa Americana", "Andorra", "Angola", "Anguila", "Antigua y Barbuda",
-        "Argentina", "Armenia", "Aruba", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bahrein", "Bangladesh", "Barbados",
-        "Bélgica", "Belice", "Benin", "Bermudas", "Bhután", "Bolivia", "Bosnia y Herzegovina", "Botswana", "Brasil",
-        "Islas Vírgenes Británicas", "Brunei Darussalam", "Bulgaria", "Burkina Faso", "Burundi", "Belarús", "Camboya",
-        "Camerún", "Canadá", "Cabo Verde", "Islas Caimán", "República Centroafricana", "Chad", "Chile", "China", "Colombia",
-        "Comoras", "Congo", "Costa Rica", "Costa de Marfil", "Croacia", "Cuba", "Chipre", "República Checa",
-        "República Popular Democrática de Corea", "Dinamarca", "Djibouti", "Dominica", "República Dominicana",
-        "Ecuador", "Egipto", "El Salvador", "Guinea Ecuatorial", "Eritrea", "Estonia", "Etiopía", "Islas Malvinas",
-        "Islas Feroe", "República Federal de Alemania", "Fiji", "Finlandia", "Francia", "Gabón", "Gambia", "Georgia", "Ghana",
-        "Grecia", "Groenlandia", "Granada", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haití", "Honduras",
-        "Hong Kong", "Hungría", "Islandia", "India", "Indonesia", "Irán", "Iraq", "Irlanda", "Israel", "Italia", "Jamaica",
-        "Japón", "Jordania", "Kazajstán", "Kenya", "Kiribati", "Kuwait", "Kirguistán", "República Democrática Popular Lao",
-        "Letonia", "Líbano", "Lesotho", "Liberia", "Libia", "Liechtenstein", "Lituania", "Luxemburgo", "Macao", "Madagascar",
-        "Malawi", "Malasia", "Maldivas", "Malí", "Malta", "Islas Marshall", "Mauritania", "Mauricio", "México", "Micronesia",
-        "Moldova", "Mónaco", "Mongolia", "Montserrat", "Marruecos", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal", "Hollanda",
-        "Antillas Holandesas", "Nueva Zelanda", "Nicaragua", "Níger", "Nigeria", "Isla Norfolk", "Islas Marianas del Norte",
-        "Noruega", "Omán", "Pakistán", "Palau", "Panamá", "Papua Nueva Guinea", "Paraguay", "Perú", "Filipinas", "Isla Pitcairn",
-        "Polonia", "Portugal", "Puerto Rico", "Qatar", "República de Corea", "Rumania", "Federación de Rusia", "Rwanda",
-        "Saint Kitts y Nevis", "Santa Lucía", "Samoa", "San Marino", "Santo Tomé y Príncipe", "Arabia Saudita", "Senegal",
-        "Seychelles", "Sierra Leona", "Singapur", "República Eslovaca", "Eslovenia", "Islas Salomón", "Somalia", "Sudáfrica",
-        "Georgia del Sur e Islas Sandwich del Sur", "España", "Sri Lanka", "Santa Elena", "San Vicente y las Granadinas",
-        "Sudán", "Suriname", "Swazilandia", "Suecia", "Suiza", "República Árabe Siria", "Taiwan", "Tayikistán", "Tailandia",
-        "Togo", "Tonga", "Trinidad y Tabago", "Túnez", "Turquía", "Turkmenistán", "Islas Turcas y Caicos", "Tuvalu", "Uganda",
-        "Ucrania", "Emiratos Árabes Unidos", "Reino Unido de Gran Bretaña e Irlanda del Norte", "República Unida de Tanzanía",
-        "Estados Unidos de América", "Islas Vírgenes de los Estados Unidos", "Uruguay", "Uzbekistán", "Vanuatu", "Venezuela",
-        "Viet Nam", "Sáhara Occidental", "Yemen", "Zambia", "Zimbabwe"
-    };
-    private static final EstiloUniforme[] estilos = {EstiloUniforme.FRANJA_HORIZONTAL, EstiloUniforme.FRANJA_VERTICAL,
-        EstiloUniforme.FRANJA_DIAGONAL, EstiloUniforme.LINEAS_HORIZONTALES, EstiloUniforme.LINEAS_VERTICALES,
-        EstiloUniforme.SIN_ESTILO
-    };
+    private static final String[] paises =
+        new String[]{"", "Afganistán", "Albania", "Argelia", "Samoa Americana", "Andorra", "Angola", "Anguila", "Antigua y Barbuda", "Argentina",
+            "Armenia", "Aruba", "Australia", "Austria", "Azerbaiyán", "Bahamas", "Bahrein", "Bangladesh", "Barbados", "Bélgica", "Belice", "Benin",
+            "Bermudas", "Bhután", "Bolivia", "Bosnia y Herzegovina", "Botswana", "Brasil", "Islas Vírgenes Británicas", "Brunei Darussalam",
+            "Bulgaria", "Burkina Faso", "Burundi", "Belarús", "Camboya", "Camerún", "Canadá", "Cabo Verde", "Islas Caimán",
+            "República Centroafricana", "Chad", "Chile", "China", "Colombia", "Comoras", "Congo", "Costa Rica", "Costa de Marfil", "Croacia", "Cuba",
+            "Chipre", "República Checa", "República Popular Democrática de Corea", "Dinamarca", "Djibouti", "Dominica", "República Dominicana",
+            "Ecuador", "Egipto", "El Salvador", "Guinea Ecuatorial", "Eritrea", "Estonia", "Etiopía", "Islas Malvinas", "Islas Feroe",
+            "República Federal de Alemania", "Fiji", "Finlandia", "Francia", "Gabón", "Gambia", "Georgia", "Ghana", "Grecia", "Groenlandia",
+            "Granada", "Guam", "Guatemala", "Guinea", "Guinea-Bissau", "Guyana", "Haití", "Honduras", "Hong Kong", "Hungría", "Islandia", "India",
+            "Indonesia", "Irán", "Iraq", "Irlanda", "Israel", "Italia", "Jamaica", "Japón", "Jordania", "Kazajstán", "Kenya", "Kiribati", "Kuwait",
+            "Kirguistán", "República Democrática Popular Lao", "Letonia", "Líbano", "Lesotho", "Liberia", "Libia", "Liechtenstein", "Lituania",
+            "Luxemburgo", "Macao", "Madagascar", "Malawi", "Malasia", "Maldivas", "Malí", "Malta", "Islas Marshall", "Mauritania", "Mauricio",
+            "México", "Micronesia", "Moldova", "Mónaco", "Mongolia", "Montserrat", "Marruecos", "Mozambique", "Myanmar", "Namibia", "Nauru", "Nepal",
+            "Hollanda", "Antillas Holandesas", "Nueva Zelanda", "Nicaragua", "Níger", "Nigeria", "Isla Norfolk", "Islas Marianas del Norte",
+            "Noruega", "Omán", "Pakistán", "Palau", "Panamá", "Papua Nueva Guinea", "Paraguay", "Perú", "Filipinas", "Isla Pitcairn", "Polonia",
+            "Portugal", "Puerto Rico", "Qatar", "República de Corea", "Rumania", "Federación de Rusia", "Rwanda", "Saint Kitts y Nevis",
+            "Santa Lucía", "Samoa", "San Marino", "Santo Tomé y Príncipe", "Arabia Saudita", "Senegal", "Seychelles", "Sierra Leona", "Singapur",
+            "República Eslovaca", "Eslovenia", "Islas Salomón", "Somalia", "Sudáfrica", "Georgia del Sur e Islas Sandwich del Sur", "España",
+            "Sri Lanka", "Santa Elena", "San Vicente y las Granadinas", "Sudán", "Suriname", "Swazilandia", "Suecia", "Suiza",
+            "República Árabe Siria", "Taiwan", "Tayikistán", "Tailandia", "Togo", "Tonga", "Trinidad y Tabago", "Túnez", "Turquía", "Turkmenistán",
+            "Islas Turcas y Caicos", "Tuvalu", "Uganda", "Ucrania", "Emiratos Árabes Unidos", "Reino Unido de Gran Bretaña e Irlanda del Norte",
+            "República Unida de Tanzanía", "Estados Unidos de América", "Islas Vírgenes de los Estados Unidos", "Uruguay", "Uzbekistán", "Vanuatu",
+            "Venezuela", "Viet Nam", "Sáhara Occidental", "Yemen", "Zambia", "Zimbabwe"};
+    private static final EstiloUniforme[] estilos =
+        {EstiloUniforme.FRANJA_HORIZONTAL, EstiloUniforme.FRANJA_VERTICAL, EstiloUniforme.FRANJA_DIAGONAL, EstiloUniforme.LINEAS_HORIZONTALES,
+            EstiloUniforme.LINEAS_VERTICALES, EstiloUniforme.SIN_ESTILO};
     private static final PoligonosData[] data = new PoligonosData[estilos.length];
     private static final long serialVersionUID = -6836315756188587417L;
+    private static Logger logger = LoggerFactory.getLogger(AsistenteFrame.class);
+    final String constNames[] =
+        new String[]{"centroArcoInf", "posteDerArcoSup", "posteIzqArcoSup", "cornerSupDer", "cornerSupIzq", "penalSup", "centroArcoSup",
+            "posteDerArcoInf", "posteIzqArcoInf", "cornerInfDer", "cornerInfIzq", "penalInf", "centroCampoJuego"};
+    final Position constPos[] =
+        new Position[]{Constants.centroArcoInf, Constants.posteDerArcoSup, Constants.posteIzqArcoSup, Constants.cornerSupDer, Constants.cornerSupIzq,
+            Constants.penalSup, Constants.centroArcoSup, Constants.posteDerArcoInf, Constants.posteIzqArcoInf, Constants.cornerInfDer,
+            Constants.cornerInfIzq, Constants.penalInf, Constants.centroCampoJuego};
+    Game game = null;
+    Properties props = new Properties();
+    ArrayList<Integer[]> intx = new ArrayList<>();
+    ArrayList<Integer[]> inty = new ArrayList<>();
+    ArrayList<Color> cols = new ArrayList<>();
+    DecimalFormat df = new DecimalFormat();
+    JFileChooser jfc;
+    String name = "";
+    double sx = 442, sy = 286;
+    double distMin;
+    boolean cupdate = true;
+    int type = 0;
+    Position p0;
+    boolean sim = false;
+    String tooltip = "";
+    int x0, y0;
+    Position pos = null;
+    double fuerza = 1;
+    double ang = 0;
+    double elev = 0;
+    Color c1 = new Color(255, 0, 0);
+    Color c2 = new Color(0, 0, 153);
+    Color c3 = new Color(255, 255, 255);
+    // End of variables declaration//GEN-END:variables
+    boolean update = false;
+    boolean newImpl = false;
+    private boolean pintando = false;
     private TacticDetailImpl impl = new TacticDetailImpl();
     private Image cancha, campo;
     private DefaultListModel model = new DefaultListModel();
     private PintaJugador jp = null;
     private CanvasGameContainer cgc = null;
-    private XStream xs = new XStream();
     private DefaultComboBoxModel model1 = new DefaultComboBoxModel();
     private boolean uniformeAlternativo = false;
-
-    private String convertVelocidad(double f) {
-        return df.format(Constants.getVelocidad(f)) + " m/iter";
-    }
-
-    private String convertRemate(double f) {
-        return df.format(Constants.getVelocidadRemate(f)) + " m/iter";
-    }
-
-    private String convertError(double f) {
-        return df.format(Constants.getErrorAngular(f) * 100) + " %";
-    }
-    Game game = null;
-    Properties props = new Properties();
+    // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButton3;
+    private javax.swing.JButton jButton4;
+    private javax.swing.JButton jButton5;
+    private javax.swing.JButton jButton6;
+    private javax.swing.JButton jButton7;
+    private javax.swing.JComboBox jComboBox1;
+    private javax.swing.JComboBox jComboBox2;
+    private javax.swing.JComboBox jComboBox3;
+    private javax.swing.JComboBox jComboBox4;
+    private javax.swing.JComboBox jComboBox7;
+    private javax.swing.JDialog jDialog1;
+    private javax.swing.JLabel jLabel14;
+    private javax.swing.JLabel jLabel15;
+    private javax.swing.JLabel jLabel16;
+    private javax.swing.JLabel jLabel17;
+    private javax.swing.JLabel jLabel20;
+    private javax.swing.JList jList1;
+    private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel5;
+    private javax.swing.JPanel jPanel7;
+    private javax.swing.JProgressBar jProgressBar1;
+    private javax.swing.JSlider jSlider1;
+    private javax.swing.JSlider jSlider2;
+    private javax.swing.JSlider jSlider3;
+    private javax.swing.JTextArea jTextArea1;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JTextField jTextField2;
+    private javax.swing.JTextField jTextField3;
+    private javax.swing.JTextField jTextField4;
+    private javax.swing.JTextField jTextField5;
+    private javax.swing.JTextField jTextField6;
+    private javax.swing.JTextField jTextField7;
+    private javax.swing.JToggleButton jToggleButton2;
 
     public AsistenteFrame() throws Exception {
         File dir = new File(System.getProperty("user.dir"));
@@ -116,6 +162,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jfc = new JFileChooser(dir);
         df.setMinimumFractionDigits(2);
         try {
+            XStream xs = new XStream();
             for (int i = 0; i < data.length; i++) {
                 data[i] = (PoligonosData) xs.fromXML(getClass().getResourceAsStream("/styles/" + (i + 1)));
             }
@@ -141,6 +188,13 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         game = new Game() {
 
             org.newdawn.slick.Image pasto = null;
+            int idx = 0
+                ,
+                id = 0;
+            double deg = 0;
+            double x = 0
+                ,
+                y = 0;
 
             @Override
             public void init(GameContainer gc) throws SlickException {
@@ -176,9 +230,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                     newImpl = false;
                 }
             }
-            int idx = 0, id = 0;
-            double deg = 0;
-            double x = 0, y = 0;
 
             @Override
             public void render(GameContainer gc, org.newdawn.slick.Graphics g) throws SlickException {
@@ -241,9 +292,18 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jComboBox3.setSelectedIndex(0);
         jTextField1.requestFocus();
     }
-    ArrayList<Integer[]> intx = new ArrayList<Integer[]>();
-    ArrayList<Integer[]> inty = new ArrayList<Integer[]>();
-    ArrayList<Color> cols = new ArrayList<Color>();
+
+    private String convertVelocidad(double f) {
+        return df.format(Constants.getVelocidad(f)) + " m/iter";
+    }
+
+    private String convertRemate(double f) {
+        return df.format(Constants.getVelocidadRemate(f)) + " m/iter";
+    }
+
+    private String convertError(double f) {
+        return df.format(Constants.getErrorAngular(f) * 100) + " %";
+    }
 
     private int[] toInt(Integer[] x) {
         return toInt(x, 0);
@@ -262,27 +322,27 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
     private void initComponents() {
 
         jDialog1 = new javax.swing.JDialog();
-        jScrollPane2 = new javax.swing.JScrollPane();
+        JScrollPane jScrollPane2 = new JScrollPane();
         jTextArea1 = new javax.swing.JTextArea();
-        jMenuBar2 = new javax.swing.JMenuBar();
-        jMenu2 = new javax.swing.JMenu();
-        jMenu3 = new javax.swing.JMenu();
-        jTabbedPane1 = new javax.swing.JTabbedPane();
+        JMenuBar jMenuBar2 = new JMenuBar();
+        JMenu jMenu2 = new JMenu();
+        JMenu jMenu3 = new JMenu();
+        JTabbedPane jTabbedPane1 = new JTabbedPane();
         jPanel1 = new javax.swing.JPanel();
-        jLabel1 = new javax.swing.JLabel();
+        JLabel jLabel1 = new JLabel();
         jTextField1 = new javax.swing.JTextField();
-        jLabel2 = new javax.swing.JLabel();
+        JLabel jLabel2 = new JLabel();
         jComboBox1 = new javax.swing.JComboBox();
-        jLabel3 = new javax.swing.JLabel();
+        JLabel jLabel3 = new JLabel();
         jTextField2 = new javax.swing.JTextField();
-        jLabel4 = new javax.swing.JLabel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
+        JLabel jLabel4 = new JLabel();
+        JLabel jLabel5 = new JLabel();
+        JLabel jLabel6 = new JLabel();
+        JLabel jLabel7 = new JLabel();
+        JLabel jLabel8 = new JLabel();
+        JLabel jLabel9 = new JLabel();
         jComboBox7 = new javax.swing.JComboBox();
-        jPanel3 = 		new javax.swing.JPanel() {
+        JPanel jPanel3 = new JPanel() {
 
             public void paint(Graphics g) {
                 g.drawImage(cancha, 0, 0, null);
@@ -323,13 +383,13 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton3 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
         jButton5 = new javax.swing.JButton();
-        jButton8 = new javax.swing.JButton();
+        JButton jButton8 = new JButton();
         jComboBox4 = new javax.swing.JComboBox();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
-        jLabel12 = new javax.swing.JLabel();
-        jLabel13 = new javax.swing.JLabel();
+        JPanel jPanel2 = new JPanel();
+        JLabel jLabel10 = new JLabel();
+        JLabel jLabel11 = new JLabel();
+        JLabel jLabel12 = new JLabel();
+        JLabel jLabel13 = new JLabel();
         jTextField3 = new javax.swing.JTextField();
         jTextField4 = new javax.swing.JTextField();
         jButton6 = new javax.swing.JButton();
@@ -337,34 +397,33 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jLabel15 = new javax.swing.JLabel();
         jLabel16 = new javax.swing.JLabel();
         jLabel17 = new javax.swing.JLabel();
-        jButton9 = new javax.swing.JButton();
+        JButton jButton9 = new JButton();
         jSlider1 = new javax.swing.JSlider();
         jSlider2 = new javax.swing.JSlider();
         jSlider3 = new javax.swing.JSlider();
-        jPanel9 = new javax.swing.JPanel();
+        JPanel jPanel9 = new JPanel();
         jLabel20 = new javax.swing.JLabel();
-        jProgressBar1 = new JProgressBar(){
+        jProgressBar1 = new JProgressBar() {
 
             @Override
-            public void paint(Graphics g){
-                int w=getWidth();
-                int h=getHeight();
-                int f=(int)((double)h*((double)this.getValue()/(double)this.getMaximum()));
+            public void paint(Graphics g) {
+                int w = getWidth();
+                int h = getHeight();
+                int f = (int) ((double) h * ((double) this.getValue() / (double) this.getMaximum()));
                 g.setColor(Color.black);
-                g.fillRect(0,0,w,h);
+                g.fillRect(0, 0, w, h);
                 g.setColor(Color.blue);
-                g.fillRect(0,h-f,w,f);
+                g.fillRect(0, h - f, w, f);
             }
-
         };
-        jLabel19 = new javax.swing.JLabel();
-        jButton18 = new javax.swing.JButton();
-        jPanel4 = new javax.swing.JPanel();
+        JLabel jLabel19 = new JLabel();
+        JButton jButton18 = new JButton();
+        JPanel jPanel4 = new JPanel();
         jComboBox3 = new javax.swing.JComboBox();
         jComboBox2 = new javax.swing.JComboBox();
-        jButton11 = new javax.swing.JButton();
-        jButton12 = new javax.swing.JButton();
-        jPanel5 =         new javax.swing.JPanel() {
+        JButton jButton11 = new JButton();
+        JButton jButton12 = new JButton();
+        jPanel5 = new javax.swing.JPanel() {
 
             Font f = new Font("lucida console", 0, 10);
 
@@ -383,7 +442,8 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                     if (idx == 1 && p.getY() > 0) {
                         ok = false;
                     }
-                    if (idx == 2 && (p.getY() > 0 || p.distance(org.javahispano.javacup.model.util.Constants.centroCampoJuego) <= org.javahispano.javacup.model.util.Constants.RADIO_CIRCULO_CENTRAL)) {
+                    if (idx == 2 && (p.getY() > 0 || p.distance(org.javahispano.javacup.model.util.Constants.centroCampoJuego) <=
+                        org.javahispano.javacup.model.util.Constants.RADIO_CIRCULO_CENTRAL)) {
                         ok = false;
                     }
                     if (p == null) {
@@ -425,7 +485,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                         g.drawRect((int) pos.getX() - 2, (int) pos.getY() - 2, 5, 5);
                         org.javahispano.javacup.model.util.Position pkt = unTransformAsistente(pos);
                         g.setColor(Color.white);
-                        g.drawString(tooltip, x0 - (int) (pkt.getY()/3), y0);
+                        g.drawString(tooltip, x0 - (int) (pkt.getY() / 3), y0);
                     }
                 }
                 double r = 0;
@@ -435,38 +495,38 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             }
         };
         jLabel14 = new javax.swing.JLabel();
-        jButton10 = new javax.swing.JButton();
-        jButton13 = new javax.swing.JButton();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel18 = new javax.swing.JLabel();
+        JButton jButton10 = new JButton();
+        JButton jButton13 = new JButton();
+        JPanel jPanel8 = new JPanel();
+        JLabel jLabel18 = new JLabel();
         jTextField5 = new javax.swing.JTextField();
-        jLabel23 = new javax.swing.JLabel();
+        JLabel jLabel23 = new JLabel();
         jTextField6 = new javax.swing.JTextField();
-        jLabel24 = new javax.swing.JLabel();
+        JLabel jLabel24 = new JLabel();
         jTextField7 = new javax.swing.JTextField();
-        jLabel21 = new javax.swing.JLabel();
-        jButton14 = new javax.swing.JButton();
-        jPanel10 = new javax.swing.JPanel();
-        jLabel22 = new javax.swing.JLabel();
-        jPanel11 = new javax.swing.JPanel();
-        jPanel12 = new javax.swing.JPanel();
-        jPanel13 = new javax.swing.JPanel();
+        JLabel jLabel21 = new JLabel();
+        JButton jButton14 = new JButton();
+        JPanel jPanel10 = new JPanel();
+        JLabel jLabel22 = new JLabel();
+        JPanel jPanel11 = new JPanel();
+        JPanel jPanel12 = new JPanel();
+        JPanel jPanel13 = new JPanel();
         jToggleButton2 = new javax.swing.JToggleButton();
-        jPanel6 = new javax.swing.JPanel();
+        JPanel jPanel6 = new JPanel();
         jPanel7 = new javax.swing.JPanel();
-        jScrollPane1 = new javax.swing.JScrollPane();
+        JScrollPane jScrollPane1 = new JScrollPane();
         jList1 = new javax.swing.JList();
-        jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jSeparator1 = new javax.swing.JSeparator();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jSeparator2 = new javax.swing.JSeparator();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        JMenuBar jMenuBar1 = new JMenuBar();
+        JMenu jMenu1 = new JMenu();
+        JMenuItem jMenuItem1 = new JMenuItem();
+        JMenuItem jMenuItem2 = new JMenuItem();
+        JSeparator jSeparator1 = new JSeparator();
+        JMenuItem jMenuItem3 = new JMenuItem();
+        JMenuItem jMenuItem4 = new JMenuItem();
+        JMenuItem jMenuItem5 = new JMenuItem();
+        JMenuItem jMenuItem6 = new JMenuItem();
+        JSeparator jSeparator2 = new JSeparator();
+        JMenuItem jMenuItem7 = new JMenuItem();
 
         jDialog1.setModal(true);
         jDialog1.getContentPane().setLayout(new java.awt.CardLayout());
@@ -586,16 +646,10 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
         jPanel3.setFocusable(false);
 
-        org.jdesktop.layout.GroupLayout jPanel3Layout = new org.jdesktop.layout.GroupLayout(jPanel3);
+        GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 226, Short.MAX_VALUE)
-        );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 336, Short.MAX_VALUE)
-        );
+        jPanel3Layout.setHorizontalGroup(jPanel3Layout.createParallelGroup(LEADING).addGap(0, 226, Short.MAX_VALUE));
+        jPanel3Layout.setVerticalGroup(jPanel3Layout.createParallelGroup(LEADING).addGap(0, 336, Short.MAX_VALUE));
 
         jPanel1.add(jPanel3);
         jPanel3.setBounds(310, 10, 230, 340);
@@ -667,7 +721,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton8.setBounds(209, 320, 90, 23);
 
         jComboBox4.setFont(new java.awt.Font("Arial", 0, 12));
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Equipamiento Principal", "Equipamiento Secundario" }));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Equipamiento Principal", "Equipamiento Secundario"}));
         jComboBox4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
@@ -699,6 +753,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField3FocusGained(evt);
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField3FocusLost(evt);
             }
@@ -707,6 +762,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextField3KeyPressed(evt);
             }
+
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField3KeyReleased(evt);
             }
@@ -717,6 +773,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 jTextField4FocusGained(evt);
             }
+
             public void focusLost(java.awt.event.FocusEvent evt) {
                 jTextField4FocusLost(evt);
             }
@@ -725,6 +782,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 jTextField4KeyPressed(evt);
             }
+
             public void keyReleased(java.awt.event.KeyEvent evt) {
                 jTextField4KeyReleased(evt);
             }
@@ -827,27 +885,17 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Creditos"); // NOI18N
 
-        org.jdesktop.layout.GroupLayout jPanel9Layout = new org.jdesktop.layout.GroupLayout(jPanel9);
+        GroupLayout jPanel9Layout = new GroupLayout(jPanel9);
         jPanel9.setLayout(jPanel9Layout);
-        jPanel9Layout.setHorizontalGroup(
-            jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel9Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel20, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
-                    .add(jLabel19, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE))
-                .addContainerGap())
-        );
-        jPanel9Layout.setVerticalGroup(
-            jPanel9Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel9Layout.createSequentialGroup()
-                .add(jLabel19)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jProgressBar1, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE)
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jLabel20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-        );
+        jPanel9Layout.setHorizontalGroup(jPanel9Layout.createParallelGroup(LEADING).addGroup(jPanel9Layout.createSequentialGroup().addContainerGap()
+            .addGroup(jPanel9Layout.createParallelGroup(LEADING)
+                .addComponent(jProgressBar1, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addComponent(jLabel20, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)
+                .addComponent(jLabel19, GroupLayout.DEFAULT_SIZE, 95, Short.MAX_VALUE)).addContainerGap()));
+        jPanel9Layout.setVerticalGroup(jPanel9Layout.createParallelGroup(LEADING).addGroup(GroupLayout.Alignment.TRAILING,
+            jPanel9Layout.createSequentialGroup().addComponent(jLabel19).addPreferredGap(RELATED)
+                .addComponent(jProgressBar1, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE).addPreferredGap(RELATED)
+                .addComponent(jLabel20, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)));
 
         jButton18.setFont(new java.awt.Font("Arial", 0, 12));
         jButton18.setText("Este Jugador es Portero");
@@ -858,88 +906,60 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        org.jdesktop.layout.GroupLayout jPanel2Layout = new org.jdesktop.layout.GroupLayout(jPanel2);
+        GroupLayout jPanel2Layout = new GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel16, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jSlider3, 0, 0, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jLabel17, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jSlider2, 0, 0, Short.MAX_VALUE)
-                    .add(jSlider1, 0, 0, Short.MAX_VALUE)
-                    .add(jLabel15, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
-                    .add(jLabel12)
-                    .add(jPanel2Layout.createSequentialGroup()
-                        .add(jLabel10)
-                        .add(47, 47, 47)
-                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jButton18, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE)
-                            .add(jPanel2Layout.createSequentialGroup()
-                                .add(jTextField3, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
-                                .add(18, 18, 18)
-                                .add(jLabel13)
-                                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                                .add(jTextField4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                        .add(7, 7, 7))
-                    .add(jPanel2Layout.createSequentialGroup()
-                        .add(jLabel11)
-                        .add(22, 22, 22)
-                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jButton9, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                            .add(org.jdesktop.layout.GroupLayout.TRAILING, jButton7, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
-                            .add(jButton6, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE))))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
-        );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel2Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel9, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .add(jPanel2Layout.createSequentialGroup()
-                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(jLabel10)
-                            .add(jTextField3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jLabel13)
-                            .add(jTextField4, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton18, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 19, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(jLabel11)
-                            .add(jButton6, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jPanel2Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(jLabel12)
-                            .add(jButton7, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton9, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(28, 28, 28)
-                        .add(jLabel15, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jSlider1, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jLabel16, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jSlider2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jLabel17, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jSlider3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
+        jPanel2Layout.setHorizontalGroup(jPanel2Layout.createParallelGroup(LEADING).addGroup(jPanel2Layout.createSequentialGroup().addContainerGap()
+            .addGroup(jPanel2Layout.createParallelGroup(LEADING)
+                .addComponent(jLabel16, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                .addComponent(jSlider3, GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel17, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE)
+                .addComponent(jSlider2, GroupLayout.Alignment.TRAILING, 0, 0, Short.MAX_VALUE).addComponent(jSlider1, 0, 0, Short.MAX_VALUE)
+                .addComponent(jLabel15, GroupLayout.DEFAULT_SIZE, 391, Short.MAX_VALUE).addComponent(jLabel12).addGroup(
+                    jPanel2Layout.createSequentialGroup().addComponent(jLabel10).addGap(47, 47, 47).addGroup(
+                        jPanel2Layout.createParallelGroup(LEADING)
+                            .addComponent(jButton18, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 292, Short.MAX_VALUE).addGroup(
+                            jPanel2Layout.createSequentialGroup().addComponent(jTextField3, GroupLayout.DEFAULT_SIZE, 234, Short.MAX_VALUE)
+                                .addGap(18, 18, 18).addComponent(jLabel13).addPreferredGap(RELATED)
+                                .addComponent(jTextField4, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE))).addGap(7, 7, 7)).addGroup(
+                    jPanel2Layout.createSequentialGroup().addComponent(jLabel11).addGap(22, 22, 22).addGroup(
+                        jPanel2Layout.createParallelGroup(LEADING)
+                            .addComponent(jButton9, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                            .addComponent(jButton7, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)
+                            .addComponent(jButton6, GroupLayout.DEFAULT_SIZE, 298, Short.MAX_VALUE)))).addPreferredGap(RELATED)
+            .addComponent(jPanel9, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addContainerGap()));
+        jPanel2Layout.setVerticalGroup(jPanel2Layout.createParallelGroup(LEADING).addGroup(jPanel2Layout.createSequentialGroup().addContainerGap()
+            .addGroup(jPanel2Layout.createParallelGroup(LEADING)
+                .addComponent(jPanel9, GroupLayout.Alignment.TRAILING, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
+                    jPanel2Layout.createSequentialGroup().addGroup(jPanel2Layout.createParallelGroup(BASELINE).addComponent(jLabel10)
+                        .addComponent(jTextField3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jLabel13)
+                        .addComponent(jTextField4, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(RELATED).addComponent(jButton18, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(RELATED, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).addGroup(
+                        jPanel2Layout.createParallelGroup(BASELINE).addComponent(jLabel11)
+                            .addComponent(jButton6, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)).addPreferredGap(RELATED).addGroup(
+                        jPanel2Layout.createParallelGroup(BASELINE).addComponent(jLabel12)
+                            .addComponent(jButton7, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)).addPreferredGap(RELATED)
+                        .addComponent(jButton9, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE).addGap(28, 28, 28)
+                        .addComponent(jLabel15, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(RELATED)
+                        .addComponent(jSlider1, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(RELATED)
+                        .addComponent(jLabel16, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(RELATED)
+                        .addComponent(jSlider2, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(RELATED)
+                        .addComponent(jLabel17, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(RELATED)
+                        .addComponent(jSlider3, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)))
+            .addContainerGap()));
 
         jTabbedPane1.addTab("Jugadores", jPanel2);
 
         jPanel4.setFont(new java.awt.Font("Arial", 0, 14));
 
         jComboBox3.setFont(new java.awt.Font("Arial", 0, 12));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "1" }));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"1"}));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
@@ -947,7 +967,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         });
 
         jComboBox2.setFont(new java.awt.Font("Arial", 0, 12));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Normal", "Inicio Sacando", "Inicio Recibiendo" }));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Normal", "Inicio Sacando", "Inicio Recibiendo"}));
         jComboBox2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
@@ -988,6 +1008,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             public void mouseDragged(java.awt.event.MouseEvent evt) {
                 jPanel5MouseDragged(evt);
             }
+
             public void mouseMoved(java.awt.event.MouseEvent evt) {
                 jPanel5MouseMoved(evt);
             }
@@ -998,16 +1019,10 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        org.jdesktop.layout.GroupLayout jPanel5Layout = new org.jdesktop.layout.GroupLayout(jPanel5);
+        GroupLayout jPanel5Layout = new GroupLayout(jPanel5);
         jPanel5.setLayout(jPanel5Layout);
-        jPanel5Layout.setHorizontalGroup(
-            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 476, Short.MAX_VALUE)
-        );
-        jPanel5Layout.setVerticalGroup(
-            jPanel5Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 307, Short.MAX_VALUE)
-        );
+        jPanel5Layout.setHorizontalGroup(jPanel5Layout.createParallelGroup(LEADING).addGap(0, 476, Short.MAX_VALUE));
+        jPanel5Layout.setVerticalGroup(jPanel5Layout.createParallelGroup(LEADING).addGap(0, 307, Short.MAX_VALUE));
 
         jLabel14.setFont(new java.awt.Font("Arial", 0, 12));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
@@ -1117,16 +1132,10 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         });
         jPanel8.add(jButton14);
 
-        org.jdesktop.layout.GroupLayout jPanel10Layout = new org.jdesktop.layout.GroupLayout(jPanel10);
+        GroupLayout jPanel10Layout = new GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
-        jPanel10Layout.setHorizontalGroup(
-            jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 50, Short.MAX_VALUE)
-        );
-        jPanel10Layout.setVerticalGroup(
-            jPanel10Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 72, Short.MAX_VALUE)
-        );
+        jPanel10Layout.setHorizontalGroup(jPanel10Layout.createParallelGroup(LEADING).addGap(0, 50, Short.MAX_VALUE));
+        jPanel10Layout.setVerticalGroup(jPanel10Layout.createParallelGroup(LEADING).addGap(0, 72, Short.MAX_VALUE));
 
         jPanel8.add(jPanel10);
 
@@ -1142,16 +1151,10 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel11.setToolTipText("Fuera del alcance");
 
-        org.jdesktop.layout.GroupLayout jPanel11Layout = new org.jdesktop.layout.GroupLayout(jPanel11);
+        GroupLayout jPanel11Layout = new GroupLayout(jPanel11);
         jPanel11.setLayout(jPanel11Layout);
-        jPanel11Layout.setHorizontalGroup(
-            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 48, Short.MAX_VALUE)
-        );
-        jPanel11Layout.setVerticalGroup(
-            jPanel11Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 22, Short.MAX_VALUE)
-        );
+        jPanel11Layout.setHorizontalGroup(jPanel11Layout.createParallelGroup(LEADING).addGap(0, 48, Short.MAX_VALUE));
+        jPanel11Layout.setVerticalGroup(jPanel11Layout.createParallelGroup(LEADING).addGap(0, 22, Short.MAX_VALUE));
 
         jPanel8.add(jPanel11);
 
@@ -1159,16 +1162,10 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel12.setToolTipText("Alcance de portero");
 
-        org.jdesktop.layout.GroupLayout jPanel12Layout = new org.jdesktop.layout.GroupLayout(jPanel12);
+        GroupLayout jPanel12Layout = new GroupLayout(jPanel12);
         jPanel12.setLayout(jPanel12Layout);
-        jPanel12Layout.setHorizontalGroup(
-            jPanel12Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 48, Short.MAX_VALUE)
-        );
-        jPanel12Layout.setVerticalGroup(
-            jPanel12Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 22, Short.MAX_VALUE)
-        );
+        jPanel12Layout.setHorizontalGroup(jPanel12Layout.createParallelGroup(LEADING).addGap(0, 48, Short.MAX_VALUE));
+        jPanel12Layout.setVerticalGroup(jPanel12Layout.createParallelGroup(LEADING).addGap(0, 22, Short.MAX_VALUE));
 
         jPanel8.add(jPanel12);
 
@@ -1176,16 +1173,10 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
         jPanel13.setToolTipText("Alcance de jugadores");
 
-        org.jdesktop.layout.GroupLayout jPanel13Layout = new org.jdesktop.layout.GroupLayout(jPanel13);
+        GroupLayout jPanel13Layout = new GroupLayout(jPanel13);
         jPanel13.setLayout(jPanel13Layout);
-        jPanel13Layout.setHorizontalGroup(
-            jPanel13Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 48, Short.MAX_VALUE)
-        );
-        jPanel13Layout.setVerticalGroup(
-            jPanel13Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(0, 22, Short.MAX_VALUE)
-        );
+        jPanel13Layout.setHorizontalGroup(jPanel13Layout.createParallelGroup(LEADING).addGap(0, 48, Short.MAX_VALUE));
+        jPanel13Layout.setVerticalGroup(jPanel13Layout.createParallelGroup(LEADING).addGap(0, 22, Short.MAX_VALUE));
 
         jPanel8.add(jPanel13);
 
@@ -1198,57 +1189,32 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             }
         });
 
-        org.jdesktop.layout.GroupLayout jPanel4Layout = new org.jdesktop.layout.GroupLayout(jPanel4);
+        GroupLayout jPanel4Layout = new GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);
-        jPanel4Layout.setHorizontalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel4Layout.createSequentialGroup()
-                        .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jPanel8, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 50, Short.MAX_VALUE))
-                    .add(jPanel4Layout.createSequentialGroup()
-                        .add(jComboBox3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 48, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jComboBox2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 140, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton11, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton12, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 20, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jButton13, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 22, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jToggleButton2)
-                        .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                        .add(jLabel14, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE)))
-                .addContainerGap())
-        );
-        jPanel4Layout.setVerticalGroup(
-            jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-            .add(org.jdesktop.layout.GroupLayout.TRAILING, jPanel4Layout.createSequentialGroup()
-                .addContainerGap()
-                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.TRAILING)
-                    .add(jPanel8, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
-                    .add(jPanel5, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, org.jdesktop.layout.GroupLayout.DEFAULT_SIZE, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(org.jdesktop.layout.LayoutStyle.RELATED)
-                .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING)
-                    .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.LEADING, false)
-                        .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                            .add(jComboBox3, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 23, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                            .add(jComboBox2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                        .add(jButton11, 0, 0, Short.MAX_VALUE)
-                        .add(jButton12, 0, 0, Short.MAX_VALUE)
-                        .add(jButton10, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE))
-                    .add(jButton13, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                    .add(jPanel4Layout.createParallelGroup(org.jdesktop.layout.GroupLayout.BASELINE)
-                        .add(jLabel14, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)
-                        .add(jToggleButton2, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE, 25, org.jdesktop.layout.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
+        jPanel4Layout.setHorizontalGroup(jPanel4Layout.createParallelGroup(LEADING).addGroup(jPanel4Layout.createSequentialGroup().addContainerGap()
+            .addGroup(jPanel4Layout.createParallelGroup(LEADING).addGroup(jPanel4Layout.createSequentialGroup()
+                .addComponent(jPanel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE).addPreferredGap(RELATED)
+                .addComponent(jPanel8, GroupLayout.PREFERRED_SIZE, 50, Short.MAX_VALUE)).addGroup(
+                jPanel4Layout.createSequentialGroup().addComponent(jComboBox3, GroupLayout.PREFERRED_SIZE, 48, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(RELATED).addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, 140, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(RELATED).addComponent(jButton11, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(RELATED).addComponent(jButton12, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(RELATED).addComponent(jButton10, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(RELATED).addComponent(jButton13, GroupLayout.PREFERRED_SIZE, 22, GroupLayout.PREFERRED_SIZE)
+                    .addPreferredGap(RELATED).addComponent(jToggleButton2).addPreferredGap(RELATED)
+                    .addComponent(jLabel14, GroupLayout.DEFAULT_SIZE, 106, Short.MAX_VALUE))).addContainerGap()));
+        jPanel4Layout.setVerticalGroup(jPanel4Layout.createParallelGroup(LEADING).addGroup(GroupLayout.Alignment.TRAILING,
+            jPanel4Layout.createSequentialGroup().addContainerGap().addGroup(jPanel4Layout.createParallelGroup(GroupLayout.Alignment.TRAILING)
+                .addComponent(jPanel8, GroupLayout.DEFAULT_SIZE, 307, Short.MAX_VALUE)
+                .addComponent(jPanel5, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)).addPreferredGap(RELATED)
+                .addGroup(jPanel4Layout.createParallelGroup(LEADING).addGroup(jPanel4Layout.createParallelGroup(LEADING, false).addGroup(
+                    jPanel4Layout.createParallelGroup(BASELINE).addComponent(jComboBox3, GroupLayout.PREFERRED_SIZE, 23, GroupLayout.PREFERRED_SIZE)
+                        .addComponent(jComboBox2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton11, 0, 0, Short.MAX_VALUE).addComponent(jButton12, 0, 0, Short.MAX_VALUE)
+                    .addComponent(jButton10, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jButton13, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE).addGroup(
+                        jPanel4Layout.createParallelGroup(BASELINE).addComponent(jLabel14, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jToggleButton2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))).addContainerGap()));
 
         jTabbedPane1.addTab("Alineaciones y Simulacion de Remate", jPanel4);
 
@@ -1448,7 +1414,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             repintaCreditos();
         }
     }
-    DecimalFormat df = new DecimalFormat();
 
     private boolean repintaCreditos() {
         double cre = Constants.CREDITOS_INICIALES;
@@ -1471,171 +1436,292 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jLabel20.setText(df.format(cre));
         return ok;
     }
-    JFileChooser jfc;
 
-private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-    int i = 0;
-    for (i = 0; i < model.getSize(); i++) {
-        impl.getPlayers()[i] = (PlayerDetail) model.get(i);
-    }
-    if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
-        try {
-            TacticDetailImpl.save(impl, jfc.getSelectedFile());
-        } catch (IOException ex) {
-            logger.error("Error al guardar tactica detalle", ex);
-        }
-    }
-}//GEN-LAST:event_jMenuItem2ActionPerformed
-
-private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-    if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
-        try {
-            impl = TacticDetailImpl.loadFichero(jfc.getSelectedFile());
-            for (int i = 0; i < model.getSize(); i++) {
-                model.set(i, impl.getPlayers()[i]);
-            }
-            model1.removeAllElements();
-            for (int i = 0; i < impl.getAlineacionCount(); i++) {
-                model1.addElement("" + (i + 1));
-            }
-            jComboBox3.setSelectedIndex(0);
-            newImpl = true;
-            update = true;
-            repinta();
-            repintaCreditos();
-            repintaModel();
-        } catch (IOException ex) {
-            logger.error("Error al cargar TacticDetail", ex);
-        }
-    }
-}//GEN-LAST:event_jMenuItem1ActionPerformed
-
-    class TacticaImpl implements Tactic {
-
-        TacticDetail det;
-        Position[] saca;
-        Position[] recive;
-
-        public TacticaImpl(TacticDetail det, Position[] saca, Position[] recive) {
-            this.det = det;
-            this.saca = saca;
-            this.recive = recive;
-        }
-
-        @Override
-        public TacticDetail getDetail() {
-            return det;
-        }
-
-        public List<Command> getComandos(GameSituations sj) {
-            return null;
-        }
-
-        @Override
-        public Position[] getStartPositions(GameSituations sj) {
-            return saca;
-        }
-
-        @Override
-        public Position[] getNoStartPositions(GameSituations sj) {
-            return recive;
-        }
-
-        @Override
-        public List<Command> execute(GameSituations sp) {
-            return null;
-        }
-    }
-    String name = "";
-private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
-    String codalin = "";
-    int numSaca = -1, numRecibe = -1;
-    for (int idx = 0; idx < impl.getAlineacionCount(); idx++) {
-        if (numSaca == -1 && impl.getTipoAlineacion(idx) == 1) {
-            numSaca = idx + 1;
-        }
-        if (numRecibe == -1 && impl.getTipoAlineacion(idx) == 2) {
-            numRecibe = idx + 1;
-        }
-        codalin = codalin + "    Position alineacion" + (idx + 1) + "[]=new Position[]{\n";
+    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         int i = 0;
-        Position[] Positiones = impl.getAlineacion(idx);
-        for (PlayerDetail j : impl.getPlayers()) {
-            i++;
-            codalin = codalin + "        new Position(" + Positiones[i - 1].getX() + ","
-                    + Positiones[i - 1].getY() + ")" + (i < 11 ? "," : "") + "\n";
+        for (i = 0; i < model.getSize(); i++) {
+            impl.getPlayers()[i] = (PlayerDetail) model.get(i);
         }
-        codalin = codalin + "    };\n\n";
+        if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
+            try {
+                TacticDetailImpl.save(impl, jfc.getSelectedFile());
+            } catch (IOException ex) {
+                logger.error("Error al guardar tactica detalle", ex);
+            }
+        }
+    }//GEN-LAST:event_jMenuItem2ActionPerformed
+
+    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+        if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
+            try {
+                impl = TacticDetailImpl.loadFichero(jfc.getSelectedFile());
+                for (int i = 0; i < model.getSize(); i++) {
+                    model.set(i, impl.getPlayers()[i]);
+                }
+                model1.removeAllElements();
+                for (int i = 0; i < impl.getAlineacionCount(); i++) {
+                    model1.addElement("" + (i + 1));
+                }
+                jComboBox3.setSelectedIndex(0);
+                newImpl = true;
+                update = true;
+                repinta();
+                repintaCreditos();
+                repintaModel();
+            } catch (IOException ex) {
+                logger.error("Error al cargar TacticDetail", ex);
+            }
+        }
+    }//GEN-LAST:event_jMenuItem1ActionPerformed
+
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        String codalin = "";
+        int numSaca = -1, numRecibe = -1;
+        for (int idx = 0; idx < impl.getAlineacionCount(); idx++) {
+            if (numSaca == -1 && impl.getTipoAlineacion(idx) == 1) {
+                numSaca = idx + 1;
+            }
+            if (numRecibe == -1 && impl.getTipoAlineacion(idx) == 2) {
+                numRecibe = idx + 1;
+            }
+            codalin = codalin + "    Position alineacion" + (idx + 1) + "[]=new Position[]{\n";
+            int i = 0;
+            Position[] Positiones = impl.getAlineacion(idx);
+            for (PlayerDetail j : impl.getPlayers()) {
+                i++;
+                codalin =
+                    codalin + "        new Position(" + Positiones[i - 1].getX() + "," + Positiones[i - 1].getY() + ")" + (i < 11 ? "," : "") + "\n";
+            }
+            codalin = codalin + "    };\n\n";
+        }
+
+        if (numSaca == -1 || numRecibe == -1) {
+            JOptionPane
+                .showMessageDialog(this, "Debe definir por lo menos una alineacion para sacar y otra para recibir", "", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        String paclas = JOptionPane.showInputDialog(this, "ingrese el nombre de la clase (paquete.clase)?", name);
+        name = paclas;
+        if (paclas != null) {
+            String paquete = null;
+            String clase = "";
+            int idx = paclas.lastIndexOf(".");
+            if (idx != -1) {
+                paquete = paclas.substring(0, idx);
+                clase = paclas.substring(idx + 1);
+            } else {
+                clase = paclas;
+            }
+
+            String codigo = "";
+            if (paquete != null) {
+                codigo = codigo + "package " + paquete + ";\n\n";
+            }
+            codigo =
+                codigo + "import java.awt.Color;\n" + "import org.javahispano.javacup.model.*;\n" + "import org.javahispano.javacup.model.util.*;\n" +
+                    "import org.javahispano.javacup.render.EstiloUniforme;\n" + "import org.javahispano.javacup.model.command.*;\n" +
+                    "import org.javahispano.javacup.model.engine.GameSituations;\n" + "import java.util.List;\n\n" + "public class " + clase +
+                    " implements Tactic {\n\n" + codalin + "    class TacticDetailImpl implements TacticDetail {\n\n" +
+                    "        public String getTacticName() {\n" + "            return \"" + impl.getTacticName() + "\";\n" + "        }\n\n" +
+                    "        public String getCountry() {\n" + "            return \"" + impl.getCountry() + "\";\n" + "        }\n\n" +
+                    "        public String getCoach() {\n" + "            return \"" + impl.getCoach() + "\";\n" + "        }\n\n" +
+                    "        public Color getShirtColor() {\n" + "            return new Color(" + impl.getShirtColor().getRed() + ", " +
+                    impl.getShirtColor().getGreen() + ", " + impl.getShirtColor().getBlue() + ");\n" + "        }\n\n" +
+                    "        public Color getShortsColor() {\n" + "            return new Color(" + impl.getShortsColor().getRed() + ", " +
+                    impl.getShortsColor().getGreen() + ", " + impl.getShortsColor().getBlue() + ");\n" + "        }\n\n" +
+                    "        public Color getShirtLineColor() {\n" + "            return new Color(" + impl.getShirtLineColor().getRed() + ", " +
+                    impl.getShirtLineColor().getGreen() + ", " + impl.getShirtLineColor().getBlue() + ");\n" + "        }\n\n" +
+                    "        public Color getSocksColor() {\n" + "            return new Color(" + impl.getSocksColor().getRed() + ", " +
+                    impl.getSocksColor().getGreen() + ", " + impl.getSocksColor().getBlue() + ");\n" + "        }\n\n" +
+                    "        public Color getGoalKeeper() {\n" + "            return new Color(" + impl.getGoalKeeper().getRed() + ", " +
+                    impl.getGoalKeeper().getGreen() + ", " + impl.getGoalKeeper().getBlue() + "        );\n";
+            String estilo = null;
+            switch (impl.getStyle()) {
+                case FRANJA_DIAGONAL:
+                    estilo = "FRANJA_DIAGONAL";
+                    break;
+                case FRANJA_HORIZONTAL:
+                    estilo = "FRANJA_HORIZONTAL";
+                    break;
+                case FRANJA_VERTICAL:
+                    estilo = "FRANJA_VERTICAL";
+                    break;
+                case LINEAS_HORIZONTALES:
+                    estilo = "LINEAS_HORIZONTALES";
+                    break;
+                case LINEAS_VERTICALES:
+                    estilo = "LINEAS_VERTICALES";
+                    break;
+                case SIN_ESTILO:
+                    estilo = "SIN_ESTILO";
+                    break;
+            }
+
+            codigo =
+                codigo + "        }\n\n" + "        public EstiloUniforme getStyle() {\n" + "            return EstiloUniforme." + estilo + ";\n" +
+                    "        }\n\n";
+
+            codigo = codigo + "        public Color getShirtColor2() {\n" + "            return new Color(" + impl.getShirtColor2().getRed() + ", " +
+                impl.getShirtColor2().getGreen() + ", " + impl.getShirtColor2().getBlue() + ");\n" + "        }\n\n" +
+                "        public Color getShortsColor2() {\n" + "            return new Color(" + impl.getShortsColor2().getRed() + ", " +
+                impl.getShortsColor2().getGreen() + ", " + impl.getShortsColor2().getBlue() + ");\n" + "        }\n\n" +
+                "        public Color getShirtLineColor2() {\n" + "            return new Color(" + impl.getShirtLineColor2().getRed() + ", " +
+                impl.getShirtLineColor2().getGreen() + ", " + impl.getShirtLineColor2().getBlue() + ");\n" + "        }\n\n" +
+                "        public Color getSocksColor2() {\n" + "            return new Color(" + impl.getSocksColor2().getRed() + ", " +
+                impl.getSocksColor2().getGreen() + ", " + impl.getSocksColor2().getBlue() + ");\n" + "        }\n\n" +
+                "        public Color getGoalKeeper2() {\n" + "            return new Color(" + impl.getGoalKeeper2().getRed() + ", " +
+                impl.getGoalKeeper2().getGreen() + ", " + impl.getGoalKeeper2().getBlue() + "        );\n";
+
+            switch (impl.getStyle2()) {
+                case FRANJA_DIAGONAL:
+                    estilo = "FRANJA_DIAGONAL";
+                    break;
+                case FRANJA_HORIZONTAL:
+                    estilo = "FRANJA_HORIZONTAL";
+                    break;
+                case FRANJA_VERTICAL:
+                    estilo = "FRANJA_VERTICAL";
+                    break;
+                case LINEAS_HORIZONTALES:
+                    estilo = "LINEAS_HORIZONTALES";
+                    break;
+                case LINEAS_VERTICALES:
+                    estilo = "LINEAS_VERTICALES";
+                    break;
+                case SIN_ESTILO:
+                    estilo = "SIN_ESTILO";
+                    break;
+            }
+
+            codigo =
+                codigo + "        }\n\n" + "        public EstiloUniforme getStyle2() {\n" + "            return EstiloUniforme." + estilo + ";\n" +
+                    "        }\n\n" + "        class JugadorImpl implements PlayerDetail {\n\n" + "            String nombre;\n" +
+                    "            int numero;\n" + "            Color piel, pelo;\n" + "            double velocidad, remate, presicion;\n" +
+                    "            boolean portero;\n" + "            Position Position;\n\n" +
+                    "            public JugadorImpl(String nombre, int numero, Color piel, Color pelo,\n" +
+                    "                    double velocidad, double remate, double presicion, boolean portero) {\n" +
+                    "                this.nombre=nombre;\n" + "                this.numero=numero;\n" + "                this.piel=piel;\n" +
+                    "                this.pelo=pelo;\n" + "                this.velocidad=velocidad;\n" + "                this.remate=remate;\n" +
+                    "                this.presicion=presicion;\n" + "                this.portero=portero;\n" + "            }\n\n" +
+                    "            public String getPlayerName() {\n" + "                return nombre;\n" + "            }\n\n" +
+                    "            public Color getSkinColor() {\n" + "                return piel;\n" + "            }\n\n" +
+                    "            public Color getHairColor() {\n" + "                return pelo;\n" + "            }\n\n" +
+                    "            public int getNumber() {\n" + "                return numero;\n" + "            }\n\n" +
+                    "            public boolean isGoalKeeper() {\n" + "                return portero;\n" + "            }\n\n" +
+                    "            public double getSpeed() {\n" + "                return velocidad;\n" + "            }\n\n" +
+                    "            public double getPower() {\n" + "                return remate;\n" + "            }\n\n" +
+                    "            public double getPrecision() {\n" + "                return presicion;\n" + "            }\n\n" + "        }\n\n" +
+                    "        public PlayerDetail[] getPlayers() {\n" + "            return new PlayerDetail[]{\n";
+            int i = 0;
+            for (PlayerDetail j : impl.getPlayers()) {
+                i++;
+                codigo = codigo + "                new JugadorImpl(\"" + j.getPlayerName() + "\", " + j.getNumber() + ", new Color(" +
+                    j.getSkinColor().getRed() + "," + j.getSkinColor().getGreen() + "," + j.getSkinColor().getBlue() + "), new Color(" +
+                    j.getHairColor().getRed() + "," + j.getHairColor().getGreen() + "," + j.getHairColor().getBlue() + ")," + j.getSpeed() + "d," +
+                    j.getPower() + "d," + j.getPrecision() + "d, " + j.isGoalKeeper() + ")" + (i < 11 ? "," : "") + "\n";
+            }
+            codigo = codigo + "            };\n" + "        }\n" + "    }\n\n" + "    TacticDetail detalle=new TacticDetailImpl();\n" +
+                "    public TacticDetail getDetail() {\n" + "        return detalle;\n" + "    }\n\n" +
+                "    public Position[] getStartPositions(GameSituations sp) {\n" + "    return alineacion" + numSaca + ";\n" + "    }\n\n" +
+                "    public Position[] getNoStartPositions(GameSituations sp) {\n" + "    return alineacion" + numRecibe + ";\n" + "    }\n\n" +
+                "    public List<Command> execute(GameSituations sp) {\n" + "        return null;\n" + "    }\n" + "}";
+            jTextArea1.setText(codigo);
+            jDialog1.setLocationRelativeTo(null);
+            jTextArea1.selectAll();
+            jDialog1.setVisible(true);
+        }
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
+
+    Position transformAsistente(Position pos) {
+        double x = 15 + sx / 2 + sx * pos.getY() / Constants.LARGO_CAMPO_JUEGO;
+        double y = 10 + sy / 2 + sy * pos.getX() / Constants.ANCHO_CAMPO_JUEGO;
+        return new Position(x, y);
     }
 
-    if (numSaca == -1 || numRecibe == -1) {
-        JOptionPane.showMessageDialog(this, "Debe definir por lo menos una alineacion para sacar y otra para recibir", "", JOptionPane.WARNING_MESSAGE);
-        return;
+    double transformAsistente(double r) {
+        return sx * r / Constants.LARGO_CAMPO_JUEGO;
     }
 
-    String paclas = JOptionPane.showInputDialog(this, "ingrese el nombre de la clase (paquete.clase)?", name);
-    name = paclas;
-    if (paclas != null) {
-        String paquete = null;
-        String clase = "";
-        int idx = paclas.lastIndexOf(".");
-        if (idx != -1) {
-            paquete = paclas.substring(0, idx);
-            clase = paclas.substring(idx + 1);
-        } else {
-            clase = paclas;
-        }
+    Position unTransformAsistente(Position p) {
+        double xp0 = (p.getX() - sx / 2 - 6);
+        double yp0 = (p.getY() - sy / 2 - 6);
+        xp0 = xp0 / sx;
+        yp0 = yp0 / sy;
+        double y = (Constants.LARGO_CAMPO_JUEGO * xp0);
+        double x = (Constants.ANCHO_CAMPO_JUEGO * yp0);
+        Position posi = new Position(x, y);
+        return posi.setInsideGameField();
+    }
 
-        String codigo = "";
-        if (paquete != null) {
-            codigo = codigo + "package " + paquete + ";\n\n";
+    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+        String paclas = JOptionPane.showInputDialog(this, "ingrese el nombre de la clase (paquete.clase)?", name);
+        name = paclas;
+        if (paclas != null) {
+            String paquete = null;
+            String clase = "";
+            int idx = paclas.lastIndexOf(".");
+            if (idx != -1) {
+                paquete = paclas.substring(0, idx);
+                clase = paclas.substring(idx + 1);
+            } else {
+                clase = paclas;
+            }
+            String codalin = "";
+            int numSaca = -1, numRecibe = -1;
+            for (idx = 0; idx < impl.getAlineacionCount(); idx++) {
+                if (numSaca == -1 && impl.getTipoAlineacion(idx) == 1) {
+                    numSaca = idx + 1;
+                }
+                if (numRecibe == -1 && impl.getTipoAlineacion(idx) == 2) {
+                    numRecibe = idx + 1;
+                }
+                codalin = codalin + "    Position alineacion" + (idx + 1) + "[]=new Position[]{\n";
+                int i = 0;
+                Position[] Positiones = impl.getAlineacion(idx);
+                for (PlayerDetail j : impl.getPlayers()) {
+                    i++;
+                    codalin =
+                        codalin + "        new Position(" + Positiones[i - 1].getX() + "," + Positiones[i - 1].getY() + ")" + (i < 11 ? "," : "") +
+                            "\n";
+                }
+                codalin = codalin + "    };\n\n";
+            }
+
+            String codigo = "";
+            if (paquete != null) {
+                codigo = "package " + paquete + ";\n\n";
+            }
+            codigo = codigo + "import org.javahispano.javacup.model.*;\n" + "import org.javahispano.javacup.model.util.Position;\n" +
+                "import org.javahispano.javacup.model.engine.GameSituations;\n" + "import org.javahispano.javacup.model.command.*;\n" +
+                "import java.util.List;\n\n" + "public class " + clase + " implements Tactic {\n\n" + codalin +
+                "    public Position[] getStartPositions(GameSituations sp) {\n" + "    return alineacion" + numSaca + ";\n" + "    }\n\n" +
+                "    public Position[] getNoStartPositions(GameSituations sp) {\n" + "    return alineacion" + numRecibe + ";\n" + "    }\n\n" +
+                "    public TacticDetail getDetail() {\n" + "        throw new UnsupportedOperationException(\"No implementado.\");\n" + "    }\n\n" +
+                "    public List<Command> execute(GameSituations sp) {\n" +
+                "        throw new UnsupportedOperationException(\"No implementado.\");\n" + "    }\n" + "}";
+            jTextArea1.setText(codigo);
+            jDialog1.setLocationRelativeTo(null);
+            jTextArea1.selectAll();
+            jDialog1.setVisible(true);
         }
-        codigo = codigo + "import java.awt.Color;\n"
-                + "import org.javahispano.javacup.model.*;\n"
-                + "import org.javahispano.javacup.model.util.*;\n"
-                + "import org.javahispano.javacup.render.EstiloUniforme;\n"
-                + "import org.javahispano.javacup.model.command.*;\n"
-                + "import org.javahispano.javacup.model.engine.GameSituations;\n"
-                + "import java.util.List;\n\n"
-                + "public class " + clase + " implements Tactic {\n\n" + codalin
-                + "    class TacticDetailImpl implements TacticDetail {\n\n"
-                + "        public String getTacticName() {\n"
-                + "            return \"" + impl.getTacticName() + "\";\n"
-                + "        }\n\n"
-                + "        public String getCountry() {\n"
-                + "            return \"" + impl.getCountry() + "\";\n"
-                + "        }\n\n"
-                + "        public String getCoach() {\n"
-                + "            return \"" + impl.getCoach() + "\";\n"
-                + "        }\n\n"
-                + "        public Color getShirtColor() {\n"
-                + "            return new Color(" + impl.getShirtColor().getRed()
-                + ", " + impl.getShirtColor().getGreen() + ", "
-                + impl.getShirtColor().getBlue() + ");\n"
-                + "        }\n\n"
-                + "        public Color getShortsColor() {\n"
-                + "            return new Color(" + impl.getShortsColor().getRed()
-                + ", " + impl.getShortsColor().getGreen()
-                + ", " + impl.getShortsColor().getBlue()
-                + ");\n"
-                + "        }\n\n"
-                + "        public Color getShirtLineColor() {\n"
-                + "            return new Color(" + impl.getShirtLineColor().getRed()
-                + ", " + impl.getShirtLineColor().getGreen()
-                + ", " + impl.getShirtLineColor().getBlue()
-                + ");\n"
-                + "        }\n\n"
-                + "        public Color getSocksColor() {\n"
-                + "            return new Color(" + impl.getSocksColor().getRed()
-                + ", " + impl.getSocksColor().getGreen()
-                + ", " + impl.getSocksColor().getBlue()
-                + ");\n"
-                + "        }\n\n"
-                + "        public Color getGoalKeeper() {\n"
-                + "            return new Color(" + impl.getGoalKeeper().getRed()
-                + ", " + impl.getGoalKeeper().getGreen()
-                + ", " + impl.getGoalKeeper().getBlue()
-                + "        );\n";
+    }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        String codigo =
+            "public class TacticDetailImpl implements TacticDetail {\n\n" + "        public String getTacticName() {\n" + "            return \"" +
+                impl.getTacticName() + "\";\n" + "        }\n\n" + "        public String getCountry() {\n" + "            return \"" +
+                impl.getCountry() + "\";\n" + "        }\n\n" + "        public String getCoach() {\n" + "            return \"" + impl.getCoach() +
+                "\";\n" + "        }\n\n" + "        public Color getShirtColor() {\n" + "            return new Color(" +
+                impl.getShirtColor().getRed() + ", " + impl.getShirtColor().getGreen() + ", " + impl.getShirtColor().getBlue() + ");\n" +
+                "        }\n\n" + "        public Color getShortsColor() {\n" + "            return new Color(" + impl.getShortsColor().getRed() +
+                ", " + impl.getShortsColor().getGreen() + ", " + impl.getShortsColor().getBlue() + ");\n" + "        }\n\n" +
+                "        public Color getShirtLineColor() {\n" + "            return new Color(" + impl.getShirtLineColor().getRed() + ", " +
+                impl.getShirtLineColor().getGreen() + ", " + impl.getShirtLineColor().getBlue() + ");\n" + "        }\n\n" +
+                "        public Color getSocksColor() {\n" + "            return new Color(" + impl.getSocksColor().getRed() + ", " +
+                impl.getSocksColor().getGreen() + ", " + impl.getSocksColor().getBlue() + ");\n" + "        }\n\n" +
+                "        public Color getGoalKeeper() {\n" + "            return new Color(" + impl.getGoalKeeper().getRed() + ", " +
+                impl.getGoalKeeper().getGreen() + ", " + impl.getGoalKeeper().getBlue() + "        );\n";
         String estilo = null;
         switch (impl.getStyle()) {
             case FRANJA_DIAGONAL:
@@ -1658,40 +1744,19 @@ private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 break;
         }
 
-        codigo = codigo
-                + "        }\n\n"
-                + "        public EstiloUniforme getStyle() {\n"
-                + "            return EstiloUniforme." + estilo + ";\n"
-                + "        }\n\n";
+        codigo = codigo + "        }\n\n" + "        public EstiloUniforme getStyle() {\n" + "            return EstiloUniforme." + estilo + ";\n" +
+            "        }\n\n";
 
-        codigo = codigo + "        public Color getShirtColor2() {\n"
-                + "            return new Color(" + impl.getShirtColor2().getRed()
-                + ", " + impl.getShirtColor2().getGreen() + ", "
-                + impl.getShirtColor2().getBlue() + ");\n"
-                + "        }\n\n"
-                + "        public Color getShortsColor2() {\n"
-                + "            return new Color(" + impl.getShortsColor2().getRed()
-                + ", " + impl.getShortsColor2().getGreen()
-                + ", " + impl.getShortsColor2().getBlue()
-                + ");\n"
-                + "        }\n\n"
-                + "        public Color getShirtLineColor2() {\n"
-                + "            return new Color(" + impl.getShirtLineColor2().getRed()
-                + ", " + impl.getShirtLineColor2().getGreen()
-                + ", " + impl.getShirtLineColor2().getBlue()
-                + ");\n"
-                + "        }\n\n"
-                + "        public Color getSocksColor2() {\n"
-                + "            return new Color(" + impl.getSocksColor2().getRed()
-                + ", " + impl.getSocksColor2().getGreen()
-                + ", " + impl.getSocksColor2().getBlue()
-                + ");\n"
-                + "        }\n\n"
-                + "        public Color getGoalKeeper2() {\n"
-                + "            return new Color(" + impl.getGoalKeeper2().getRed()
-                + ", " + impl.getGoalKeeper2().getGreen()
-                + ", " + impl.getGoalKeeper2().getBlue()
-                + "        );\n";
+        codigo = codigo + "        public Color getShirtColor2() {\n" + "            return new Color(" + impl.getShirtColor2().getRed() + ", " +
+            impl.getShirtColor2().getGreen() + ", " + impl.getShirtColor2().getBlue() + ");\n" + "        }\n\n" +
+            "        public Color getShortsColor2() {\n" + "            return new Color(" + impl.getShortsColor2().getRed() + ", " +
+            impl.getShortsColor2().getGreen() + ", " + impl.getShortsColor2().getBlue() + ");\n" + "        }\n\n" +
+            "        public Color getShirtLineColor2() {\n" + "            return new Color(" + impl.getShirtLineColor2().getRed() + ", " +
+            impl.getShirtLineColor2().getGreen() + ", " + impl.getShirtLineColor2().getBlue() + ");\n" + "        }\n\n" +
+            "        public Color getSocksColor2() {\n" + "            return new Color(" + impl.getSocksColor2().getRed() + ", " +
+            impl.getSocksColor2().getGreen() + ", " + impl.getSocksColor2().getBlue() + ");\n" + "        }\n\n" +
+            "        public Color getGoalKeeper2() {\n" + "            return new Color(" + impl.getGoalKeeper2().getRed() + ", " +
+            impl.getGoalKeeper2().getGreen() + ", " + impl.getGoalKeeper2().getBlue() + "        );\n";
 
         switch (impl.getStyle2()) {
             case FRANJA_DIAGONAL:
@@ -1714,127 +1779,41 @@ private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
                 break;
         }
 
-        codigo = codigo
-                + "        }\n\n"
-                + "        public EstiloUniforme getStyle2() {\n"
-                + "            return EstiloUniforme." + estilo + ";\n"
-                + "        }\n\n"
-                + "        class JugadorImpl implements PlayerDetail {\n\n"
-                + "            String nombre;\n"
-                + "            int numero;\n"
-                + "            Color piel, pelo;\n"
-                + "            double velocidad, remate, presicion;\n"
-                + "            boolean portero;\n"
-                + "            Position Position;\n\n"
-                + "            public JugadorImpl(String nombre, int numero, Color piel, Color pelo,\n"
-                + "                    double velocidad, double remate, double presicion, boolean portero) {\n"
-                + "                this.nombre=nombre;\n"
-                + "                this.numero=numero;\n"
-                + "                this.piel=piel;\n"
-                + "                this.pelo=pelo;\n"
-                + "                this.velocidad=velocidad;\n"
-                + "                this.remate=remate;\n"
-                + "                this.presicion=presicion;\n"
-                + "                this.portero=portero;\n"
-                + "            }\n\n"
-                + "            public String getPlayerName() {\n"
-                + "                return nombre;\n"
-                + "            }\n\n"
-                + "            public Color getSkinColor() {\n"
-                + "                return piel;\n"
-                + "            }\n\n"
-                + "            public Color getHairColor() {\n"
-                + "                return pelo;\n"
-                + "            }\n\n"
-                + "            public int getNumber() {\n"
-                + "                return numero;\n"
-                + "            }\n\n"
-                + "            public boolean isGoalKeeper() {\n"
-                + "                return portero;\n"
-                + "            }\n\n"
-                + "            public double getSpeed() {\n"
-                + "                return velocidad;\n"
-                + "            }\n\n"
-                + "            public double getPower() {\n"
-                + "                return remate;\n"
-                + "            }\n\n"
-                + "            public double getPrecision() {\n"
-                + "                return presicion;\n"
-                + "            }\n\n"
-                + "        }\n\n"
-                + "        public PlayerDetail[] getPlayers() {\n"
-                + "            return new PlayerDetail[]{\n";
+        codigo = codigo + "        }\n\n" + "        public EstiloUniforme getStyle2() {\n" + "            return EstiloUniforme." + estilo + ";\n" +
+            "        }\n\n";
+
+        codigo = codigo + "        class JugadorImpl implements PlayerDetail {\n\n" + "            String nombre;\n" + "            int numero;\n" +
+            "            Color piel, pelo;\n" + "            double velocidad, remate, presicion;\n" + "            boolean portero;\n" +
+            "            Position Position;\n\n" + "            public JugadorImpl(String nombre, int numero, Color piel, Color pelo,\n" +
+            "                    double velocidad, double remate, double presicion, boolean portero) {\n" + "                this.nombre=nombre;\n" +
+            "                this.numero=numero;\n" + "                this.piel=piel;\n" + "                this.pelo=pelo;\n" +
+            "                this.velocidad=velocidad;\n" + "                this.remate=remate;\n" + "                this.presicion=presicion;\n" +
+            "                this.portero=portero;\n" + "            }\n\n" + "            public String getPlayerName() {\n" +
+            "                return nombre;\n" + "            }\n\n" + "            public Color getSkinColor() {\n" +
+            "                return piel;\n" + "            }\n\n" + "            public Color getHairColor() {\n" +
+            "                return pelo;\n" + "            }\n\n" + "            public int getNumber() {\n" + "                return numero;\n" +
+            "            }\n\n" + "            public boolean isGoalKeeper() {\n" + "                return portero;\n" + "            }\n\n" +
+            "            public double getSpeed() {\n" + "                return velocidad;\n" + "            }\n\n" +
+            "            public double getPower() {\n" + "                return remate;\n" + "            }\n\n" +
+            "            public double getPrecision() {\n" + "                return presicion;\n" + "            }\n\n" + "        }\n\n" +
+            "        public PlayerDetail[] getPlayers() {\n" + "            return new PlayerDetail[]{\n";
         int i = 0;
         for (PlayerDetail j : impl.getPlayers()) {
             i++;
-            codigo = codigo + "                new JugadorImpl(\"" + j.getPlayerName() + "\", " + j.getNumber()
-                    + ", new Color(" + j.getSkinColor().getRed() + ","
-                    + j.getSkinColor().getGreen() + "," + j.getSkinColor().getBlue()
-                    + "), new Color(" + j.getHairColor().getRed() + ","
-                    + j.getHairColor().getGreen() + "," + j.getHairColor().getBlue()
-                    + ")," + j.getSpeed() + "d," + j.getPower() + "d," + j.getPrecision()
-                    + "d, " + j.isGoalKeeper() + ")" + (i < 11 ? "," : "") + "\n";
+            codigo = codigo + "                new JugadorImpl(\"" + j.getPlayerName() + "\", " + j.getNumber() + ", new Color(" +
+                j.getSkinColor().getRed() + "," + j.getSkinColor().getGreen() + "," + j.getSkinColor().getBlue() + "), new Color(" +
+                j.getHairColor().getRed() + "," + j.getHairColor().getGreen() + "," + j.getHairColor().getBlue() + ")," + j.getSpeed() + "d," +
+                j.getPower() + "d," + j.getPrecision() + "d, " + j.isGoalKeeper() + ")" + (i < 11 ? "," : "") + "\n";
         }
-        codigo = codigo + "            };\n"
-                + "        }\n"
-                + "    }\n\n"
-                + "    TacticDetail detalle=new TacticDetailImpl();\n"
-                + "    public TacticDetail getDetail() {\n"
-                + "        return detalle;\n"
-                + "    }\n\n"
-                + "    public Position[] getStartPositions(GameSituations sp) {\n"
-                + "    return alineacion" + numSaca + ";\n"
-                + "    }\n\n"
-                + "    public Position[] getNoStartPositions(GameSituations sp) {\n"
-                + "    return alineacion" + numRecibe + ";\n"
-                + "    }\n\n"
-                + "    public List<Command> execute(GameSituations sp) {\n"
-                + "        return null;\n"
-                + "    }\n"
-                + "}";
+        codigo = codigo + "            };\n" + "        }\n" + "    }\n\n";
         jTextArea1.setText(codigo);
         jDialog1.setLocationRelativeTo(null);
         jTextArea1.selectAll();
         jDialog1.setVisible(true);
-    }
-}//GEN-LAST:event_jMenuItem3ActionPerformed
-    double sx = 442, sy = 286;
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    Position transformAsistente(Position pos) {
-        double x = 15 + sx / 2 + sx * pos.getY() / Constants.LARGO_CAMPO_JUEGO;
-        double y = 10 + sy / 2 + sy * pos.getX() / Constants.ANCHO_CAMPO_JUEGO;
-        return new Position(x, y);
-    }
-
-    double transformAsistente(double r) {
-        return sx * r / Constants.LARGO_CAMPO_JUEGO;
-    }
-
-    Position unTransformAsistente(Position p) {
-        double xp0 = (p.getX() - sx / 2 - 6);
-        double yp0 = (p.getY() - sy / 2 - 6);
-        xp0 = xp0 / sx;
-        yp0 = yp0 / sy;
-        double y = (Constants.LARGO_CAMPO_JUEGO * xp0);
-        double x = (Constants.ANCHO_CAMPO_JUEGO * yp0);
-        Position posi = new Position(x, y);
-        return posi.setInsideGameField();
-    }
-    double distMin;
-    boolean cupdate = true;
-private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
-    String paclas = JOptionPane.showInputDialog(this, "ingrese el nombre de la clase (paquete.clase)?", name);
-    name = paclas;
-    if (paclas != null) {
-        String paquete = null;
-        String clase = "";
-        int idx = paclas.lastIndexOf(".");
-        if (idx != -1) {
-            paquete = paclas.substring(0, idx);
-            clase = paclas.substring(idx + 1);
-        } else {
-            clase = paclas;
-        }
+    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+        int idx;
         String codalin = "";
         int numSaca = -1, numRecibe = -1;
         for (idx = 0; idx < impl.getAlineacionCount(); idx++) {
@@ -1849,821 +1828,539 @@ private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FI
             Position[] Positiones = impl.getAlineacion(idx);
             for (PlayerDetail j : impl.getPlayers()) {
                 i++;
-                codalin = codalin + "        new Position(" + Positiones[i - 1].getX() + ","
-                        + Positiones[i - 1].getY() + ")" + (i < 11 ? "," : "") + "\n";
+                codalin =
+                    codalin + "        new Position(" + Positiones[i - 1].getX() + "," + Positiones[i - 1].getY() + ")" + (i < 11 ? "," : "") + "\n";
             }
             codalin = codalin + "    };\n\n";
         }
 
-        String codigo = "";
-        if (paquete != null) {
-            codigo = "package " + paquete + ";\n\n";
-        }
-        codigo = codigo + "import org.javahispano.javacup.model.*;\n"
-                +"import org.javahispano.javacup.model.util.Position;\n"
-                +"import org.javahispano.javacup.model.engine.GameSituations;\n"
-                +"import org.javahispano.javacup.model.command.*;\n"
-                + "import java.util.List;\n\n"
-                + "public class " + clase + " implements Tactic {\n\n" + codalin
-                + "    public Position[] getStartPositions(GameSituations sp) {\n"
-                + "    return alineacion" + numSaca + ";\n"
-                + "    }\n\n"
-                + "    public Position[] getNoStartPositions(GameSituations sp) {\n"
-                + "    return alineacion" + numRecibe + ";\n"
-                + "    }\n\n"
-                + "    public TacticDetail getDetail() {\n"
-                + "        throw new UnsupportedOperationException(\"No implementado.\");\n"
-                + "    }\n\n"
-                + "    public List<Command> execute(GameSituations sp) {\n"
-                + "        throw new UnsupportedOperationException(\"No implementado.\");\n"
-                + "    }\n"
-                + "}";
-        jTextArea1.setText(codigo);
+        jTextArea1.setText(codalin);
         jDialog1.setLocationRelativeTo(null);
         jTextArea1.selectAll();
         jDialog1.setVisible(true);
-    }
+    }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-}//GEN-LAST:event_jMenuItem4ActionPerformed
-
-private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
-    String codigo =
-            "public class TacticDetailImpl implements TacticDetail {\n\n"
-            + "        public String getTacticName() {\n"
-            + "            return \"" + impl.getTacticName() + "\";\n"
-            + "        }\n\n"
-            + "        public String getCountry() {\n"
-            + "            return \"" + impl.getCountry() + "\";\n"
-            + "        }\n\n"
-            + "        public String getCoach() {\n"
-            + "            return \"" + impl.getCoach() + "\";\n"
-            + "        }\n\n"
-            + "        public Color getShirtColor() {\n"
-            + "            return new Color(" + impl.getShirtColor().getRed()
-            + ", " + impl.getShirtColor().getGreen() + ", "
-            + impl.getShirtColor().getBlue() + ");\n"
-            + "        }\n\n"
-            + "        public Color getShortsColor() {\n"
-            + "            return new Color(" + impl.getShortsColor().getRed()
-            + ", " + impl.getShortsColor().getGreen()
-            + ", " + impl.getShortsColor().getBlue()
-            + ");\n"
-            + "        }\n\n"
-            + "        public Color getShirtLineColor() {\n"
-            + "            return new Color(" + impl.getShirtLineColor().getRed()
-            + ", " + impl.getShirtLineColor().getGreen()
-            + ", " + impl.getShirtLineColor().getBlue()
-            + ");\n"
-            + "        }\n\n"
-            + "        public Color getSocksColor() {\n"
-            + "            return new Color(" + impl.getSocksColor().getRed()
-            + ", " + impl.getSocksColor().getGreen()
-            + ", " + impl.getSocksColor().getBlue()
-            + ");\n"
-            + "        }\n\n"
-            + "        public Color getGoalKeeper() {\n"
-            + "            return new Color(" + impl.getGoalKeeper().getRed()
-            + ", " + impl.getGoalKeeper().getGreen()
-            + ", " + impl.getGoalKeeper().getBlue()
-            + "        );\n";
-    String estilo = null;
-    switch (impl.getStyle()) {
-        case FRANJA_DIAGONAL:
-            estilo = "FRANJA_DIAGONAL";
-            break;
-        case FRANJA_HORIZONTAL:
-            estilo = "FRANJA_HORIZONTAL";
-            break;
-        case FRANJA_VERTICAL:
-            estilo = "FRANJA_VERTICAL";
-            break;
-        case LINEAS_HORIZONTALES:
-            estilo = "LINEAS_HORIZONTALES";
-            break;
-        case LINEAS_VERTICALES:
-            estilo = "LINEAS_VERTICALES";
-            break;
-        case SIN_ESTILO:
-            estilo = "SIN_ESTILO";
-            break;
-    }
-
-    codigo = codigo
-            + "        }\n\n"
-            + "        public EstiloUniforme getStyle() {\n"
-            + "            return EstiloUniforme." + estilo + ";\n"
-            + "        }\n\n";
-
-    codigo = codigo + "        public Color getShirtColor2() {\n"
-            + "            return new Color(" + impl.getShirtColor2().getRed()
-            + ", " + impl.getShirtColor2().getGreen() + ", "
-            + impl.getShirtColor2().getBlue() + ");\n"
-            + "        }\n\n"
-            + "        public Color getShortsColor2() {\n"
-            + "            return new Color(" + impl.getShortsColor2().getRed()
-            + ", " + impl.getShortsColor2().getGreen()
-            + ", " + impl.getShortsColor2().getBlue()
-            + ");\n"
-            + "        }\n\n"
-            + "        public Color getShirtLineColor2() {\n"
-            + "            return new Color(" + impl.getShirtLineColor2().getRed()
-            + ", " + impl.getShirtLineColor2().getGreen()
-            + ", " + impl.getShirtLineColor2().getBlue()
-            + ");\n"
-            + "        }\n\n"
-            + "        public Color getSocksColor2() {\n"
-            + "            return new Color(" + impl.getSocksColor2().getRed()
-            + ", " + impl.getSocksColor2().getGreen()
-            + ", " + impl.getSocksColor2().getBlue()
-            + ");\n"
-            + "        }\n\n"
-            + "        public Color getGoalKeeper2() {\n"
-            + "            return new Color(" + impl.getGoalKeeper2().getRed()
-            + ", " + impl.getGoalKeeper2().getGreen()
-            + ", " + impl.getGoalKeeper2().getBlue()
-            + "        );\n";
-
-    switch (impl.getStyle2()) {
-        case FRANJA_DIAGONAL:
-            estilo = "FRANJA_DIAGONAL";
-            break;
-        case FRANJA_HORIZONTAL:
-            estilo = "FRANJA_HORIZONTAL";
-            break;
-        case FRANJA_VERTICAL:
-            estilo = "FRANJA_VERTICAL";
-            break;
-        case LINEAS_HORIZONTALES:
-            estilo = "LINEAS_HORIZONTALES";
-            break;
-        case LINEAS_VERTICALES:
-            estilo = "LINEAS_VERTICALES";
-            break;
-        case SIN_ESTILO:
-            estilo = "SIN_ESTILO";
-            break;
-    }
-
-    codigo = codigo
-            + "        }\n\n"
-            + "        public EstiloUniforme getStyle2() {\n"
-            + "            return EstiloUniforme." + estilo + ";\n"
-            + "        }\n\n";
-
-
-
-    codigo = codigo + "        class JugadorImpl implements PlayerDetail {\n\n"
-            + "            String nombre;\n"
-            + "            int numero;\n"
-            + "            Color piel, pelo;\n"
-            + "            double velocidad, remate, presicion;\n"
-            + "            boolean portero;\n"
-            + "            Position Position;\n\n"
-            + "            public JugadorImpl(String nombre, int numero, Color piel, Color pelo,\n"
-            + "                    double velocidad, double remate, double presicion, boolean portero) {\n"
-            + "                this.nombre=nombre;\n"
-            + "                this.numero=numero;\n"
-            + "                this.piel=piel;\n"
-            + "                this.pelo=pelo;\n"
-            + "                this.velocidad=velocidad;\n"
-            + "                this.remate=remate;\n"
-            + "                this.presicion=presicion;\n"
-            + "                this.portero=portero;\n"
-            + "            }\n\n"
-            + "            public String getPlayerName() {\n"
-            + "                return nombre;\n"
-            + "            }\n\n"
-            + "            public Color getSkinColor() {\n"
-            + "                return piel;\n"
-            + "            }\n\n"
-            + "            public Color getHairColor() {\n"
-            + "                return pelo;\n"
-            + "            }\n\n"
-            + "            public int getNumber() {\n"
-            + "                return numero;\n"
-            + "            }\n\n"
-            + "            public boolean isGoalKeeper() {\n"
-            + "                return portero;\n"
-            + "            }\n\n"
-            + "            public double getSpeed() {\n"
-            + "                return velocidad;\n"
-            + "            }\n\n"
-            + "            public double getPower() {\n"
-            + "                return remate;\n"
-            + "            }\n\n"
-            + "            public double getPrecision() {\n"
-            + "                return presicion;\n"
-            + "            }\n\n"
-            + "        }\n\n"
-            + "        public PlayerDetail[] getPlayers() {\n"
-            + "            return new PlayerDetail[]{\n";
-    int i = 0;
-    for (PlayerDetail j : impl.getPlayers()) {
-        i++;
-        codigo = codigo + "                new JugadorImpl(\"" + j.getPlayerName() + "\", " + j.getNumber()
-                + ", new Color(" + j.getSkinColor().getRed() + ","
-                + j.getSkinColor().getGreen() + "," + j.getSkinColor().getBlue()
-                + "), new Color(" + j.getHairColor().getRed() + ","
-                + j.getHairColor().getGreen() + "," + j.getHairColor().getBlue()
-                + ")," + j.getSpeed() + "d," + j.getPower() + "d," + j.getPrecision()
-                + "d, " + j.isGoalKeeper() + ")" + (i < 11 ? "," : "") + "\n";
-    }
-    codigo = codigo + "            };\n"
-            + "        }\n"
-            + "    }\n\n";
-    jTextArea1.setText(codigo);
-    jDialog1.setLocationRelativeTo(null);
-    jTextArea1.selectAll();
-    jDialog1.setVisible(true);
-}//GEN-LAST:event_jMenuItem5ActionPerformed
-
-private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
-    int idx;
-    String codalin = "";
-    int numSaca = -1, numRecibe = -1;
-    for (idx = 0; idx < impl.getAlineacionCount(); idx++) {
-        if (numSaca == -1 && impl.getTipoAlineacion(idx) == 1) {
-            numSaca = idx + 1;
+    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+        int idx = jComboBox3.getSelectedIndex();
+        if (idx < jComboBox3.getModel().getSize() - 1) {
+            cupdate = false;
+            Position[] al = impl.getAlineacion(idx + 1);
+            int tipo = impl.getTipoAlineacion(idx + 1);
+            impl.setAlineacion(idx + 1, impl.getAlineacion(idx), impl.getTipoAlineacion(idx));
+            impl.setAlineacion(idx, al, tipo);
+            jComboBox3.setSelectedIndex(idx + 1);
+            jComboBox2.setSelectedIndex(impl.getTipoAlineacion(idx + 1));
+            jPanel5.repaint();
+            cupdate = true;
         }
-        if (numRecibe == -1 && impl.getTipoAlineacion(idx) == 2) {
-            numRecibe = idx + 1;
+    }//GEN-LAST:event_jButton13ActionPerformed
+
+    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+        int idx = jComboBox3.getSelectedIndex();
+        if (idx > 0) {
+            cupdate = false;
+            Position[] al = impl.getAlineacion(idx - 1);
+            int tipo = impl.getTipoAlineacion(idx - 1);
+            impl.setAlineacion(idx - 1, impl.getAlineacion(idx), impl.getTipoAlineacion(idx));
+            impl.setAlineacion(idx, al, tipo);
+            jComboBox3.setSelectedIndex(idx - 1);
+            jComboBox2.setSelectedIndex(impl.getTipoAlineacion(idx - 1));
+            jPanel5.repaint();
+            cupdate = true;
         }
-        codalin = codalin + "    Position alineacion" + (idx + 1) + "[]=new Position[]{\n";
-        int i = 0;
-        Position[] Positiones = impl.getAlineacion(idx);
-        for (PlayerDetail j : impl.getPlayers()) {
-            i++;
-            codalin = codalin + "        new Position(" + Positiones[i - 1].getX() + ","
-                    + Positiones[i - 1].getY() + ")" + (i < 11 ? "," : "") + "\n";
-        }
-        codalin = codalin + "    };\n\n";
-    }
+    }//GEN-LAST:event_jButton10ActionPerformed
 
-    jTextArea1.setText(codalin);
-    jDialog1.setLocationRelativeTo(null);
-    jTextArea1.selectAll();
-    jDialog1.setVisible(true);
-
-}//GEN-LAST:event_jMenuItem6ActionPerformed
-
-private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
-    int idx = jComboBox3.getSelectedIndex();
-    if (idx < jComboBox3.getModel().getSize() - 1) {
-        cupdate = false;
-        Position[] al = impl.getAlineacion(idx + 1);
-        int tipo = impl.getTipoAlineacion(idx + 1);
-        impl.setAlineacion(idx + 1, impl.getAlineacion(idx), impl.getTipoAlineacion(idx));
-        impl.setAlineacion(idx, al, tipo);
-        jComboBox3.setSelectedIndex(idx + 1);
-        jComboBox2.setSelectedIndex(impl.getTipoAlineacion(idx + 1));
-        jPanel5.repaint();
-        cupdate = true;
-    }
-}//GEN-LAST:event_jButton13ActionPerformed
-
-private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
-    int idx = jComboBox3.getSelectedIndex();
-    if (idx > 0) {
-        cupdate = false;
-        Position[] al = impl.getAlineacion(idx - 1);
-        int tipo = impl.getTipoAlineacion(idx - 1);
-        impl.setAlineacion(idx - 1, impl.getAlineacion(idx), impl.getTipoAlineacion(idx));
-        impl.setAlineacion(idx, al, tipo);
-        jComboBox3.setSelectedIndex(idx - 1);
-        jComboBox2.setSelectedIndex(impl.getTipoAlineacion(idx - 1));
-        jPanel5.repaint();
-        cupdate = true;
-    }
-}//GEN-LAST:event_jButton10ActionPerformed
-
-private void jPanel5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseDragged
-    if (type == MouseEvent.BUTTON1) {
-        if (distMin < 20) {
-            Position[] Positiones = impl.getAlineacion(jComboBox3.getSelectedIndex());
-            Position p = unTransformAsistente(new Position((double) evt.getX() - 8, (double) evt.getY() - 3));
-            Positiones[jList1.getSelectedIndex()] = p;
-            jLabel14.setText(df.format(p.getY()) + ":" + df.format(p.getX()));
+    private void jPanel5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseDragged
+        if (type == MouseEvent.BUTTON1) {
+            if (distMin < 20) {
+                Position[] Positiones = impl.getAlineacion(jComboBox3.getSelectedIndex());
+                Position p = unTransformAsistente(new Position((double) evt.getX() - 8, (double) evt.getY() - 3));
+                Positiones[jList1.getSelectedIndex()] = p;
+                jLabel14.setText(df.format(p.getY()) + ":" + df.format(p.getX()));
+                jPanel5.repaint();
+            }
+        } else {
+            Position p1 = new Position(evt.getX(), evt.getY());
+            double angu = -p0.angle(p1) * 180 / Math.PI;
+            if (angu < 0) {
+                angu = 360 + angu;
+            }
+            double dist = p0.distance(p1) / 50;
+            if (dist > 1) {
+                dist = 1;
+            }
+            jTextField6.setText(df.format(angu).replace(",", "."));
+            jTextField5.setText(df.format(dist).replace(",", "."));
+            sim = true;
             jPanel5.repaint();
         }
-    } else {
-        Position p1 = new Position(evt.getX(), evt.getY());
-        double angu = -p0.angle(p1) * 180 / Math.PI;
-        if (angu < 0) {
-            angu = 360 + angu;
+    }//GEN-LAST:event_jPanel5MouseDragged
+
+    private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
+        type = evt.getButton();
+        jPanel5.requestFocus();
+        if (evt.getButton() == MouseEvent.BUTTON1) {
+            Position click = new Position((double) evt.getX() - 8, (double) evt.getY() - 3);
+            double dist;
+            distMin = Double.MAX_VALUE;
+            int idx = 0;
+            Position[] Positiones = impl.getAlineacion(jComboBox3.getSelectedIndex());
+            for (int i = 0; i < 11; i++) {
+                dist = click.distance(transformAsistente(Positiones[i]));
+                if (dist < distMin) {
+                    distMin = dist;
+                    idx = i;
+                }
+            }
+            if (distMin < 20) {
+                jList1.setSelectedIndex(idx);
+                jPanel5.repaint();
+                jTextField2.requestFocus();
+                jTextField2.setSelectionStart(0);
+                jTextField2.setSelectionEnd(jTextField2.getText().length());
+            }
+        } else {
+            p0 = transformAsistente(impl.getAlineacion(jComboBox3.getSelectedIndex())[jList1.getSelectedIndex()]);
         }
-        double dist = p0.distance(p1) / 50;
-        if (dist > 1) {
-            dist = 1;
+    }//GEN-LAST:event_jPanel5MousePressed
+
+    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+        int idx = jComboBox3.getSelectedIndex();
+        int size = jComboBox3.getModel().getSize();
+        if (size == 1) {
+            JOptionPane.showMessageDialog(this, "No puede eliminar todas las alineaciones", "", JOptionPane.WARNING_MESSAGE);
+        } else {
+            model1.removeElementAt(size - 1);
+            impl.delAlineacion(idx);
+            jPanel5.repaint();
         }
-        jTextField6.setText(df.format(angu).replace(",", "."));
-        jTextField5.setText(df.format(dist).replace(",", "."));
-        sim = true;
+    }//GEN-LAST:event_jButton12ActionPerformed
+
+    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+        int idx = jComboBox3.getSelectedIndex();
+        impl.addAlineacion(idx);
+        int size = jComboBox3.getModel().getSize() + 1;
+        model1.addElement("" + size);
+        jComboBox3.setSelectedIndex(size - 1);
+    }//GEN-LAST:event_jButton11ActionPerformed
+
+    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+        try {
+            jPanel5.repaint();
+            int idx = jComboBox3.getSelectedIndex();
+            impl.setAlineacion(idx, impl.getAlineacion(idx), jComboBox2.getSelectedIndex());
+        } catch (Exception ex) {
+        }
+    }//GEN-LAST:event_jComboBox2ActionPerformed
+
+    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+        int idx = jComboBox3.getSelectedIndex();
+        if (idx == -1) {
+            idx = 0;
+        }
+        jComboBox2.setSelectedIndex(impl.getTipoAlineacion(idx));
         jPanel5.repaint();
-    }
-}//GEN-LAST:event_jPanel5MouseDragged
-    int type = 0;
-    Position p0;
-private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
-    type = evt.getButton();
-    jPanel5.requestFocus();
-    if (evt.getButton() == MouseEvent.BUTTON1) {
-        Position click = new Position((double) evt.getX() - 8, (double) evt.getY() - 3);
-        double dist;
-        distMin = Double.MAX_VALUE;
-        int idx = 0;
-        Position[] Positiones = impl.getAlineacion(jComboBox3.getSelectedIndex());
-        for (int i = 0; i < 11; i++) {
-            dist = click.distance(transformAsistente(Positiones[i]));
-            if (dist < distMin) {
-                distMin = dist;
-                idx = i;
+    }//GEN-LAST:event_jComboBox3ActionPerformed
+
+    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+        PlayerDetail j = getJugador();
+        Color piel = j.getSkinColor();
+        Color pelo = j.getHairColor();
+        for (PlayerDetail jj : impl.getPlayers()) {
+            ((JugadorImpl) jj).setColorPelo(pelo);
+            ((JugadorImpl) jj).setColorPiel(piel);
+        }
+    }//GEN-LAST:event_jButton9ActionPerformed
+
+    private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
+        repinta();
+        jTextField3.requestFocus();
+        jTextField3.setSelectionStart(0);
+        jTextField3.setSelectionEnd(jTextField3.getText().length());
+    }//GEN-LAST:event_jList1ValueChanged
+
+    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+        Color c = JColorChooser.showDialog(this, "Color del Pelo", getJugador().getHairColor());
+        if (c != null) {
+            getJugador().setColorPelo(c);
+            jButton7.setBackground(c);
+            update = true;
+        }
+    }//GEN-LAST:event_jButton7ActionPerformed
+
+    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+        Color c = JColorChooser.showDialog(this, "Color de la Piel", getJugador().getSkinColor());
+        if (c != null) {
+            getJugador().setColorPiel(c);
+            jButton6.setBackground(c);
+            update = true;
+        }
+    }//GEN-LAST:event_jButton6ActionPerformed
+
+    private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
+        try {
+            getJugador().setNumero(Integer.parseInt(jTextField4.getText().trim()));
+        } catch (Exception ex) {
+        }
+        repintaModel();
+        jPanel5.repaint();
+    }//GEN-LAST:event_jTextField4KeyReleased
+
+    private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
+        try {
+            getJugador().setNumero(Integer.parseInt(jTextField4.getText().trim()));
+        } catch (Exception ex) {
+        }
+        repintaModel();
+        jPanel5.repaint();
+    }//GEN-LAST:event_jTextField4KeyPressed
+
+    private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
+        try {
+            getJugador().setNumero(Integer.parseInt(jTextField4.getText().trim()));
+        } catch (Exception ex) {
+            jTextField4.setText("" + getJugador().getNumber());
+        }
+        repintaModel();
+        jPanel5.repaint();
+    }//GEN-LAST:event_jTextField4FocusLost
+
+    private void jTextField4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusGained
+        jTextField4.selectAll();
+    }//GEN-LAST:event_jTextField4FocusGained
+
+    private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
+        getJugador().setNombre(jTextField3.getText());
+        repintaModel();
+        jPanel5.repaint();
+    }//GEN-LAST:event_jTextField3KeyReleased
+
+    private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
+        int idx = jList1.getSelectedIndex();
+        if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
+            jList1.setSelectedIndex((idx + 1) % 11);
+        } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
+            if (idx == 0) {
+                jList1.setSelectedIndex(10);
+            } else {
+                jList1.setSelectedIndex(idx - 1);
+            }
+        } else {
+            getJugador().setNombre(jTextField3.getText());
+        }
+        repintaModel();
+    }//GEN-LAST:event_jTextField3KeyPressed
+
+    private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
+        getJugador().setNombre(jTextField3.getText().trim());
+        repintaModel();
+    }//GEN-LAST:event_jTextField3FocusLost
+
+    private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusGained
+        jTextField3.selectAll();
+    }//GEN-LAST:event_jTextField3FocusGained
+
+    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+        uniformeAlternativo = jComboBox4.getSelectedIndex() == 1;
+        repinta();
+    }//GEN-LAST:event_jComboBox4ActionPerformed
+
+    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+        if (jComboBox4.getSelectedIndex() == 0) {
+            azar();
+        } else {
+            azar2();
+        }
+        update = true;
+    }//GEN-LAST:event_jButton8ActionPerformed
+
+    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+        if (jComboBox4.getSelectedIndex() == 0) {
+            Color col = JColorChooser.showDialog(this, "Color del Portero", impl.getGoalKeeper());
+            if (col != null) {
+                impl.setColorPortero(col);
+                jButton5.setBackground(col);
+                repinta();
+                update = true;
+            }
+        } else {
+            Color col = JColorChooser.showDialog(this, "Color del Portero", impl.getGoalKeeper2());
+            if (col != null) {
+                impl.setColorPortero2(col);
+                jButton5.setBackground(col);
+                repinta();
+                update = true;
             }
         }
-        if (distMin < 20) {
-            jList1.setSelectedIndex(idx);
-            jPanel5.repaint();
-            jTextField2.requestFocus();
-            jTextField2.setSelectionStart(0);
-            jTextField2.setSelectionEnd(jTextField2.getText().length());
-        }
-    } else {
-        p0 = transformAsistente(impl.getAlineacion(jComboBox3.getSelectedIndex())[jList1.getSelectedIndex()]);
-    }
-}//GEN-LAST:event_jPanel5MousePressed
+    }//GEN-LAST:event_jButton5ActionPerformed
 
-private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
-    int idx = jComboBox3.getSelectedIndex();
-    int size = jComboBox3.getModel().getSize();
-    if (size == 1) {
-        JOptionPane.showMessageDialog(this, "No puede eliminar todas las alineaciones", "", JOptionPane.WARNING_MESSAGE);
-    } else {
-        model1.removeElementAt(size - 1);
-        impl.delAlineacion(idx);
-        jPanel5.repaint();
-    }
-}//GEN-LAST:event_jButton12ActionPerformed
-
-private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
-    int idx = jComboBox3.getSelectedIndex();
-    impl.addAlineacion(idx);
-    int size = jComboBox3.getModel().getSize() + 1;
-    model1.addElement("" + size);
-    jComboBox3.setSelectedIndex(size - 1);
-}//GEN-LAST:event_jButton11ActionPerformed
-
-private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
-    try {
-        jPanel5.repaint();
-        int idx = jComboBox3.getSelectedIndex();
-        impl.setAlineacion(idx, impl.getAlineacion(idx), jComboBox2.getSelectedIndex());
-    } catch (Exception ex) {
-    }
-}//GEN-LAST:event_jComboBox2ActionPerformed
-
-private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
-    int idx = jComboBox3.getSelectedIndex();
-    if (idx == -1) {
-        idx = 0;
-    }
-    jComboBox2.setSelectedIndex(impl.getTipoAlineacion(idx));
-    jPanel5.repaint();
-}//GEN-LAST:event_jComboBox3ActionPerformed
-
-private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-    PlayerDetail j = getJugador();
-    Color piel = j.getSkinColor();
-    Color pelo = j.getHairColor();
-    for (PlayerDetail jj : impl.getPlayers()) {
-        ((JugadorImpl) jj).setColorPelo(pelo);
-        ((JugadorImpl) jj).setColorPiel(piel);
-    }
-}//GEN-LAST:event_jButton9ActionPerformed
-
-private void jList1ValueChanged(javax.swing.event.ListSelectionEvent evt) {//GEN-FIRST:event_jList1ValueChanged
-    repinta();
-    jTextField3.requestFocus();
-    jTextField3.setSelectionStart(0);
-    jTextField3.setSelectionEnd(jTextField3.getText().length());
-}//GEN-LAST:event_jList1ValueChanged
-
-private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
-    Color c = JColorChooser.showDialog(this, "Color del Pelo", getJugador().getHairColor());
-    if (c != null) {
-        getJugador().setColorPelo(c);
-        jButton7.setBackground(c);
-        update = true;
-    }
-}//GEN-LAST:event_jButton7ActionPerformed
-
-private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
-    Color c = JColorChooser.showDialog(this, "Color de la Piel", getJugador().getSkinColor());
-    if (c != null) {
-        getJugador().setColorPiel(c);
-        jButton6.setBackground(c);
-        update = true;
-    }
-}//GEN-LAST:event_jButton6ActionPerformed
-
-private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
-    try {
-        getJugador().setNumero(Integer.parseInt(jTextField4.getText().trim()));
-    } catch (Exception ex) {
-    }
-    repintaModel();
-    jPanel5.repaint();
-}//GEN-LAST:event_jTextField4KeyReleased
-
-private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
-    try {
-        getJugador().setNumero(Integer.parseInt(jTextField4.getText().trim()));
-    } catch (Exception ex) {
-    }
-    repintaModel();
-    jPanel5.repaint();
-}//GEN-LAST:event_jTextField4KeyPressed
-
-private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
-    try {
-        getJugador().setNumero(Integer.parseInt(jTextField4.getText().trim()));
-    } catch (Exception ex) {
-        jTextField4.setText("" + getJugador().getNumber());
-    }
-    repintaModel();
-    jPanel5.repaint();
-}//GEN-LAST:event_jTextField4FocusLost
-
-private void jTextField4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusGained
-    jTextField4.selectAll();
-}//GEN-LAST:event_jTextField4FocusGained
-
-private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
-    getJugador().setNombre(jTextField3.getText());
-    repintaModel();
-    jPanel5.repaint();
-}//GEN-LAST:event_jTextField3KeyReleased
-
-private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
-    int idx = jList1.getSelectedIndex();
-    if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
-        jList1.setSelectedIndex((idx + 1) % 11);
-    } else if (evt.getKeyCode() == KeyEvent.VK_UP) {
-        if (idx == 0) {
-            jList1.setSelectedIndex(10);
+    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+        if (jComboBox4.getSelectedIndex() == 0) {
+            Color col = JColorChooser.showDialog(this, "Color de la Franja", impl.getShirtLineColor());
+            if (col != null) {
+                impl.setColorFranja(col);
+                jButton4.setBackground(col);
+                repinta();
+                update = true;
+            }
         } else {
-            jList1.setSelectedIndex(idx - 1);
+            Color col = JColorChooser.showDialog(this, "Color de la Franja", impl.getShirtLineColor2());
+            if (col != null) {
+                impl.setColorFranja2(col);
+                jButton4.setBackground(col);
+                repinta();
+                update = true;
+            }
         }
-    } else {
-        getJugador().setNombre(jTextField3.getText());
-    }
-    repintaModel();
-}//GEN-LAST:event_jTextField3KeyPressed
+    }//GEN-LAST:event_jButton4ActionPerformed
 
-private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
-    getJugador().setNombre(jTextField3.getText().trim());
-    repintaModel();
-}//GEN-LAST:event_jTextField3FocusLost
-
-private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusGained
-    jTextField3.selectAll();
-}//GEN-LAST:event_jTextField3FocusGained
-
-private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
-    uniformeAlternativo = jComboBox4.getSelectedIndex() == 1;
-    repinta();
-}//GEN-LAST:event_jComboBox4ActionPerformed
-
-private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
-    if (jComboBox4.getSelectedIndex() == 0) {
-        azar();
-    } else {
-        azar2();
-    }
-    update = true;
-}//GEN-LAST:event_jButton8ActionPerformed
-
-private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
-    if (jComboBox4.getSelectedIndex() == 0) {
-        Color col = JColorChooser.showDialog(this, "Color del Portero", impl.getGoalKeeper());
-        if (col != null) {
-            impl.setColorPortero(col);
-            jButton5.setBackground(col);
-            repinta();
-            update = true;
+    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+        if (jComboBox4.getSelectedIndex() == 0) {
+            Color col = JColorChooser.showDialog(this, "Color de las Calcetas", impl.getSocksColor());
+            if (col != null) {
+                impl.setColorCalcetas(col);
+                jButton3.setBackground(col);
+                repinta();
+                update = true;
+            }
+        } else {
+            Color col = JColorChooser.showDialog(this, "Color de las Calcetas", impl.getSocksColor2());
+            if (col != null) {
+                impl.setColorCalcetas2(col);
+                jButton3.setBackground(col);
+                repinta();
+                update = true;
+            }
         }
-    } else {
-        Color col = JColorChooser.showDialog(this, "Color del Portero", impl.getGoalKeeper2());
-        if (col != null) {
-            impl.setColorPortero2(col);
-            jButton5.setBackground(col);
-            repinta();
-            update = true;
+    }//GEN-LAST:event_jButton3ActionPerformed
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        if (jComboBox4.getSelectedIndex() == 0) {
+            Color col = JColorChooser.showDialog(this, "Color de los Pantalones", impl.getShortsColor());
+            if (col != null) {
+                impl.setColorPantalon(col);
+                jButton2.setBackground(col);
+                repinta();
+                update = true;
+            }
+        } else {
+            Color col = JColorChooser.showDialog(this, "Color de los Pantalones", impl.getShortsColor2());
+            if (col != null) {
+                impl.setColorPantalon2(col);
+                jButton2.setBackground(col);
+                repinta();
+                update = true;
+            }
         }
-    }
-}//GEN-LAST:event_jButton5ActionPerformed
+    }//GEN-LAST:event_jButton2ActionPerformed
 
-private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-    if (jComboBox4.getSelectedIndex() == 0) {
-        Color col = JColorChooser.showDialog(this, "Color de la Franja", impl.getShirtLineColor());
-        if (col != null) {
-            impl.setColorFranja(col);
-            jButton4.setBackground(col);
-            repinta();
-            update = true;
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (jComboBox4.getSelectedIndex() == 0) {
+            Color col = JColorChooser.showDialog(this, "Color de la Camiseta", impl.getShirtColor());
+            if (col != null) {
+                impl.setColorCamiseta(col);
+                jButton1.setBackground(col);
+                repinta();
+                update = true;
+            }
+        } else {
+            Color col = JColorChooser.showDialog(this, "Color de la Camiseta", impl.getShirtColor2());
+            if (col != null) {
+                impl.setColorCamiseta2(col);
+                jButton1.setBackground(col);
+                repinta();
+                update = true;
+            }
         }
-    } else {
-        Color col = JColorChooser.showDialog(this, "Color de la Franja", impl.getShirtLineColor2());
-        if (col != null) {
-            impl.setColorFranja2(col);
-            jButton4.setBackground(col);
-            repinta();
-            update = true;
+    }//GEN-LAST:event_jButton1ActionPerformed
+
+    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
+        if (jComboBox4.getSelectedIndex() == 0) {
+            impl.setEstiloPrincipal((EstiloUniforme) jComboBox7.getSelectedItem());
+        } else {
+            impl.setEstilo2((EstiloUniforme) jComboBox7.getSelectedItem());
         }
-    }
-}//GEN-LAST:event_jButton4ActionPerformed
+        repinta();
+        newImpl = true;
+    }//GEN-LAST:event_jComboBox7ActionPerformed
 
-private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
-    if (jComboBox4.getSelectedIndex() == 0) {
-        Color col = JColorChooser.showDialog(this, "Color de las Calcetas", impl.getSocksColor());
-        if (col != null) {
-            impl.setColorCalcetas(col);
-            jButton3.setBackground(col);
-            repinta();
-            update = true;
+    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
+        impl.setEntrenador(jTextField2.getText().trim());
+    }//GEN-LAST:event_jTextField2FocusLost
+
+    private void jComboBox1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBox1FocusLost
+        impl.setPais("" + jComboBox1.getSelectedItem());
+    }//GEN-LAST:event_jComboBox1FocusLost
+
+    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+        impl.setNombre(jTextField1.getText().trim());
+    }//GEN-LAST:event_jTextField1FocusLost
+
+    private void jTextField5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusLost
+        try {
+            fuerza = Double.parseDouble(jTextField5.getText().trim());
+        } catch (Exception ex) {
         }
-    } else {
-        Color col = JColorChooser.showDialog(this, "Color de las Calcetas", impl.getSocksColor2());
-        if (col != null) {
-            impl.setColorCalcetas2(col);
-            jButton3.setBackground(col);
-            repinta();
-            update = true;
+        if (fuerza < 0) {
+            fuerza = 0;
         }
-    }
-}//GEN-LAST:event_jButton3ActionPerformed
-
-private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-    if (jComboBox4.getSelectedIndex() == 0) {
-        Color col = JColorChooser.showDialog(this, "Color de los Pantalones", impl.getShortsColor());
-        if (col != null) {
-            impl.setColorPantalon(col);
-            jButton2.setBackground(col);
-            repinta();
-            update = true;
+        if (fuerza > 1) {
+            fuerza = 1;
         }
-    } else {
-        Color col = JColorChooser.showDialog(this, "Color de los Pantalones", impl.getShortsColor2());
-        if (col != null) {
-            impl.setColorPantalon2(col);
-            jButton2.setBackground(col);
-            repinta();
-            update = true;
-        }
-    }
-}//GEN-LAST:event_jButton2ActionPerformed
-
-private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    if (jComboBox4.getSelectedIndex() == 0) {
-        Color col = JColorChooser.showDialog(this, "Color de la Camiseta", impl.getShirtColor());
-        if (col != null) {
-            impl.setColorCamiseta(col);
-            jButton1.setBackground(col);
-            repinta();
-            update = true;
-        }
-    } else {
-        Color col = JColorChooser.showDialog(this, "Color de la Camiseta", impl.getShirtColor2());
-        if (col != null) {
-            impl.setColorCamiseta2(col);
-            jButton1.setBackground(col);
-            repinta();
-            update = true;
-        }
-    }
-}//GEN-LAST:event_jButton1ActionPerformed
-
-private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
-    if (jComboBox4.getSelectedIndex() == 0) {
-        impl.setEstiloPrincipal((EstiloUniforme) jComboBox7.getSelectedItem());
-    } else {
-        impl.setEstilo2((EstiloUniforme) jComboBox7.getSelectedItem());
-    }
-    repinta();
-    newImpl = true;
-}//GEN-LAST:event_jComboBox7ActionPerformed
-
-private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
-    impl.setEntrenador(jTextField2.getText().trim());
-}//GEN-LAST:event_jTextField2FocusLost
-
-private void jComboBox1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBox1FocusLost
-    impl.setPais("" + jComboBox1.getSelectedItem());
-}//GEN-LAST:event_jComboBox1FocusLost
-
-private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
-    impl.setNombre(jTextField1.getText().trim());
-}//GEN-LAST:event_jTextField1FocusLost
-
-private void jTextField5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusLost
-    try {
-        fuerza = Double.parseDouble(jTextField5.getText().trim());
-    } catch (Exception ex) {
-    }
-    if (fuerza < 0) {
-        fuerza = 0;
-    }
-    if (fuerza > 1) {
-        fuerza = 1;
-    }
-    jTextField5.setText("" + fuerza);
-    jPanel5.repaint();
-}//GEN-LAST:event_jTextField5FocusLost
-
-private void jTextField5CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField5CaretUpdate
-    try {
-        fuerza = Double.parseDouble(jTextField5.getText().trim());
-        jTextField5.setForeground(Color.black);
-    } catch (Exception ex) {
-        jTextField5.setForeground(Color.red);
-    }
-    if (fuerza < 0) {
-        fuerza = 0;
-    }
-    if (fuerza > 1) {
-        fuerza = 1;
-    }
-    jPanel5.repaint();
-}//GEN-LAST:event_jTextField5CaretUpdate
-
-private void jTextField6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField6FocusLost
-    try {
-        ang = Double.parseDouble(jTextField6.getText().trim());
-    } catch (Exception ex) {
-    }
-    jTextField6.setText("" + ang);
-}//GEN-LAST:event_jTextField6FocusLost
-
-private void jTextField6CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField6CaretUpdate
-    try {
-        ang = Double.parseDouble(jTextField6.getText().trim());
-        jTextField6.setForeground(Color.black);
-    } catch (Exception ex) {
-        jTextField6.setForeground(Color.red);
-    }
-}//GEN-LAST:event_jTextField6CaretUpdate
-
-private void jTextField7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField7FocusLost
-    try {
-        elev = Double.parseDouble(jTextField7.getText().trim());
-    } catch (Exception ex) {
-    }
-    if (elev < 0) {
-        elev = 0;
-    }
-    if (elev > Constants.ANGULO_VERTICAL_MAX) {
-        elev = Constants.ANGULO_VERTICAL_MAX;
-    }
-    jTextField7.setText("" + elev);
-    jPanel5.repaint();
-}//GEN-LAST:event_jTextField7FocusLost
-
-private void jTextField7CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField7CaretUpdate
-    try {
-        elev = Double.parseDouble(jTextField7.getText().trim());
-        jTextField7.setForeground(Color.black);
-    } catch (Exception ex) {
-        jTextField7.setForeground(Color.red);
-    }
-    if (elev < 0) {
-        elev = 0;
-    }
-    if (elev > Constants.ANGULO_VERTICAL_MAX) {
-        elev = Constants.ANGULO_VERTICAL_MAX;
-    }
-    jPanel5.repaint();
-}//GEN-LAST:event_jTextField7CaretUpdate
-    boolean sim = false;
-
-private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
-    sim = true;
-    jPanel5.repaint();
-}//GEN-LAST:event_jButton14ActionPerformed
-
-private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
-    updateSlider();
-}//GEN-LAST:event_jSlider1StateChanged
-
-private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
-    updateSlider();
-}//GEN-LAST:event_jSlider2StateChanged
-
-private void jSlider3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider3StateChanged
-    updateSlider();
-}//GEN-LAST:event_jSlider3StateChanged
-
-private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
-    try {
-        TacticValidate.validateDetail("tactica", impl);
-    } catch (Exception ex) {
-        JOptionPane.showMessageDialog(this, ex.getMessage(), "Validacion", JOptionPane.ERROR_MESSAGE);
-        return;
-    }
-    JOptionPane.showMessageDialog(this, "Validacion OK", "Validacion", JOptionPane.INFORMATION_MESSAGE);
-}//GEN-LAST:event_jMenuItem7ActionPerformed
-
-private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
-    props.setProperty("currentDir", jfc.getCurrentDirectory().getAbsolutePath());
-    try {
-        props.store(new FileOutputStream("props"), "properties");
-    } catch (Exception e) {
-    }
-}//GEN-LAST:event_formWindowClosing
-
-private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
-    jPanel5.repaint();
-}//GEN-LAST:event_jToggleButton2ActionPerformed
-    final String constNames[] = new String[]{
-        "centroArcoInf",
-        "posteDerArcoSup",
-        "posteIzqArcoSup",
-        "cornerSupDer",
-        "cornerSupIzq",
-        "penalSup",
-        "centroArcoSup",
-        "posteDerArcoInf",
-        "posteIzqArcoInf",
-        "cornerInfDer",
-        "cornerInfIzq",
-        "penalInf",
-        "centroCampoJuego"
-    };
-    final Position constPos[] = new Position[]{
-        Constants.centroArcoInf,
-        Constants.posteDerArcoSup,
-        Constants.posteIzqArcoSup,
-        Constants.cornerSupDer,
-        Constants.cornerSupIzq,
-        Constants.penalSup,
-        Constants.centroArcoSup,
-        Constants.posteDerArcoInf,
-        Constants.posteIzqArcoInf,
-        Constants.cornerInfDer,
-        Constants.cornerInfIzq,
-        Constants.penalInf,
-        Constants.centroCampoJuego
-    };
-    String tooltip = "";
-    int x0, y0;
-    Position pos = null;
-private void jPanel5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseMoved
-    Position p = unTransformAsistente(new Position(evt.getX() - 8, evt.getY() - 3));
-    jLabel14.setText(df.format(p.getY()) + ":" + df.format(p.getX()));
-    int idx = p.nearestIndex(constPos);
-    if (p.distance(constPos[idx]) < 10) {
-        tooltip = constNames[idx];
+        jTextField5.setText("" + fuerza);
         jPanel5.repaint();
-        x0 = evt.getX() - tooltip.length() * 3 + 10;
-        y0 = evt.getY();
-        pos = transformAsistente(constPos[idx]);
-    } else {
-        tooltip = "";
+    }//GEN-LAST:event_jTextField5FocusLost
+
+    private void jTextField5CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField5CaretUpdate
+        try {
+            fuerza = Double.parseDouble(jTextField5.getText().trim());
+            jTextField5.setForeground(Color.black);
+        } catch (Exception ex) {
+            jTextField5.setForeground(Color.red);
+        }
+        if (fuerza < 0) {
+            fuerza = 0;
+        }
+        if (fuerza > 1) {
+            fuerza = 1;
+        }
         jPanel5.repaint();
-        pos = null;
-    }
-}//GEN-LAST:event_jPanel5MouseMoved
+    }//GEN-LAST:event_jTextField5CaretUpdate
 
-private void jPanel5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel5KeyTyped
-}//GEN-LAST:event_jPanel5KeyTyped
+    private void jTextField6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField6FocusLost
+        try {
+            ang = Double.parseDouble(jTextField6.getText().trim());
+        } catch (Exception ex) {
+        }
+        jTextField6.setText("" + ang);
+    }//GEN-LAST:event_jTextField6FocusLost
 
-private void jPanel5MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jPanel5MouseWheelMoved
-    int units = -evt.getUnitsToScroll() / Math.abs(evt.getUnitsToScroll());
-    try {
-        units = (int) (Double.parseDouble(jTextField7.getText().trim())) + units;
-        if (units < 0) {
-            units = 0;
+    private void jTextField6CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField6CaretUpdate
+        try {
+            ang = Double.parseDouble(jTextField6.getText().trim());
+            jTextField6.setForeground(Color.black);
+        } catch (Exception ex) {
+            jTextField6.setForeground(Color.red);
         }
-        if (units > Constants.ANGULO_VERTICAL_MAX) {
-            units = (int) Constants.ANGULO_VERTICAL_MAX;
+    }//GEN-LAST:event_jTextField6CaretUpdate
+
+    private void jTextField7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField7FocusLost
+        try {
+            elev = Double.parseDouble(jTextField7.getText().trim());
+        } catch (Exception ex) {
         }
-        jTextField7.setText("" + units);
+        if (elev < 0) {
+            elev = 0;
+        }
+        if (elev > Constants.ANGULO_VERTICAL_MAX) {
+            elev = Constants.ANGULO_VERTICAL_MAX;
+        }
+        jTextField7.setText("" + elev);
+        jPanel5.repaint();
+    }//GEN-LAST:event_jTextField7FocusLost
+
+    private void jTextField7CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField7CaretUpdate
+        try {
+            elev = Double.parseDouble(jTextField7.getText().trim());
+            jTextField7.setForeground(Color.black);
+        } catch (Exception ex) {
+            jTextField7.setForeground(Color.red);
+        }
+        if (elev < 0) {
+            elev = 0;
+        }
+        if (elev > Constants.ANGULO_VERTICAL_MAX) {
+            elev = Constants.ANGULO_VERTICAL_MAX;
+        }
+        jPanel5.repaint();
+    }//GEN-LAST:event_jTextField7CaretUpdate
+
+    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         sim = true;
         jPanel5.repaint();
-    } catch (Exception e) {
-        jTextField7.setText("0");
-    }
-}//GEN-LAST:event_jPanel5MouseWheelMoved
+    }//GEN-LAST:event_jButton14ActionPerformed
 
-private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-    JugadorImpl[] jugs = ((JugadorImpl[]) (impl.getPlayers()));
-    int idx = jList1.getSelectedIndex();
-    for (int i = 0; i < 11; i++) {
-        jugs[i].setPortero(i == idx);
-    }
-    update = true;
-    repaint();
-}//GEN-LAST:event_jButton18ActionPerformed
-    double fuerza = 1;
-    double ang = 0;
-    double elev = 0;
+    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
+        updateSlider();
+    }//GEN-LAST:event_jSlider1StateChanged
+
+    private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
+        updateSlider();
+    }//GEN-LAST:event_jSlider2StateChanged
+
+    private void jSlider3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider3StateChanged
+        updateSlider();
+    }//GEN-LAST:event_jSlider3StateChanged
+
+    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+        try {
+            TacticValidate.validateDetail("tactica", impl);
+        } catch (Exception ex) {
+            JOptionPane.showMessageDialog(this, ex.getMessage(), "Validacion", JOptionPane.ERROR_MESSAGE);
+            return;
+        }
+        JOptionPane.showMessageDialog(this, "Validacion OK", "Validacion", JOptionPane.INFORMATION_MESSAGE);
+    }//GEN-LAST:event_jMenuItem7ActionPerformed
+
+    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+        props.setProperty("currentDir", jfc.getCurrentDirectory().getAbsolutePath());
+        try {
+            props.store(new FileOutputStream("props"), "properties");
+        } catch (Exception e) {
+        }
+    }//GEN-LAST:event_formWindowClosing
+
+    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+        jPanel5.repaint();
+    }//GEN-LAST:event_jToggleButton2ActionPerformed
+
+    private void jPanel5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseMoved
+        Position p = unTransformAsistente(new Position(evt.getX() - 8, evt.getY() - 3));
+        jLabel14.setText(df.format(p.getY()) + ":" + df.format(p.getX()));
+        int idx = p.nearestIndex(constPos);
+        if (p.distance(constPos[idx]) < 10) {
+            tooltip = constNames[idx];
+            jPanel5.repaint();
+            x0 = evt.getX() - tooltip.length() * 3 + 10;
+            y0 = evt.getY();
+            pos = transformAsistente(constPos[idx]);
+        } else {
+            tooltip = "";
+            jPanel5.repaint();
+            pos = null;
+        }
+    }//GEN-LAST:event_jPanel5MouseMoved
+
+    private void jPanel5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel5KeyTyped
+    }//GEN-LAST:event_jPanel5KeyTyped
+
+    private void jPanel5MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jPanel5MouseWheelMoved
+        int units = -evt.getUnitsToScroll() / Math.abs(evt.getUnitsToScroll());
+        try {
+            units = (int) (Double.parseDouble(jTextField7.getText().trim())) + units;
+            if (units < 0) {
+                units = 0;
+            }
+            if (units > Constants.ANGULO_VERTICAL_MAX) {
+                units = (int) Constants.ANGULO_VERTICAL_MAX;
+            }
+            jTextField7.setText("" + units);
+            sim = true;
+            jPanel5.repaint();
+        } catch (Exception e) {
+            jTextField7.setText("0");
+        }
+    }//GEN-LAST:event_jPanel5MouseWheelMoved
+
+    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+        JugadorImpl[] jugs = ((JugadorImpl[]) (impl.getPlayers()));
+        int idx = jList1.getSelectedIndex();
+        for (int i = 0; i < 11; i++) {
+            jugs[i].setPortero(i == idx);
+        }
+        update = true;
+        repaint();
+    }//GEN-LAST:event_jButton18ActionPerformed
 
     private JugadorImpl getJugador() {
         return (JugadorImpl) jList1.getSelectedValue();
@@ -2746,103 +2443,6 @@ private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
         jPanel1.repaint();
         pintando = false;
     }
-    Color c1 = new Color(255, 0, 0);
-    Color c2 = new Color(0, 0, 153);
-    Color c3 = new Color(255, 255, 255);
-    Color c4 = new Color(255, 255, 0);
-    // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton10;
-    private javax.swing.JButton jButton11;
-    private javax.swing.JButton jButton12;
-    private javax.swing.JButton jButton13;
-    private javax.swing.JButton jButton14;
-    private javax.swing.JButton jButton18;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JButton jButton8;
-    private javax.swing.JButton jButton9;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
-    private javax.swing.JComboBox jComboBox7;
-    private javax.swing.JDialog jDialog1;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
-    private javax.swing.JLabel jLabel11;
-    private javax.swing.JLabel jLabel12;
-    private javax.swing.JLabel jLabel13;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel18;
-    private javax.swing.JLabel jLabel19;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel20;
-    private javax.swing.JLabel jLabel21;
-    private javax.swing.JLabel jLabel22;
-    private javax.swing.JLabel jLabel23;
-    private javax.swing.JLabel jLabel24;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JLabel jLabel5;
-    private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
-    private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
-    private javax.swing.JList jList1;
-    private javax.swing.JMenu jMenu1;
-    private javax.swing.JMenu jMenu2;
-    private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
-    private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel10;
-    private javax.swing.JPanel jPanel11;
-    private javax.swing.JPanel jPanel12;
-    private javax.swing.JPanel jPanel13;
-    private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
-    private javax.swing.JPanel jPanel4;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel6;
-    private javax.swing.JPanel jPanel7;
-    private javax.swing.JPanel jPanel8;
-    private javax.swing.JPanel jPanel9;
-    private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JScrollPane jScrollPane2;
-    private javax.swing.JSeparator jSeparator1;
-    private javax.swing.JSeparator jSeparator2;
-    private javax.swing.JSlider jSlider1;
-    private javax.swing.JSlider jSlider2;
-    private javax.swing.JSlider jSlider3;
-    private javax.swing.JTabbedPane jTabbedPane1;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
-    private javax.swing.JToggleButton jToggleButton2;
-    // End of variables declaration//GEN-END:variables
-    boolean update = false;
-    boolean newImpl = false;
 
     @Override
     public void run() {
@@ -2850,6 +2450,43 @@ private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
             cgc.start();
         } catch (Exception ex) {
             logger.error("Error al iniciar el gameContainer", ex);
+        }
+    }
+
+    class TacticaImpl implements Tactic {
+
+        TacticDetail det;
+        Position[] saca;
+        Position[] recive;
+
+        public TacticaImpl(TacticDetail det, Position[] saca, Position[] recive) {
+            this.det = det;
+            this.saca = saca;
+            this.recive = recive;
+        }
+
+        @Override
+        public TacticDetail getDetail() {
+            return det;
+        }
+
+        public List<Command> getComandos(GameSituations sj) {
+            return null;
+        }
+
+        @Override
+        public Position[] getStartPositions(GameSituations sj) {
+            return saca;
+        }
+
+        @Override
+        public Position[] getNoStartPositions(GameSituations sj) {
+            return recive;
+        }
+
+        @Override
+        public List<Command> execute(GameSituations sp) {
+            return null;
         }
     }
 }
