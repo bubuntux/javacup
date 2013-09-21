@@ -738,6 +738,14 @@ public class FormationAndSimulationTab {
         model1.addElement("6");
         jComboBox3.setSelectedIndex(0);
     }
+
+    public void setFormationCount(int formationCount) {
+        model1.removeAllElements();
+        for (int i = 0; i < formationCount; i++) {
+            model1.addElement("" + (i + 1));
+        }
+        jComboBox3.setSelectedIndex(0);
+    }
 }
 
 

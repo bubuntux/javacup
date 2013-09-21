@@ -984,19 +984,13 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
     private void jMenuItem1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        /*
-        TODO
         if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             try {
                 impl = TacticDetailImpl.loadFichero(jfc.getSelectedFile());
                 for (int i = 0; i < model.getSize(); i++) {
                     model.set(i, impl.getPlayers()[i]);
                 }
-                model1.removeAllElements();
-                for (int i = 0; i < impl.getAlineacionCount(); i++) {
-                    model1.addElement("" + (i + 1));
-                }
-                jComboBox3.setSelectedIndex(0);
+                fast.setFormationCount(impl.getAlineacionCount());
                 newImpl = true;
                 update = true;
                 repinta();
@@ -1005,7 +999,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             } catch (IOException ex) {
                 logger.error("Error al cargar TacticDetail", ex);
             }
-        }*/
+        }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
     private void jMenuItem3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
