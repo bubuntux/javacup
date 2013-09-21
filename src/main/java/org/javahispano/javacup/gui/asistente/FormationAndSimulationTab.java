@@ -427,7 +427,7 @@ public class FormationAndSimulationTab {
         int idx = jComboBox3.getSelectedIndex();
         int size = jComboBox3.getModel().getSize();
         if (size == 1) {
-            //todo JOptionPane.showMessageDialog(this, "No puede eliminar todas las alineaciones", "", JOptionPane.WARNING_MESSAGE);
+            JOptionPane.showMessageDialog(jPanel4, "No puede eliminar todas las alineaciones", "", JOptionPane.WARNING_MESSAGE);
         } else {
             model1.removeElementAt(size - 1);
             impl.delAlineacion(idx);
@@ -614,11 +614,6 @@ public class FormationAndSimulationTab {
             if (distMin < 20) {
                 jList1.setSelectedIndex(idx);
                 jPanel5.repaint();
-                /*
-                TODO
-                jTextField2.requestFocus();
-                jTextField2.setSelectionStart(0);
-                jTextField2.setSelectionEnd(jTextField2.getText().length());*/
             }
         } else {
             p0 = transformAsistente(impl.getAlineacion(jComboBox3.getSelectedIndex())[jList1.getSelectedIndex()]);
@@ -734,7 +729,7 @@ public class FormationAndSimulationTab {
         return jList1.getSelectedValue();
     }
 
-    public void postInit(){
+    public void postInit() {
         model1.addElement("1");
         model1.addElement("2");
         model1.addElement("3");
