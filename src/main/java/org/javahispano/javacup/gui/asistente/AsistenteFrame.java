@@ -96,7 +96,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
     boolean cupdate = true;
     int type = 0;
     Position p0;
-    boolean sim = false;
     String tooltip = "";
     int x0, y0;
     Position pos = null;
@@ -109,6 +108,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
     // End of variables declaration//GEN-END:variables
     boolean update = false;
     boolean newImpl = false;
+    private JCheckBox simulationCheckBox = new JCheckBox();
     private boolean pintando = false;
     private TacticDetailImpl impl = new TacticDetailImpl();
     private Image cancha, campo;
@@ -152,7 +152,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
     private JTextField jTextField5;
     private JTextField jTextField6;
     private JTextField jTextField7;
-    private javax.swing.JToggleButton jToggleButton2;
+    private JToggleButton jToggleButton2;
 
     public AsistenteFrame() throws Exception {
         File dir = new File(System.getProperty("user.dir"));
@@ -504,13 +504,12 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         JLabel jLabel24 = new JLabel();
         jTextField7 = new JTextField();
         JLabel jLabel21 = new JLabel();
-        JButton jButton14 = new JButton();
         JPanel jPanel10 = new JPanel();
         JLabel jLabel22 = new JLabel();
         JPanel jPanel11 = new JPanel();
         JPanel jPanel12 = new JPanel();
         JPanel jPanel13 = new JPanel();
-        jToggleButton2 = new javax.swing.JToggleButton();
+        jToggleButton2 = new JToggleButton();
         JPanel jPanel6 = new JPanel();
         jPanel7 = new JPanel();
         JScrollPane jScrollPane1 = new JScrollPane();
@@ -720,7 +719,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton8.setBounds(209, 320, 90, 23);
 
         jComboBox4.setFont(new Font("Arial", 0, 12));
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[]{"Equipamiento Principal", "Equipamiento Secundario"}));
+        jComboBox4.setModel(new DefaultComboBoxModel(new String[]{"Equipamiento Principal", "Equipamiento Secundario"}));
         jComboBox4.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
@@ -1120,16 +1119,24 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jLabel21.setText(" "); // NOI18N
         jPanel8.add(jLabel21);
 
-        jButton14.setFont(new Font("Arial", 0, 12));
-        jButton14.setText(">"); // NOI18N
-        jButton14.setFocusable(false);
-        jButton14.setMaximumSize(new java.awt.Dimension(60, 23));
-        jButton14.addActionListener(new ActionListener() {
+        simulationCheckBox.setFont(new Font("Arial", 0, 12));
+        simulationCheckBox.setText(" >> ");
+        simulationCheckBox.setFocusable(false);
+
+        simulationCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jPanel5.repaint();
+            }
+        });
+
+        //jButton14.setMaximumSize(new java.awt.Dimension(60, 23));
+        /*simulationCheckBox.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jButton14ActionPerformed(evt);
             }
-        });
-        jPanel8.add(jButton14);
+        });*/
+        jPanel8.add(simulationCheckBox);
 
         GroupLayout jPanel10Layout = new GroupLayout(jPanel10);
         jPanel10.setLayout(jPanel10Layout);
@@ -1321,7 +1328,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
     }// </editor-fold>//GEN-END:initComponents
 
     private void simula(Graphics graphics, double x, double y, double remate, double error) {
-        if (sim) {
+        if (simulationCheckBox.isSelected()) {
             Graphics2D gr = (Graphics2D) graphics;
             //ang -> rad
             error = 90d * error;
@@ -1344,7 +1351,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             Color red = new Color(1f, 0f, 0f, .5f);
             Color green = new Color(0f, 1f, 0f, .5f);
             Color blue = new Color(0f, 0f, 1f, .5f);
-            Color yellow = new Color(1f, 1f, 0f, .5f);
             double rr;
             Position p = transformAsistente(new Position(x, y));
             for (int i = 0; i < 500; i++) {
@@ -1365,7 +1371,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                 gr.setColor(c);
                 gr.drawArc((int) (p.getX() - rr), (int) (p.getY() - rr), (int) (rr * 2), (int) (rr * 2), (int) ang0, (int) error * 2);
             }
-            sim = false;
         }
     }
 
@@ -1862,7 +1867,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             }
             jTextField6.setText(df.format(angu).replace(",", "."));
             jTextField5.setText(df.format(dist).replace(",", "."));
-            sim = true;
             jPanel5.repaint();
         }
     }//GEN-LAST:event_jPanel5MouseDragged
@@ -2246,11 +2250,11 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel5.repaint();
     }//GEN-LAST:event_jTextField7CaretUpdate
 
-    private void jButton14ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+    /*private void jButton14ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         sim = true;
         jPanel5.repaint();
     }//GEN-LAST:event_jButton14ActionPerformed
-
+*/
     private void jSlider1StateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         updateSlider();
     }//GEN-LAST:event_jSlider1StateChanged
@@ -2316,7 +2320,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                 units = (int) Constants.ANGULO_VERTICAL_MAX;
             }
             jTextField7.setText("" + units);
-            sim = true;
             jPanel5.repaint();
         } catch (Exception e) {
             jTextField7.setText("0");
