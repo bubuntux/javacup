@@ -1,23 +1,24 @@
 package org.javahispano.javacup.gui.asistente;
 
 import javax.swing.*;
+import javax.swing.event.CaretEvent;
+import javax.swing.event.ChangeEvent;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
+import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Properties;
 import com.thoughtworks.xstream.XStream;
 import org.javahispano.javacup.model.PlayerDetail;
-import org.javahispano.javacup.model.Tactic;
-import org.javahispano.javacup.model.TacticDetail;
-import org.javahispano.javacup.model.command.Command;
-import org.javahispano.javacup.model.engine.GameSituations;
 import org.javahispano.javacup.model.trajectory.AbstractTrajectory;
 import org.javahispano.javacup.model.trajectory.AirTrajectory;
 import org.javahispano.javacup.model.util.Constants;
@@ -37,6 +38,7 @@ import org.slf4j.LoggerFactory;
 import static javax.swing.GroupLayout.Alignment.BASELINE;
 import static javax.swing.GroupLayout.Alignment.LEADING;
 import static javax.swing.LayoutStyle.ComponentPlacement.RELATED;
+import static org.javahispano.javacup.model.util.Constants.RADIO_CIRCULO_CENTRAL;
 
 /**
  * Aplicacion que permite generar codigo para la implementacion de la clase TacticDetail.
@@ -113,43 +115,43 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
     private DefaultListModel model = new DefaultListModel();
     private PintaJugador jp = null;
     private CanvasGameContainer cgc = null;
-    private DefaultComboBoxModel model1 = new DefaultComboBoxModel();
+    private DefaultComboBoxModel<String> model1 = new DefaultComboBoxModel<String>();
     private boolean uniformeAlternativo = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JButton jButton3;
-    private javax.swing.JButton jButton4;
-    private javax.swing.JButton jButton5;
-    private javax.swing.JButton jButton6;
-    private javax.swing.JButton jButton7;
-    private javax.swing.JComboBox jComboBox1;
-    private javax.swing.JComboBox jComboBox2;
-    private javax.swing.JComboBox jComboBox3;
-    private javax.swing.JComboBox jComboBox4;
-    private javax.swing.JComboBox jComboBox7;
-    private javax.swing.JDialog jDialog1;
-    private javax.swing.JLabel jLabel14;
-    private javax.swing.JLabel jLabel15;
-    private javax.swing.JLabel jLabel16;
-    private javax.swing.JLabel jLabel17;
-    private javax.swing.JLabel jLabel20;
+    private JButton jButton1;
+    private JButton jButton2;
+    private JButton jButton3;
+    private JButton jButton4;
+    private JButton jButton5;
+    private JButton jButton6;
+    private JButton jButton7;
+    private JComboBox<String> jComboBox1;
+    private JComboBox<String> jComboBox2;
+    private JComboBox<String> jComboBox3;
+    private JComboBox<String> jComboBox4;
+    private JComboBox<EstiloUniforme> jComboBox7;
+    private JDialog jDialog1;
+    private JLabel jLabel14;
+    private JLabel jLabel15;
+    private JLabel jLabel16;
+    private JLabel jLabel17;
+    private JLabel jLabel20;
     private javax.swing.JList jList1;
-    private javax.swing.JPanel jPanel1;
-    private javax.swing.JPanel jPanel5;
-    private javax.swing.JPanel jPanel7;
+    private JPanel jPanel1;
+    private JPanel jPanel5;
+    private JPanel jPanel7;
     private javax.swing.JProgressBar jProgressBar1;
-    private javax.swing.JSlider jSlider1;
-    private javax.swing.JSlider jSlider2;
-    private javax.swing.JSlider jSlider3;
-    private javax.swing.JTextArea jTextArea1;
-    private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField jTextField2;
-    private javax.swing.JTextField jTextField3;
-    private javax.swing.JTextField jTextField4;
-    private javax.swing.JTextField jTextField5;
-    private javax.swing.JTextField jTextField6;
-    private javax.swing.JTextField jTextField7;
+    private JSlider jSlider1;
+    private JSlider jSlider2;
+    private JSlider jSlider3;
+    private JTextArea jTextArea1;
+    private JTextField jTextField1;
+    private JTextField jTextField2;
+    private JTextField jTextField3;
+    private JTextField jTextField4;
+    private JTextField jTextField5;
+    private JTextField jTextField6;
+    private JTextField jTextField7;
     private javax.swing.JToggleButton jToggleButton2;
 
     public AsistenteFrame() throws Exception {
@@ -188,9 +190,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         game = new Game() {
 
             org.newdawn.slick.Image pasto = null;
-            int idx = 0
-                ,
-                id = 0;
             double deg = 0;
             double x = 0
                 ,
@@ -207,6 +206,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                 gc.setTargetFrameRate(20);
                 gc.setVSync(true);
                 gc.setForceExit(false);
+                gc.setAlwaysRender(true);
             }
 
             @Override
@@ -312,7 +312,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
     private int[] toInt(Integer[] x, int middle) {
         int[] ints = new int[x.length];
         for (int i = 0; i < ints.length; i++) {
-            ints[i] = x[i].intValue() + middle;
+            ints[i] = x[i] + middle;
         }
         return ints;
     }
@@ -321,27 +321,27 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jDialog1 = new javax.swing.JDialog();
+        jDialog1 = new JDialog();
         JScrollPane jScrollPane2 = new JScrollPane();
-        jTextArea1 = new javax.swing.JTextArea();
+        jTextArea1 = new JTextArea();
         JMenuBar jMenuBar2 = new JMenuBar();
         JMenu jMenu2 = new JMenu();
         JMenu jMenu3 = new JMenu();
         JTabbedPane jTabbedPane1 = new JTabbedPane();
-        jPanel1 = new javax.swing.JPanel();
+        jPanel1 = new JPanel();
         JLabel jLabel1 = new JLabel();
-        jTextField1 = new javax.swing.JTextField();
+        jTextField1 = new JTextField();
         JLabel jLabel2 = new JLabel();
-        jComboBox1 = new javax.swing.JComboBox();
+        jComboBox1 = new JComboBox();
         JLabel jLabel3 = new JLabel();
-        jTextField2 = new javax.swing.JTextField();
+        jTextField2 = new JTextField();
         JLabel jLabel4 = new JLabel();
         JLabel jLabel5 = new JLabel();
         JLabel jLabel6 = new JLabel();
         JLabel jLabel7 = new JLabel();
         JLabel jLabel8 = new JLabel();
         JLabel jLabel9 = new JLabel();
-        jComboBox7 = new javax.swing.JComboBox();
+        jComboBox7 = new JComboBox();
         JPanel jPanel3 = new JPanel() {
 
             public void paint(Graphics g) {
@@ -374,35 +374,35 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                     }
                     g.setColor(cc);
                     g.fillPolygon(toInt(intx.get(i), getWidth() / 2), toInt(inty.get(i)), inty.get(i).length);
-                    Color color = cols.get(i);
+                    //Color color = cols.get(i);
                 }
             }
         };
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jButton3 = new javax.swing.JButton();
-        jButton4 = new javax.swing.JButton();
-        jButton5 = new javax.swing.JButton();
+        jButton1 = new JButton();
+        jButton2 = new JButton();
+        jButton3 = new JButton();
+        jButton4 = new JButton();
+        jButton5 = new JButton();
         JButton jButton8 = new JButton();
-        jComboBox4 = new javax.swing.JComboBox();
+        jComboBox4 = new JComboBox();
         JPanel jPanel2 = new JPanel();
         JLabel jLabel10 = new JLabel();
         JLabel jLabel11 = new JLabel();
         JLabel jLabel12 = new JLabel();
         JLabel jLabel13 = new JLabel();
-        jTextField3 = new javax.swing.JTextField();
-        jTextField4 = new javax.swing.JTextField();
-        jButton6 = new javax.swing.JButton();
-        jButton7 = new javax.swing.JButton();
-        jLabel15 = new javax.swing.JLabel();
-        jLabel16 = new javax.swing.JLabel();
-        jLabel17 = new javax.swing.JLabel();
+        jTextField3 = new JTextField();
+        jTextField4 = new JTextField();
+        jButton6 = new JButton();
+        jButton7 = new JButton();
+        jLabel15 = new JLabel();
+        jLabel16 = new JLabel();
+        jLabel17 = new JLabel();
         JButton jButton9 = new JButton();
-        jSlider1 = new javax.swing.JSlider();
-        jSlider2 = new javax.swing.JSlider();
-        jSlider3 = new javax.swing.JSlider();
+        jSlider1 = new JSlider();
+        jSlider2 = new JSlider();
+        jSlider3 = new JSlider();
         JPanel jPanel9 = new JPanel();
-        jLabel20 = new javax.swing.JLabel();
+        jLabel20 = new JLabel();
         jProgressBar1 = new JProgressBar() {
 
             @Override
@@ -419,20 +419,20 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         JLabel jLabel19 = new JLabel();
         JButton jButton18 = new JButton();
         JPanel jPanel4 = new JPanel();
-        jComboBox3 = new javax.swing.JComboBox();
-        jComboBox2 = new javax.swing.JComboBox();
+        jComboBox3 = new JComboBox();
+        jComboBox2 = new JComboBox();
         JButton jButton11 = new JButton();
         JButton jButton12 = new JButton();
-        jPanel5 = new javax.swing.JPanel() {
+        jPanel5 = new JPanel() {
 
             Font f = new Font("lucida console", 0, 10);
 
             public void paint(Graphics g) {
                 g.drawImage(campo, 0, 0, null);
-                org.javahispano.javacup.model.util.Position p;
+                Position p;
                 int num;
                 int i = 0;
-                org.javahispano.javacup.model.util.Position[] posiciones = impl.getAlineacion(jComboBox3.getSelectedIndex());
+                Position[] posiciones = impl.getAlineacion(jComboBox3.getSelectedIndex());
                 double remate = 0, error = 0;
                 double x = 0, y = 0;
                 for (org.javahispano.javacup.model.PlayerDetail j : impl.getPlayers()) {
@@ -442,12 +442,12 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                     if (idx == 1 && p.getY() > 0) {
                         ok = false;
                     }
-                    if (idx == 2 && (p.getY() > 0 || p.distance(org.javahispano.javacup.model.util.Constants.centroCampoJuego) <=
-                        org.javahispano.javacup.model.util.Constants.RADIO_CIRCULO_CENTRAL)) {
+                    if (idx == 2 &&
+                        (p.getY() > 0 || p.distance(org.javahispano.javacup.model.util.Constants.centroCampoJuego) <= RADIO_CIRCULO_CENTRAL)) {
                         ok = false;
                     }
                     if (p == null) {
-                        posiciones[i] = new org.javahispano.javacup.model.util.Position(0, 0);
+                        posiciones[i] = new Position(0, 0);
                         p = posiciones[i];
                     }
                     num = j.getNumber();
@@ -475,7 +475,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                     i++;
                 }
                 if (jToggleButton2.isSelected()) {
-                    for (org.javahispano.javacup.model.util.Position pp : constPos) {
+                    for (Position pp : constPos) {
                         pp = transformAsistente(pp);
                         g.setColor(Color.white);
                         g.drawRect((int) pp.getX() - 2, (int) pp.getY() - 2, 5, 5);
@@ -483,27 +483,26 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                     if (pos != null) {
                         g.setColor(Color.red);
                         g.drawRect((int) pos.getX() - 2, (int) pos.getY() - 2, 5, 5);
-                        org.javahispano.javacup.model.util.Position pkt = unTransformAsistente(pos);
+                        Position pkt = unTransformAsistente(pos);
                         g.setColor(Color.white);
                         g.drawString(tooltip, x0 - (int) (pkt.getY() / 3), y0);
                     }
                 }
-                double r = 0;
                 if (remate > 0) {
                     simula(g, x, y, remate, error);
                 }
             }
         };
-        jLabel14 = new javax.swing.JLabel();
+        jLabel14 = new JLabel();
         JButton jButton10 = new JButton();
         JButton jButton13 = new JButton();
         JPanel jPanel8 = new JPanel();
         JLabel jLabel18 = new JLabel();
-        jTextField5 = new javax.swing.JTextField();
+        jTextField5 = new JTextField();
         JLabel jLabel23 = new JLabel();
-        jTextField6 = new javax.swing.JTextField();
+        jTextField6 = new JTextField();
         JLabel jLabel24 = new JLabel();
-        jTextField7 = new javax.swing.JTextField();
+        jTextField7 = new JTextField();
         JLabel jLabel21 = new JLabel();
         JButton jButton14 = new JButton();
         JPanel jPanel10 = new JPanel();
@@ -513,7 +512,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         JPanel jPanel13 = new JPanel();
         jToggleButton2 = new javax.swing.JToggleButton();
         JPanel jPanel6 = new JPanel();
-        jPanel7 = new javax.swing.JPanel();
+        jPanel7 = new JPanel();
         JScrollPane jScrollPane1 = new JScrollPane();
         jList1 = new javax.swing.JList();
         JMenuBar jMenuBar1 = new JMenuBar();
@@ -533,7 +532,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jTextArea1.setColumns(20);
         jTextArea1.setEditable(false);
-        jTextArea1.setFont(new java.awt.Font("Bitstream Vera Sans Mono", 0, 10));
+        jTextArea1.setFont(new Font("Bitstream Vera Sans Mono", 0, 10));
         jTextArea1.setRows(5);
         jScrollPane2.setViewportView(jTextArea1);
 
@@ -550,100 +549,100 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
-            public void windowClosing(java.awt.event.WindowEvent evt) {
+            public void windowClosing(WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
         getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jTabbedPane1.setFocusable(false);
-        jTabbedPane1.setFont(new java.awt.Font("Arial", 0, 12));
+        jTabbedPane1.setFont(new Font("Arial", 0, 12));
 
         jPanel1.setLayout(null);
 
-        jLabel1.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel1.setFont(new Font("Arial", 0, 12));
         jLabel1.setText("Nombre del Equipo"); // NOI18N
         jPanel1.add(jLabel1);
         jLabel1.setBounds(10, 10, 120, 15);
 
-        jTextField1.setFont(new java.awt.Font("Arial", 0, 12));
+        jTextField1.setFont(new Font("Arial", 0, 12));
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(FocusEvent evt) {
                 jTextField1FocusLost(evt);
             }
         });
         jPanel1.add(jTextField1);
         jTextField1.setBounds(130, 10, 170, 21);
 
-        jLabel2.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel2.setFont(new Font("Arial", 0, 12));
         jLabel2.setText("Pais"); // NOI18N
         jPanel1.add(jLabel2);
         jLabel2.setBounds(10, 40, 90, 15);
 
-        jComboBox1.setFont(new java.awt.Font("Arial", 0, 12));
+        jComboBox1.setFont(new Font("Arial", 0, 12));
         jComboBox1.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(FocusEvent evt) {
                 jComboBox1FocusLost(evt);
             }
         });
         jPanel1.add(jComboBox1);
         jComboBox1.setBounds(130, 40, 170, 21);
 
-        jLabel3.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel3.setFont(new Font("Arial", 0, 12));
         jLabel3.setText("Entrenador"); // NOI18N
         jPanel1.add(jLabel3);
         jLabel3.setBounds(10, 70, 90, 15);
 
-        jTextField2.setFont(new java.awt.Font("Arial", 0, 12));
+        jTextField2.setFont(new Font("Arial", 0, 12));
         jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(FocusEvent evt) {
                 jTextField2FocusLost(evt);
             }
         });
         jPanel1.add(jTextField2);
         jTextField2.setBounds(130, 70, 170, 21);
 
-        jLabel4.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel4.setFont(new Font("Arial", 0, 12));
         jLabel4.setText("Color Camiseta"); // NOI18N
         jPanel1.add(jLabel4);
         jLabel4.setBounds(10, 140, 110, 15);
 
-        jLabel5.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel5.setFont(new Font("Arial", 0, 12));
         jLabel5.setText("Color Pantalones"); // NOI18N
         jPanel1.add(jLabel5);
         jLabel5.setBounds(10, 170, 110, 15);
 
-        jLabel6.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel6.setFont(new Font("Arial", 0, 12));
         jLabel6.setText("Color Calcetas"); // NOI18N
         jPanel1.add(jLabel6);
         jLabel6.setBounds(10, 200, 100, 15);
 
-        jLabel7.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel7.setFont(new Font("Arial", 0, 12));
         jLabel7.setText("Color Franja"); // NOI18N
         jPanel1.add(jLabel7);
         jLabel7.setBounds(10, 230, 100, 15);
 
-        jLabel8.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel8.setFont(new Font("Arial", 0, 12));
         jLabel8.setText("Color Portero"); // NOI18N
         jPanel1.add(jLabel8);
         jLabel8.setBounds(10, 260, 100, 15);
 
-        jLabel9.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel9.setFont(new Font("Arial", 0, 12));
         jLabel9.setText("Estilo Franja"); // NOI18N
         jPanel1.add(jLabel9);
         jLabel9.setBounds(10, 290, 100, 15);
 
-        jComboBox7.setFont(new java.awt.Font("Arial", 0, 12));
-        jComboBox7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox7.setFont(new Font("Arial", 0, 12));
+        jComboBox7.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jComboBox7ActionPerformed(evt);
             }
         });
         jPanel1.add(jComboBox7);
         jComboBox7.setBounds(130, 290, 170, 21);
 
-        jPanel3.setBackground(new java.awt.Color(51, 51, 51));
-        jPanel3.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 2, true));
+        jPanel3.setBackground(new Color(51, 51, 51));
+        jPanel3.setBorder(new javax.swing.border.LineBorder(new Color(0, 0, 0), 2, true));
         jPanel3.setFocusable(false);
 
         GroupLayout jPanel3Layout = new GroupLayout(jPanel3);
@@ -654,76 +653,76 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel1.add(jPanel3);
         jPanel3.setBounds(310, 10, 230, 340);
 
-        jButton1.setFont(new java.awt.Font("Arial", 0, 10));
+        jButton1.setFont(new Font("Arial", 0, 10));
         jButton1.setText(" "); // NOI18N
         jButton1.setFocusable(false);
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton1);
         jButton1.setBounds(130, 140, 170, 21);
 
-        jButton2.setFont(new java.awt.Font("Arial", 0, 10));
+        jButton2.setFont(new Font("Arial", 0, 10));
         jButton2.setText(" "); // NOI18N
         jButton2.setFocusable(false);
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton2);
         jButton2.setBounds(130, 170, 170, 21);
 
-        jButton3.setFont(new java.awt.Font("Arial", 0, 10));
+        jButton3.setFont(new Font("Arial", 0, 10));
         jButton3.setText(" "); // NOI18N
         jButton3.setFocusable(false);
-        jButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton3);
         jButton3.setBounds(130, 200, 170, 21);
 
-        jButton4.setFont(new java.awt.Font("Arial", 0, 10));
+        jButton4.setFont(new Font("Arial", 0, 10));
         jButton4.setText(" "); // NOI18N
         jButton4.setFocusable(false);
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton4);
         jButton4.setBounds(130, 230, 170, 21);
 
-        jButton5.setFont(new java.awt.Font("Arial", 0, 10));
+        jButton5.setFont(new Font("Arial", 0, 10));
         jButton5.setText(" "); // NOI18N
         jButton5.setFocusable(false);
-        jButton5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton5);
         jButton5.setBounds(130, 260, 170, 21);
 
-        jButton8.setFont(new java.awt.Font("Arial", 0, 12));
+        jButton8.setFont(new Font("Arial", 0, 12));
         jButton8.setText("Al Azar"); // NOI18N
         jButton8.setFocusable(false);
-        jButton8.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton8.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
         });
         jPanel1.add(jButton8);
         jButton8.setBounds(209, 320, 90, 23);
 
-        jComboBox4.setFont(new java.awt.Font("Arial", 0, 12));
-        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Equipamiento Principal", "Equipamiento Secundario"}));
-        jComboBox4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox4.setFont(new Font("Arial", 0, 12));
+        jComboBox4.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[]{"Equipamiento Principal", "Equipamiento Secundario"}));
+        jComboBox4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
             }
         });
@@ -736,102 +735,102 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel2.setMinimumSize(new java.awt.Dimension(200, 20));
         jPanel2.setPreferredSize(new java.awt.Dimension(200, 20));
 
-        jLabel10.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel10.setFont(new Font("Arial", 0, 12));
         jLabel10.setText("Nombre"); // NOI18N
 
-        jLabel11.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel11.setFont(new Font("Arial", 0, 12));
         jLabel11.setText("Color de Piel"); // NOI18N
 
-        jLabel12.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel12.setFont(new Font("Arial", 0, 12));
         jLabel12.setText("Color del pelo"); // NOI18N
 
-        jLabel13.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel13.setFont(new Font("Arial", 0, 12));
         jLabel13.setText("N°"); // NOI18N
 
-        jTextField3.setFont(new java.awt.Font("Arial", 0, 12));
+        jTextField3.setFont(new Font("Arial", 0, 12));
         jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+            public void focusGained(FocusEvent evt) {
                 jTextField3FocusGained(evt);
             }
 
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(FocusEvent evt) {
                 jTextField3FocusLost(evt);
             }
         });
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+            public void keyPressed(KeyEvent evt) {
                 jTextField3KeyPressed(evt);
             }
 
-            public void keyReleased(java.awt.event.KeyEvent evt) {
+            public void keyReleased(KeyEvent evt) {
                 jTextField3KeyReleased(evt);
             }
         });
 
-        jTextField4.setFont(new java.awt.Font("Arial", 0, 12));
+        jTextField4.setFont(new Font("Arial", 0, 12));
         jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusGained(java.awt.event.FocusEvent evt) {
+            public void focusGained(FocusEvent evt) {
                 jTextField4FocusGained(evt);
             }
 
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(FocusEvent evt) {
                 jTextField4FocusLost(evt);
             }
         });
         jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyPressed(java.awt.event.KeyEvent evt) {
+            public void keyPressed(KeyEvent evt) {
                 jTextField4KeyPressed(evt);
             }
 
-            public void keyReleased(java.awt.event.KeyEvent evt) {
+            public void keyReleased(KeyEvent evt) {
                 jTextField4KeyReleased(evt);
             }
         });
 
-        jButton6.setFont(new java.awt.Font("Arial", 0, 12));
+        jButton6.setFont(new Font("Arial", 0, 12));
         jButton6.setText(" "); // NOI18N
         jButton6.setFocusable(false);
-        jButton6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
         });
 
-        jButton7.setFont(new java.awt.Font("Arial", 0, 12));
+        jButton7.setFont(new Font("Arial", 0, 12));
         jButton7.setText(" "); // NOI18N
         jButton7.setFocusable(false);
-        jButton7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton7.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
         });
 
-        jLabel15.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel15.setFont(new Font("Arial", 0, 12));
         jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel15.setText("Velocidad(00,00 m/iter)"); // NOI18N
         jLabel15.setMaximumSize(new java.awt.Dimension(200, 20));
         jLabel15.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel15.setPreferredSize(new java.awt.Dimension(200, 20));
 
-        jLabel16.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel16.setFont(new Font("Arial", 0, 12));
         jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel16.setText("Remate  (000,00 m/iter)"); // NOI18N
         jLabel16.setMaximumSize(new java.awt.Dimension(200, 20));
         jLabel16.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel16.setPreferredSize(new java.awt.Dimension(200, 20));
 
-        jLabel17.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel17.setFont(new Font("Arial", 0, 12));
         jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel17.setText("Precisión (   %)"); // NOI18N
         jLabel17.setMaximumSize(new java.awt.Dimension(200, 20));
         jLabel17.setMinimumSize(new java.awt.Dimension(200, 20));
         jLabel17.setPreferredSize(new java.awt.Dimension(200, 20));
 
-        jButton9.setFont(new java.awt.Font("Arial", 0, 12));
+        jButton9.setFont(new Font("Arial", 0, 12));
         jButton9.setText("Usar estos colores en todos"); // NOI18N
         jButton9.setFocusable(false);
-        jButton9.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton9.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
         });
@@ -841,7 +840,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jSlider1.setMinimumSize(new java.awt.Dimension(200, 20));
         jSlider1.setPreferredSize(new java.awt.Dimension(200, 20));
         jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+            public void stateChanged(ChangeEvent evt) {
                 jSlider1StateChanged(evt);
             }
         });
@@ -851,7 +850,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jSlider2.setMinimumSize(new java.awt.Dimension(200, 20));
         jSlider2.setPreferredSize(new java.awt.Dimension(200, 20));
         jSlider2.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+            public void stateChanged(ChangeEvent evt) {
                 jSlider2StateChanged(evt);
             }
         });
@@ -861,27 +860,27 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jSlider3.setMinimumSize(new java.awt.Dimension(200, 20));
         jSlider3.setPreferredSize(new java.awt.Dimension(200, 20));
         jSlider3.addChangeListener(new javax.swing.event.ChangeListener() {
-            public void stateChanged(javax.swing.event.ChangeEvent evt) {
+            public void stateChanged(ChangeEvent evt) {
                 jSlider3StateChanged(evt);
             }
         });
 
         jPanel9.setFocusable(false);
 
-        jLabel20.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel20.setFont(new Font("Arial", 0, 12));
         jLabel20.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel20.setText("0.0"); // NOI18N
         jLabel20.setAlignmentX(1.0F);
 
-        jProgressBar1.setBackground(new java.awt.Color(102, 102, 102));
-        jProgressBar1.setFont(new java.awt.Font("Arial", 0, 10));
-        jProgressBar1.setForeground(new java.awt.Color(0, 51, 255));
+        jProgressBar1.setBackground(new Color(102, 102, 102));
+        jProgressBar1.setFont(new Font("Arial", 0, 10));
+        jProgressBar1.setForeground(new Color(0, 51, 255));
         jProgressBar1.setMaximum(200);
         jProgressBar1.setOrientation(1);
-        jProgressBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jProgressBar1.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 0, 0)));
         jProgressBar1.setFocusable(false);
 
-        jLabel19.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel19.setFont(new Font("Arial", 0, 12));
         jLabel19.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         jLabel19.setText("Creditos"); // NOI18N
 
@@ -897,11 +896,11 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                 .addComponent(jProgressBar1, GroupLayout.DEFAULT_SIZE, 276, Short.MAX_VALUE).addPreferredGap(RELATED)
                 .addComponent(jLabel20, GroupLayout.PREFERRED_SIZE, 20, GroupLayout.PREFERRED_SIZE)));
 
-        jButton18.setFont(new java.awt.Font("Arial", 0, 12));
+        jButton18.setFont(new Font("Arial", 0, 12));
         jButton18.setText("Este Jugador es Portero");
         jButton18.setFocusable(false);
-        jButton18.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton18.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton18ActionPerformed(evt);
             }
         });
@@ -956,41 +955,41 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jTabbedPane1.addTab("Jugadores", jPanel2);
 
-        jPanel4.setFont(new java.awt.Font("Arial", 0, 14));
+        jPanel4.setFont(new Font("Arial", 0, 14));
 
-        jComboBox3.setFont(new java.awt.Font("Arial", 0, 12));
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"1"}));
-        jComboBox3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox3.setFont(new Font("Arial", 0, 12));
+        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[]{"1"}));
+        jComboBox3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
             }
         });
 
-        jComboBox2.setFont(new java.awt.Font("Arial", 0, 12));
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[]{"Normal", "Inicio Sacando", "Inicio Recibiendo"}));
-        jComboBox2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jComboBox2.setFont(new Font("Arial", 0, 12));
+        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<String>(new String[]{"Normal", "Inicio Sacando", "Inicio Recibiendo"}));
+        jComboBox2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jComboBox2ActionPerformed(evt);
             }
         });
 
         jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/add.png"))); // NOI18N
         jButton11.setFocusable(false);
-        jButton11.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton11.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton11ActionPerformed(evt);
             }
         });
 
         jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/delete.png"))); // NOI18N
         jButton12.setFocusable(false);
-        jButton12.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton12.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton12ActionPerformed(evt);
             }
         });
 
-        jPanel5.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel5.setBackground(new Color(102, 102, 102));
         jPanel5.setMaximumSize(new java.awt.Dimension(216, 145));
         jPanel5.setMinimumSize(new java.awt.Dimension(216, 145));
         jPanel5.setPreferredSize(new java.awt.Dimension(476, 307));
@@ -1000,21 +999,21 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             }
         });
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
-            public void mousePressed(java.awt.event.MouseEvent evt) {
+            public void mousePressed(MouseEvent evt) {
                 jPanel5MousePressed(evt);
             }
         });
         jPanel5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
-            public void mouseDragged(java.awt.event.MouseEvent evt) {
+            public void mouseDragged(MouseEvent evt) {
                 jPanel5MouseDragged(evt);
             }
 
-            public void mouseMoved(java.awt.event.MouseEvent evt) {
+            public void mouseMoved(MouseEvent evt) {
                 jPanel5MouseMoved(evt);
             }
         });
         jPanel5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(java.awt.event.KeyEvent evt) {
+            public void keyTyped(KeyEvent evt) {
                 jPanel5KeyTyped(evt);
             }
         });
@@ -1024,29 +1023,29 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel5Layout.setHorizontalGroup(jPanel5Layout.createParallelGroup(LEADING).addGap(0, 476, Short.MAX_VALUE));
         jPanel5Layout.setVerticalGroup(jPanel5Layout.createParallelGroup(LEADING).addGap(0, 307, Short.MAX_VALUE));
 
-        jLabel14.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel14.setFont(new Font("Arial", 0, 12));
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
         jLabel14.setText("0,0"); // NOI18N
 
         jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/up.png"))); // NOI18N
         jButton10.setFocusable(false);
-        jButton10.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton10.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton10ActionPerformed(evt);
             }
         });
 
         jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/down.png"))); // NOI18N
         jButton13.setFocusable(false);
-        jButton13.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton13.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton13ActionPerformed(evt);
             }
         });
 
         jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.PAGE_AXIS));
 
-        jLabel18.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel18.setFont(new Font("Arial", 0, 12));
         jLabel18.setText("Fuerza"); // NOI18N
         jLabel18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel18.setMaximumSize(new java.awt.Dimension(50, 15));
@@ -1054,23 +1053,23 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jLabel18.setPreferredSize(new java.awt.Dimension(50, 15));
         jPanel8.add(jLabel18);
 
-        jTextField5.setFont(new java.awt.Font("Arial", 0, 12));
-        jTextField5.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextField5.setFont(new Font("Arial", 0, 12));
+        jTextField5.setHorizontalAlignment(JTextField.RIGHT);
         jTextField5.setText("1"); // NOI18N
         jTextField5.setMaximumSize(new java.awt.Dimension(2147483647, 20));
         jTextField5.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+            public void caretUpdate(CaretEvent evt) {
                 jTextField5CaretUpdate(evt);
             }
         });
         jTextField5.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(FocusEvent evt) {
                 jTextField5FocusLost(evt);
             }
         });
         jPanel8.add(jTextField5);
 
-        jLabel23.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel23.setFont(new Font("Arial", 0, 12));
         jLabel23.setText("Angulo"); // NOI18N
         jLabel23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel23.setMaximumSize(new java.awt.Dimension(50, 15));
@@ -1078,23 +1077,23 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jLabel23.setPreferredSize(new java.awt.Dimension(50, 15));
         jPanel8.add(jLabel23);
 
-        jTextField6.setFont(new java.awt.Font("Arial", 0, 12));
-        jTextField6.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextField6.setFont(new Font("Arial", 0, 12));
+        jTextField6.setHorizontalAlignment(JTextField.RIGHT);
         jTextField6.setText("0"); // NOI18N
         jTextField6.setMaximumSize(new java.awt.Dimension(2147483647, 20));
         jTextField6.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+            public void caretUpdate(CaretEvent evt) {
                 jTextField6CaretUpdate(evt);
             }
         });
         jTextField6.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(FocusEvent evt) {
                 jTextField6FocusLost(evt);
             }
         });
         jPanel8.add(jTextField6);
 
-        jLabel24.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel24.setFont(new Font("Arial", 0, 12));
         jLabel24.setText("Angulo Z"); // NOI18N
         jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel24.setMaximumSize(new java.awt.Dimension(50, 15));
@@ -1102,17 +1101,17 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jLabel24.setPreferredSize(new java.awt.Dimension(50, 15));
         jPanel8.add(jLabel24);
 
-        jTextField7.setFont(new java.awt.Font("Arial", 0, 12));
-        jTextField7.setHorizontalAlignment(javax.swing.JTextField.RIGHT);
+        jTextField7.setFont(new Font("Arial", 0, 12));
+        jTextField7.setHorizontalAlignment(JTextField.RIGHT);
         jTextField7.setText("0"); // NOI18N
         jTextField7.setMaximumSize(new java.awt.Dimension(2147483647, 20));
         jTextField7.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(javax.swing.event.CaretEvent evt) {
+            public void caretUpdate(CaretEvent evt) {
                 jTextField7CaretUpdate(evt);
             }
         });
         jTextField7.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(java.awt.event.FocusEvent evt) {
+            public void focusLost(FocusEvent evt) {
                 jTextField7FocusLost(evt);
             }
         });
@@ -1121,12 +1120,12 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jLabel21.setText(" "); // NOI18N
         jPanel8.add(jLabel21);
 
-        jButton14.setFont(new java.awt.Font("Arial", 0, 12));
+        jButton14.setFont(new Font("Arial", 0, 12));
         jButton14.setText(">"); // NOI18N
         jButton14.setFocusable(false);
         jButton14.setMaximumSize(new java.awt.Dimension(60, 23));
-        jButton14.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jButton14.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jButton14ActionPerformed(evt);
             }
         });
@@ -1139,7 +1138,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jPanel8.add(jPanel10);
 
-        jLabel22.setFont(new java.awt.Font("Arial", 0, 12));
+        jLabel22.setFont(new Font("Arial", 0, 12));
         jLabel22.setText("Leyenda"); // NOI18N
         jLabel22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel22.setMaximumSize(new java.awt.Dimension(50, 15));
@@ -1147,8 +1146,8 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jLabel22.setPreferredSize(new java.awt.Dimension(50, 15));
         jPanel8.add(jLabel22);
 
-        jPanel11.setBackground(new java.awt.Color(255, 0, 51));
-        jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel11.setBackground(new Color(255, 0, 51));
+        jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 0, 0)));
         jPanel11.setToolTipText("Fuera del alcance");
 
         GroupLayout jPanel11Layout = new GroupLayout(jPanel11);
@@ -1158,8 +1157,8 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jPanel8.add(jPanel11);
 
-        jPanel12.setBackground(new java.awt.Color(0, 0, 255));
-        jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel12.setBackground(new Color(0, 0, 255));
+        jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 0, 0)));
         jPanel12.setToolTipText("Alcance de portero");
 
         GroupLayout jPanel12Layout = new GroupLayout(jPanel12);
@@ -1169,8 +1168,8 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jPanel8.add(jPanel12);
 
-        jPanel13.setBackground(new java.awt.Color(0, 255, 0));
-        jPanel13.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0)));
+        jPanel13.setBackground(new Color(0, 255, 0));
+        jPanel13.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 0, 0)));
         jPanel13.setToolTipText("Alcance de jugadores");
 
         GroupLayout jPanel13Layout = new GroupLayout(jPanel13);
@@ -1180,11 +1179,11 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jPanel8.add(jPanel13);
 
-        jToggleButton2.setFont(new java.awt.Font("Arial", 0, 12));
+        jToggleButton2.setFont(new Font("Arial", 0, 12));
         jToggleButton2.setText("Constantes");
         jToggleButton2.setFocusable(false);
-        jToggleButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jToggleButton2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jToggleButton2ActionPerformed(evt);
             }
         });
@@ -1223,8 +1222,8 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel6.setFocusable(false);
         jPanel6.setLayout(new java.awt.CardLayout());
 
-        jPanel7.setBackground(new java.awt.Color(102, 102, 102));
-        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new java.awt.Color(0, 0, 0), 2));
+        jPanel7.setBackground(new Color(102, 102, 102));
+        jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
         jPanel7.setFocusable(false);
         jPanel7.setMaximumSize(new java.awt.Dimension(140, 100));
         jPanel7.setMinimumSize(new java.awt.Dimension(140, 100));
@@ -1234,8 +1233,8 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(571, 23, 120, 100));
 
-        jList1.setBorder(new javax.swing.border.LineBorder(new java.awt.Color(0, 0, 0), 1, true));
-        jList1.setFont(new java.awt.Font("Arial", 0, 10));
+        jList1.setBorder(new javax.swing.border.LineBorder(new Color(0, 0, 0), 1, true));
+        jList1.setFont(new Font("Arial", 0, 10));
         jList1.setFocusable(false);
         jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
@@ -1247,68 +1246,68 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         getContentPane().add(jScrollPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(570, 130, 120, 240));
 
         jMenu1.setText("Archivo"); // NOI18N
-        jMenu1.setFont(new java.awt.Font("Arial", 0, 12));
+        jMenu1.setFont(new Font("Arial", 0, 12));
 
-        jMenuItem1.setFont(new java.awt.Font("Arial", 0, 12));
+        jMenuItem1.setFont(new Font("Arial", 0, 12));
         jMenuItem1.setText("Abrir"); // NOI18N
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem1.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setFont(new java.awt.Font("Arial", 0, 12));
+        jMenuItem2.setFont(new Font("Arial", 0, 12));
         jMenuItem2.setText("Guardar"); // NOI18N
-        jMenuItem2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem2.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItem2);
         jMenu1.add(jSeparator1);
 
-        jMenuItem3.setFont(new java.awt.Font("Arial", 0, 12));
+        jMenuItem3.setFont(new Font("Arial", 0, 12));
         jMenuItem3.setText("Generar Codigo de Tactica"); // NOI18N
-        jMenuItem3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem3.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItem3);
 
-        jMenuItem4.setFont(new java.awt.Font("Arial", 0, 12));
+        jMenuItem4.setFont(new Font("Arial", 0, 12));
         jMenuItem4.setText("Generar Codigo de Tactica, Sin TacticaDetalle"); // NOI18N
-        jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem4.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItem4);
 
-        jMenuItem5.setFont(new java.awt.Font("Arial", 0, 12));
+        jMenuItem5.setFont(new Font("Arial", 0, 12));
         jMenuItem5.setText("Generar Codigo de TacticaDetalle"); // NOI18N
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem5.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItem5);
 
-        jMenuItem6.setFont(new java.awt.Font("Arial", 0, 12));
+        jMenuItem6.setFont(new Font("Arial", 0, 12));
         jMenuItem6.setText("Generar Codigo de Alineaciones"); // NOI18N
-        jMenuItem6.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem6.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
             }
         });
         jMenu1.add(jMenuItem6);
         jMenu1.add(jSeparator2);
 
-        jMenuItem7.setFont(new java.awt.Font("Arial", 0, 12));
+        jMenuItem7.setFont(new Font("Arial", 0, 12));
         jMenuItem7.setText("Validar Tactica"); // NOI18N
-        jMenuItem7.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
+        jMenuItem7.addActionListener(new ActionListener() {
+            public void actionPerformed(ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
             }
         });
@@ -1320,10 +1319,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
-
-    private double redondeaMultiplo(double valor, double divisor) {
-        return Math.round(valor / divisor) * divisor;
-    }
 
     private void simula(Graphics graphics, double x, double y, double remate, double error) {
         if (sim) {
@@ -1339,10 +1334,9 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             double dr = vel * Math.cos(av);
             AbstractTrajectory trayectoria = new AirTrajectory(dr, dz, 0, 0);
             //coordenadas
-            double r = 0;
-            double z = 0;
+            double r;
+            double z;
             //booleans
-            boolean rebote;
             boolean alcanceJugador;
             boolean alcancePortico;
             //bucle
@@ -1353,28 +1347,9 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             Color yellow = new Color(1f, 1f, 0f, .5f);
             double rr;
             Position p = transformAsistente(new Position(x, y));
-            boolean suelo = false;
             for (int i = 0; i < 500; i++) {
                 r = trayectoria.getX((double) i / 60d) * Constants.AMPLIFICA_VEL_TRAYECTORIA;
                 z = trayectoria.getY((double) i / 60d) * Constants.AMPLIFICA_VEL_TRAYECTORIA;
-//                rebote = false;
-//                if (!suelo && z == 0 && dz < Constants.G * 3) {//condicion para que se arrastre
-//                    suelo = true;
-//                }
-//                if (suelo) {
-//                    r = r + dr;
-//                    dr = dr * Constants.FACTOR_DISMINUCION_VEL_BALON_SUELO;
-//                } else {
-//                    z = redondeaMultiplo(z + dz, Constants.G);
-//                    r = r + dr;
-//                    dz = redondeaMultiplo(dz - Constants.G, Constants.G);
-//                    dr = dr * Constants.FACTOR_DISMINUCION_VEL_BALON_AIRE;
-//                    if (z == 0) {
-//                        dz = (-dz - Constants.G) * Constants.FACTOR_DISMINUCION_ALTURA_BALON_REBOTE;
-//                        dz = redondeaMultiplo(dz, Constants.G);
-//                        rebote = true;
-//                    }
-//                }
                 alcanceJugador = z < Constants.ALTURA_CONTROL_BALON;
                 alcancePortico = z < Constants.ALTO_ARCO;
                 if (!alcancePortico) {
@@ -1386,11 +1361,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                         c = blue;
                     }
                 }
-                if (suelo) {
-                    c = yellow;
-                }
                 rr = transformAsistente(r);
-                //System.out.println(i+" "+r+" "+z);
                 gr.setColor(c);
                 gr.drawArc((int) (p.getX() - rr), (int) (p.getY() - rr), (int) (rr * 2), (int) (rr * 2), (int) ang0, (int) error * 2);
             }
@@ -1437,7 +1408,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         return ok;
     }
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jMenuItem2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
         int i = 0;
         for (i = 0; i < model.getSize(); i++) {
             impl.getPlayers()[i] = (PlayerDetail) model.get(i);
@@ -1451,7 +1422,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jMenuItem2ActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jMenuItem1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
         if (jfc.showOpenDialog(this) == JFileChooser.APPROVE_OPTION) {
             try {
                 impl = TacticDetailImpl.loadFichero(jfc.getSelectedFile());
@@ -1474,7 +1445,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jMenuItem3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
         String codalin = "";
         int numSaca = -1, numRecibe = -1;
         for (int idx = 0; idx < impl.getAlineacionCount(); idx++) {
@@ -1654,7 +1625,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         return posi.setInsideGameField();
     }
 
-    private void jMenuItem4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
+    private void jMenuItem4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem4ActionPerformed
         String paclas = JOptionPane.showInputDialog(this, "ingrese el nombre de la clase (paquete.clase)?", name);
         name = paclas;
         if (paclas != null) {
@@ -1707,7 +1678,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void jMenuItem5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
         String codigo =
             "public class TacticDetailImpl implements TacticDetail {\n\n" + "        public String getTacticName() {\n" + "            return \"" +
                 impl.getTacticName() + "\";\n" + "        }\n\n" + "        public String getCountry() {\n" + "            return \"" +
@@ -1812,7 +1783,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jDialog1.setVisible(true);
     }//GEN-LAST:event_jMenuItem5ActionPerformed
 
-    private void jMenuItem6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
+    private void jMenuItem6ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem6ActionPerformed
         int idx;
         String codalin = "";
         int numSaca = -1, numRecibe = -1;
@@ -1840,7 +1811,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jDialog1.setVisible(true);
     }//GEN-LAST:event_jMenuItem6ActionPerformed
 
-    private void jButton13ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void jButton13ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
         int idx = jComboBox3.getSelectedIndex();
         if (idx < jComboBox3.getModel().getSize() - 1) {
             cupdate = false;
@@ -1855,7 +1826,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jButton13ActionPerformed
 
-    private void jButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void jButton10ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
         int idx = jComboBox3.getSelectedIndex();
         if (idx > 0) {
             cupdate = false;
@@ -1870,7 +1841,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jButton10ActionPerformed
 
-    private void jPanel5MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseDragged
+    private void jPanel5MouseDragged(MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseDragged
         if (type == MouseEvent.BUTTON1) {
             if (distMin < 20) {
                 Position[] Positiones = impl.getAlineacion(jComboBox3.getSelectedIndex());
@@ -1896,7 +1867,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jPanel5MouseDragged
 
-    private void jPanel5MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
+    private void jPanel5MousePressed(MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
         type = evt.getButton();
         jPanel5.requestFocus();
         if (evt.getButton() == MouseEvent.BUTTON1) {
@@ -1924,7 +1895,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jPanel5MousePressed
 
-    private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void jButton12ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
         int idx = jComboBox3.getSelectedIndex();
         int size = jComboBox3.getModel().getSize();
         if (size == 1) {
@@ -1936,7 +1907,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jButton12ActionPerformed
 
-    private void jButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void jButton11ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
         int idx = jComboBox3.getSelectedIndex();
         impl.addAlineacion(idx);
         int size = jComboBox3.getModel().getSize() + 1;
@@ -1944,7 +1915,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jComboBox3.setSelectedIndex(size - 1);
     }//GEN-LAST:event_jButton11ActionPerformed
 
-    private void jComboBox2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void jComboBox2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
         try {
             jPanel5.repaint();
             int idx = jComboBox3.getSelectedIndex();
@@ -1953,7 +1924,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jComboBox2ActionPerformed
 
-    private void jComboBox3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void jComboBox3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
         int idx = jComboBox3.getSelectedIndex();
         if (idx == -1) {
             idx = 0;
@@ -1962,7 +1933,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel5.repaint();
     }//GEN-LAST:event_jComboBox3ActionPerformed
 
-    private void jButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
+    private void jButton9ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
         PlayerDetail j = getJugador();
         Color piel = j.getSkinColor();
         Color pelo = j.getHairColor();
@@ -1979,7 +1950,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jTextField3.setSelectionEnd(jTextField3.getText().length());
     }//GEN-LAST:event_jList1ValueChanged
 
-    private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
+    private void jButton7ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton7ActionPerformed
         Color c = JColorChooser.showDialog(this, "Color del Pelo", getJugador().getHairColor());
         if (c != null) {
             getJugador().setColorPelo(c);
@@ -1988,7 +1959,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jButton7ActionPerformed
 
-    private void jButton6ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
+    private void jButton6ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton6ActionPerformed
         Color c = JColorChooser.showDialog(this, "Color de la Piel", getJugador().getSkinColor());
         if (c != null) {
             getJugador().setColorPiel(c);
@@ -1997,7 +1968,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jButton6ActionPerformed
 
-    private void jTextField4KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
+    private void jTextField4KeyReleased(KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyReleased
         try {
             getJugador().setNumero(Integer.parseInt(jTextField4.getText().trim()));
         } catch (Exception ex) {
@@ -2006,7 +1977,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel5.repaint();
     }//GEN-LAST:event_jTextField4KeyReleased
 
-    private void jTextField4KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
+    private void jTextField4KeyPressed(KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
         try {
             getJugador().setNumero(Integer.parseInt(jTextField4.getText().trim()));
         } catch (Exception ex) {
@@ -2015,7 +1986,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel5.repaint();
     }//GEN-LAST:event_jTextField4KeyPressed
 
-    private void jTextField4FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
+    private void jTextField4FocusLost(FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
         try {
             getJugador().setNumero(Integer.parseInt(jTextField4.getText().trim()));
         } catch (Exception ex) {
@@ -2025,17 +1996,17 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel5.repaint();
     }//GEN-LAST:event_jTextField4FocusLost
 
-    private void jTextField4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusGained
+    private void jTextField4FocusGained(FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusGained
         jTextField4.selectAll();
     }//GEN-LAST:event_jTextField4FocusGained
 
-    private void jTextField3KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
+    private void jTextField3KeyReleased(KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
         getJugador().setNombre(jTextField3.getText());
         repintaModel();
         jPanel5.repaint();
     }//GEN-LAST:event_jTextField3KeyReleased
 
-    private void jTextField3KeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
+    private void jTextField3KeyPressed(KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
         int idx = jList1.getSelectedIndex();
         if (evt.getKeyCode() == KeyEvent.VK_DOWN) {
             jList1.setSelectedIndex((idx + 1) % 11);
@@ -2051,21 +2022,21 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         repintaModel();
     }//GEN-LAST:event_jTextField3KeyPressed
 
-    private void jTextField3FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
+    private void jTextField3FocusLost(FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusLost
         getJugador().setNombre(jTextField3.getText().trim());
         repintaModel();
     }//GEN-LAST:event_jTextField3FocusLost
 
-    private void jTextField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusGained
+    private void jTextField3FocusGained(FocusEvent evt) {//GEN-FIRST:event_jTextField3FocusGained
         jTextField3.selectAll();
     }//GEN-LAST:event_jTextField3FocusGained
 
-    private void jComboBox4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
+    private void jComboBox4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jComboBox4ActionPerformed
         uniformeAlternativo = jComboBox4.getSelectedIndex() == 1;
         repinta();
     }//GEN-LAST:event_jComboBox4ActionPerformed
 
-    private void jButton8ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
+    private void jButton8ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton8ActionPerformed
         if (jComboBox4.getSelectedIndex() == 0) {
             azar();
         } else {
@@ -2074,7 +2045,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         update = true;
     }//GEN-LAST:event_jButton8ActionPerformed
 
-    private void jButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
+    private void jButton5ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton5ActionPerformed
         if (jComboBox4.getSelectedIndex() == 0) {
             Color col = JColorChooser.showDialog(this, "Color del Portero", impl.getGoalKeeper());
             if (col != null) {
@@ -2094,7 +2065,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jButton5ActionPerformed
 
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
+    private void jButton4ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
         if (jComboBox4.getSelectedIndex() == 0) {
             Color col = JColorChooser.showDialog(this, "Color de la Franja", impl.getShirtLineColor());
             if (col != null) {
@@ -2114,7 +2085,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jButton4ActionPerformed
 
-    private void jButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
+    private void jButton3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton3ActionPerformed
         if (jComboBox4.getSelectedIndex() == 0) {
             Color col = JColorChooser.showDialog(this, "Color de las Calcetas", impl.getSocksColor());
             if (col != null) {
@@ -2134,7 +2105,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jButton3ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jButton2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (jComboBox4.getSelectedIndex() == 0) {
             Color col = JColorChooser.showDialog(this, "Color de los Pantalones", impl.getShortsColor());
             if (col != null) {
@@ -2154,7 +2125,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jButton2ActionPerformed
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+    private void jButton1ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         if (jComboBox4.getSelectedIndex() == 0) {
             Color col = JColorChooser.showDialog(this, "Color de la Camiseta", impl.getShirtColor());
             if (col != null) {
@@ -2174,7 +2145,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jComboBox7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
+    private void jComboBox7ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
         if (jComboBox4.getSelectedIndex() == 0) {
             impl.setEstiloPrincipal((EstiloUniforme) jComboBox7.getSelectedItem());
         } else {
@@ -2184,19 +2155,19 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         newImpl = true;
     }//GEN-LAST:event_jComboBox7ActionPerformed
 
-    private void jTextField2FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
+    private void jTextField2FocusLost(FocusEvent evt) {//GEN-FIRST:event_jTextField2FocusLost
         impl.setEntrenador(jTextField2.getText().trim());
     }//GEN-LAST:event_jTextField2FocusLost
 
-    private void jComboBox1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jComboBox1FocusLost
+    private void jComboBox1FocusLost(FocusEvent evt) {//GEN-FIRST:event_jComboBox1FocusLost
         impl.setPais("" + jComboBox1.getSelectedItem());
     }//GEN-LAST:event_jComboBox1FocusLost
 
-    private void jTextField1FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
+    private void jTextField1FocusLost(FocusEvent evt) {//GEN-FIRST:event_jTextField1FocusLost
         impl.setNombre(jTextField1.getText().trim());
     }//GEN-LAST:event_jTextField1FocusLost
 
-    private void jTextField5FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusLost
+    private void jTextField5FocusLost(FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusLost
         try {
             fuerza = Double.parseDouble(jTextField5.getText().trim());
         } catch (Exception ex) {
@@ -2211,7 +2182,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel5.repaint();
     }//GEN-LAST:event_jTextField5FocusLost
 
-    private void jTextField5CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField5CaretUpdate
+    private void jTextField5CaretUpdate(CaretEvent evt) {//GEN-FIRST:event_jTextField5CaretUpdate
         try {
             fuerza = Double.parseDouble(jTextField5.getText().trim());
             jTextField5.setForeground(Color.black);
@@ -2227,7 +2198,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel5.repaint();
     }//GEN-LAST:event_jTextField5CaretUpdate
 
-    private void jTextField6FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField6FocusLost
+    private void jTextField6FocusLost(FocusEvent evt) {//GEN-FIRST:event_jTextField6FocusLost
         try {
             ang = Double.parseDouble(jTextField6.getText().trim());
         } catch (Exception ex) {
@@ -2235,7 +2206,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jTextField6.setText("" + ang);
     }//GEN-LAST:event_jTextField6FocusLost
 
-    private void jTextField6CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField6CaretUpdate
+    private void jTextField6CaretUpdate(CaretEvent evt) {//GEN-FIRST:event_jTextField6CaretUpdate
         try {
             ang = Double.parseDouble(jTextField6.getText().trim());
             jTextField6.setForeground(Color.black);
@@ -2244,7 +2215,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jTextField6CaretUpdate
 
-    private void jTextField7FocusLost(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_jTextField7FocusLost
+    private void jTextField7FocusLost(FocusEvent evt) {//GEN-FIRST:event_jTextField7FocusLost
         try {
             elev = Double.parseDouble(jTextField7.getText().trim());
         } catch (Exception ex) {
@@ -2259,7 +2230,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel5.repaint();
     }//GEN-LAST:event_jTextField7FocusLost
 
-    private void jTextField7CaretUpdate(javax.swing.event.CaretEvent evt) {//GEN-FIRST:event_jTextField7CaretUpdate
+    private void jTextField7CaretUpdate(CaretEvent evt) {//GEN-FIRST:event_jTextField7CaretUpdate
         try {
             elev = Double.parseDouble(jTextField7.getText().trim());
             jTextField7.setForeground(Color.black);
@@ -2275,24 +2246,24 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jPanel5.repaint();
     }//GEN-LAST:event_jTextField7CaretUpdate
 
-    private void jButton14ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
+    private void jButton14ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton14ActionPerformed
         sim = true;
         jPanel5.repaint();
     }//GEN-LAST:event_jButton14ActionPerformed
 
-    private void jSlider1StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
+    private void jSlider1StateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSlider1StateChanged
         updateSlider();
     }//GEN-LAST:event_jSlider1StateChanged
 
-    private void jSlider2StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
+    private void jSlider2StateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSlider2StateChanged
         updateSlider();
     }//GEN-LAST:event_jSlider2StateChanged
 
-    private void jSlider3StateChanged(javax.swing.event.ChangeEvent evt) {//GEN-FIRST:event_jSlider3StateChanged
+    private void jSlider3StateChanged(ChangeEvent evt) {//GEN-FIRST:event_jSlider3StateChanged
         updateSlider();
     }//GEN-LAST:event_jSlider3StateChanged
 
-    private void jMenuItem7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
+    private void jMenuItem7ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jMenuItem7ActionPerformed
         try {
             TacticValidate.validateDetail("tactica", impl);
         } catch (Exception ex) {
@@ -2302,7 +2273,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         JOptionPane.showMessageDialog(this, "Validacion OK", "Validacion", JOptionPane.INFORMATION_MESSAGE);
     }//GEN-LAST:event_jMenuItem7ActionPerformed
 
-    private void formWindowClosing(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
+    private void formWindowClosing(WindowEvent evt) {//GEN-FIRST:event_formWindowClosing
         props.setProperty("currentDir", jfc.getCurrentDirectory().getAbsolutePath());
         try {
             props.store(new FileOutputStream("props"), "properties");
@@ -2310,11 +2281,11 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_formWindowClosing
 
-    private void jToggleButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void jToggleButton2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
         jPanel5.repaint();
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
-    private void jPanel5MouseMoved(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseMoved
+    private void jPanel5MouseMoved(MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseMoved
         Position p = unTransformAsistente(new Position(evt.getX() - 8, evt.getY() - 3));
         jLabel14.setText(df.format(p.getY()) + ":" + df.format(p.getX()));
         int idx = p.nearestIndex(constPos);
@@ -2331,7 +2302,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jPanel5MouseMoved
 
-    private void jPanel5KeyTyped(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_jPanel5KeyTyped
+    private void jPanel5KeyTyped(KeyEvent evt) {//GEN-FIRST:event_jPanel5KeyTyped
     }//GEN-LAST:event_jPanel5KeyTyped
 
     private void jPanel5MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jPanel5MouseWheelMoved
@@ -2352,7 +2323,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         }
     }//GEN-LAST:event_jPanel5MouseWheelMoved
 
-    private void jButton18ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
+    private void jButton18ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
         JugadorImpl[] jugs = ((JugadorImpl[]) (impl.getPlayers()));
         int idx = jList1.getSelectedIndex();
         for (int i = 0; i < 11; i++) {
@@ -2450,43 +2421,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             cgc.start();
         } catch (Exception ex) {
             logger.error("Error al iniciar el gameContainer", ex);
-        }
-    }
-
-    class TacticaImpl implements Tactic {
-
-        TacticDetail det;
-        Position[] saca;
-        Position[] recive;
-
-        public TacticaImpl(TacticDetail det, Position[] saca, Position[] recive) {
-            this.det = det;
-            this.saca = saca;
-            this.recive = recive;
-        }
-
-        @Override
-        public TacticDetail getDetail() {
-            return det;
-        }
-
-        public List<Command> getComandos(GameSituations sj) {
-            return null;
-        }
-
-        @Override
-        public Position[] getStartPositions(GameSituations sj) {
-            return saca;
-        }
-
-        @Override
-        public Position[] getNoStartPositions(GameSituations sj) {
-            return recive;
-        }
-
-        @Override
-        public List<Command> execute(GameSituations sp) {
-            return null;
         }
     }
 }

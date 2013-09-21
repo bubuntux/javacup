@@ -1,16 +1,14 @@
 package org.javahispano.javacup.render;
 
-import java.awt.Font;
+import javax.swing.*;
 import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
 import org.javahispano.javacup.gui.principal.PrincipalFrame;
-import org.javahispano.javacup.model.util.Constants;
 import org.javahispano.javacup.model.engine.Partido;
 import org.javahispano.javacup.model.engine.PartidoGuardado;
 import org.javahispano.javacup.model.engine.PartidoInterface;
+import org.javahispano.javacup.model.util.Constants;
 import org.javahispano.javacup.model.util.Position;
 import org.javahispano.javacup.model.util.TacticValidate;
 import org.newdawn.slick.AppGameContainer;
@@ -27,21 +25,42 @@ import org.newdawn.slick.opengl.InternalTextureLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-/** Visor OpenGL*/
+/**
+ * Visor OpenGL
+ */
 public class VisorOpenGl implements Game {
 
-    private static int fps = Constants.FPS;
     public static int estadioIdx = 0;
     public static boolean jugador3d;
+    public static boolean progreso = false;
+    /**
+     * Activa o desactiva los sonidos
+     */
+    public static boolean sonidos = true;
+    private static int fps = Constants.FPS;
     private static Logger logger = LoggerFactory.getLogger(VisorOpenGl.class);
-
-    public static void setFPS(int fps) {
-        VisorOpenGl.fps = fps;
-    }
+    private static double escala = Constants.ESCALA;
+    private static boolean estadio = true;
+    private static boolean entorno = true;
+    private static boolean autoescala = true;
+    private static boolean marcador = true;
+    private static int tipoTexto = 0;
+    private static float volumenAmbiente = 1;
+    private static float volumenCancha = 1;
+    JFileChooser jfc = new JFileChooser();
+    Random rand = new Random();
+    int audioIdx = 0;
+    int audioAmbiente = 0;
+    int audioAmbienteIdx = 0;
+    int inicio = 0;
+    int fin = 0;
+    int paso = 0;
+    double escalaGradual = 0;
+    boolean noAutoEscalar = false;
+    ArrayList<Object[]> lista = new ArrayList<Object[]>();
     private PrincipalFrame principal;
     private PartidoInterface partido = null;
     private int sx, sy;
-    private static double escala = Constants.ESCALA;
     private PintaCancha pc = null;
     private PintaJugador pjLocal, pjVisita = null;
     private PintaBalon pb = null;
@@ -61,12 +80,7 @@ public class VisorOpenGl implements Game {
     private Sound[] poste = new Sound[2];
     private Sound[] ovacion = new Sound[2];
     private Position balon0 = new Position();
-    private static boolean estadio = true;
-    private static boolean entorno = true;
-    private static boolean autoescala = true;
     private boolean showfps = false;
-    private static boolean marcador = true;
-    private static int tipoTexto = 0;
     private boolean pause = false;
     private int[] rel;
     private double dx, dy, z = 0, ang = 0;
@@ -88,11 +102,13 @@ public class VisorOpenGl implements Game {
     private boolean guardado = false;
     private int iteracionControl = 0;
     private PartidoGuardado pg = null;
-    public static boolean progreso = false;
     private boolean showTexto = true;
+    private int incremento = 1;
 
-    /**Inicia el Visor OpenGL indicando la instancia de partido, las dimensiones de la pantalla (sx,sy),
+    /**
+     * Inicia el Visor OpenGL indicando la instancia de partido, las dimensiones de la pantalla (sx,sy),
      * si Se ejecuta en pantalla completa(fullscreen), e indicando la instancia del jframe Principal(dejar nulo)
+     *
      * @param partido
      * @param sx
      * @param sy
@@ -116,11 +132,12 @@ public class VisorOpenGl implements Game {
         InternalTextureLoader.get().clear();
     }
 
-    /**Inicia el Visor OpenGL indicando la instancia de partido guardado, las dimensiones de la pantalla (sx,sy),
+    /**
+     * Inicia el Visor OpenGL indicando la instancia de partido guardado, las dimensiones de la pantalla (sx,sy),
      * si Se ejecuta en pantalla completa(fullscreen), e indicando la instancia del jframe Principal(dejar nulo)
-     * */
+     */
     public VisorOpenGl(PartidoGuardado partido, int sx, int sy, boolean fullscreen, PrincipalFrame principal) throws SlickException {
-        pg = (PartidoGuardado) partido;
+        pg = partido;
         guardado = true;
         progreso = true;
         inicio = 0;
@@ -140,11 +157,70 @@ public class VisorOpenGl implements Game {
         SoundStore.get().clear();
         InternalTextureLoader.get().clear();
     }
-    /**Activa o desactiva los sonidos*/
-    public static boolean sonidos = true;
-    private int incremento = 1;
 
-    /**Inicializacion del juego, uso interno*/
+    public static void setFPS(int fps) {
+        VisorOpenGl.fps = fps;
+    }
+
+    /**
+     * Setea el volumen ambiente
+     */
+    public static void setVolumenAmbiente(float volumen) {
+        volumenAmbiente = volumen;
+    }
+
+    /**
+     * Setea el volumen dentro del campo de juego
+     */
+    public static void setVolumenCancha(float volumen) {
+        volumenCancha = volumen;
+    }
+
+    /**
+     * Setea la escala
+     */
+    public static void setEscala(double escala) {
+        VisorOpenGl.escala = escala;
+    }
+
+    /**
+     * Setea la modalida auto-escala
+     */
+    public static void setAutoescala(boolean auto) {
+        VisorOpenGl.autoescala = auto;
+    }
+
+    /**
+     * Setea si el marcador esta visible
+     */
+    public static void setMarcadorVisible(boolean visible) {
+        marcador = visible;
+    }
+
+    /**
+     * Setea se el entorno externo al estadio es visible
+     */
+    public static void setEntornoVisible(boolean visible) {
+        entorno = visible;
+    }
+
+    /**
+     * Setea si el estadio es visible
+     */
+    public static void setEstadioVisible(boolean visible) {
+        estadio = visible;
+    }
+
+    /**
+     * Cambia la modalidad del texto de los nombres y numeros de los jugadores
+     */
+    public static void setTexto(int tipo) {
+        tipoTexto = tipo;
+    }
+
+    /**
+     * Inicializacion del juego, uso interno
+     */
     @Override
     public void init(GameContainer gc) throws SlickException {
         uniformeAlternativoLocal = false;
@@ -177,6 +253,7 @@ public class VisorOpenGl implements Game {
                 //nosound
             }
         }
+        gc.setAlwaysRender(true); //TODO config
         gc.setShowFPS(false);
         pc = new PintaCancha(gc.getWidth() / 2, gc.getHeight() / 2, estadioIdx);
         if (partido != null) {
@@ -209,7 +286,6 @@ public class VisorOpenGl implements Game {
         pm = new PintaMarcador(partido.getDetalleLocal().getTacticName(), partido.getDetalleVisita().getTacticName());
         gc.setMouseGrabbed(false);
     }
-    JFileChooser jfc = new JFileChooser();
 
     void stop() {
         SoundStore.get().clear();
@@ -249,19 +325,14 @@ public class VisorOpenGl implements Game {
             System.exit(0);
         }
     }
-    Random rand = new Random();
 
     float pinch() {
         return .95f + rand.nextFloat() * .1f;
     }
-    int audioIdx = 0;
-    int audioAmbiente = 0;
-    int audioAmbienteIdx = 0;
-    int inicio = 0;
-    int fin = 0;
-    int paso = 0;
 
-    /**Actualiza el juego, uso interno*/
+    /**
+     * Actualiza el juego, uso interno
+     */
     @Override
     public void update(GameContainer gc, int fps) throws SlickException {
         Input i = gc.getInput();
@@ -385,7 +456,6 @@ public class VisorOpenGl implements Game {
                                 principal.addGuardadoLocal(new File[]{jfc.getSelectedFile()});
                             } catch (Exception ex) {
                             }
-
                         }
                     }
                 }
@@ -459,30 +529,31 @@ public class VisorOpenGl implements Game {
                 }
                 golIter = 1;
             }
-            
+
             if (golIter > 0) {
                 golIter++;
                 if (golIter == 50) {
                     golIter = 0;
                 }
             }
-            
+
             if (partido.isLibreIndirecto()) {
                 if (sonidos) {
-                	silbato.play(pinch(), volumenAmbiente);
+                    silbato.play(pinch(), volumenAmbiente);
                 }
             }
-            
-            if (partido.isOffSide())  offSideIter = 1;
-                        
+
+            if (partido.isOffSide()) {
+                offSideIter = 1;
+            }
 
             if (offSideIter > 0) {
                 offSideIter += dxsaque;
                 if (offSideIter > 800) {
-                	offSideIter = 0;
+                    offSideIter = 0;
                 }
             }
-            
+
             if (partido.cambioDeSaque()) {
                 if (sonidos) {
                     silbato.play(pinch(), volumenAmbiente);
@@ -512,8 +583,6 @@ public class VisorOpenGl implements Game {
                 iterSaca = (iterSaca + 1) % 6;
             }
         }
-
-
 
         posActu = partido.getPosiciones();
         for (int j = 0; j < 11; j++) {
@@ -554,7 +623,6 @@ public class VisorOpenGl implements Game {
                 angulosAnteriores[x][y][angulosAnteriores[0][0].length - 1] = angulos[x][y];
             }
         }
-        boolean ok = true;
         for (int x = 0; x < 11; x++) {
             for (int y = 0; y < 2; y++) {
                 angVisible[x][y] = 0;
@@ -565,9 +633,9 @@ public class VisorOpenGl implements Game {
             }
         }
 
-
         if (autoescala) {
-            int[] escalas = (Transforma.transform(partido.getPosVisibleBalon(), Constants.centroCampoJuego, -Transforma.transform(px, escala), -Transforma.transform(py, escala), escala));
+            int[] escalas = (Transforma.transform(partido.getPosVisibleBalon(), Constants.centroCampoJuego, -Transforma.transform(px, escala),
+                -Transforma.transform(py, escala), escala));
             escalaAjustada = escala * Math.min(0.7d * sx2 / (double) Math.abs(escalas[0]), 0.7d * sy2 / (double) Math.abs(escalas[1]));
         }
         if (!noAutoEscalar && partido.esGol()) {
@@ -577,11 +645,10 @@ public class VisorOpenGl implements Game {
             noAutoEscalar = false;
         }
     }
-    double escalaGradual = 0;
-    boolean noAutoEscalar = false;
-    ArrayList<Object[]> lista = new ArrayList<Object[]>();
 
-    /**Renderiza el juego, uso interno*/
+    /**
+     * Renderiza el juego, uso interno
+     */
     @Override
     public void render(GameContainer gc, Graphics g) throws SlickException {
         double escalaTemporal = 0;
@@ -606,15 +673,20 @@ public class VisorOpenGl implements Game {
         Position[][] pos = partido.getPosiciones();
         if (!partido.esGol() && partido.estanSacando()) {
             double zoom = 1 * escala * (1 + 0.02 * (double) iterSaca);
-            rel = Transforma.transform(pos[2][0], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
+            rel = Transforma
+                .transform(pos[2][0], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2,
+                    escala);
             g.drawImage(xImage.getScaledCopy((int) zoom, (int) zoom), rel[0] - (int) (zoom / 2), rel[1] - (int) (zoom / 2));
-
         }
         Position ball = partido.getPosVisibleBalon();
         for (int i = 0; i < 11; i++) {
-            rel = Transforma.transform(pos[0][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
+            rel = Transforma
+                .transform(pos[0][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2,
+                    escala);
             pjLocal.pintaSombra(i, iteraciones[i][0], angVisible[i][0], escala, rel[0], rel[1], g);
-            rel = Transforma.transform(pos[1][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
+            rel = Transforma
+                .transform(pos[1][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2,
+                    escala);
             pjVisita.pintaSombra(i, iteraciones[i][1], angVisible[i][1], escala, rel[0], rel[1], g);
         }
         z = partido.getAlturaBalon();// 16*Math.sin(Math.abs(ang % Math.PI));
@@ -633,7 +705,8 @@ public class VisorOpenGl implements Game {
         if (giro < 0) {
             giro = 6 + giro;
         }
-        rel = Transforma.transform(ball, Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
+        rel = Transforma
+            .transform(ball, Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
         pb.pintaSombra(escala, rel[0], rel[1], z, g);
         if (partido.getAlturaBalon() <= 2) {
             pb.pintaBalon((int) (giro), ang, escala, rel[0], rel[1], z * 2, g);
@@ -643,9 +716,11 @@ public class VisorOpenGl implements Game {
         if (jugador3d) {
             lista.clear();
             for (int i = 0; i < 11; i++) {
-                rel = Transforma.transform(pos[0][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
+                rel = Transforma.transform(pos[0][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2,
+                    -Transforma.transform(py, escala) + sy2, escala);
                 lista.add(new Object[]{pjLocal, i, iteraciones[i][0], angVisible[i][0], escala, rel[0], rel[1]});
-                rel = Transforma.transform(pos[1][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
+                rel = Transforma.transform(pos[1][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2,
+                    -Transforma.transform(py, escala) + sy2, escala);
                 lista.add(new Object[]{pjVisita, i, iteraciones[i][1], angVisible[i][1], escala, rel[0], rel[1]});
             }
             Object[] tmp1, tmp2;
@@ -666,14 +741,16 @@ public class VisorOpenGl implements Game {
             }
 
             for (int i = 0; i < 11; i++) {
-                rel = Transforma.transform(pos[0][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
+                rel = Transforma.transform(pos[0][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2,
+                    -Transforma.transform(py, escala) + sy2, escala);
                 if (tipoTexto == 3 || (pos[0][i].distance(pos[2][0]) < 8 && tipoTexto == 1)) {
                     pjLocal.pintaNumero(i, rel[0], rel[1], g);
                 }
                 if (tipoTexto == 4 || (pos[0][i].distance(pos[2][0]) < 8 && tipoTexto == 2)) {
                     pjLocal.pintaNombre(i, rel[0], rel[1], g);
                 }
-                rel = Transforma.transform(pos[1][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
+                rel = Transforma.transform(pos[1][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2,
+                    -Transforma.transform(py, escala) + sy2, escala);
                 if (tipoTexto == 3 || (pos[1][i].distance(pos[2][0]) < 8 && tipoTexto == 1)) {
                     pjVisita.pintaNumero(i, rel[0], rel[1], g);
                 }
@@ -683,7 +760,8 @@ public class VisorOpenGl implements Game {
             }
         } else {
             for (int i = 0; i < 11; i++) {
-                rel = Transforma.transform(pos[0][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
+                rel = Transforma.transform(pos[0][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2,
+                    -Transforma.transform(py, escala) + sy2, escala);
                 pjLocal.pintaJugador(i, iteraciones[i][0], angVisible[i][0], escala, rel[0], rel[1], g);
                 if (tipoTexto == 3 || (pos[0][i].distance(pos[2][0]) < 8 && tipoTexto == 1)) {
                     pjLocal.pintaNumero(i, rel[0], rel[1], g);
@@ -691,7 +769,8 @@ public class VisorOpenGl implements Game {
                 if (tipoTexto == 4 || (pos[0][i].distance(pos[2][0]) < 8 && tipoTexto == 2)) {
                     pjLocal.pintaNombre(i, rel[0], rel[1], g);
                 }
-                rel = Transforma.transform(pos[1][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
+                rel = Transforma.transform(pos[1][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2,
+                    -Transforma.transform(py, escala) + sy2, escala);
                 pjVisita.pintaJugador(i, iteraciones[i][1], angVisible[i][1], escala, rel[0], rel[1], g);
                 if (tipoTexto == 3 || (pos[1][i].distance(pos[2][0]) < 8 && tipoTexto == 1)) {
                     pjVisita.pintaNumero(i, rel[0], rel[1], g);
@@ -702,7 +781,8 @@ public class VisorOpenGl implements Game {
             }
         }
 
-        rel = Transforma.transform(ball, Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
+        rel = Transforma
+            .transform(ball, Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
         if (partido.getAlturaBalon() > 2) {
             pb.pintaBalon((int) (giro), ang, escala, rel[0], rel[1], z * 2, g);
         }
@@ -717,12 +797,12 @@ public class VisorOpenGl implements Game {
             double zoom = 1 + 0.05 * (golIter % 3);
             g.drawImage(golImage.getScaledCopy((int) (361d * zoom), (int) (81d * zoom)), sx2 - (int) (180d * zoom), sy2 - (int) (40d * zoom));
         }
-        
+
         if (offSideIter > 0) {
-        	g.drawImage(offSideImage, sx2-70, sy2 - 20);
-        	//g.drawImage(offSideImage, offSideIter - 300, sy2 - 20);        	
+            g.drawImage(offSideImage, sx2 - 70, sy2 - 20);
+            //g.drawImage(offSideImage, offSideIter - 300, sy2 - 20);
         }
-        
+
         if (saqueIter > 0) {
             g.drawImage(cambioImage, saqueIter - 300, sy2 - 20);
         }
@@ -775,48 +855,27 @@ public class VisorOpenGl implements Game {
             if (partido.getIteracion() > Constants.ITERACIONES) {
                 g.setColor(Color.black);
                 g.drawString("Gana", sx2 + 11, sy2 + 11);
-                if ((partido.getGolesLocal() > partido.getGolesVisita())
-                        || (partido.getGolesLocal() == partido.getGolesVisita() && partido.getPosesionBalonLocal() >= .5d)) {
+                if ((partido.getGolesLocal() > partido.getGolesVisita()) ||
+                    (partido.getGolesLocal() == partido.getGolesVisita() && partido.getPosesionBalonLocal() >= .5d)) {
                     g.drawString(partido.getDetalleLocal().getTacticName(), sx2 + 41, sy2 + 41);
                 } else {
                     g.drawString(partido.getDetalleVisita().getTacticName(), sx2 + 41, sy2 + 41);
                 }
                 g.setColor(Color.white);
                 g.drawString("Gana", sx2 + 10, sy2 + 10);
-                if ((partido.getGolesLocal() > partido.getGolesVisita())
-                        || (partido.getGolesLocal() == partido.getGolesVisita() && partido.getPosesionBalonLocal() >= .5d)) {
+                if ((partido.getGolesLocal() > partido.getGolesVisita()) ||
+                    (partido.getGolesLocal() == partido.getGolesVisita() && partido.getPosesionBalonLocal() >= .5d)) {
                     g.drawString(partido.getDetalleLocal().getTacticName(), sx2 + 40, sy2 + 40);
                 } else {
                     g.drawString(partido.getDetalleVisita().getTacticName(), sx2 + 40, sy2 + 40);
                 }
             }
         }
-        /*if (isRain) {
-            g.setColor(lluvia);
-            for (int i = 0; i < 200; i++) {
-                double an = rand.nextDouble() * Math.PI * 2d;
-                double rad = rand.nextDouble() * 1024;
-                int x0 = (int) (sx2 + Math.sin(an) * rad);
-                int y0 = (int) (sy2 + Math.cos(an) * rad);
-                int x1 = (int) (sx2 + Math.sin(an) * rad * 1.1d);
-                int y1 = (int) (sy2 + Math.cos(an) * rad * 1.1d);
-                g.drawLine(x0, y0, x1, y1);
-            }
-            if (rand.nextDouble() < 0.05) {
-                g.setColor(relampago);
-                g.fillRect(0, 0, sx, sy);
-            }
-            isRain = rand.nextDouble() < 0.995;
-        } else {
-            isRain = rand.nextDouble() < 0.005;
-        }*/
     }
-    boolean isRain = rand.nextDouble() < 0.05d;
-    Color lluvia = new Color(200, 200, 255, 192);
-    Color relampago = new Color(255, 255, 255, 48);
-    Font texto = new Font("Lucida Console", Font.ITALIC, 24);
 
-    /**metodo llamado cuando se cierra la ventana, uso interno*/
+    /**
+     * metodo llamado cuando se cierra la ventana, uso interno
+     */
     @Override
     public boolean closeRequested() {
         gc.setSoundVolume(0);
@@ -825,51 +884,11 @@ public class VisorOpenGl implements Game {
         return true;
     }
 
-    /**Metodo llamado para obtener el titulo de la ventana, uso interno*/
+    /**
+     * Metodo llamado para obtener el titulo de la ventana, uso interno
+     */
     @Override
     public String getTitle() {
         return "JavaCup";
-    }
-    private static float volumenAmbiente = 1;
-
-    /**Setea el volumen ambiente*/
-    public static void setVolumenAmbiente(float volumen) {
-        volumenAmbiente = volumen;
-    }
-    private static float volumenCancha = 1;
-
-    /**Setea el volumen dentro del campo de juego*/
-    public static void setVolumenCancha(float volumen) {
-        volumenCancha = volumen;
-    }
-
-    /**Setea la escala*/
-    public static void setEscala(double escala) {
-        VisorOpenGl.escala = escala;
-    }
-
-    /**Setea la modalida auto-escala*/
-    public static void setAutoescala(boolean auto) {
-        VisorOpenGl.autoescala = auto;
-    }
-
-    /**Setea si el marcador esta visible*/
-    public static void setMarcadorVisible(boolean visible) {
-        marcador = visible;
-    }
-
-    /**Setea se el entorno externo al estadio es visible*/
-    public static void setEntornoVisible(boolean visible) {
-        entorno = visible;
-    }
-
-    /**Setea si el estadio es visible*/
-    public static void setEstadioVisible(boolean visible) {
-        estadio = visible;
-    }
-
-    /**Cambia la modalidad del texto de los nombres y numeros de los jugadores*/
-    public static void setTexto(int tipo) {
-        tipoTexto = tipo;
     }
 }
