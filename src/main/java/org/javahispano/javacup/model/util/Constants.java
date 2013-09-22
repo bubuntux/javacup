@@ -78,9 +78,9 @@ public final class Constants {
     public  static final double ENERGIA_MIN = 0.55;
     /**Factor de influencia de la energia en la potencia de disparo**/
     public static final double ENERGIA_DISPARO = 1.25;
-    /**Aceleración minima de un jugador al hacer un cambio de direccion en el eje Y**/
+    /**Aceleraciï¿½n minima de un jugador al hacer un cambio de direccion en el eje Y**/
     public static final double ACELERACION_MINIMA_Y = 0.70;
-    /**Aceleración minima de un jugador al hacer un cambio de direccion en el eje X**/
+    /**Aceleraciï¿½n minima de un jugador al hacer un cambio de direccion en el eje X**/
     public static final double ACELERACION_MINIMA_X = 0.9;
     /**Incremento de la aceleracion en cada iteraccion si no se cambia de direccion**/
     public static final double ACELERACION_INCR = 0.04;
@@ -96,7 +96,9 @@ public final class Constants {
     /**angle por defecto usado al rematar por alto*/
     public static final double ANGULO_VERTICAL = 30;
     /**angle vertical maximo*/
-    public static final double ANGULO_VERTICAL_MAX = 60;
+    public static final int ANGULO_VERTICAL_MAX = 60;
+    /**angle vertical minimum*/
+    public static final int ANGULO_VERTICAL_MIN = 0;
     @Deprecated
     /**No se usa*/
     public static final double FACTOR_DISMINUCION_VEL_BALON_AIRE = 0.97;

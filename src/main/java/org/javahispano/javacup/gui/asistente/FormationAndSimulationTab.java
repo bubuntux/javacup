@@ -1,14 +1,11 @@
 package org.javahispano.javacup.gui.asistente;
 
 import javax.swing.*;
-import javax.swing.event.CaretEvent;
-import javax.swing.event.CaretListener;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import org.javahispano.javacup.model.trajectory.AbstractTrajectory;
@@ -33,9 +30,6 @@ public class FormationAndSimulationTab {
     private final JList<JugadorImpl> jList1;
     boolean cupdate = true;
     JPanel jPanel4 = new JPanel();
-    double strength = 0.8;
-    int angle;
-    double elev = 0;
     double sx = 442, sy = 286;
     double distMin;
     int type = 0;
@@ -50,10 +44,12 @@ public class FormationAndSimulationTab {
     private JComboBox<String> jComboBox2;
     private JComboBox<String> jComboBox3;
     private DefaultComboBoxModel<String> model1 = new DefaultComboBoxModel<>();
-    private JTextField jTextField7;
     private Image campo;
     private JCheckBox simulationCheckBox = new JCheckBox();
     private Font _font;
+    private double _strength = 0.8;
+    private int _angle;
+    private int _angleZ = 0;
 
     public FormationAndSimulationTab(TacticDetailImpl imp2l, JList<JugadorImpl> jList1) {
         this.impl = imp2l;
@@ -141,34 +137,10 @@ public class FormationAndSimulationTab {
 
         addAngleComponents(jPanel8);
 
-        JLabel jLabel24 = new JLabel();
-        jLabel24.setFont(new Font("Arial", 0, 12));
-        jLabel24.setText("Angulo Z"); // NOI18N
-        jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel24.setMaximumSize(new Dimension(50, 15));
-        jLabel24.setMinimumSize(new Dimension(50, 15));
-        jLabel24.setPreferredSize(new Dimension(50, 15));
-        jPanel8.add(jLabel24);
+        addAngleZComponents(jPanel8);
 
-        jTextField7 = new JTextField();
         JLabel jLabel21 = new JLabel();
-        jTextField7.setFont(new Font("Arial", 0, 12));
-        jTextField7.setHorizontalAlignment(JTextField.RIGHT);
-        jTextField7.setText("0"); // NOI18N
-        jTextField7.setMaximumSize(new Dimension(2147483647, 20));
-        jTextField7.addCaretListener(new CaretListener() {
-            public void caretUpdate(CaretEvent evt) {
-                jTextField7CaretUpdate();
-            }
-        });
-        jTextField7.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(FocusEvent evt) {
-                jTextField7FocusLost();
-            }
-        });
-        jPanel8.add(jTextField7);
-
-        jLabel21.setText(" "); // NOI18N
+        jLabel21.setText(" ");
         jPanel8.add(jLabel21);
 
         simulationCheckBox.setFont(new Font("Arial", 0, 12));
@@ -313,11 +285,7 @@ public class FormationAndSimulationTab {
         jPanel5.setMaximumSize(preferredSize);
         jPanel5.setMinimumSize(preferredSize);
         jPanel5.setPreferredSize(preferredSize);
-        jPanel5.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
-            public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
-                jPanel5MouseWheelMoved(evt);
-            }
-        });
+
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
             public void mousePressed(MouseEvent evt) {
                 jPanel5MousePressed(evt);
@@ -366,24 +334,48 @@ public class FormationAndSimulationTab {
                             .addComponent(jToggleButton2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))).addContainerGap()));
     }
 
+    private void addAngleZComponents(JPanel panel) {
+        final String angleZText = "Angle Z";
+
+        final JLabel angleZLabel = new JLabel();
+        angleZLabel.setFont(_font);
+        setText(angleZLabel, angleZText, _angleZ);
+        angleZLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        panel.add(angleZLabel);
+
+        final JSlider angleZSlider = new JSlider();
+        angleZSlider.setValue(_angleZ);
+        angleZSlider.setMinimum(Constants.ANGULO_VERTICAL_MIN);
+        angleZSlider.setMaximum(Constants.ANGULO_VERTICAL_MAX);
+        angleZSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                _angleZ = angleZSlider.getValue();
+                setText(angleZLabel, angleZText, _angleZ);
+                jPanel5.repaint();
+            }
+        });
+        panel.add(angleZSlider);
+    }
+
     private void addAngleComponents(JPanel panel) {
         final String angleText = "Angle";
 
         final JLabel angleLabel = new JLabel();
         angleLabel.setFont(_font);
-        setText(angleLabel, angleText, angle);
+        setText(angleLabel, angleText, _angle);
         angleLabel.setHorizontalTextPosition(SwingConstants.CENTER);
         panel.add(angleLabel);
 
         final JSlider angleSlider = new JSlider();
-        angleSlider.setValue(angle);
+        angleSlider.setValue(_angle);
         angleSlider.setMinimum(-180);
         angleSlider.setMaximum(180);
         angleSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                angle = angleSlider.getValue();
-                setText(angleLabel, angleText, angle);
+                _angle = angleSlider.getValue();
+                setText(angleLabel, angleText, _angle);
                 jPanel5.repaint();
             }
         });
@@ -396,18 +388,18 @@ public class FormationAndSimulationTab {
         final JLabel strengthLabel = new JLabel();
         strengthLabel.setFont(_font);
         strengthLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-        setText(strengthLabel, strengthText, strength);
+        setText(strengthLabel, strengthText, _strength);
         panel.add(strengthLabel);
 
         final JSlider strengthSlider = new JSlider();
-        strengthSlider.setValue((int) (strength * 100));
+        strengthSlider.setValue((int) (_strength * 100));
         strengthSlider.setMinimum(0);
         strengthSlider.setMaximum(100);
         strengthSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
-                strength = strengthSlider.getValue() / 100d;
-                setText(strengthLabel, strengthText, strength);
+                _strength = strengthSlider.getValue() / 100d;
+                setText(strengthLabel, strengthText, _strength);
                 jPanel5.repaint();
             }
         });
@@ -498,37 +490,6 @@ public class FormationAndSimulationTab {
         }
     }
 
-    private void jTextField7FocusLost() {
-        try {
-            elev = Double.parseDouble(jTextField7.getText().trim());
-        } catch (Exception ignored) {
-        }
-        if (elev < 0) {
-            elev = 0;
-        }
-        if (elev > Constants.ANGULO_VERTICAL_MAX) {
-            elev = Constants.ANGULO_VERTICAL_MAX;
-        }
-        jTextField7.setText("" + elev);
-        jPanel5.repaint();
-    }
-
-    private void jTextField7CaretUpdate() {
-        try {
-            elev = Double.parseDouble(jTextField7.getText().trim());
-            jTextField7.setForeground(Color.black);
-        } catch (Exception ex) {
-            jTextField7.setForeground(Color.red);
-        }
-        if (elev < 0) {
-            elev = 0;
-        }
-        if (elev > Constants.ANGULO_VERTICAL_MAX) {
-            elev = Constants.ANGULO_VERTICAL_MAX;
-        }
-        jPanel5.repaint();
-    }
-
     private void jPanel5MouseDragged(MouseEvent evt) {
         if (type == MouseEvent.BUTTON1) {
             if (distMin < 20) {
@@ -596,6 +557,8 @@ public class FormationAndSimulationTab {
         }
     }
 
+    /*
+    TODO
     private void jPanel5MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
         int units = -evt.getUnitsToScroll() / Math.abs(evt.getUnitsToScroll());
         try {
@@ -612,16 +575,17 @@ public class FormationAndSimulationTab {
             jTextField7.setText("0");
         }
     }
+    */
 
     private void simula(Graphics graphics, double x, double y, double remate, double error) {
         if (simulationCheckBox.isSelected()) {
             Graphics2D gr = (Graphics2D) graphics;
             //ang -> rad
             error = 90d * error;
-            double ang0 = angle - error;
-            double av = elev * Math.PI / 180d;
+            double ang0 = _angle - error;
+            double av = _angleZ * Math.PI / 180d;
             //velocidad
-            double vel = remate * strength;
+            double vel = remate * _strength;
             //direccion;
             double dz = vel * Math.sin(av);
             double dr = vel * Math.cos(av);
