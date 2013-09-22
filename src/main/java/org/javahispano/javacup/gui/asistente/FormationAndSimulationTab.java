@@ -8,6 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
+import org.javahispano.javacup.model.PlayerDetail;
 import org.javahispano.javacup.model.trajectory.AbstractTrajectory;
 import org.javahispano.javacup.model.trajectory.AirTrajectory;
 import org.javahispano.javacup.model.util.Constants;
@@ -26,8 +27,8 @@ public class FormationAndSimulationTab {
         new Position[]{Constants.centroArcoInf, Constants.posteDerArcoSup, Constants.posteIzqArcoSup, Constants.cornerSupDer, Constants.cornerSupIzq,
             Constants.penalSup, Constants.centroArcoSup, Constants.posteDerArcoInf, Constants.posteIzqArcoInf, Constants.cornerInfDer,
             Constants.cornerInfIzq, Constants.penalInf, Constants.centroCampoJuego};
-    private final TacticDetailImpl impl;
-    private final JList<JugadorImpl> jList1;
+    private final JList<JugadorImpl> _playerList;
+    private final TacticDetailImpl _tacticDetail;
     boolean cupdate = true;
     JPanel jPanel4 = new JPanel();
     double sx = 442, sy = 286;
@@ -45,23 +46,24 @@ public class FormationAndSimulationTab {
     private JComboBox<String> jComboBox3;
     private DefaultComboBoxModel<String> model1 = new DefaultComboBoxModel<>();
     private Image campo;
-    private JCheckBox simulationCheckBox = new JCheckBox();
+    private JCheckBox _simulationCheckBox;
     private Font _font;
     private double _strength = 0.8;
     private int _angle;
-    private int _angleZ = 0;
+    private int _angleZ;
 
-    public FormationAndSimulationTab(TacticDetailImpl imp2l, JList<JugadorImpl> jList1) {
-        this.impl = imp2l;
-        this.jList1 = jList1;
+    public FormationAndSimulationTab(TacticDetailImpl tacticDetail, JList<JugadorImpl> playerList) {
+        _tacticDetail = tacticDetail;
+        _playerList = playerList;
 
         _font = new Font("Arial", 0, 12);
+
         campo = new ImageIcon(getClass().getResource("/imagenes/campo.jpg")).getImage();
 
         jPanel4.setFont(new Font("Arial", 0, 14));
 
         jToggleButton2 = new JToggleButton();
-        jToggleButton2.setFont(new Font("Arial", 0, 12));
+        jToggleButton2.setFont(_font);
         jToggleButton2.setText("Constantes");
         jToggleButton2.setFocusable(false);
         jToggleButton2.addActionListener(new ActionListener() {
@@ -71,9 +73,9 @@ public class FormationAndSimulationTab {
         });
 
         jLabel14 = new JLabel();
-        jLabel14.setFont(new Font("Arial", 0, 12));
+        jLabel14.setFont(_font);
         jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
-        jLabel14.setText("0,0"); // NOI18N
+        jLabel14.setText("0,0");
 
         JButton jButton11 = new JButton();
         JButton jButton12 = new JButton();
@@ -113,7 +115,7 @@ public class FormationAndSimulationTab {
 
         jComboBox3 = new JComboBox<>();
         jComboBox2 = new JComboBox<>();
-        jComboBox3.setFont(new Font("Arial", 0, 12));
+        jComboBox3.setFont(_font);
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
         jComboBox3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -122,7 +124,7 @@ public class FormationAndSimulationTab {
         });
         jComboBox3.setModel(model1);
 
-        jComboBox2.setFont(new Font("Arial", 0, 12));
+        jComboBox2.setFont(_font);
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Normal", "Inicio Sacando", "Inicio Recibiendo"}));
         jComboBox2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -139,22 +141,11 @@ public class FormationAndSimulationTab {
 
         addAngleZComponents(jPanel8);
 
-        JLabel jLabel21 = new JLabel();
-        jLabel21.setText(" ");
-        jPanel8.add(jLabel21);
+        JLabel emptyLabel = new JLabel();
+        emptyLabel.setText(" ");
+        jPanel8.add(emptyLabel);
 
-        simulationCheckBox.setFont(new Font("Arial", 0, 12));
-        simulationCheckBox.setText(" >> ");
-        simulationCheckBox.setFocusable(false);
-
-        simulationCheckBox.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                jPanel5.repaint();
-            }
-        });
-
-        jPanel8.add(simulationCheckBox);
+        addSimulationComponents(jPanel8);
 
         JPanel jPanel10 = new JPanel();
         JLabel jLabel22 = new JLabel();
@@ -165,8 +156,8 @@ public class FormationAndSimulationTab {
 
         jPanel8.add(jPanel10);
 
-        jLabel22.setFont(new Font("Arial", 0, 12));
-        jLabel22.setText("Leyenda"); // NOI18N
+        jLabel22.setFont(_font);
+        jLabel22.setText("Leyenda");
         jLabel22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
         jLabel22.setMaximumSize(new Dimension(50, 15));
         jLabel22.setMinimumSize(new Dimension(50, 15));
@@ -218,10 +209,10 @@ public class FormationAndSimulationTab {
                 Position p;
                 int num;
                 int i = 0;
-                Position[] posiciones = impl.getAlineacion(jComboBox3.getSelectedIndex());
+                Position[] posiciones = _tacticDetail.getAlineacion(jComboBox3.getSelectedIndex());
                 double remate = 0, error = 0;
                 double x = 0, y = 0;
-                for (org.javahispano.javacup.model.PlayerDetail j : impl.getPlayers()) {
+                for (PlayerDetail j : _tacticDetail.getPlayers()) {
                     p = posiciones[i];
                     boolean ok = true;
                     int idx = jComboBox2.getSelectedIndex();
@@ -334,6 +325,20 @@ public class FormationAndSimulationTab {
                             .addComponent(jToggleButton2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))).addContainerGap()));
     }
 
+    private void addSimulationComponents(JPanel panel) {
+        _simulationCheckBox = new JCheckBox();
+        _simulationCheckBox.setFont(_font);
+        _simulationCheckBox.setText("Simulation");
+
+        _simulationCheckBox.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                jPanel5.repaint();
+            }
+        });
+        panel.add(_simulationCheckBox);
+    }
+
     private void addAngleZComponents(JPanel panel) {
         final String angleZText = "Angle Z";
 
@@ -429,7 +434,7 @@ public class FormationAndSimulationTab {
             JOptionPane.showMessageDialog(jPanel4, "No puede eliminar todas las alineaciones", "", JOptionPane.WARNING_MESSAGE);
         } else {
             model1.removeElementAt(size - 1);
-            impl.delAlineacion(idx);
+            _tacticDetail.delAlineacion(idx);
             jPanel5.repaint();
         }
     }
@@ -438,7 +443,7 @@ public class FormationAndSimulationTab {
         try {
             jPanel5.repaint();
             int idx = jComboBox3.getSelectedIndex();
-            impl.setAlineacion(idx, impl.getAlineacion(idx), jComboBox2.getSelectedIndex());
+            _tacticDetail.setAlineacion(idx, _tacticDetail.getAlineacion(idx), jComboBox2.getSelectedIndex());
         } catch (Exception ignored) {
         }
     }
@@ -448,13 +453,13 @@ public class FormationAndSimulationTab {
         if (idx == -1) {
             idx = 0;
         }
-        jComboBox2.setSelectedIndex(impl.getTipoAlineacion(idx));
+        jComboBox2.setSelectedIndex(_tacticDetail.getTipoAlineacion(idx));
         jPanel5.repaint();
     }
 
     private void jButton11ActionPerformed() {
         int idx = jComboBox3.getSelectedIndex();
-        impl.addAlineacion(idx);
+        _tacticDetail.addAlineacion(idx);
         int size = jComboBox3.getModel().getSize() + 1;
         model1.addElement("" + size);
         jComboBox3.setSelectedIndex(size - 1);
@@ -464,12 +469,12 @@ public class FormationAndSimulationTab {
         int idx = jComboBox3.getSelectedIndex();
         if (idx < jComboBox3.getModel().getSize() - 1) {
             cupdate = false;
-            Position[] al = impl.getAlineacion(idx + 1);
-            int tipo = impl.getTipoAlineacion(idx + 1);
-            impl.setAlineacion(idx + 1, impl.getAlineacion(idx), impl.getTipoAlineacion(idx));
-            impl.setAlineacion(idx, al, tipo);
+            Position[] al = _tacticDetail.getAlineacion(idx + 1);
+            int tipo = _tacticDetail.getTipoAlineacion(idx + 1);
+            _tacticDetail.setAlineacion(idx + 1, _tacticDetail.getAlineacion(idx), _tacticDetail.getTipoAlineacion(idx));
+            _tacticDetail.setAlineacion(idx, al, tipo);
             jComboBox3.setSelectedIndex(idx + 1);
-            jComboBox2.setSelectedIndex(impl.getTipoAlineacion(idx + 1));
+            jComboBox2.setSelectedIndex(_tacticDetail.getTipoAlineacion(idx + 1));
             jPanel5.repaint();
             cupdate = true;
         }
@@ -479,12 +484,12 @@ public class FormationAndSimulationTab {
         int idx = jComboBox3.getSelectedIndex();
         if (idx > 0) {
             cupdate = false;
-            Position[] al = impl.getAlineacion(idx - 1);
-            int tipo = impl.getTipoAlineacion(idx - 1);
-            impl.setAlineacion(idx - 1, impl.getAlineacion(idx), impl.getTipoAlineacion(idx));
-            impl.setAlineacion(idx, al, tipo);
+            Position[] al = _tacticDetail.getAlineacion(idx - 1);
+            int tipo = _tacticDetail.getTipoAlineacion(idx - 1);
+            _tacticDetail.setAlineacion(idx - 1, _tacticDetail.getAlineacion(idx), _tacticDetail.getTipoAlineacion(idx));
+            _tacticDetail.setAlineacion(idx, al, tipo);
             jComboBox3.setSelectedIndex(idx - 1);
-            jComboBox2.setSelectedIndex(impl.getTipoAlineacion(idx - 1));
+            jComboBox2.setSelectedIndex(_tacticDetail.getTipoAlineacion(idx - 1));
             jPanel5.repaint();
             cupdate = true;
         }
@@ -494,14 +499,14 @@ public class FormationAndSimulationTab {
         if (type == MouseEvent.BUTTON1) {
             if (distMin < 20) {
                 Position p = unTransformAsistente(new Position((double) evt.getX() - 8, (double) evt.getY() - 3));
-                Position[] Positiones = impl.getAlineacion(jComboBox3.getSelectedIndex());
-                Positiones[jList1.getSelectedIndex()] = p;
+                Position[] Positiones = _tacticDetail.getAlineacion(jComboBox3.getSelectedIndex());
+                Positiones[_playerList.getSelectedIndex()] = p;
                 jLabel14.setText(df.format(p.getY()) + ":" + df.format(p.getX()));
-                //  jPanel5.repaint();
+                jPanel5.repaint();
             }
-        } //else {
-        //jPanel5.repaint();
-        //}
+        } else {
+            jPanel5.repaint();
+        }
     }
 
     private void jPanel5MousePressed(MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
@@ -512,7 +517,7 @@ public class FormationAndSimulationTab {
             double dist;
             distMin = Double.MAX_VALUE;
             int idx = 0;
-            Position[] Positiones = impl.getAlineacion(jComboBox3.getSelectedIndex());
+            Position[] Positiones = _tacticDetail.getAlineacion(jComboBox3.getSelectedIndex());
             for (int i = 0; i < 11; i++) {
                 dist = click.distance(transformAsistente(Positiones[i]));
                 if (dist < distMin) {
@@ -521,11 +526,11 @@ public class FormationAndSimulationTab {
                 }
             }
             if (distMin < 20) {
-                jList1.setSelectedIndex(idx);
+                _playerList.setSelectedIndex(idx);
                 jPanel5.repaint();
             }
         } else {
-            p0 = transformAsistente(impl.getAlineacion(jComboBox3.getSelectedIndex())[jList1.getSelectedIndex()]);
+            p0 = transformAsistente(_tacticDetail.getAlineacion(jComboBox3.getSelectedIndex())[_playerList.getSelectedIndex()]);
         }
     }//GEN-LAST:event_jPanel5MousePressed
 
@@ -557,28 +562,8 @@ public class FormationAndSimulationTab {
         }
     }
 
-    /*
-    TODO
-    private void jPanel5MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
-        int units = -evt.getUnitsToScroll() / Math.abs(evt.getUnitsToScroll());
-        try {
-            units = (int) (Double.parseDouble(jTextField7.getText().trim())) + units;
-            if (units < 0) {
-                units = 0;
-            }
-            if (units > Constants.ANGULO_VERTICAL_MAX) {
-                units = (int) Constants.ANGULO_VERTICAL_MAX;
-            }
-            jTextField7.setText("" + units);
-            jPanel5.repaint();
-        } catch (Exception e) {
-            jTextField7.setText("0");
-        }
-    }
-    */
-
     private void simula(Graphics graphics, double x, double y, double remate, double error) {
-        if (simulationCheckBox.isSelected()) {
+        if (_simulationCheckBox.isSelected()) {
             Graphics2D gr = (Graphics2D) graphics;
             //ang -> rad
             error = 90d * error;
@@ -635,7 +620,7 @@ public class FormationAndSimulationTab {
     }
 
     private JugadorImpl getJugador() {
-        return jList1.getSelectedValue();
+        return _playerList.getSelectedValue();
     }
 
     public void postInit() {
