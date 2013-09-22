@@ -33,8 +33,8 @@ public class FormationAndSimulationTab {
     private final JList<JugadorImpl> jList1;
     boolean cupdate = true;
     JPanel jPanel4 = new JPanel();
-    double strength = 0.5;
-    double ang = 0;
+    double strength = 0.8;
+    int angle;
     double elev = 0;
     double sx = 442, sy = 286;
     double distMin;
@@ -50,14 +50,16 @@ public class FormationAndSimulationTab {
     private JComboBox<String> jComboBox2;
     private JComboBox<String> jComboBox3;
     private DefaultComboBoxModel<String> model1 = new DefaultComboBoxModel<>();
-    private JTextField jTextField6;
     private JTextField jTextField7;
     private Image campo;
     private JCheckBox simulationCheckBox = new JCheckBox();
+    private Font _font;
 
     public FormationAndSimulationTab(TacticDetailImpl imp2l, JList<JugadorImpl> jList1) {
         this.impl = imp2l;
         this.jList1 = jList1;
+
+        _font = new Font("Arial", 0, 12);
         campo = new ImageIcon(getClass().getResource("/imagenes/campo.jpg")).getImage();
 
         jPanel4.setFont(new Font("Arial", 0, 14));
@@ -137,31 +139,7 @@ public class FormationAndSimulationTab {
 
         addStrengthComponents(jPanel8);
 
-        JLabel jLabel23 = new JLabel();
-        jLabel23.setFont(new Font("Arial", 0, 12));
-        jLabel23.setText("Angulo");
-        jLabel23.setHorizontalTextPosition(SwingConstants.CENTER);
-        jLabel23.setMaximumSize(new Dimension(50, 15));
-        jLabel23.setMinimumSize(new Dimension(50, 15));
-        jLabel23.setPreferredSize(new Dimension(50, 15));
-        jPanel8.add(jLabel23);
-
-        jTextField6 = new JTextField();
-        jTextField6.setFont(new Font("Arial", 0, 12));
-        jTextField6.setHorizontalAlignment(JTextField.RIGHT);
-        jTextField6.setText("0");
-        jTextField6.setMaximumSize(new Dimension(2147483647, 20));
-        jTextField6.addCaretListener(new CaretListener() {
-            public void caretUpdate(CaretEvent evt) {
-                jTextField6CaretUpdate();
-            }
-        });
-        jTextField6.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(FocusEvent evt) {
-                jTextField6FocusLost();
-            }
-        });
-        jPanel8.add(jTextField6);
+        addAngleComponents(jPanel8);
 
         JLabel jLabel24 = new JLabel();
         jLabel24.setFont(new Font("Arial", 0, 12));
@@ -388,13 +366,36 @@ public class FormationAndSimulationTab {
                             .addComponent(jToggleButton2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))).addContainerGap()));
     }
 
+    private void addAngleComponents(JPanel panel) {
+        final String angleText = "Angle";
+
+        final JLabel angleLabel = new JLabel();
+        angleLabel.setFont(_font);
+        setText(angleLabel, angleText, angle);
+        angleLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        panel.add(angleLabel);
+
+        final JSlider angleSlider = new JSlider();
+        angleSlider.setValue(angle);
+        angleSlider.setMinimum(-180);
+        angleSlider.setMaximum(180);
+        angleSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                angle = angleSlider.getValue();
+                setText(angleLabel, angleText, angle);
+                jPanel5.repaint();
+            }
+        });
+        panel.add(angleSlider);
+    }
+
     private void addStrengthComponents(JPanel panel) {
         final String strengthText = "Strength";
 
         final JLabel strengthLabel = new JLabel();
-        strengthLabel.setFont(new Font("Arial", 0, 12));
+        strengthLabel.setFont(_font);
         strengthLabel.setHorizontalTextPosition(SwingConstants.CENTER);
-        //strengthLabel.setPreferredSize(new Dimension(50, 15));
         setText(strengthLabel, strengthText, strength);
         panel.add(strengthLabel);
 
@@ -402,7 +403,6 @@ public class FormationAndSimulationTab {
         strengthSlider.setValue((int) (strength * 100));
         strengthSlider.setMinimum(0);
         strengthSlider.setMaximum(100);
-        strengthSlider.setForeground(Color.black);
         strengthSlider.addChangeListener(new ChangeListener() {
             @Override
             public void stateChanged(ChangeEvent e) {
@@ -418,9 +418,13 @@ public class FormationAndSimulationTab {
         label.setText(name + " (" + value + ")");
     }
 
-    private void jToggleButton2ActionPerformed() {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void setText(JLabel label, String name, int value) {
+        label.setText(name + " (" + value + ")");
+    }
+
+    private void jToggleButton2ActionPerformed() {
         jPanel5.repaint();
-    }//GEN-LAST:event_jToggleButton2ActionPerformed
+    }
 
     public JPanel getjPanel4() {
         return jPanel4;
@@ -494,23 +498,6 @@ public class FormationAndSimulationTab {
         }
     }
 
-    private void jTextField6FocusLost() {
-        try {
-            ang = Double.parseDouble(jTextField6.getText().trim());
-        } catch (Exception ignored) {
-        }
-        jTextField6.setText("" + ang);
-    }
-
-    private void jTextField6CaretUpdate() {
-        try {
-            ang = Double.parseDouble(jTextField6.getText().trim());
-            jTextField6.setForeground(Color.black);
-        } catch (Exception ex) {
-            jTextField6.setForeground(Color.red);
-        }
-    }
-
     private void jTextField7FocusLost() {
         try {
             elev = Double.parseDouble(jTextField7.getText().trim());
@@ -549,19 +536,11 @@ public class FormationAndSimulationTab {
                 Position[] Positiones = impl.getAlineacion(jComboBox3.getSelectedIndex());
                 Positiones[jList1.getSelectedIndex()] = p;
                 jLabel14.setText(df.format(p.getY()) + ":" + df.format(p.getX()));
-                jPanel5.repaint();
+                //  jPanel5.repaint();
             }
-        } else {
-            Position p1 = new Position(evt.getX(), evt.getY());
-            double angu = -p0.angle(p1) * 180 / Math.PI;
-            if (angu < 0) {
-                angu = 360 + angu;
-            }
-
-            jTextField6.setText(df.format(angu).replace(",", "."));
-
-            jPanel5.repaint();
-        }
+        } //else {
+        //jPanel5.repaint();
+        //}
     }
 
     private void jPanel5MousePressed(MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
@@ -600,7 +579,7 @@ public class FormationAndSimulationTab {
         return posi.setInsideGameField();
     }
 
-    private void jPanel5MouseMoved(MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseMoved
+    private void jPanel5MouseMoved(MouseEvent evt) {
         Position p = unTransformAsistente(new Position(evt.getX() - 8, evt.getY() - 3));
         jLabel14.setText(df.format(p.getY()) + ":" + df.format(p.getX()));
         int idx = p.nearestIndex(constPos);
@@ -615,9 +594,9 @@ public class FormationAndSimulationTab {
             jPanel5.repaint();
             pos = null;
         }
-    }//GEN-LAST:event_jPanel5MouseMoved
+    }
 
-    private void jPanel5MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jPanel5MouseWheelMoved
+    private void jPanel5MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
         int units = -evt.getUnitsToScroll() / Math.abs(evt.getUnitsToScroll());
         try {
             units = (int) (Double.parseDouble(jTextField7.getText().trim())) + units;
@@ -632,14 +611,14 @@ public class FormationAndSimulationTab {
         } catch (Exception e) {
             jTextField7.setText("0");
         }
-    }//GEN-LAST:event_jPanel5MouseWheelMoved
+    }
 
     private void simula(Graphics graphics, double x, double y, double remate, double error) {
         if (simulationCheckBox.isSelected()) {
             Graphics2D gr = (Graphics2D) graphics;
             //ang -> rad
             error = 90d * error;
-            double ang0 = ang - error;
+            double ang0 = angle - error;
             double av = elev * Math.PI / 180d;
             //velocidad
             double vel = remate * strength;
