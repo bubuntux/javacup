@@ -74,12 +74,12 @@ public class FormationAndSimulationTab {
 
         jLabel14 = new JLabel();
         jLabel14.setFont(_font);
-        jLabel14.setHorizontalAlignment(javax.swing.SwingConstants.RIGHT);
+        jLabel14.setHorizontalAlignment(SwingConstants.RIGHT);
         jLabel14.setText("0,0");
 
         JButton jButton11 = new JButton();
         JButton jButton12 = new JButton();
-        jButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/add.png"))); // NOI18N
+        jButton11.setIcon(new ImageIcon(getClass().getResource("/imagenes/iconos/add.png")));
         jButton11.setFocusable(false);
         jButton11.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -87,7 +87,7 @@ public class FormationAndSimulationTab {
             }
         });
 
-        jButton12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/delete.png"))); // NOI18N
+        jButton12.setIcon(new ImageIcon(getClass().getResource("/imagenes/iconos/delete.png")));
         jButton12.setFocusable(false);
         jButton12.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -97,7 +97,7 @@ public class FormationAndSimulationTab {
 
         JButton jButton10 = new JButton();
         JButton jButton13 = new JButton();
-        jButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/up.png"))); // NOI18N
+        jButton10.setIcon(new ImageIcon(getClass().getResource("/imagenes/iconos/up.png")));
         jButton10.setFocusable(false);
         jButton10.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -105,7 +105,7 @@ public class FormationAndSimulationTab {
             }
         });
 
-        jButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/imagenes/iconos/down.png"))); // NOI18N
+        jButton13.setIcon(new ImageIcon(getClass().getResource("/imagenes/iconos/down.png")));
         jButton13.setFocusable(false);
         jButton13.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
@@ -116,7 +116,7 @@ public class FormationAndSimulationTab {
         jComboBox3 = new JComboBox<>();
         jComboBox2 = new JComboBox<>();
         jComboBox3.setFont(_font);
-        jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
+        jComboBox3.setModel(new DefaultComboBoxModel<>(new String[]{"1"}));
         jComboBox3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jComboBox3ActionPerformed();
@@ -125,7 +125,7 @@ public class FormationAndSimulationTab {
         jComboBox3.setModel(model1);
 
         jComboBox2.setFont(_font);
-        jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Normal", "Inicio Sacando", "Inicio Recibiendo"}));
+        jComboBox2.setModel(new DefaultComboBoxModel<>(new String[]{"Normal", "Inicio Sacando", "Inicio Recibiendo"}));
         jComboBox2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
                 jComboBox2ActionPerformed();
@@ -272,7 +272,7 @@ public class FormationAndSimulationTab {
         };
 
         jPanel5.setBackground(new Color(102, 102, 102));
-        Dimension preferredSize = new Dimension(400, 300);
+        Dimension preferredSize = new Dimension(430, 307);
         jPanel5.setMaximumSize(preferredSize);
         jPanel5.setMinimumSize(preferredSize);
         jPanel5.setPreferredSize(preferredSize);
@@ -509,7 +509,7 @@ public class FormationAndSimulationTab {
         }
     }
 
-    private void jPanel5MousePressed(MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
+    private void jPanel5MousePressed(MouseEvent evt) {
         type = evt.getButton();
         jPanel5.requestFocus();
         if (evt.getButton() == MouseEvent.BUTTON1) {
@@ -532,7 +532,7 @@ public class FormationAndSimulationTab {
         } else {
             p0 = transformAsistente(_tacticDetail.getAlineacion(jComboBox3.getSelectedIndex())[_playerList.getSelectedIndex()]);
         }
-    }//GEN-LAST:event_jPanel5MousePressed
+    }
 
     Position unTransformAsistente(Position p) {
         double xp0 = (p.getX() - sx / 2 - 6);
