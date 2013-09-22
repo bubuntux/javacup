@@ -2,11 +2,13 @@ package org.javahispano.javacup.gui.asistente;
 
 import javax.swing.*;
 import javax.swing.event.CaretEvent;
+import javax.swing.event.CaretListener;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
-import java.awt.event.KeyEvent;
 import java.awt.event.MouseEvent;
 import java.text.DecimalFormat;
 import org.javahispano.javacup.model.trajectory.AbstractTrajectory;
@@ -31,7 +33,7 @@ public class FormationAndSimulationTab {
     private final JList<JugadorImpl> jList1;
     boolean cupdate = true;
     JPanel jPanel4 = new JPanel();
-    double fuerza = 1;
+    double strength = 0.5;
     double ang = 0;
     double elev = 0;
     double sx = 442, sy = 286;
@@ -46,7 +48,6 @@ public class FormationAndSimulationTab {
     private JPanel jPanel5;
     private JLabel jLabel14;
     private JComboBox<String> jComboBox2;
-    private JTextField jTextField5;
     private JComboBox<String> jComboBox3;
     private DefaultComboBoxModel<String> model1 = new DefaultComboBoxModel<>();
     private JTextField jTextField6;
@@ -67,7 +68,7 @@ public class FormationAndSimulationTab {
         jToggleButton2.setFocusable(false);
         jToggleButton2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jToggleButton2ActionPerformed(evt);
+                jToggleButton2ActionPerformed();
             }
         });
 
@@ -82,7 +83,7 @@ public class FormationAndSimulationTab {
         jButton11.setFocusable(false);
         jButton11.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton11ActionPerformed(evt);
+                jButton11ActionPerformed();
             }
         });
 
@@ -90,7 +91,7 @@ public class FormationAndSimulationTab {
         jButton12.setFocusable(false);
         jButton12.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton12ActionPerformed(evt);
+                jButton12ActionPerformed();
             }
         });
 
@@ -100,7 +101,7 @@ public class FormationAndSimulationTab {
         jButton10.setFocusable(false);
         jButton10.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton10ActionPerformed(evt);
+                jButton10ActionPerformed();
             }
         });
 
@@ -108,7 +109,7 @@ public class FormationAndSimulationTab {
         jButton13.setFocusable(false);
         jButton13.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jButton13ActionPerformed(evt);
+                jButton13ActionPerformed();
             }
         });
 
@@ -118,7 +119,7 @@ public class FormationAndSimulationTab {
         jComboBox3.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"1"}));
         jComboBox3.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jComboBox3ActionPerformed(evt);
+                jComboBox3ActionPerformed();
             }
         });
         jComboBox3.setModel(model1);
@@ -127,61 +128,37 @@ public class FormationAndSimulationTab {
         jComboBox2.setModel(new javax.swing.DefaultComboBoxModel<>(new String[]{"Normal", "Inicio Sacando", "Inicio Recibiendo"}));
         jComboBox2.addActionListener(new ActionListener() {
             public void actionPerformed(ActionEvent evt) {
-                jComboBox2ActionPerformed(evt);
+                jComboBox2ActionPerformed();
             }
         });
 
         JPanel jPanel8 = new JPanel();
-        jPanel8.setLayout(new javax.swing.BoxLayout(jPanel8, javax.swing.BoxLayout.PAGE_AXIS));
+        jPanel8.setLayout(new BoxLayout(jPanel8, BoxLayout.PAGE_AXIS));
 
-        JLabel jLabel18 = new JLabel();
-        jLabel18.setFont(new Font("Arial", 0, 12));
-        jLabel18.setText("Fuerza"); // NOI18N
-        jLabel18.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel18.setMaximumSize(new java.awt.Dimension(50, 15));
-        jLabel18.setMinimumSize(new java.awt.Dimension(50, 15));
-        jLabel18.setPreferredSize(new java.awt.Dimension(50, 15));
-        jPanel8.add(jLabel18);
-
-        jTextField5 = new JTextField();
-        jTextField5.setFont(new Font("Arial", 0, 12));
-        jTextField5.setHorizontalAlignment(JTextField.RIGHT);
-        jTextField5.setText("1"); // NOI18N
-        jTextField5.setMaximumSize(new java.awt.Dimension(2147483647, 20));
-        jTextField5.addCaretListener(new javax.swing.event.CaretListener() {
-            public void caretUpdate(CaretEvent evt) {
-                jTextField5CaretUpdate(evt);
-            }
-        });
-        jTextField5.addFocusListener(new java.awt.event.FocusAdapter() {
-            public void focusLost(FocusEvent evt) {
-                jTextField5FocusLost(evt);
-            }
-        });
-        jPanel8.add(jTextField5);
+        addStrengthComponents(jPanel8);
 
         JLabel jLabel23 = new JLabel();
         jLabel23.setFont(new Font("Arial", 0, 12));
-        jLabel23.setText("Angulo"); // NOI18N
-        jLabel23.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel23.setMaximumSize(new java.awt.Dimension(50, 15));
-        jLabel23.setMinimumSize(new java.awt.Dimension(50, 15));
-        jLabel23.setPreferredSize(new java.awt.Dimension(50, 15));
+        jLabel23.setText("Angulo");
+        jLabel23.setHorizontalTextPosition(SwingConstants.CENTER);
+        jLabel23.setMaximumSize(new Dimension(50, 15));
+        jLabel23.setMinimumSize(new Dimension(50, 15));
+        jLabel23.setPreferredSize(new Dimension(50, 15));
         jPanel8.add(jLabel23);
 
         jTextField6 = new JTextField();
         jTextField6.setFont(new Font("Arial", 0, 12));
         jTextField6.setHorizontalAlignment(JTextField.RIGHT);
-        jTextField6.setText("0"); // NOI18N
-        jTextField6.setMaximumSize(new java.awt.Dimension(2147483647, 20));
-        jTextField6.addCaretListener(new javax.swing.event.CaretListener() {
+        jTextField6.setText("0");
+        jTextField6.setMaximumSize(new Dimension(2147483647, 20));
+        jTextField6.addCaretListener(new CaretListener() {
             public void caretUpdate(CaretEvent evt) {
-                jTextField6CaretUpdate(evt);
+                jTextField6CaretUpdate();
             }
         });
         jTextField6.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(FocusEvent evt) {
-                jTextField6FocusLost(evt);
+                jTextField6FocusLost();
             }
         });
         jPanel8.add(jTextField6);
@@ -190,9 +167,9 @@ public class FormationAndSimulationTab {
         jLabel24.setFont(new Font("Arial", 0, 12));
         jLabel24.setText("Angulo Z"); // NOI18N
         jLabel24.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel24.setMaximumSize(new java.awt.Dimension(50, 15));
-        jLabel24.setMinimumSize(new java.awt.Dimension(50, 15));
-        jLabel24.setPreferredSize(new java.awt.Dimension(50, 15));
+        jLabel24.setMaximumSize(new Dimension(50, 15));
+        jLabel24.setMinimumSize(new Dimension(50, 15));
+        jLabel24.setPreferredSize(new Dimension(50, 15));
         jPanel8.add(jLabel24);
 
         jTextField7 = new JTextField();
@@ -200,15 +177,15 @@ public class FormationAndSimulationTab {
         jTextField7.setFont(new Font("Arial", 0, 12));
         jTextField7.setHorizontalAlignment(JTextField.RIGHT);
         jTextField7.setText("0"); // NOI18N
-        jTextField7.setMaximumSize(new java.awt.Dimension(2147483647, 20));
-        jTextField7.addCaretListener(new javax.swing.event.CaretListener() {
+        jTextField7.setMaximumSize(new Dimension(2147483647, 20));
+        jTextField7.addCaretListener(new CaretListener() {
             public void caretUpdate(CaretEvent evt) {
-                jTextField7CaretUpdate(evt);
+                jTextField7CaretUpdate();
             }
         });
         jTextField7.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusLost(FocusEvent evt) {
-                jTextField7FocusLost(evt);
+                jTextField7FocusLost();
             }
         });
         jPanel8.add(jTextField7);
@@ -241,9 +218,9 @@ public class FormationAndSimulationTab {
         jLabel22.setFont(new Font("Arial", 0, 12));
         jLabel22.setText("Leyenda"); // NOI18N
         jLabel22.setHorizontalTextPosition(javax.swing.SwingConstants.CENTER);
-        jLabel22.setMaximumSize(new java.awt.Dimension(50, 15));
-        jLabel22.setMinimumSize(new java.awt.Dimension(50, 15));
-        jLabel22.setPreferredSize(new java.awt.Dimension(50, 15));
+        jLabel22.setMaximumSize(new Dimension(50, 15));
+        jLabel22.setMinimumSize(new Dimension(50, 15));
+        jLabel22.setPreferredSize(new Dimension(50, 15));
         jPanel8.add(jLabel22);
 
         JPanel jPanel11 = new JPanel();
@@ -354,9 +331,10 @@ public class FormationAndSimulationTab {
         };
 
         jPanel5.setBackground(new Color(102, 102, 102));
-        jPanel5.setMaximumSize(new java.awt.Dimension(216, 145));
-        jPanel5.setMinimumSize(new java.awt.Dimension(216, 145));
-        jPanel5.setPreferredSize(new java.awt.Dimension(476, 307));
+        Dimension preferredSize = new Dimension(400, 300);
+        jPanel5.setMaximumSize(preferredSize);
+        jPanel5.setMinimumSize(preferredSize);
+        jPanel5.setPreferredSize(preferredSize);
         jPanel5.addMouseWheelListener(new java.awt.event.MouseWheelListener() {
             public void mouseWheelMoved(java.awt.event.MouseWheelEvent evt) {
                 jPanel5MouseWheelMoved(evt);
@@ -374,11 +352,6 @@ public class FormationAndSimulationTab {
 
             public void mouseMoved(MouseEvent evt) {
                 jPanel5MouseMoved(evt);
-            }
-        });
-        jPanel5.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyTyped(KeyEvent evt) {
-                jPanel5KeyTyped(evt);
             }
         });
 
@@ -415,7 +388,37 @@ public class FormationAndSimulationTab {
                             .addComponent(jToggleButton2, GroupLayout.PREFERRED_SIZE, 25, GroupLayout.PREFERRED_SIZE))).addContainerGap()));
     }
 
-    private void jToggleButton2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jToggleButton2ActionPerformed
+    private void addStrengthComponents(JPanel panel) {
+        final String strengthText = "Strength";
+
+        final JLabel strengthLabel = new JLabel();
+        strengthLabel.setFont(new Font("Arial", 0, 12));
+        strengthLabel.setHorizontalTextPosition(SwingConstants.CENTER);
+        //strengthLabel.setPreferredSize(new Dimension(50, 15));
+        setText(strengthLabel, strengthText, strength);
+        panel.add(strengthLabel);
+
+        final JSlider strengthSlider = new JSlider();
+        strengthSlider.setValue((int) (strength * 100));
+        strengthSlider.setMinimum(0);
+        strengthSlider.setMaximum(100);
+        strengthSlider.setForeground(Color.black);
+        strengthSlider.addChangeListener(new ChangeListener() {
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                strength = strengthSlider.getValue() / 100d;
+                setText(strengthLabel, strengthText, strength);
+                jPanel5.repaint();
+            }
+        });
+        panel.add(strengthSlider);
+    }
+
+    private void setText(JLabel label, String name, double value) {
+        label.setText(name + " (" + value + ")");
+    }
+
+    private void jToggleButton2ActionPerformed() {//GEN-FIRST:event_jToggleButton2ActionPerformed
         jPanel5.repaint();
     }//GEN-LAST:event_jToggleButton2ActionPerformed
 
@@ -423,7 +426,7 @@ public class FormationAndSimulationTab {
         return jPanel4;
     }
 
-    private void jButton12ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton12ActionPerformed
+    private void jButton12ActionPerformed() {
         int idx = jComboBox3.getSelectedIndex();
         int size = jComboBox3.getModel().getSize();
         if (size == 1) {
@@ -433,66 +436,35 @@ public class FormationAndSimulationTab {
             impl.delAlineacion(idx);
             jPanel5.repaint();
         }
-    }//GEN-LAST:event_jButton12ActionPerformed
+    }
 
-    private void jTextField5FocusLost(FocusEvent evt) {//GEN-FIRST:event_jTextField5FocusLost
-        try {
-            fuerza = Double.parseDouble(jTextField5.getText().trim());
-        } catch (Exception ex) {
-        }
-        if (fuerza < 0) {
-            fuerza = 0;
-        }
-        if (fuerza > 1) {
-            fuerza = 1;
-        }
-        jTextField5.setText("" + fuerza);
-        jPanel5.repaint();
-    }//GEN-LAST:event_jTextField5FocusLost
-
-    private void jTextField5CaretUpdate(CaretEvent evt) {//GEN-FIRST:event_jTextField5CaretUpdate
-        try {
-            fuerza = Double.parseDouble(jTextField5.getText().trim());
-            jTextField5.setForeground(Color.black);
-        } catch (Exception ex) {
-            jTextField5.setForeground(Color.red);
-        }
-        if (fuerza < 0) {
-            fuerza = 0;
-        }
-        if (fuerza > 1) {
-            fuerza = 1;
-        }
-        jPanel5.repaint();
-    }//GEN-LAST:event_jTextField5CaretUpdate
-
-    private void jComboBox2ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jComboBox2ActionPerformed
+    private void jComboBox2ActionPerformed() {
         try {
             jPanel5.repaint();
             int idx = jComboBox3.getSelectedIndex();
             impl.setAlineacion(idx, impl.getAlineacion(idx), jComboBox2.getSelectedIndex());
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
-    }//GEN-LAST:event_jComboBox2ActionPerformed
+    }
 
-    private void jComboBox3ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jComboBox3ActionPerformed
+    private void jComboBox3ActionPerformed() {
         int idx = jComboBox3.getSelectedIndex();
         if (idx == -1) {
             idx = 0;
         }
         jComboBox2.setSelectedIndex(impl.getTipoAlineacion(idx));
         jPanel5.repaint();
-    }//GEN-LAST:event_jComboBox3ActionPerformed
+    }
 
-    private void jButton11ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton11ActionPerformed
+    private void jButton11ActionPerformed() {
         int idx = jComboBox3.getSelectedIndex();
         impl.addAlineacion(idx);
         int size = jComboBox3.getModel().getSize() + 1;
         model1.addElement("" + size);
         jComboBox3.setSelectedIndex(size - 1);
-    }//GEN-LAST:event_jButton11ActionPerformed
+    }
 
-    private void jButton13ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton13ActionPerformed
+    private void jButton13ActionPerformed() {
         int idx = jComboBox3.getSelectedIndex();
         if (idx < jComboBox3.getModel().getSize() - 1) {
             cupdate = false;
@@ -505,9 +477,9 @@ public class FormationAndSimulationTab {
             jPanel5.repaint();
             cupdate = true;
         }
-    }//GEN-LAST:event_jButton13ActionPerformed
+    }
 
-    private void jButton10ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton10ActionPerformed
+    private void jButton10ActionPerformed() {
         int idx = jComboBox3.getSelectedIndex();
         if (idx > 0) {
             cupdate = false;
@@ -520,29 +492,29 @@ public class FormationAndSimulationTab {
             jPanel5.repaint();
             cupdate = true;
         }
-    }//GEN-LAST:event_jButton10ActionPerformed
+    }
 
-    private void jTextField6FocusLost(FocusEvent evt) {//GEN-FIRST:event_jTextField6FocusLost
+    private void jTextField6FocusLost() {
         try {
             ang = Double.parseDouble(jTextField6.getText().trim());
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
         jTextField6.setText("" + ang);
-    }//GEN-LAST:event_jTextField6FocusLost
+    }
 
-    private void jTextField6CaretUpdate(CaretEvent evt) {//GEN-FIRST:event_jTextField6CaretUpdate
+    private void jTextField6CaretUpdate() {
         try {
             ang = Double.parseDouble(jTextField6.getText().trim());
             jTextField6.setForeground(Color.black);
         } catch (Exception ex) {
             jTextField6.setForeground(Color.red);
         }
-    }//GEN-LAST:event_jTextField6CaretUpdate
+    }
 
-    private void jTextField7FocusLost(FocusEvent evt) {//GEN-FIRST:event_jTextField7FocusLost
+    private void jTextField7FocusLost() {
         try {
             elev = Double.parseDouble(jTextField7.getText().trim());
-        } catch (Exception ex) {
+        } catch (Exception ignored) {
         }
         if (elev < 0) {
             elev = 0;
@@ -552,9 +524,9 @@ public class FormationAndSimulationTab {
         }
         jTextField7.setText("" + elev);
         jPanel5.repaint();
-    }//GEN-LAST:event_jTextField7FocusLost
+    }
 
-    private void jTextField7CaretUpdate(CaretEvent evt) {//GEN-FIRST:event_jTextField7CaretUpdate
+    private void jTextField7CaretUpdate() {
         try {
             elev = Double.parseDouble(jTextField7.getText().trim());
             jTextField7.setForeground(Color.black);
@@ -568,13 +540,13 @@ public class FormationAndSimulationTab {
             elev = Constants.ANGULO_VERTICAL_MAX;
         }
         jPanel5.repaint();
-    }//GEN-LAST:event_jTextField7CaretUpdate
+    }
 
-    private void jPanel5MouseDragged(MouseEvent evt) {//GEN-FIRST:event_jPanel5MouseDragged
+    private void jPanel5MouseDragged(MouseEvent evt) {
         if (type == MouseEvent.BUTTON1) {
             if (distMin < 20) {
-                Position[] Positiones = impl.getAlineacion(jComboBox3.getSelectedIndex());
                 Position p = unTransformAsistente(new Position((double) evt.getX() - 8, (double) evt.getY() - 3));
+                Position[] Positiones = impl.getAlineacion(jComboBox3.getSelectedIndex());
                 Positiones[jList1.getSelectedIndex()] = p;
                 jLabel14.setText(df.format(p.getY()) + ":" + df.format(p.getX()));
                 jPanel5.repaint();
@@ -585,15 +557,12 @@ public class FormationAndSimulationTab {
             if (angu < 0) {
                 angu = 360 + angu;
             }
-            double dist = p0.distance(p1) / 50;
-            if (dist > 1) {
-                dist = 1;
-            }
+
             jTextField6.setText(df.format(angu).replace(",", "."));
-            jTextField5.setText(df.format(dist).replace(",", "."));
+
             jPanel5.repaint();
         }
-    }//GEN-LAST:event_jPanel5MouseDragged
+    }
 
     private void jPanel5MousePressed(MouseEvent evt) {//GEN-FIRST:event_jPanel5MousePressed
         type = evt.getButton();
@@ -648,9 +617,6 @@ public class FormationAndSimulationTab {
         }
     }//GEN-LAST:event_jPanel5MouseMoved
 
-    private void jPanel5KeyTyped(KeyEvent evt) {//GEN-FIRST:event_jPanel5KeyTyped
-    }//GEN-LAST:event_jPanel5KeyTyped
-
     private void jPanel5MouseWheelMoved(java.awt.event.MouseWheelEvent evt) {//GEN-FIRST:event_jPanel5MouseWheelMoved
         int units = -evt.getUnitsToScroll() / Math.abs(evt.getUnitsToScroll());
         try {
@@ -676,7 +642,7 @@ public class FormationAndSimulationTab {
             double ang0 = ang - error;
             double av = elev * Math.PI / 180d;
             //velocidad
-            double vel = remate * fuerza;
+            double vel = remate * strength;
             //direccion;
             double dz = vel * Math.sin(av);
             double dr = vel * Math.cos(av);

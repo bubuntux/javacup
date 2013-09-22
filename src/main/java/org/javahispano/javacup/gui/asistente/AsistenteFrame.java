@@ -2,11 +2,13 @@ package org.javahispano.javacup.gui.asistente;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.FocusEvent;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.io.File;
 import java.io.FileInputStream;
@@ -22,6 +24,7 @@ import org.javahispano.javacup.model.util.Position;
 import org.javahispano.javacup.model.util.TacticValidate;
 import org.javahispano.javacup.render.EstiloUniforme;
 import org.javahispano.javacup.render.PintaJugador;
+import org.netbeans.lib.awtextra.AbsoluteLayout;
 import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.Game;
 import org.newdawn.slick.GameContainer;
@@ -238,18 +241,14 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         repinta();
         repintaCreditos();
-        Dimension size = new Dimension(565, 425);
-        setSize(size);
-        setMaximumSize(size);
-        setMinimumSize(size);
-        setPreferredSize(size);
         setLocationRelativeTo(null);
         setVisible(true);
-        setSize(size);
+        Dimension size = new Dimension(565, 425);
         setMaximumSize(size);
         setMinimumSize(size);
         setPreferredSize(size);
         setSize(size);
+
         fast.postInit();
         jTextField1.requestFocus();
     }
@@ -397,7 +396,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         JMenuItem jMenuItem7 = new JMenuItem();
 
         jDialog1.setModal(true);
-        jDialog1.getContentPane().setLayout(new java.awt.CardLayout());
+        jDialog1.getContentPane().setLayout(new CardLayout());
 
         jTextArea1.setColumns(20);
         jTextArea1.setEditable(false);
@@ -413,16 +412,16 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jMenu3.setText("Edit"); // NOI18N
         jMenuBar2.add(jMenu3);
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         setTitle("Asistente Javacup"); // NOI18N
-        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
+        setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         setResizable(false);
-        addWindowListener(new java.awt.event.WindowAdapter() {
+        addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
-        getContentPane().setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
+        getContentPane().setLayout(new AbsoluteLayout());
 
         jTabbedPane1.setFocusable(false);
         jTabbedPane1.setFont(new Font("Arial", 0, 12));
@@ -600,9 +599,9 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jTabbedPane1.addTab("Equipo", jPanel1);
 
-        jPanel2.setMaximumSize(new java.awt.Dimension(200, 20));
-        jPanel2.setMinimumSize(new java.awt.Dimension(200, 20));
-        jPanel2.setPreferredSize(new java.awt.Dimension(200, 20));
+        jPanel2.setMaximumSize(new Dimension(200, 20));
+        jPanel2.setMinimumSize(new Dimension(200, 20));
+        jPanel2.setPreferredSize(new Dimension(200, 20));
 
         jLabel10.setFont(new Font("Arial", 0, 12));
         jLabel10.setText("Nombre"); // NOI18N
@@ -675,25 +674,25 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         });
 
         jLabel15.setFont(new Font("Arial", 0, 12));
-        jLabel15.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel15.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel15.setText("Velocidad(00,00 m/iter)"); // NOI18N
-        jLabel15.setMaximumSize(new java.awt.Dimension(200, 20));
-        jLabel15.setMinimumSize(new java.awt.Dimension(200, 20));
-        jLabel15.setPreferredSize(new java.awt.Dimension(200, 20));
+        jLabel15.setMaximumSize(new Dimension(200, 20));
+        jLabel15.setMinimumSize(new Dimension(200, 20));
+        jLabel15.setPreferredSize(new Dimension(200, 20));
 
         jLabel16.setFont(new Font("Arial", 0, 12));
-        jLabel16.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel16.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel16.setText("Remate  (000,00 m/iter)"); // NOI18N
-        jLabel16.setMaximumSize(new java.awt.Dimension(200, 20));
-        jLabel16.setMinimumSize(new java.awt.Dimension(200, 20));
-        jLabel16.setPreferredSize(new java.awt.Dimension(200, 20));
+        jLabel16.setMaximumSize(new Dimension(200, 20));
+        jLabel16.setMinimumSize(new Dimension(200, 20));
+        jLabel16.setPreferredSize(new Dimension(200, 20));
 
         jLabel17.setFont(new Font("Arial", 0, 12));
-        jLabel17.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel17.setHorizontalAlignment(SwingConstants.CENTER);
         jLabel17.setText("Precisión (   %)"); // NOI18N
-        jLabel17.setMaximumSize(new java.awt.Dimension(200, 20));
-        jLabel17.setMinimumSize(new java.awt.Dimension(200, 20));
-        jLabel17.setPreferredSize(new java.awt.Dimension(200, 20));
+        jLabel17.setMaximumSize(new Dimension(200, 20));
+        jLabel17.setMinimumSize(new Dimension(200, 20));
+        jLabel17.setPreferredSize(new Dimension(200, 20));
 
         jButton9.setFont(new Font("Arial", 0, 12));
         jButton9.setText("Usar estos colores en todos"); // NOI18N
@@ -705,30 +704,30 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         });
 
         jSlider1.setFocusable(false);
-        jSlider1.setMaximumSize(new java.awt.Dimension(200, 20));
-        jSlider1.setMinimumSize(new java.awt.Dimension(200, 20));
-        jSlider1.setPreferredSize(new java.awt.Dimension(200, 20));
-        jSlider1.addChangeListener(new javax.swing.event.ChangeListener() {
+        jSlider1.setMaximumSize(new Dimension(200, 20));
+        jSlider1.setMinimumSize(new Dimension(200, 20));
+        jSlider1.setPreferredSize(new Dimension(200, 20));
+        jSlider1.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 jSlider1StateChanged(evt);
             }
         });
 
         jSlider2.setFocusable(false);
-        jSlider2.setMaximumSize(new java.awt.Dimension(200, 20));
-        jSlider2.setMinimumSize(new java.awt.Dimension(200, 20));
-        jSlider2.setPreferredSize(new java.awt.Dimension(200, 20));
-        jSlider2.addChangeListener(new javax.swing.event.ChangeListener() {
+        jSlider2.setMaximumSize(new Dimension(200, 20));
+        jSlider2.setMinimumSize(new Dimension(200, 20));
+        jSlider2.setPreferredSize(new Dimension(200, 20));
+        jSlider2.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 jSlider2StateChanged(evt);
             }
         });
 
         jSlider3.setFocusable(false);
-        jSlider3.setMaximumSize(new java.awt.Dimension(200, 20));
-        jSlider3.setMinimumSize(new java.awt.Dimension(200, 20));
-        jSlider3.setPreferredSize(new java.awt.Dimension(200, 20));
-        jSlider3.addChangeListener(new javax.swing.event.ChangeListener() {
+        jSlider3.setMaximumSize(new Dimension(200, 20));
+        jSlider3.setMinimumSize(new Dimension(200, 20));
+        jSlider3.setPreferredSize(new Dimension(200, 20));
+        jSlider3.addChangeListener(new ChangeListener() {
             public void stateChanged(ChangeEvent evt) {
                 jSlider3StateChanged(evt);
             }
@@ -830,15 +829,15 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         getContentPane().add(jTabbedPane1, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 560, 385));
 
         jPanel6.setFocusable(false);
-        jPanel6.setLayout(new java.awt.CardLayout());
+        jPanel6.setLayout(new CardLayout());
 
         jPanel7.setBackground(new Color(102, 102, 102));
         jPanel7.setBorder(javax.swing.BorderFactory.createLineBorder(new Color(0, 0, 0), 2));
         jPanel7.setFocusable(false);
-        jPanel7.setMaximumSize(new java.awt.Dimension(140, 100));
-        jPanel7.setMinimumSize(new java.awt.Dimension(140, 100));
-        jPanel7.setPreferredSize(new java.awt.Dimension(140, 100));
-        jPanel7.setLayout(new java.awt.CardLayout());
+        jPanel7.setMaximumSize(new Dimension(140, 100));
+        jPanel7.setMinimumSize(new Dimension(140, 100));
+        jPanel7.setPreferredSize(new Dimension(140, 100));
+        jPanel7.setLayout(new CardLayout());
         jPanel6.add(jPanel7, "card2");
 
         getContentPane().add(jPanel6, new org.netbeans.lib.awtextra.AbsoluteConstraints(571, 23, 120, 100));
@@ -1166,7 +1165,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         name = paclas;
         if (paclas != null) {
             String paquete = null;
-            String clase = "";
+            String clase;
             int idx = paclas.lastIndexOf(".");
             if (idx != -1) {
                 paquete = paclas.substring(0, idx);
@@ -1388,7 +1387,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         } catch (Exception ex) {
         }
         repintaModel();
-        //  jPanel5.repaint();
     }//GEN-LAST:event_jTextField4KeyReleased
 
     private void jTextField4KeyPressed(KeyEvent evt) {//GEN-FIRST:event_jTextField4KeyPressed
@@ -1397,7 +1395,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         } catch (Exception ex) {
         }
         repintaModel();
-        //  jPanel5.repaint();
     }//GEN-LAST:event_jTextField4KeyPressed
 
     private void jTextField4FocusLost(FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusLost
@@ -1407,7 +1404,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             jTextField4.setText("" + getJugador().getNumber());
         }
         repintaModel();
-        //jPanel5.repaint();
     }//GEN-LAST:event_jTextField4FocusLost
 
     private void jTextField4FocusGained(FocusEvent evt) {//GEN-FIRST:event_jTextField4FocusGained
@@ -1417,7 +1413,6 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
     private void jTextField3KeyReleased(KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyReleased
         getJugador().setNombre(jTextField3.getText());
         repintaModel();
-        //jPanel5.repaint();
     }//GEN-LAST:event_jTextField3KeyReleased
 
     private void jTextField3KeyPressed(KeyEvent evt) {//GEN-FIRST:event_jTextField3KeyPressed
@@ -1643,8 +1638,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
     private void repinta() {
         pintando = true;
-        //  jPanel5.repaint();
-        PlayerDetail j = (PlayerDetail) jList1.getSelectedValue();
+        PlayerDetail j = jList1.getSelectedValue();
         for (int i = 0; i < model.getSize(); i++) {
             model.set(i, impl.getPlayers()[i]);
         }
