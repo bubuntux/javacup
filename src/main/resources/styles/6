@@ -1,4 +1,4 @@
-<org.javahispano.javacup.gui.asistente.PoligonosData>
+<org.dsaw.javacup.gui.asistente.PoligonosData>
   <intx>
     <java.lang.Integer-array>
       <int>-32</int>
@@ -381,4 +381,4 @@
       <alpha>255</alpha>
     </awt-color>
   </cols>
-</org.javahispano.javacup.gui.asistente.PoligonosData>
+</org.dsaw.javacup.gui.asistente.PoligonosData>

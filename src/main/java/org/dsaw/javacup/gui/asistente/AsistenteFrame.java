@@ -1,23 +1,7 @@
 package org.dsaw.javacup.gui.asistente;
 
-import javax.swing.*;
-import javax.swing.event.ChangeEvent;
-import javax.swing.event.ChangeListener;
-import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.FocusEvent;
-import java.awt.event.KeyEvent;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.text.DecimalFormat;
-import java.util.ArrayList;
-import java.util.Properties;
 import com.thoughtworks.xstream.XStream;
+
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
@@ -33,6 +17,26 @@ import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.opengl.InternalTextureLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.FocusEvent;
+import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
+import java.text.DecimalFormat;
+import java.util.ArrayList;
+import java.util.Properties;
+
+import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 
 import static javax.swing.GroupLayout.Alignment.BASELINE;
 import static javax.swing.GroupLayout.Alignment.LEADING;
@@ -137,7 +141,8 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         try {
             XStream xs = new XStream();
             for (int i = 0; i < data.length; i++) {
-                data[i] = (PoligonosData) xs.fromXML(getClass().getResourceAsStream("/styles/" + (i + 1)));
+              InputStream resourceAsStream = getClass().getResourceAsStream("/styles/" + (i + 1));
+              data[i] = (PoligonosData) xs.fromXML(resourceAsStream);
             }
         } catch (Exception ex) {
             JOptionPane.showMessageDialog(null, "Debe limpiar y construir el proyecto");
@@ -1046,9 +1051,9 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                 codigo = codigo + "package " + paquete + ";\n\n";
             }
             codigo =
-                codigo + "import java.awt.Color;\n" + "import org.javahispano.javacup.model.*;\n" + "import org.javahispano.javacup.model.util.*;\n" +
-                    "import org.javahispano.javacup.render.EstiloUniforme;\n" + "import org.javahispano.javacup.model.command.*;\n" +
-                    "import org.javahispano.javacup.model.engine.GameSituations;\n" + "import java.util.List;\n\n" + "public class " + clase +
+                codigo + "import java.awt.Color;\n" + "import org.dsaw.javacup.model.*;\n" + "import org.dsaw.javacup.model.util.*;\n" +
+                    "import org.dsaw.javacup.render.EstiloUniforme;\n" + "import org.dsaw.javacup.model.command.*;\n" +
+                    "import org.dsaw.javacup.model.engine.GameSituations;\n" + "import java.util.List;\n\n" + "public class " + clase +
                     " implements Tactic {\n\n" + codalin + "    class TacticDetailImpl implements TacticDetail {\n\n" +
                     "        public String getTacticName() {\n" + "            return \"" + impl.getTacticName() + "\";\n" + "        }\n\n" +
                     "        public String getCountry() {\n" + "            return \"" + impl.getCountry() + "\";\n" + "        }\n\n" +
@@ -1198,8 +1203,8 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             if (paquete != null) {
                 codigo = "package " + paquete + ";\n\n";
             }
-            codigo = codigo + "import org.javahispano.javacup.model.*;\n" + "import org.javahispano.javacup.model.util.Position;\n" +
-                "import org.javahispano.javacup.model.engine.GameSituations;\n" + "import org.javahispano.javacup.model.command.*;\n" +
+            codigo = codigo + "import org.dsaw.javacup.model.*;\n" + "import org.dsaw.javacup.model.util.Position;\n" +
+                "import org.dsaw.javacup.model.engine.GameSituations;\n" + "import org.dsaw.javacup.model.command.*;\n" +
                 "import java.util.List;\n\n" + "public class " + clase + " implements Tactic {\n\n" + codalin +
                 "    public Position[] getStartPositions(GameSituations sp) {\n" + "    return alineacion" + numSaca + ";\n" + "    }\n\n" +
                 "    public Position[] getNoStartPositions(GameSituations sp) {\n" + "    return alineacion" + numRecibe + ";\n" + "    }\n\n" +

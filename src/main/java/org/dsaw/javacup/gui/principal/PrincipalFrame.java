@@ -1,42 +1,33 @@
 package org.dsaw.javacup.gui.principal;
 
-import java.awt.Component;
-import java.awt.Graphics;
-import javax.swing.JList;
-import org.dsaw.javacup.render.VisorOpenGl;
-import org.dsaw.javacup.render.VisorBasico;
-import java.net.MalformedURLException;
 import com.thoughtworks.xstream.XStream;
-import java.awt.Color;
-import java.awt.Cursor;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.Image;
+
+import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.engine.Partido;
+import org.dsaw.javacup.model.engine.PartidoGuardado;
+import org.dsaw.javacup.model.util.Constants;
+import org.dsaw.javacup.render.VisorBasico;
+import org.dsaw.javacup.render.VisorOpenGl;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import java.awt.*;
 import java.awt.event.MouseEvent;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import javax.swing.DefaultListModel;
-import javax.swing.ImageIcon;
-import javax.swing.JFileChooser;
-import javax.swing.JOptionPane;
-import javax.swing.JPanel;
-import javax.swing.ListCellRenderer;
-import org.dsaw.javacup.model.util.Constants;
-import org.dsaw.javacup.model.engine.Partido;
-import org.dsaw.javacup.model.engine.PartidoGuardado;
-import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import javax.swing.*;
 
 /**Aplicacion que permite visualizar, grabar, repetir y configurar partidos*/
 public final class PrincipalFrame extends javax.swing.JFrame implements Runnable {
@@ -72,10 +63,10 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
             classes = new Class[]{};
         }
         for (Class c : classes) {
-            if (!c.getName().startsWith("org.javahispano.javacup.modelo.")
-                    && !c.getName().startsWith("org.javahispano.javacup.model.")
-                    && !c.getName().startsWith("org.javahispano.javacup.gui.")
-                    && !c.getName().equals("org.javahispano.javacup.tacticas_aceptadas.DaniP.Termineitor$JugadaEnsayadaAvanzayPasa")) {
+            if (!c.getName().startsWith("org.dsaw.javacup.modelo.")
+                    && !c.getName().startsWith("org.dsaw.javacup.model.")
+                    && !c.getName().startsWith("org.dsaw.javacup.gui.")
+                    && !c.getName().equals("org.dsaw.javacup.tacticas_aceptadas.DaniP.Termineitor$JugadaEnsayadaAvanzayPasa")) {
                 synchronized (tacticasModel) {
                     tacticasModel.addElement(c);
                     filedirs.add(dir);

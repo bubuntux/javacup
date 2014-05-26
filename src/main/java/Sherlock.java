@@ -14,7 +14,7 @@ public class Sherlock {
 
     private static String path0;
     private static String path;
-    private static String packagePath = "org.javahispano.javacup.tacticas.tacticas_aceptadas";
+    private static String packagePath = "org.dsaw.javacup.tacticas.tacticas_aceptadas";
 
     static class Registro implements Comparable {
 
@@ -104,7 +104,7 @@ public class Sherlock {
         frame.setVisible(true);
         path0 = new File(".").getAbsolutePath();
         path0 = path0.substring(0, path0.length() - 1);
-        path = path0 + "tacticas\\org\\javahispano\\javacup\\tacticas\\tacticas_aceptadas";
+        path = path0 + "tacticas\\org\\dsaw\\javacup\\tacticas\\tacticas_aceptadas";
         LinkedList<File> files = getFiles(path);
         StringBuffer command = new StringBuffer();
         command.append("sherlock -o resultados");
