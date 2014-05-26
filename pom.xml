@@ -9,7 +9,7 @@
     <version>2013</version>
 
     <name>JavaCup</name>
-    <inceptionYear>2012</inceptionYear>
+    <inceptionYear>2007</inceptionYear>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -70,7 +70,7 @@
             <version>0.0.1</version>
         </dependency>
 
-        <dependency>
+        <dependency> <!-- TODO change for playN or libGDX -->
             <groupId>org.newdawn</groupId>
             <artifactId>slick</artifactId>
             <version>237</version>
@@ -132,7 +132,7 @@
             </plugin>
 
             <plugin>
-                <!-- TODO remove plugin and adapt slick to automatically unpack native library -->
+                <!-- TODO remove plugin -->
                 <!-- for now just include this parameter when launch the program -Djava.library.path=target/natives  -->
                 <groupId>com.googlecode.mavennatives</groupId>
                 <artifactId>maven-nativedependencies-plugin</artifactId>
