@@ -1,5 +1,6 @@
+import org.dsaw.javacup.gui.principal.PrincipalFrame;
+
 import javax.swing.*;
-import org.javahispano.javacup.gui.principal.PrincipalFrame;
 
 public class JavaCup {
 

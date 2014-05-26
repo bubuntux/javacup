@@ -4,14 +4,26 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
 
-    <groupId>org.javahispano</groupId>
+    <groupId>org.dsaw</groupId>
     <artifactId>javacup</artifactId>
     <version>2013</version>
+
+    <name>JavaCup</name>
+    <inceptionYear>2012</inceptionYear>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <java.version>1.7</java.version>
     </properties>
+
+    <developers>
+        <developer>
+            <id>bubuntux</id>
+            <name>Julio Gutierrez</name>
+            <email>bubuntux@gmail.com</email>
+            <timezone>-6</timezone>
+        </developer>
+    </developers>
 
     <licenses>
         <license>
@@ -26,10 +38,16 @@
         <url>https://github.com/bubuntux/javacup/issues</url>
     </issueManagement>
 
+    <scm>
+        <url>https://github.com/bubuntux/javacup</url>
+        <connection>scm:git:git://github.com/bubuntux/javacup.git</connection>
+        <developerConnection>scm:git:git@github.com:bubuntux/javacup.git</developerConnection>
+    </scm>
+
     <repositories>
         <repository>
             <id>bubuntux-repo</id>
-            <url>http://bubuntux.github.io/mvn-repo/</url>
+            <url>https://raw.github.com/bubuntux/mvn/repo/</url>
         </repository>
     </repositories>
 

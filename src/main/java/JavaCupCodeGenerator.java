@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import org.javahispano.javacup.gui.asistente.AsistenteFrame;
+import org.dsaw.javacup.gui.asistente.AsistenteFrame;
 
 public class JavaCupCodeGenerator {
 

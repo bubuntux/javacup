@@ -1,9 +1,9 @@
 
-import org.javahispano.javacup.model.TacticDetail;
-import org.javahispano.javacup.model.Tactic;
-import org.javahispano.javacup.model.engine.Partido;
-import org.javahispano.javacup.model.util.Constants;
-import org.javahispano.javacup.model.util.TacticValidate;
+import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.engine.Partido;
+import org.dsaw.javacup.model.util.Constants;
+import org.dsaw.javacup.model.util.TacticValidate;
 import java.awt.CardLayout;
 import java.awt.Image;
 import java.io.BufferedReader;
@@ -333,79 +333,79 @@ public class Torneo {
     }
     //tacticas ordenadas segun su resultado en la liguilla previa
     private static Class[] tactics = new Class[]{
-        org.javahispano.javacup.tacticas.jvc2012.romedal.TacticaRomedalusTeam.class,//32 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.masia2012.Masia.class,//32 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.hortalezablamers.HortalezaBlamers.class,//31 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.bo.ChimuelosTactic.class,//28 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.losdesistemas.Sistemitas.class,//28 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.iriveros.Chelsea.class,//28 puntos. (descalificado por ser copia identica del campeon 2011)
-        org.javahispano.javacup.tacticas.jvc2012.dbonilla.Millos.class,//26 puntos. (descalificado por ser copia identica del campeon 2011)
-        org.javahispano.javacup.tacticas.jvc2012.iria.Iria.class,//25 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.arturo8a.TacticaPulgarcitos.class,//24 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.chr2012.tactica.TacticaTiquiTacaTeam.class,//23 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.fortega.Frioleros.class,//23 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.team2012.Team2312.class,//22 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.tukutuku.Tactica.class,//21 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.davidramirez.TElResultaoDaIgual.class,//20 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.evolution.SanMarinoEvolution.class,//18 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.agalan.NewTeam.class,//18 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.losjavatos.LosJavatos.class,//17 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.mijarojos.Mijarojos.class,//17 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.moleteam.MoleTeam.class,//13 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.lgarza.Tactica.class,//13 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.srh.SRH.class,//12 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.abonilla.Arsenal4.class,//11 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.realvencedores.RealVencedoresJuego.class,//11 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.pringaos.Pringaos2012.class,//11 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.adeleon.Manada.class,//11 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.emendoza.Junior.class,//8 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.ateixeira.Artenara.class,//7 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.lacras.lacras.class,//7 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.rchavarria.RChavarriaTactic.class,//7 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.petardos.Petardos.class,//5 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.vnavarro.Pequeo.class,//4 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.sotilezos.Sotilezos.class,//3 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.celta.Celta.class,//3 puntos.
-        org.javahispano.javacup.tacticas.jvc2012.tomatesmecanicos.tomates.class,//2 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.romedal.TacticaRomedalusTeam.class,//32 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.masia2012.Masia.class,//32 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.hortalezablamers.HortalezaBlamers.class,//31 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.bo.ChimuelosTactic.class,//28 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.losdesistemas.Sistemitas.class,//28 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.iriveros.Chelsea.class,//28 puntos. (descalificado por ser copia identica del campeon 2011)
+        org.dsaw.javacup.tacticas.jvc2012.dbonilla.Millos.class,//26 puntos. (descalificado por ser copia identica del campeon 2011)
+        org.dsaw.javacup.tacticas.jvc2012.iria.Iria.class,//25 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.arturo8a.TacticaPulgarcitos.class,//24 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.chr2012.tactica.TacticaTiquiTacaTeam.class,//23 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.fortega.Frioleros.class,//23 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.team2012.Team2312.class,//22 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.tukutuku.Tactica.class,//21 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.davidramirez.TElResultaoDaIgual.class,//20 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.evolution.SanMarinoEvolution.class,//18 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.agalan.NewTeam.class,//18 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.losjavatos.LosJavatos.class,//17 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.mijarojos.Mijarojos.class,//17 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.moleteam.MoleTeam.class,//13 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.lgarza.Tactica.class,//13 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.srh.SRH.class,//12 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.abonilla.Arsenal4.class,//11 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.realvencedores.RealVencedoresJuego.class,//11 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.pringaos.Pringaos2012.class,//11 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.adeleon.Manada.class,//11 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.emendoza.Junior.class,//8 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.ateixeira.Artenara.class,//7 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.lacras.lacras.class,//7 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.rchavarria.RChavarriaTactic.class,//7 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.petardos.Petardos.class,//5 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.vnavarro.Pequeo.class,//4 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.sotilezos.Sotilezos.class,//3 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.celta.Celta.class,//3 puntos.
+        org.dsaw.javacup.tacticas.jvc2012.tomatesmecanicos.tomates.class,//2 puntos.
     };
 
     //array de grupos de la primera fase
     private static Class[][] gruposPublicados() {
         return new Class[][]{
-                    {org.javahispano.javacup.tacticas.jvc2012.hortalezablamers.HortalezaBlamers.class,
-                        org.javahispano.javacup.tacticas.jvc2012.sotilezos.Sotilezos.class,
-                        org.javahispano.javacup.tacticas.jvc2012.evolution.SanMarinoEvolution.class,
-                        org.javahispano.javacup.tacticas.jvc2012.realvencedores.RealVencedoresJuego.class,},
-                    {org.javahispano.javacup.tacticas.jvc2012.davidramirez.TElResultaoDaIgual.class,
-                        org.javahispano.javacup.tacticas.jvc2012.mijarojos.Mijarojos.class,
-                        org.javahispano.javacup.tacticas.jvc2012.losdesistemas.Sistemitas.class,
-                        org.javahispano.javacup.tacticas.jvc2012.emendoza.Junior.class,},
-                    {org.javahispano.javacup.tacticas.jvc2012.iria.Iria.class,
-                        org.javahispano.javacup.tacticas.jvc2012.chr2012.tactica.TacticaTiquiTacaTeam.class,
-                        org.javahispano.javacup.tacticas.jvc2012.ateixeira.Artenara.class,
-                        org.javahispano.javacup.tacticas.jvc2012.pringaos.Pringaos2012.class,},
-                    {org.javahispano.javacup.tacticas.jvc2012.agalan.NewTeam.class,
-                        org.javahispano.javacup.tacticas.jvc2012.lacras.lacras.class,
-                        org.javahispano.javacup.tacticas.jvc2012.romedal.TacticaRomedalusTeam.class,
-                        org.javahispano.javacup.tacticas.jvc2012.srh.SRH.class,},
-                    {org.javahispano.javacup.tacticas.jvc2012.iriveros.Chelsea.class,
-                        org.javahispano.javacup.tacticas.jvc2012.arturo8a.TacticaPulgarcitos.class,
-                        org.javahispano.javacup.tacticas.jvc2012.losjavatos.LosJavatos.class,
-                        org.javahispano.javacup.tacticas.jvc2012.petardos.Petardos.class,},
-                    {org.javahispano.javacup.tacticas.jvc2012.rchavarria.RChavarriaTactic.class,
-                        org.javahispano.javacup.tacticas.jvc2012.abonilla.Arsenal4.class,
-                        org.javahispano.javacup.tacticas.jvc2012.tukutuku.Tactica.class,
-                        org.javahispano.javacup.tacticas.jvc2012.bo.ChimuelosTactic.class,},
-                    {org.javahispano.javacup.tacticas.jvc2012.adeleon.Manada.class,
-                        org.javahispano.javacup.tacticas.jvc2012.masia2012.Masia.class,
-                        org.javahispano.javacup.tacticas.jvc2012.fortega.Frioleros.class,
-                        org.javahispano.javacup.tacticas.jvc2012.celta.Celta.class,
-                        org.javahispano.javacup.tacticas.jvc2012.lgarza.Tactica.class,},
-                    {org.javahispano.javacup.tacticas.jvc2012.team2012.Team2312.class,
-                        org.javahispano.javacup.tacticas.jvc2012.dbonilla.Millos.class,
-                        org.javahispano.javacup.tacticas.jvc2012.vnavarro.Pequeo.class,
-                        org.javahispano.javacup.tacticas.jvc2012.moleteam.MoleTeam.class,
-                        org.javahispano.javacup.tacticas.jvc2012.tomatesmecanicos.tomates.class,},};
+                    {org.dsaw.javacup.tacticas.jvc2012.hortalezablamers.HortalezaBlamers.class,
+                        org.dsaw.javacup.tacticas.jvc2012.sotilezos.Sotilezos.class,
+                        org.dsaw.javacup.tacticas.jvc2012.evolution.SanMarinoEvolution.class,
+                        org.dsaw.javacup.tacticas.jvc2012.realvencedores.RealVencedoresJuego.class,},
+                    {org.dsaw.javacup.tacticas.jvc2012.davidramirez.TElResultaoDaIgual.class,
+                        org.dsaw.javacup.tacticas.jvc2012.mijarojos.Mijarojos.class,
+                        org.dsaw.javacup.tacticas.jvc2012.losdesistemas.Sistemitas.class,
+                        org.dsaw.javacup.tacticas.jvc2012.emendoza.Junior.class,},
+                    {org.dsaw.javacup.tacticas.jvc2012.iria.Iria.class,
+                        org.dsaw.javacup.tacticas.jvc2012.chr2012.tactica.TacticaTiquiTacaTeam.class,
+                        org.dsaw.javacup.tacticas.jvc2012.ateixeira.Artenara.class,
+                        org.dsaw.javacup.tacticas.jvc2012.pringaos.Pringaos2012.class,},
+                    {org.dsaw.javacup.tacticas.jvc2012.agalan.NewTeam.class,
+                        org.dsaw.javacup.tacticas.jvc2012.lacras.lacras.class,
+                        org.dsaw.javacup.tacticas.jvc2012.romedal.TacticaRomedalusTeam.class,
+                        org.dsaw.javacup.tacticas.jvc2012.srh.SRH.class,},
+                    {org.dsaw.javacup.tacticas.jvc2012.iriveros.Chelsea.class,
+                        org.dsaw.javacup.tacticas.jvc2012.arturo8a.TacticaPulgarcitos.class,
+                        org.dsaw.javacup.tacticas.jvc2012.losjavatos.LosJavatos.class,
+                        org.dsaw.javacup.tacticas.jvc2012.petardos.Petardos.class,},
+                    {org.dsaw.javacup.tacticas.jvc2012.rchavarria.RChavarriaTactic.class,
+                        org.dsaw.javacup.tacticas.jvc2012.abonilla.Arsenal4.class,
+                        org.dsaw.javacup.tacticas.jvc2012.tukutuku.Tactica.class,
+                        org.dsaw.javacup.tacticas.jvc2012.bo.ChimuelosTactic.class,},
+                    {org.dsaw.javacup.tacticas.jvc2012.adeleon.Manada.class,
+                        org.dsaw.javacup.tacticas.jvc2012.masia2012.Masia.class,
+                        org.dsaw.javacup.tacticas.jvc2012.fortega.Frioleros.class,
+                        org.dsaw.javacup.tacticas.jvc2012.celta.Celta.class,
+                        org.dsaw.javacup.tacticas.jvc2012.lgarza.Tactica.class,},
+                    {org.dsaw.javacup.tacticas.jvc2012.team2012.Team2312.class,
+                        org.dsaw.javacup.tacticas.jvc2012.dbonilla.Millos.class,
+                        org.dsaw.javacup.tacticas.jvc2012.vnavarro.Pequeo.class,
+                        org.dsaw.javacup.tacticas.jvc2012.moleteam.MoleTeam.class,
+                        org.dsaw.javacup.tacticas.jvc2012.tomatesmecanicos.tomates.class,},};
     }
     static Random r = new Random();
 
@@ -529,29 +529,29 @@ public class Torneo {
     static Class[][] clasificados = new Class[][]{
         {
             //GRUPO A
-            org.javahispano.javacup.tacticas.jvc2012.hortalezablamers.HortalezaBlamers.class,
-            org.javahispano.javacup.tacticas.jvc2012.evolution.SanMarinoEvolution.class,}, {
+            org.dsaw.javacup.tacticas.jvc2012.hortalezablamers.HortalezaBlamers.class,
+            org.dsaw.javacup.tacticas.jvc2012.evolution.SanMarinoEvolution.class,}, {
             //GRUPO B
-            org.javahispano.javacup.tacticas.jvc2012.losdesistemas.Sistemitas.class,
-            org.javahispano.javacup.tacticas.jvc2012.davidramirez.TElResultaoDaIgual.class,}, {
+            org.dsaw.javacup.tacticas.jvc2012.losdesistemas.Sistemitas.class,
+            org.dsaw.javacup.tacticas.jvc2012.davidramirez.TElResultaoDaIgual.class,}, {
             //GRUPO C
-            org.javahispano.javacup.tacticas.jvc2012.iria.Iria.class,
-            org.javahispano.javacup.tacticas.jvc2012.chr2012.tactica.TacticaTiquiTacaTeam.class,}, {
+            org.dsaw.javacup.tacticas.jvc2012.iria.Iria.class,
+            org.dsaw.javacup.tacticas.jvc2012.chr2012.tactica.TacticaTiquiTacaTeam.class,}, {
             //GRUPO D
-            org.javahispano.javacup.tacticas.jvc2012.romedal.TacticaRomedalusTeam.class,
-            org.javahispano.javacup.tacticas.jvc2012.agalan.NewTeam.class,}, {
+            org.dsaw.javacup.tacticas.jvc2012.romedal.TacticaRomedalusTeam.class,
+            org.dsaw.javacup.tacticas.jvc2012.agalan.NewTeam.class,}, {
             //GRUPO E
-            org.javahispano.javacup.tacticas.jvc2012.arturo8a.TacticaPulgarcitos.class,
-            org.javahispano.javacup.tacticas.jvc2012.losjavatos.LosJavatos.class}, {
+            org.dsaw.javacup.tacticas.jvc2012.arturo8a.TacticaPulgarcitos.class,
+            org.dsaw.javacup.tacticas.jvc2012.losjavatos.LosJavatos.class}, {
             //GRUPO F
-            org.javahispano.javacup.tacticas.jvc2012.bo.ChimuelosTactic.class,
-            org.javahispano.javacup.tacticas.jvc2012.tukutuku.Tactica.class,}, {
+            org.dsaw.javacup.tacticas.jvc2012.bo.ChimuelosTactic.class,
+            org.dsaw.javacup.tacticas.jvc2012.tukutuku.Tactica.class,}, {
             //GRUPO G
-            org.javahispano.javacup.tacticas.jvc2012.masia2012.Masia.class,
-            org.javahispano.javacup.tacticas.jvc2012.fortega.Frioleros.class,}, {
+            org.dsaw.javacup.tacticas.jvc2012.masia2012.Masia.class,
+            org.dsaw.javacup.tacticas.jvc2012.fortega.Frioleros.class,}, {
             //GRUPO H
-            org.javahispano.javacup.tacticas.jvc2012.team2012.Team2312.class,
-            org.javahispano.javacup.tacticas.jvc2012.moleteam.MoleTeam.class,}
+            org.dsaw.javacup.tacticas.jvc2012.team2012.Team2312.class,
+            org.dsaw.javacup.tacticas.jvc2012.moleteam.MoleTeam.class,}
     };
 
     //ejecuta la segunda fase (eliminatorias)... guarda los partidos en path
