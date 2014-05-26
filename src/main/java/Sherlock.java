@@ -10,7 +10,7 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 
-public class Sherlock {
+public class Sherlock { //TODO WTF?
 
     private static String path0;
     private static String path;
