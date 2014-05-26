@@ -5,7 +5,7 @@ import java.awt.Color;
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 
 public class TacticaRomedalusTeamDetalleImpl implements TacticDetail {
 
@@ -50,8 +50,8 @@ public class TacticaRomedalusTeamDetalleImpl implements TacticDetail {
 	}
 
 	@Override
-	public EstiloUniforme getStyle() {
-		return EstiloUniforme.LINEAS_VERTICALES;
+	public UniformStyle getStyle() {
+		return UniformStyle.LINEAS_VERTICALES;
 	}
 
 	@Override
@@ -80,8 +80,8 @@ public class TacticaRomedalusTeamDetalleImpl implements TacticDetail {
 	}
 
 	@Override
-	public EstiloUniforme getStyle2() {
-		return EstiloUniforme.SIN_ESTILO;
+	public UniformStyle getStyle2() {
+		return UniformStyle.SIN_ESTILO;
 	}
 
 	class JugadorImpl implements PlayerDetail {

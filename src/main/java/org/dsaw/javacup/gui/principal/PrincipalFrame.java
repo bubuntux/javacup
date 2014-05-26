@@ -4,8 +4,8 @@ import com.thoughtworks.xstream.XStream;
 
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.TacticDetail;
-import org.dsaw.javacup.model.engine.Partido;
-import org.dsaw.javacup.model.engine.PartidoGuardado;
+import org.dsaw.javacup.model.engine.Match;
+import org.dsaw.javacup.model.engine.StoredMatch;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.render.VisorBasico;
 import org.dsaw.javacup.render.VisorOpenGl;
@@ -1127,7 +1127,7 @@ private void jButton12ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIR
                 URL url = (URL) guardados.get(jList3.getSelectedIndex());
 
                 try {
-                    PartidoGuardado p = new PartidoGuardado(url);
+                    StoredMatch p = new StoredMatch(url);
                     setCursor(Cursor.getDefaultCursor());
                     p.iterar();
                     int sx = Integer.parseInt(jTextField6.getText().trim());
@@ -1198,7 +1198,7 @@ private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
     if (tl != null && tv != null) {
         try {
             Tactic tlocal = (Tactic) tl.newInstance(), tvisita = (Tactic) tv.newInstance();
-            Partido p = new Partido(tlocal, tvisita, jCheckBox12.isSelected() || jCheckBox8.isSelected());
+            Match p = new Match(tlocal, tvisita, jCheckBox12.isSelected() || jCheckBox8.isSelected());
             if (!datos.entrada) {
                 p.inicioRapido();
             }

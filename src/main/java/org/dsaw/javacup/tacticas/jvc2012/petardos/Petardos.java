@@ -32,7 +32,7 @@ import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 
 public class Petardos implements Tactic {
 
@@ -107,8 +107,8 @@ public class Petardos implements Tactic {
 		}
 
 		@Override
-                public EstiloUniforme getStyle() {
-			return EstiloUniforme.SIN_ESTILO;
+                public UniformStyle getStyle() {
+			return UniformStyle.SIN_ESTILO;
 		}
 
 		@Override
@@ -137,8 +137,8 @@ public class Petardos implements Tactic {
 		}
 
 		@Override
-                public EstiloUniforme getStyle2() {
-			return EstiloUniforme.SIN_ESTILO;
+                public UniformStyle getStyle2() {
+			return UniformStyle.SIN_ESTILO;
 		}
 
 		class JugadorImpl implements PlayerDetail {

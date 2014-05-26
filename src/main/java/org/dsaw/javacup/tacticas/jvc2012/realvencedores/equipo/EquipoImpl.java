@@ -5,7 +5,7 @@ import java.awt.Color;
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 
 public class EquipoImpl implements TacticDetail {
 
@@ -50,8 +50,8 @@ public class EquipoImpl implements TacticDetail {
     }
 
     @Override
-    public EstiloUniforme getStyle() {
-        return EstiloUniforme.FRANJA_HORIZONTAL;
+    public UniformStyle getStyle() {
+        return UniformStyle.FRANJA_HORIZONTAL;
     }
 
     @Override
@@ -80,8 +80,8 @@ public class EquipoImpl implements TacticDetail {
     }
 
     @Override
-    public EstiloUniforme getStyle2() {
-        return EstiloUniforme.SIN_ESTILO;
+    public UniformStyle getStyle2() {
+        return UniformStyle.SIN_ESTILO;
     }
 
     class JugadorImpl implements PlayerDetail {

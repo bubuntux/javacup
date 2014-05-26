@@ -26,7 +26,7 @@ public abstract class AbstractTrajectory {
                 return this;
             } else {
                 AirTrajectory tr0 = (AirTrajectory) this;
-                return tr0.nextTrayectory.getTrajectory(time - dt);
+                return tr0.nextTrajectory.getTrajectory(time - dt);
             }
         } else {
             return this;

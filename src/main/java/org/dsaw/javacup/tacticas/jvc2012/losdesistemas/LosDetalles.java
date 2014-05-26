@@ -2,7 +2,7 @@ package org.dsaw.javacup.tacticas.jvc2012.losdesistemas;
 
 import java.awt.Color;
 
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.TacticDetail;
@@ -50,8 +50,8 @@ public class LosDetalles implements TacticDetail{
     }
 
     @Override
-    public EstiloUniforme getStyle() {
-        return EstiloUniforme.FRANJA_HORIZONTAL;
+    public UniformStyle getStyle() {
+        return UniformStyle.FRANJA_HORIZONTAL;
     }
 
     @Override
@@ -80,8 +80,8 @@ public class LosDetalles implements TacticDetail{
     }
 
     @Override
-    public EstiloUniforme getStyle2() {
-        return EstiloUniforme.FRANJA_HORIZONTAL;
+    public UniformStyle getStyle2() {
+        return UniformStyle.FRANJA_HORIZONTAL;
     }
 
     class PlayerDetailImpl implements PlayerDetail {

@@ -6,7 +6,7 @@ import org.dsaw.javacup.model.util.Position;
 /**
 Interfaz partido, usada para ejecutar o visualizar partidos
  */
-public interface PartidoInterface {
+public interface MatchInterface {
 
     /**retorna si ocurrio un gol*/
     public boolean esGol();
@@ -45,7 +45,7 @@ public interface PartidoInterface {
     public TacticDetail getDetalleVisita();
 
     /**Retorna el partido guardado*/
-    public PartidoGuardado getPartidoGuardado();
+    public StoredMatch getPartidoGuardado();
 
     /**Retorna la posicion del balon visible*/
     public Position getPosVisibleBalon();

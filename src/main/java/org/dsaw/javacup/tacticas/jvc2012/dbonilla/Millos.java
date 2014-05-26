@@ -12,7 +12,8 @@ import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -189,8 +190,8 @@ public class Millos implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle() {
-            return EstiloUniforme.FRANJA_VERTICAL;
+        public UniformStyle getStyle() {
+            return UniformStyle.FRANJA_VERTICAL;
         }
 
         @Override
@@ -219,8 +220,8 @@ public class Millos implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle2() {
-            return EstiloUniforme.FRANJA_VERTICAL;
+        public UniformStyle getStyle2() {
+            return UniformStyle.FRANJA_VERTICAL;
         }
 
         class JugadorImpl implements PlayerDetail {

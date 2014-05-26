@@ -3,9 +3,10 @@ package org.dsaw.javacup.tacticas.jvc2012.lacras;
 import java.awt.Color;
 import org.dsaw.javacup.model.*;
 import org.dsaw.javacup.model.util.*;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 import org.dsaw.javacup.model.command.*;
 import org.dsaw.javacup.model.engine.GameSituations;
+
 import java.util.ArrayList;
 
 public class lacras implements Tactic {
@@ -100,8 +101,8 @@ public class lacras implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle() {
-            return EstiloUniforme.FRANJA_DIAGONAL;
+        public UniformStyle getStyle() {
+            return UniformStyle.FRANJA_DIAGONAL;
         }
 
         @Override
@@ -130,8 +131,8 @@ public class lacras implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle2() {
-            return EstiloUniforme.FRANJA_VERTICAL;
+        public UniformStyle getStyle2() {
+            return UniformStyle.FRANJA_VERTICAL;
         }
 
         class JugadorImpl implements PlayerDetail {

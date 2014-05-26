@@ -3,7 +3,7 @@ package org.dsaw.javacup.tacticas.jvc2012.vnavarro;
 import java.awt.Color;
 import org.dsaw.javacup.model.*;
 import org.dsaw.javacup.model.util.*;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 import org.dsaw.javacup.model.command.*;
 import org.dsaw.javacup.model.engine.GameSituations;
 
@@ -126,8 +126,8 @@ public class Pequeo implements org.dsaw.javacup.model.Tactic {
 		}
 
 		@Override
-                public EstiloUniforme getStyle() {
-			return EstiloUniforme.FRANJA_DIAGONAL;
+                public UniformStyle getStyle() {
+			return UniformStyle.FRANJA_DIAGONAL;
 		}
 
 		@Override
@@ -156,8 +156,8 @@ public class Pequeo implements org.dsaw.javacup.model.Tactic {
 		}
 
 		@Override
-                public EstiloUniforme getStyle2() {
-			return EstiloUniforme.FRANJA_HORIZONTAL;
+                public UniformStyle getStyle2() {
+			return UniformStyle.FRANJA_HORIZONTAL;
 		}
 
 		class JugadorImpl implements PlayerDetail {

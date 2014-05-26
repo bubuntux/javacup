@@ -24,9 +24,9 @@ import java.util.zip.ZipOutputStream;
 import javax.swing.*;
 
 /** Clase usada para cargar y guardar partidos, uso interno*/
-public final class PartidoGuardado implements PartidoInterface, Serializable {
+public final class StoredMatch implements MatchInterface, Serializable { //TODO rename?
 
-    private static Logger logger = LoggerFactory.getLogger(PartidoGuardado.class);
+    private static Logger logger = LoggerFactory.getLogger(StoredMatch.class);
     private static final long serialVersionUID = 1L;
     transient private int tiempo = -1;
     transient private Iteration iteration;
@@ -36,7 +36,7 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
     private TacticDetail detalleVisita;
 
     /**Instancia un partido guardado indicando los detalles de el local y la visita*/
-    public PartidoGuardado(TacticDetail detalleLocal, TacticDetail detalleVisita) {
+    public StoredMatch(TacticDetail detalleLocal, TacticDetail detalleVisita) {
         this.detalleLocal = detalleLocal;
         this.detalleVisita = detalleVisita;
     }
@@ -183,7 +183,7 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
     }
 
     @Override
-    public PartidoGuardado getPartidoGuardado() {
+    public StoredMatch getPartidoGuardado() {
         return this;
     }
     private URL url = null;
@@ -194,10 +194,10 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
     }
 
     /**Instancia un partido guardado a partir de una url*/
-    public PartidoGuardado(final URL url) throws Exception {
-        PartidoGuardado pg = null;
+    public StoredMatch(final URL url) throws Exception {
+        StoredMatch pg = null;
         try {
-            pg = PartidoGuardado.load(url);
+            pg = StoredMatch.load(url);
             this.url = url;
         } catch (Exception ex) {
             logger.error("Error al cargar partido guardado", ex);
@@ -247,7 +247,7 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
     /**Muesta un jframe que indica que el partido se esta cargando*/
     public static boolean SHOWFRAME = true;
 
-    private static PartidoGuardado load(URL url) throws Exception {
+    private static StoredMatch load(URL url) throws Exception {
         JFrame frame = null;
         if (SHOWFRAME) {
             frame = new JFrame("Cargando Partido ");
@@ -279,7 +279,7 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
             unziped.deleteOnExit();
             FileInputStream fis = new FileInputStream(unziped);
             ObjectInputStream ois = new ObjectInputStream(fis);
-            PartidoGuardado p = (PartidoGuardado) ois.readObject();
+            StoredMatch p = (StoredMatch) ois.readObject();
             ois.close();
             fis.close();
             tempFile.delete();

@@ -1,7 +1,7 @@
 package org.dsaw.javacup.render;
 
 /**Enumeracion de estilos de vestimenta de jugadores, uso interno*/
-public enum EstiloUniforme {
+public enum UniformStyle {
 
     /**Polera con una franja Ancha Horizontal*/
     FRANJA_HORIZONTAL(1,"Franja Horizontal"),
@@ -19,7 +19,7 @@ public enum EstiloUniforme {
     String nombre;
 
     /**esblece el numero y nombre del estilo*/
-    EstiloUniforme(int numero,String nombre) {
+    UniformStyle(int numero, String nombre) {
         this.numero = numero;
         this.nombre = nombre;
     }

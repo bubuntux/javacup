@@ -20,8 +20,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 import org.dsaw.javacup.gui.principal.PrincipalFrame;
+import org.dsaw.javacup.model.engine.MatchInterface;
 import org.dsaw.javacup.model.util.Constants;
-import org.dsaw.javacup.model.engine.PartidoInterface;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.util.TacticValidate;
@@ -210,7 +210,7 @@ public class VisorBasico extends javax.swing.JFrame {
             imgVisita[i] = imgVisita[i].getScaledInstance(13, 13, Image.SCALE_SMOOTH);
         }
     }
-    private PartidoInterface p;
+    private MatchInterface p;
     private BufferedImage bimg = new BufferedImage(408, 628, BufferedImage.TYPE_INT_ARGB);
     private Position panterior[][] = new Position[2][11];
     private Position[][] pos = new Position[2][11];
@@ -385,7 +385,7 @@ public class VisorBasico extends javax.swing.JFrame {
      * @param principal
      * @throws IOException
      */
-    public VisorBasico(PartidoInterface partido, PrincipalFrame principal) throws IOException {
+    public VisorBasico(MatchInterface partido, PrincipalFrame principal) throws IOException {
 
         this.principal = principal;
         p = partido;

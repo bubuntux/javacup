@@ -9,9 +9,10 @@ import java.awt.Color;
 import java.util.LinkedList;
 import org.dsaw.javacup.model.*;
 import org.dsaw.javacup.model.util.*;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 import org.dsaw.javacup.model.command.*;
 import org.dsaw.javacup.model.engine.GameSituations;
+
 import java.util.List;
 import java.util.Random;
 
@@ -117,8 +118,8 @@ public class TElResultaoDaIgual implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle() {
-            return EstiloUniforme.SIN_ESTILO;
+        public UniformStyle getStyle() {
+            return UniformStyle.SIN_ESTILO;
         }
 
         @Override
@@ -147,8 +148,8 @@ public class TElResultaoDaIgual implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle2() {
-            return EstiloUniforme.LINEAS_HORIZONTALES;
+        public UniformStyle getStyle2() {
+            return UniformStyle.LINEAS_HORIZONTALES;
         }
 
         class JugadorImpl implements PlayerDetail {

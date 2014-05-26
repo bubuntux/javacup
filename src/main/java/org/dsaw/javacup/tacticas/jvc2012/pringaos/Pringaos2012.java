@@ -16,7 +16,7 @@ import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 
 public class Pringaos2012 implements Tactic {
     Position alineacion1[]=new Position[]{
@@ -516,8 +516,8 @@ class Pringaos2012Detalle implements TacticDetail {
     }
 
     @Override
-    public EstiloUniforme getStyle() {
-        return EstiloUniforme.LINEAS_VERTICALES;
+    public UniformStyle getStyle() {
+        return UniformStyle.LINEAS_VERTICALES;
     }
 
     @Override
@@ -546,8 +546,8 @@ class Pringaos2012Detalle implements TacticDetail {
     }
 
     @Override
-    public EstiloUniforme getStyle2() {
-        return EstiloUniforme.SIN_ESTILO;
+    public UniformStyle getStyle2() {
+        return UniformStyle.SIN_ESTILO;
     }
 
     class JugadorImpl implements PlayerDetail

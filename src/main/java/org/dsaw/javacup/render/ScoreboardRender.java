@@ -12,11 +12,11 @@ import org.newdawn.slick.TrueTypeFont;
 /**
 Esta clase dibuja el marcador electronico, uso interno
  */
-public final class PintaMarcador {
+public final class ScoreboardRender {
 
 	private String local, visita;
 
-	public PintaMarcador(String local, String visita) {
+	public ScoreboardRender(String local, String visita) {
 		local = local.replaceAll("\\s+", " ").toUpperCase();
 		visita = visita.replaceAll("\\s+", " ").toUpperCase();
 		String[] ss;

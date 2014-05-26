@@ -8,11 +8,12 @@ import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import org.dsaw.javacup.model.*;
+
 import java.util.List;
 import java.util.Random;
 
@@ -179,8 +180,8 @@ public class TacticaPulgarcitos implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle() {
-            return EstiloUniforme.FRANJA_VERTICAL;
+        public UniformStyle getStyle() {
+            return UniformStyle.FRANJA_VERTICAL;
         }
 
         @Override
@@ -209,8 +210,8 @@ public class TacticaPulgarcitos implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle2() {
-            return EstiloUniforme.FRANJA_VERTICAL;
+        public UniformStyle getStyle2() {
+            return UniformStyle.FRANJA_VERTICAL;
         }
 
         class JugadorImpl implements PlayerDetail {

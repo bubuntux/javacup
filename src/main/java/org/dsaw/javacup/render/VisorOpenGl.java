@@ -1,13 +1,9 @@
 package org.dsaw.javacup.render;
 
-import javax.swing.*;
-import java.io.File;
-import java.util.ArrayList;
-import java.util.Random;
 import org.dsaw.javacup.gui.principal.PrincipalFrame;
-import org.dsaw.javacup.model.engine.Partido;
-import org.dsaw.javacup.model.engine.PartidoGuardado;
-import org.dsaw.javacup.model.engine.PartidoInterface;
+import org.dsaw.javacup.model.engine.Match;
+import org.dsaw.javacup.model.engine.MatchInterface;
+import org.dsaw.javacup.model.engine.StoredMatch;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.util.TacticValidate;
@@ -24,6 +20,12 @@ import org.newdawn.slick.openal.SoundStore;
 import org.newdawn.slick.opengl.InternalTextureLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.io.File;
+import java.util.ArrayList;
+import java.util.Random;
+
+import javax.swing.*;
 
 /**
  * Visor OpenGL
@@ -59,13 +61,13 @@ public class VisorOpenGl implements Game {
     boolean noAutoEscalar = false;
     ArrayList<Object[]> lista = new ArrayList<>();
     private PrincipalFrame principal;
-    private PartidoInterface partido = null;
+    private MatchInterface partido = null;
     private int sx, sy;
-    private PintaCancha pc = null;
-    private PintaJugador pjLocal, pjVisita = null;
-    private PintaBalon pb = null;
-    private PintaMarcador pm = null;
-    private PintaPublicidad pp = null;
+    private FieldRender pc = null;
+    private PlayerRender pjLocal, pjVisita = null;
+    private BallRender pb = null;
+    private ScoreboardRender pm = null;
+    private PublicityRender pp = null;
     private double vx = 0, vy = 0;
     private double px = 0, py = 0;
     private int sx2, sy2;
@@ -101,7 +103,7 @@ public class VisorOpenGl implements Game {
     private Image reImage;
     private boolean guardado = false;
     private int iteracionControl = 0;
-    private PartidoGuardado pg = null;
+    private StoredMatch pg = null;
     private boolean showTexto = true;
     private int incremento = 1;
 
@@ -116,7 +118,7 @@ public class VisorOpenGl implements Game {
      * @param principal
      * @throws SlickException
      */
-    public VisorOpenGl(Partido partido, int sx, int sy, boolean fullscreen, PrincipalFrame principal) throws SlickException {
+    public VisorOpenGl(Match partido, int sx, int sy, boolean fullscreen, PrincipalFrame principal) throws SlickException {
         this.partido = partido;
         this.sx = sx;
         this.sy = sy;
@@ -136,7 +138,7 @@ public class VisorOpenGl implements Game {
      * Inicia el Visor OpenGL indicando la instancia de partido guardado, las dimensiones de la pantalla (sx,sy),
      * si Se ejecuta en pantalla completa(fullscreen), e indicando la instancia del jframe Principal(dejar nulo)
      */
-    public VisorOpenGl(PartidoGuardado partido, int sx, int sy, boolean fullscreen, PrincipalFrame principal) throws SlickException {
+    public VisorOpenGl(StoredMatch partido, int sx, int sy, boolean fullscreen, PrincipalFrame principal) throws SlickException {
         pg = partido;
         guardado = true;
         progreso = true;
@@ -226,7 +228,7 @@ public class VisorOpenGl implements Game {
         uniformeAlternativoLocal = false;
         uniformeAlternativoVisita = TacticValidate.useAlternativeColors(partido.getDetalleLocal(), partido.getDetalleVisita());
         this.gc = gc;
-        pp = new PintaPublicidad("imagenes/logos/pubvert.png", "imagenes/logos/pubhor.png", gc.getWidth() / 2, gc.getHeight() / 2);
+        pp = new PublicityRender("imagenes/logos/pubvert.png", "imagenes/logos/pubhor.png", gc.getWidth() / 2, gc.getHeight() / 2);
         golImage = new Image("imagenes/gol.png");
         cambioImage = new Image("imagenes/cambio.png");
         offSideImage = new Image("imagenes/fuerajuego.png");
@@ -255,23 +257,23 @@ public class VisorOpenGl implements Game {
         }
         gc.setAlwaysRender(true); //TODO config
         gc.setShowFPS(false);
-        pc = new PintaCancha(gc.getWidth() / 2, gc.getHeight() / 2, estadioIdx);
+        pc = new FieldRender(gc.getWidth() / 2, gc.getHeight() / 2, estadioIdx);
         if (partido != null) {
             if (jugador3d) {
-                pjLocal = new PintaJugadorNew();
+                pjLocal = new PlayerRenderNew();
             } else {
-                pjLocal = new PintaJugador();
+                pjLocal = new PlayerRender();
             }
             pjLocal.setImpl(partido.getDetalleLocal());
             pjLocal.update(uniformeAlternativoLocal);
             if (jugador3d) {
-                pjVisita = new PintaJugadorNew();
+                pjVisita = new PlayerRenderNew();
             } else {
-                pjVisita = new PintaJugador();
+                pjVisita = new PlayerRender();
             }
             pjVisita.setImpl(partido.getDetalleVisita());
             pjVisita.update(uniformeAlternativoVisita);
-            pb = new PintaBalon();
+            pb = new BallRender();
             posActu = partido.getPosiciones();
             posPrev = new Position[11][2];
             for (int i = 0; i < 11; i++) {
@@ -283,7 +285,7 @@ public class VisorOpenGl implements Game {
         }
         gc.setTargetFrameRate(VisorOpenGl.fps);
         gc.setVSync(false);
-        pm = new PintaMarcador(partido.getDetalleLocal().getTacticName(), partido.getDetalleVisita().getTacticName());
+        pm = new ScoreboardRender(partido.getDetalleLocal().getTacticName(), partido.getDetalleVisita().getTacticName());
         gc.setMouseGrabbed(false);
     }
 
@@ -339,7 +341,7 @@ public class VisorOpenGl implements Game {
         if (guardado && progreso) {
             if (i.isMouseButtonDown(0)) {
                 double y = 1 - (double) (Math.max(20, Math.min(i.getMouseY(), sy - 20)) - 20) / (double) (sy - 40);
-                PartidoGuardado pguardado = (PartidoGuardado) partido;
+                StoredMatch pguardado = (StoredMatch) partido;
                 pguardado.setTiempo((int) (y * (double) pguardado.getIterciones()));
             }
         }
@@ -634,8 +636,10 @@ public class VisorOpenGl implements Game {
         }
 
         if (autoescala) {
-            int[] escalas = (Transforma.transform(partido.getPosVisibleBalon(), Constants.centroCampoJuego, -Transforma.transform(px, escala),
-                -Transforma.transform(py, escala), escala));
+            int[] escalas = (Transformer.transform(partido.getPosVisibleBalon(),
+                                                   Constants.centroCampoJuego,
+                                                   -Transformer.transform(px, escala),
+                                                   -Transformer.transform(py, escala), escala));
             escalaAjustada = escala * Math.min(0.7d * sx2 / (double) Math.abs(escalas[0]), 0.7d * sy2 / (double) Math.abs(escalas[1]));
         }
         if (!noAutoEscalar && partido.esGol()) {
@@ -673,20 +677,26 @@ public class VisorOpenGl implements Game {
         Position[][] pos = partido.getPosiciones();
         if (!partido.esGol() && partido.estanSacando()) {
             double zoom = 1 * escala * (1 + 0.02 * (double) iterSaca);
-            rel = Transforma
-                .transform(pos[2][0], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2,
-                    escala);
+            rel = Transformer
+                .transform(pos[2][0], Constants.centroCampoJuego,
+                           -Transformer.transform(px, escala) + sx2,
+                           -Transformer.transform(py, escala) + sy2,
+                           escala);
             g.drawImage(xImage.getScaledCopy((int) zoom, (int) zoom), rel[0] - (int) (zoom / 2), rel[1] - (int) (zoom / 2));
         }
         Position ball = partido.getPosVisibleBalon();
         for (int i = 0; i < 11; i++) {
-            rel = Transforma
-                .transform(pos[0][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2,
-                    escala);
+            rel = Transformer
+                .transform(pos[0][i], Constants.centroCampoJuego,
+                           -Transformer.transform(px, escala) + sx2,
+                           -Transformer.transform(py, escala) + sy2,
+                           escala);
             pjLocal.pintaSombra(i, iteraciones[i][0], angVisible[i][0], escala, rel[0], rel[1], g);
-            rel = Transforma
-                .transform(pos[1][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2,
-                    escala);
+            rel = Transformer
+                .transform(pos[1][i], Constants.centroCampoJuego,
+                           -Transformer.transform(px, escala) + sx2,
+                           -Transformer.transform(py, escala) + sy2,
+                           escala);
             pjVisita.pintaSombra(i, iteraciones[i][1], angVisible[i][1], escala, rel[0], rel[1], g);
         }
         z = partido.getAlturaBalon();// 16*Math.sin(Math.abs(ang % Math.PI));
@@ -705,22 +715,25 @@ public class VisorOpenGl implements Game {
         if (giro < 0) {
             giro = 6 + giro;
         }
-        rel = Transforma
-            .transform(ball, Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
-        pb.pintaSombra(escala, rel[0], rel[1], z, g);
+        rel = Transformer
+            .transform(ball, Constants.centroCampoJuego, -Transformer.transform(px, escala) + sx2,
+                       -Transformer.transform(py, escala) + sy2, escala);
+        pb.renderShadow(escala, rel[0], rel[1], z, g);
         if (partido.getAlturaBalon() <= 2) {
-            pb.pintaBalon((int) (giro), ang, escala, rel[0], rel[1], z * 2, g);
+            pb.renderBall((int) (giro), ang, escala, rel[0], rel[1], z * 2, g);
         }
-        pp.pintaPublicidad(g, p, escala);
+        pp.renderPublicity(g, p, escala);
 
         if (jugador3d) {
             lista.clear();
             for (int i = 0; i < 11; i++) {
-                rel = Transforma.transform(pos[0][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2,
-                    -Transforma.transform(py, escala) + sy2, escala);
+                rel = Transformer.transform(pos[0][i], Constants.centroCampoJuego,
+                                            -Transformer.transform(px, escala) + sx2,
+                                            -Transformer.transform(py, escala) + sy2, escala);
                 lista.add(new Object[]{pjLocal, i, iteraciones[i][0], angVisible[i][0], escala, rel[0], rel[1]});
-                rel = Transforma.transform(pos[1][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2,
-                    -Transforma.transform(py, escala) + sy2, escala);
+                rel = Transformer.transform(pos[1][i], Constants.centroCampoJuego,
+                                            -Transformer.transform(px, escala) + sx2,
+                                            -Transformer.transform(py, escala) + sy2, escala);
                 lista.add(new Object[]{pjVisita, i, iteraciones[i][1], angVisible[i][1], escala, rel[0], rel[1]});
             }
             Object[] tmp1, tmp2;
@@ -736,21 +749,23 @@ public class VisorOpenGl implements Game {
             }
 
             for (Object obj[] : lista) {
-                PintaJugador pj = (PintaJugador) obj[0];
+                PlayerRender pj = (PlayerRender) obj[0];
                 pj.pintaJugador((Integer) obj[1], (Integer) obj[2], (Double) obj[3], (Double) obj[4], (Integer) obj[5], (Integer) obj[6], g);
             }
 
             for (int i = 0; i < 11; i++) {
-                rel = Transforma.transform(pos[0][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2,
-                    -Transforma.transform(py, escala) + sy2, escala);
+                rel = Transformer.transform(pos[0][i], Constants.centroCampoJuego,
+                                            -Transformer.transform(px, escala) + sx2,
+                                            -Transformer.transform(py, escala) + sy2, escala);
                 if (tipoTexto == 3 || (pos[0][i].distance(pos[2][0]) < 8 && tipoTexto == 1)) {
                     pjLocal.pintaNumero(i, rel[0], rel[1], g);
                 }
                 if (tipoTexto == 4 || (pos[0][i].distance(pos[2][0]) < 8 && tipoTexto == 2)) {
                     pjLocal.pintaNombre(i, rel[0], rel[1], g);
                 }
-                rel = Transforma.transform(pos[1][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2,
-                    -Transforma.transform(py, escala) + sy2, escala);
+                rel = Transformer.transform(pos[1][i], Constants.centroCampoJuego,
+                                            -Transformer.transform(px, escala) + sx2,
+                                            -Transformer.transform(py, escala) + sy2, escala);
                 if (tipoTexto == 3 || (pos[1][i].distance(pos[2][0]) < 8 && tipoTexto == 1)) {
                     pjVisita.pintaNumero(i, rel[0], rel[1], g);
                 }
@@ -760,8 +775,9 @@ public class VisorOpenGl implements Game {
             }
         } else {
             for (int i = 0; i < 11; i++) {
-                rel = Transforma.transform(pos[0][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2,
-                    -Transforma.transform(py, escala) + sy2, escala);
+                rel = Transformer.transform(pos[0][i], Constants.centroCampoJuego,
+                                            -Transformer.transform(px, escala) + sx2,
+                                            -Transformer.transform(py, escala) + sy2, escala);
                 pjLocal.pintaJugador(i, iteraciones[i][0], angVisible[i][0], escala, rel[0], rel[1], g);
                 if (tipoTexto == 3 || (pos[0][i].distance(pos[2][0]) < 8 && tipoTexto == 1)) {
                     pjLocal.pintaNumero(i, rel[0], rel[1], g);
@@ -769,8 +785,9 @@ public class VisorOpenGl implements Game {
                 if (tipoTexto == 4 || (pos[0][i].distance(pos[2][0]) < 8 && tipoTexto == 2)) {
                     pjLocal.pintaNombre(i, rel[0], rel[1], g);
                 }
-                rel = Transforma.transform(pos[1][i], Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2,
-                    -Transforma.transform(py, escala) + sy2, escala);
+                rel = Transformer.transform(pos[1][i], Constants.centroCampoJuego,
+                                            -Transformer.transform(px, escala) + sx2,
+                                            -Transformer.transform(py, escala) + sy2, escala);
                 pjVisita.pintaJugador(i, iteraciones[i][1], angVisible[i][1], escala, rel[0], rel[1], g);
                 if (tipoTexto == 3 || (pos[1][i].distance(pos[2][0]) < 8 && tipoTexto == 1)) {
                     pjVisita.pintaNumero(i, rel[0], rel[1], g);
@@ -781,10 +798,11 @@ public class VisorOpenGl implements Game {
             }
         }
 
-        rel = Transforma
-            .transform(ball, Constants.centroCampoJuego, -Transforma.transform(px, escala) + sx2, -Transforma.transform(py, escala) + sy2, escala);
+        rel = Transformer
+            .transform(ball, Constants.centroCampoJuego, -Transformer.transform(px, escala) + sx2,
+                       -Transformer.transform(py, escala) + sy2, escala);
         if (partido.getAlturaBalon() > 2) {
-            pb.pintaBalon((int) (giro), ang, escala, rel[0], rel[1], z * 2, g);
+            pb.renderBall((int) (giro), ang, escala, rel[0], rel[1], z * 2, g);
         }
         pc.pintaArcos(g, p, escala);
         if (estadio) {

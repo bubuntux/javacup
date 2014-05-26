@@ -15,7 +15,8 @@ import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.command.CommandHitBall;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
+
 import java.awt.Color;
 import java.util.LinkedList;
 import java.util.List;
@@ -145,8 +146,8 @@ public class Arsenal4 implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle() {
-            return EstiloUniforme.LINEAS_VERTICALES;
+        public UniformStyle getStyle() {
+            return UniformStyle.LINEAS_VERTICALES;
         }
 
         @Override
@@ -175,8 +176,8 @@ public class Arsenal4 implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle2() {
-            return EstiloUniforme.FRANJA_DIAGONAL;
+        public UniformStyle getStyle2() {
+            return UniformStyle.FRANJA_DIAGONAL;
         }
 
         class JugadorImpl implements PlayerDetail {

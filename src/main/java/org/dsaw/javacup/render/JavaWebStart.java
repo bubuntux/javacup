@@ -8,7 +8,7 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.net.URL;
 import org.dsaw.javacup.gui.principal.PrincipalDatos;
-import org.dsaw.javacup.model.engine.PartidoGuardado;
+import org.dsaw.javacup.model.engine.StoredMatch;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -23,7 +23,7 @@ public class JavaWebStart {
     public static void main(String[] args) throws Exception {
         String url = System.getProperty("partido.url");
         boolean visorBasico = System.getProperty("visor.basico") != null;
-        PartidoGuardado pg = new PartidoGuardado(new URL(url));
+        StoredMatch pg = new StoredMatch(new URL(url));
         PrincipalDatos datos = new PrincipalDatos();
         FileInputStream fis = null;
         try {

@@ -3,7 +3,8 @@ package org.dsaw.javacup.tacticas.jvc2012.chr2012.tactica;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
+
 import java.awt.Color;
 
 
@@ -56,8 +57,8 @@ public class TacticaTiquiTacaTeamDetalle  implements TacticDetail {
     }
 
     @Override
-    public EstiloUniforme getStyle() {
-        return EstiloUniforme.SIN_ESTILO;
+    public UniformStyle getStyle() {
+        return UniformStyle.SIN_ESTILO;
     }
 
     @Override
@@ -86,8 +87,8 @@ public class TacticaTiquiTacaTeamDetalle  implements TacticDetail {
     }
 
     @Override
-    public EstiloUniforme getStyle2() {
-        return EstiloUniforme.SIN_ESTILO;
+    public UniformStyle getStyle2() {
+        return UniformStyle.SIN_ESTILO;
     }    
 
 	

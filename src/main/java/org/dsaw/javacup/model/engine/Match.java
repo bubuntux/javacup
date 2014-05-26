@@ -22,9 +22,9 @@ import java.util.List;
 import java.util.Random;
 
 /**Esta clase se encarga de la ejecucion de partidos*/
-public final class Partido implements PartidoInterface {
+public final class Match implements MatchInterface {
 
-    private static Logger logger = LoggerFactory.getLogger(Partido.class);
+    private static Logger logger = LoggerFactory.getLogger(Match.class);
     private Tactic tacticaLocal, tacticaVisita;//tactica local y visita
     private GameSituations spLocal = new GameSituations(), spVisita = new GameSituations();//situacion del partido, version local y visita
     private Position balon = new Position(Constants.centroCampoJuego);//posicion del ballPosition
@@ -76,7 +76,7 @@ public final class Partido implements PartidoInterface {
     private int iteracionesFoto = 0;//iteraciones al tomar una foto;
     private final static double MITAD_ANCHO = Constants.ANCHO_CAMPO_JUEGO / 2;
     private final static double MITAD_LARGO = Constants.LARGO_CAMPO_JUEGO / 2;
-    private PartidoGuardado guardado = null;
+    private StoredMatch guardado = null;
     private boolean save = false;
     private static final double angConvert = Math.PI / 180d;
     private int iteracionSaque = 0;
@@ -104,7 +104,7 @@ public final class Partido implements PartidoInterface {
     }
    
         /**Instancia un partido vacio e inicializando las variables. Es usado por los otros contructores*/
-    private Partido() {
+    private Match() {
         
     	posLocal = new Position[11];
         posVisita = new Position[11];
@@ -141,7 +141,7 @@ public final class Partido implements PartidoInterface {
     }
 
     /**Instancia un nuevo partido, indicando la tactica local y la tactica visita*/
-    public Partido(Tactic tacticaLocal, Tactic tacticaVisita, boolean save) throws Exception {
+    public Match(Tactic tacticaLocal, Tactic tacticaVisita, boolean save) throws Exception {
         this();
         this.tacticaLocal = new TacticImpl(tacticaLocal);//deja inmutables las aptitudes, colores, nombres, etc.
         this.tacticaVisita = new TacticImpl(tacticaVisita);//deja inmutables las aptitudes, colores, nombres, etc.
@@ -161,7 +161,7 @@ public final class Partido implements PartidoInterface {
         spLocal.set(new PlayerDetail[][]{tacticaLocal.getDetail().getPlayers(), tacticaVisita.getDetail().getPlayers()});
         spVisita.set(new PlayerDetail[][]{tacticaVisita.getDetail().getPlayers(), tacticaLocal.getDetail().getPlayers()});
         if (save) {
-            guardado = new PartidoGuardado(new TacticaDetalleImpl(tacticaLocal.getDetail()), new TacticaDetalleImpl(tacticaVisita.getDetail()));
+            guardado = new StoredMatch(new TacticaDetalleImpl(tacticaLocal.getDetail()), new TacticaDetalleImpl(tacticaVisita.getDetail()));
         }
         iterar();
     }
@@ -571,7 +571,7 @@ public final class Partido implements PartidoInterface {
 
     /**Retorna el partido guardado*/
     @Override
-    public PartidoGuardado getPartidoGuardado() {
+    public StoredMatch getPartidoGuardado() {
         return guardado;
     }
     private double balonDx0 = 0, balonDy0 = 0, balonDz0 = 0;

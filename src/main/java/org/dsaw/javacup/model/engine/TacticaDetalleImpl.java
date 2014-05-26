@@ -1,6 +1,6 @@
 package org.dsaw.javacup.model.engine;
 
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 import java.awt.Color;
 import java.io.Serializable;
 import org.dsaw.javacup.model.PlayerDetail;
@@ -18,14 +18,14 @@ import org.dsaw.javacup.model.TacticDetail;
     private final Color colorCalcetas;
     private final Color colorFranja;
     private final Color colorPortero;
-    private final EstiloUniforme estilo;
+    private final UniformStyle estilo;
     private final Color colorCamiseta2;
     private final Color colorPantalon2;
     private final Color colorCalcetas2;
     private final Color colorFranja2;
     private final Color colorPortero2;
-    private final EstiloUniforme estilo2;
-    private final JugadorImpl[] jugadores = new JugadorImpl[11];
+    private final UniformStyle estilo2;
+    private final PlayerImpl[] jugadores = new PlayerImpl[11];
 
 	/**Copia el detalle y deja inmutables sus valores*/
     TacticaDetalleImpl(TacticDetail impl) {
@@ -45,7 +45,7 @@ import org.dsaw.javacup.model.TacticDetail;
         this.colorPortero2 = impl.getGoalKeeper2();
         this.estilo2 = impl.getStyle2();
         for (int i = 0; i < 11; i++) {
-            this.jugadores[i] = new JugadorImpl(impl.getPlayers()[i]);
+            this.jugadores[i] = new PlayerImpl(impl.getPlayers()[i]);
         }
     }
 
@@ -85,7 +85,7 @@ import org.dsaw.javacup.model.TacticDetail;
     }
 
 	@Override
-    public EstiloUniforme getStyle() {
+    public UniformStyle getStyle() {
         return estilo;
     }
 
@@ -125,7 +125,7 @@ import org.dsaw.javacup.model.TacticDetail;
     }
 
     @Override
-    public EstiloUniforme getStyle2() {
+    public UniformStyle getStyle2() {
         return estilo2;
     }
 }

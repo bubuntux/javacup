@@ -15,7 +15,7 @@ import java.net.URL;
 import java.util.ArrayList;
 import java.util.Random;
 
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -110,7 +110,7 @@ public final class TacticaDetalleImpl implements TacticDetail {
     private Color colorCalcetas;
     private Color colorFranja;
     private Color colorPortero;
-    private EstiloUniforme estilo;
+    private UniformStyle estilo;
 
     @Override
     public Color getSocksColor2() {
@@ -163,12 +163,12 @@ public final class TacticaDetalleImpl implements TacticDetail {
     }
 
     @Override
-    public EstiloUniforme getStyle2() {
+    public UniformStyle getStyle2() {
         return estilo2;
     }
 
     /**EStablece el estilo del uniforme alternativo*/
-    void setEstilo2(EstiloUniforme estilo2) {
+    void setEstilo2(UniformStyle estilo2) {
         this.estilo2 = estilo2;
     }
     private Color colorCamiseta2;
@@ -176,7 +176,7 @@ public final class TacticaDetalleImpl implements TacticDetail {
     private Color colorCalcetas2;
     private Color colorFranja2;
     private Color colorPortero2;
-    private EstiloUniforme estilo2;
+    private UniformStyle estilo2;
     private JugadorImpl[] jugadores = new JugadorImpl[11];
     private ArrayList<Position[]> alineaciones = new ArrayList<>();
     private ArrayList<Integer> tipoAlineacion = new ArrayList<>();
@@ -314,7 +314,7 @@ public final class TacticaDetalleImpl implements TacticDetail {
         colorCalcetas = nextRandomColor();
         colorFranja = nextRandomColor();
         colorPortero = nextRandomColor();
-        EstiloUniforme[] estilos = EstiloUniforme.values();
+        UniformStyle[] estilos = UniformStyle.values();
         estilo = estilos[rand.nextInt(estilos.length)];
     }
 
@@ -325,7 +325,7 @@ public final class TacticaDetalleImpl implements TacticDetail {
         colorCalcetas2 = nextRandomColor();
         colorFranja2 = nextRandomColor();
         colorPortero2 = nextRandomColor();
-        EstiloUniforme[] estilos = EstiloUniforme.values();
+        UniformStyle[] estilos = UniformStyle.values();
         estilo2 = estilos[rand.nextInt(estilos.length)];
     }
 
@@ -365,11 +365,11 @@ public final class TacticaDetalleImpl implements TacticDetail {
     }
 
     @Override
-    public EstiloUniforme getStyle() {
+    public UniformStyle getStyle() {
         return estilo;
     }
 
-    void setEstiloPrincipal(EstiloUniforme estilo) {
+    void setEstiloPrincipal(UniformStyle estilo) {
         this.estilo = estilo;
     }
 

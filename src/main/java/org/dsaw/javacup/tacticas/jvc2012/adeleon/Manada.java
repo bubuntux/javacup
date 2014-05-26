@@ -9,7 +9,8 @@ import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.command.CommandHitBall;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -146,8 +147,8 @@ public class Manada implements Tactic {
 	        }
 
 	        @Override
-                public EstiloUniforme getStyle() {
-	            return EstiloUniforme.SIN_ESTILO;
+                public UniformStyle getStyle() {
+	            return UniformStyle.SIN_ESTILO;
 	        }
 
 	        @Override
@@ -176,8 +177,8 @@ public class Manada implements Tactic {
 	        }
 
 	        @Override
-                public EstiloUniforme getStyle2() {
-	            return EstiloUniforme.SIN_ESTILO;
+                public UniformStyle getStyle2() {
+	            return UniformStyle.SIN_ESTILO;
 	        }
 
 	        class JugadorImpl implements PlayerDetail {

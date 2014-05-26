@@ -3,7 +3,7 @@ package org.dsaw.javacup.tacticas.jvc2012.fortega;
 import java.awt.Color;
 import org.dsaw.javacup.model.*;
 import org.dsaw.javacup.model.util.*;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 import org.dsaw.javacup.model.command.*;
 import org.dsaw.javacup.model.engine.GameSituations;
 
@@ -118,8 +118,8 @@ public class Frioleros implements Tactic {
 		}
 
 		@Override
-                public EstiloUniforme getStyle() {
-			return EstiloUniforme.SIN_ESTILO;
+                public UniformStyle getStyle() {
+			return UniformStyle.SIN_ESTILO;
 		}
 
 		@Override
@@ -148,8 +148,8 @@ public class Frioleros implements Tactic {
 		}
 
 		@Override
-                public EstiloUniforme getStyle2() {
-			return EstiloUniforme.SIN_ESTILO;
+                public UniformStyle getStyle2() {
+			return UniformStyle.SIN_ESTILO;
 		}
 
 		class JugadorImpl implements PlayerDetail {

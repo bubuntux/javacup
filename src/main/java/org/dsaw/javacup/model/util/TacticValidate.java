@@ -1,7 +1,8 @@
 package org.dsaw.javacup.model.util;
 
 import org.dsaw.javacup.model.TacticDetail;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
+
 import java.awt.Color;
 import java.util.HashSet;
 
@@ -137,7 +138,7 @@ public final class TacticValidate {
         return new Color((int) (c1.getRed() * p1 + c2.getRed() * p2), (int) (c1.getGreen() * p1 + c2.getGreen() * p2), (int) (c1.getBlue() * p1 + c2.getBlue() * p2));
     }
 
-    private static double getP1(EstiloUniforme est) {
+    private static double getP1(UniformStyle est) {
         switch (est) {
             case LINEAS_HORIZONTALES:
                 return .5;

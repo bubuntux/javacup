@@ -4,7 +4,7 @@ import java.awt.Color;
 
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.TacticDetail;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 
 class TacticDetailImpl implements TacticDetail {
 
@@ -49,8 +49,8 @@ class TacticDetailImpl implements TacticDetail {
     }
 
     @Override
-    public EstiloUniforme getStyle() {
-        return EstiloUniforme.SIN_ESTILO;
+    public UniformStyle getStyle() {
+        return UniformStyle.SIN_ESTILO;
     }
 
     @Override
@@ -79,8 +79,8 @@ class TacticDetailImpl implements TacticDetail {
     }
 
     @Override
-    public EstiloUniforme getStyle2() {
-        return EstiloUniforme.SIN_ESTILO;
+    public UniformStyle getStyle2() {
+        return UniformStyle.SIN_ESTILO;
     }
 
     @Override

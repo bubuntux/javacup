@@ -3,7 +3,7 @@ package org.dsaw.javacup.tacticas.jvc2012.sotilezos;
 import java.awt.Color;
 import org.dsaw.javacup.model.*;
 import org.dsaw.javacup.model.util.*;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 import org.dsaw.javacup.model.command.*;
 import org.dsaw.javacup.model.engine.GameSituations;
 
@@ -97,8 +97,8 @@ public class Sotilezos implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle() {
-            return EstiloUniforme.FRANJA_HORIZONTAL;
+        public UniformStyle getStyle() {
+            return UniformStyle.FRANJA_HORIZONTAL;
         }
 
         @Override
@@ -127,8 +127,8 @@ public class Sotilezos implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle2() {
-            return EstiloUniforme.LINEAS_HORIZONTALES;
+        public UniformStyle getStyle2() {
+            return UniformStyle.LINEAS_HORIZONTALES;
         }
 
         class JugadorImpl implements PlayerDetail {

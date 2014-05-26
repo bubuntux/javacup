@@ -18,7 +18,7 @@ import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 
 public class Tactica implements Tactic {
 
@@ -304,8 +304,8 @@ public class Tactica implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle() {
-            return EstiloUniforme.LINEAS_VERTICALES;
+        public UniformStyle getStyle() {
+            return UniformStyle.LINEAS_VERTICALES;
         }
 
         @Override
@@ -334,8 +334,8 @@ public class Tactica implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle2() {
-            return EstiloUniforme.FRANJA_HORIZONTAL;
+        public UniformStyle getStyle2() {
+            return UniformStyle.FRANJA_HORIZONTAL;
         }
 
         class JugadorImpl implements PlayerDetail {

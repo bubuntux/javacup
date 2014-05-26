@@ -8,7 +8,7 @@ import org.newdawn.slick.Image;
 import org.newdawn.slick.SlickException;
 
 /**Esta clase se encarga de dibujar el campo de juego, los arcos y el entorno, uso interno*/
-public final class PintaCancha {
+public final class FieldRender {
 
     private Image pasto, arcilla, arcoSup, arcoInf, image, estadio, cancha, entorno;
     private int wm, hm;
@@ -19,7 +19,7 @@ public final class PintaCancha {
     private Position esqSupCancha = Constants.esqSupIzqCampoJuego.movePosition(-8.4, -10);
     private int estadioIdx = 0;
 
-    public PintaCancha(int wm, int hm, int estadioIdx) throws SlickException {
+    public FieldRender(int wm, int hm, int estadioIdx) throws SlickException {
         this.wm = wm;
         this.hm = hm;
         this.estadioIdx = estadioIdx;
@@ -42,11 +42,12 @@ public final class PintaCancha {
         ok = !ok;
         if (true) {
             if (estadioIdx == 0) {
-                int inf[] = Transforma.transform(esqSupEstadio, p, wm, hm, escala);
+                int inf[] = Transformer.transform(esqSupEstadio, p, wm, hm, escala);
                 float factor = (float) (escala * Constants.LARGO_ARCO / Constants.AMP_ARCO / 145);
                 g.drawImage(estadio.getScaledCopy(factor * 6.66666f), inf[0], inf[1]);
             } else {
-                int inf[] = Transforma.transform(esqSupEstadio, p.movePosition(-44, 13.5), wm, hm, escala);
+                int inf[] = Transformer
+                    .transform(esqSupEstadio, p.movePosition(-44, 13.5), wm, hm, escala);
                 float factor = (float) (escala * Constants.LARGO_ARCO / Constants.AMP_ARCO / 145);
                 g.drawImage(estadio.getScaledCopy(factor * 6.56614f), inf[0], inf[1]);
             }
@@ -55,37 +56,39 @@ public final class PintaCancha {
 
     public void pintaEntorno(Graphics g, Position p, double escala) throws SlickException {
         if (estadioIdx == 0) {
-            int inf[] = Transforma.transform(esqSupEntorno, p, wm, hm, escala);
+            int inf[] = Transformer.transform(esqSupEntorno, p, wm, hm, escala);
             float factor = (float) (escala * Constants.LARGO_ARCO / Constants.AMP_ARCO / 145);
             g.drawImage(entorno.getScaledCopy(factor * 18.8f), inf[0], inf[1]);
         } else {
-            int inf[] = Transforma.transform(esqSupEntorno, p.movePosition(-236, -145), wm, hm, escala);
+            int inf[] = Transformer
+                .transform(esqSupEntorno, p.movePosition(-236, -145), wm, hm, escala);
             float factor = (float) (escala * Constants.LARGO_ARCO / Constants.AMP_ARCO / 145);
             g.drawImage(entorno.getScaledCopy(factor * 11.8f), inf[0], inf[1]);
         }
     }
 
     public void pintaCancha(Graphics g, Position p, double escala) {
-        int inf[] = Transforma.transform(esqSupCancha, p, wm, hm, escala);
+        int inf[] = Transformer.transform(esqSupCancha, p, wm, hm, escala);
         float factor = (float) (escala / 15d);
         g.drawImage(cancha.getScaledCopy(factor), inf[0], inf[1]);
     }
 
     public void pintaArcos(Graphics g, Position p, double escala) {
-        int inf[] = Transforma.transform(Constants.posteIzqArcoInf, p, wm, hm, escala);
+        int inf[] = Transformer.transform(Constants.posteIzqArcoInf, p, wm, hm, escala);
         float factor = (float) (escala * Constants.LARGO_ARCO / 165);
         double dy = 0.25 * Constants.LARGO_ARCO * Constants.AMP_ARCO;
         double dx = 0.023 * Constants.LARGO_ARCO;
-        g.drawImage(arcoInf.getScaledCopy(factor), inf[0] - Transforma.transform(dx, escala), inf[1] - Transforma.transform(dy, escala));
-        inf = Transforma.transform(Constants.posteIzqArcoSup, p, wm, hm, escala);
-        g.drawImage(arcoSup.getScaledCopy(factor), inf[0] - Transforma.transform(dx, escala), inf[1]);
+        g.drawImage(arcoInf.getScaledCopy(factor), inf[0] - Transformer.transform(dx, escala), inf[1] - Transformer
+            .transform(dy, escala));
+        inf = Transformer.transform(Constants.posteIzqArcoSup, p, wm, hm, escala);
+        g.drawImage(arcoSup.getScaledCopy(factor), inf[0] - Transformer.transform(dx, escala), inf[1]);
     }
 
     public void dibujaCancha(Graphics g, Position p, double escala) {
 
-        int[] inf = Transforma.transform(Constants.esqSupIzqCampo, p, wm, hm, escala);
-        int[] dim = Transforma.transform(Constants.dimCampo, escala);
-        int[] cen = Transforma.transform(Constants.centroCampoJuego, p, wm, hm, escala);
+        int[] inf = Transformer.transform(Constants.esqSupIzqCampo, p, wm, hm, escala);
+        int[] dim = Transformer.transform(Constants.dimCampo, escala);
+        int[] cen = Transformer.transform(Constants.centroCampoJuego, p, wm, hm, escala);
         int larg;
         int sx = dim[0] / 200 + 1;
         int sy = dim[1] / 200 + 1;
@@ -108,33 +111,33 @@ public final class PintaCancha {
         g.drawRect(inf[0], inf[1], dim[0], dim[1]);
         g.setColor(c1);
         g.setLineWidth(2);
-        inf = Transforma.transform(Constants.esqSupIzqCampoJuego, p, wm, hm, escala);
-        dim = Transforma.transform(Constants.dimCampoJuego, escala);
+        inf = Transformer.transform(Constants.esqSupIzqCampoJuego, p, wm, hm, escala);
+        dim = Transformer.transform(Constants.dimCampoJuego, escala);
         g.drawRect(inf[0], inf[1], dim[0], dim[1]);
         g.drawLine(inf[0] + 1, cen[1], inf[0] + dim[0] - 2, cen[1]);
-        inf = Transforma.transform(Constants.esqSupIzqCircCentral, p, wm, hm, escala);
-        larg = Transforma.transform(Constants.RADIO_CIRCULO_CENTRAL * 2, escala);
+        inf = Transformer.transform(Constants.esqSupIzqCircCentral, p, wm, hm, escala);
+        larg = Transformer.transform(Constants.RADIO_CIRCULO_CENTRAL * 2, escala);
         g.drawOval(inf[0], inf[1], larg, larg);
-        inf = Transforma.transform(Constants.esqSupIzqAreaGrandeSup, p, wm, hm, escala);
-        dim = Transforma.transform(Constants.dimAreaGrande, escala);
+        inf = Transformer.transform(Constants.esqSupIzqAreaGrandeSup, p, wm, hm, escala);
+        dim = Transformer.transform(Constants.dimAreaGrande, escala);
         g.drawRect(inf[0], inf[1], dim[0], dim[1]);
-        inf = Transforma.transform(Constants.esqSupIzqAreaGrandeInf, p, wm, hm, escala);
+        inf = Transformer.transform(Constants.esqSupIzqAreaGrandeInf, p, wm, hm, escala);
         g.drawRect(inf[0], inf[1], dim[0], dim[1]);
-        inf = Transforma.transform(Constants.esqSupIzqAreaChicaSup, p, wm, hm, escala);
-        dim = Transforma.transform(Constants.dimAreaChica, escala);
+        inf = Transformer.transform(Constants.esqSupIzqAreaChicaSup, p, wm, hm, escala);
+        dim = Transformer.transform(Constants.dimAreaChica, escala);
         g.drawRect(inf[0], inf[1], dim[0], dim[1]);
-        inf = Transforma.transform(Constants.esqSupIzqAreaChicaInf, p, wm, hm, escala);
+        inf = Transformer.transform(Constants.esqSupIzqAreaChicaInf, p, wm, hm, escala);
         g.drawRect(inf[0], inf[1], dim[0], dim[1]);
-        inf = Transforma.transform(Constants.esqSupIzqPenalSup, p, wm, hm, escala);
-        larg = Transforma.transform(Constants.RADIO_PENAL * 2, escala);
+        inf = Transformer.transform(Constants.esqSupIzqPenalSup, p, wm, hm, escala);
+        larg = Transformer.transform(Constants.RADIO_PENAL * 2, escala);
         g.drawArc(inf[0], inf[1], larg, larg, 36, 144);
-        inf = Transforma.transform(Constants.esqSupDerPenalInf, p, wm, hm, escala);
+        inf = Transformer.transform(Constants.esqSupDerPenalInf, p, wm, hm, escala);
         g.drawArc(inf[0], inf[1], larg, larg, 216, 324);
-        inf = Transforma.transform(Constants.centroCampoJuego, p, wm, hm, escala);
+        inf = Transformer.transform(Constants.centroCampoJuego, p, wm, hm, escala);
         g.fillOval(inf[0] - 2, inf[1] - 1, 4, 4);
-        inf = Transforma.transform(Constants.penalInf, p, wm, hm, escala);
+        inf = Transformer.transform(Constants.penalInf, p, wm, hm, escala);
         g.fillOval(inf[0] - 2, inf[1] - 2, 4, 4);
-        inf = Transforma.transform(Constants.penalSup, p, wm, hm, escala);
+        inf = Transformer.transform(Constants.penalSup, p, wm, hm, escala);
         g.fillOval(inf[0] - 2, inf[1] - 2, 4, 4);
     }
 }

@@ -3,7 +3,7 @@ package org.dsaw.javacup.tacticas.jvc2012.iria;
 import java.awt.Color;
 import org.dsaw.javacup.model.*;
 import org.dsaw.javacup.model.util.*;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 
 public class IriaDetail implements TacticDetail {
 
@@ -48,8 +48,8 @@ public class IriaDetail implements TacticDetail {
     }
 
     @Override
-    public EstiloUniforme getStyle() {
-        return EstiloUniforme.FRANJA_HORIZONTAL;
+    public UniformStyle getStyle() {
+        return UniformStyle.FRANJA_HORIZONTAL;
     }
 
     @Override
@@ -78,8 +78,8 @@ public class IriaDetail implements TacticDetail {
     }
 
     @Override
-    public EstiloUniforme getStyle2() {
-        return EstiloUniforme.FRANJA_HORIZONTAL;
+    public UniformStyle getStyle2() {
+        return UniformStyle.FRANJA_HORIZONTAL;
     }
 
     class JugadorImpl implements PlayerDetail {

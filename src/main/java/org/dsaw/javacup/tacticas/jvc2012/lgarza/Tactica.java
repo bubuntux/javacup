@@ -5,9 +5,10 @@ package org.dsaw.javacup.tacticas.jvc2012.lgarza;
 import java.awt.Color;
 import org.dsaw.javacup.model.*;
 import org.dsaw.javacup.model.util.*;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 import org.dsaw.javacup.model.command.*;
 import org.dsaw.javacup.model.engine.GameSituations;
+
 import java.util.List;
 import java.util.LinkedList;
 
@@ -256,8 +257,8 @@ public class Tactica implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle() {
-            return EstiloUniforme.LINEAS_VERTICALES;
+        public UniformStyle getStyle() {
+            return UniformStyle.LINEAS_VERTICALES;
         }
 
         @Override
@@ -286,8 +287,8 @@ public class Tactica implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle2() {
-            return EstiloUniforme.FRANJA_VERTICAL;
+        public UniformStyle getStyle2() {
+            return UniformStyle.FRANJA_VERTICAL;
         }
 
         class JugadorImpl implements PlayerDetail {

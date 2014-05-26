@@ -6,8 +6,8 @@ import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.util.TacticValidate;
-import org.dsaw.javacup.render.EstiloUniforme;
-import org.dsaw.javacup.render.PintaJugador;
+import org.dsaw.javacup.render.PlayerRender;
+import org.dsaw.javacup.render.UniformStyle;
 import org.netbeans.lib.awtextra.AbsoluteLayout;
 import org.newdawn.slick.CanvasGameContainer;
 import org.newdawn.slick.Game;
@@ -72,9 +72,9 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             "Islas Turcas y Caicos", "Tuvalu", "Uganda", "Ucrania", "Emiratos Árabes Unidos", "Reino Unido de Gran Bretaña e Irlanda del Norte",
             "República Unida de Tanzanía", "Estados Unidos de América", "Islas Vírgenes de los Estados Unidos", "Uruguay", "Uzbekistán", "Vanuatu",
             "Venezuela", "Viet Nam", "Sáhara Occidental", "Yemen", "Zambia", "Zimbabwe"};
-    private static final EstiloUniforme[] estilos =
-        {EstiloUniforme.FRANJA_HORIZONTAL, EstiloUniforme.FRANJA_VERTICAL, EstiloUniforme.FRANJA_DIAGONAL, EstiloUniforme.LINEAS_HORIZONTALES,
-            EstiloUniforme.LINEAS_VERTICALES, EstiloUniforme.SIN_ESTILO};
+    private static final UniformStyle[] estilos =
+        {UniformStyle.FRANJA_HORIZONTAL, UniformStyle.FRANJA_VERTICAL, UniformStyle.FRANJA_DIAGONAL, UniformStyle.LINEAS_HORIZONTALES,
+            UniformStyle.LINEAS_VERTICALES, UniformStyle.SIN_ESTILO};
     private static final PoligonosData[] data = new PoligonosData[estilos.length];
     private static final long serialVersionUID = -6836315756188587417L;
     private static Logger logger = LoggerFactory.getLogger(AsistenteFrame.class);
@@ -97,7 +97,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
     private TacticDetailImpl impl = new TacticDetailImpl();
     private Image cancha;
     private DefaultListModel model = new DefaultListModel();
-    private PintaJugador jp = null;
+    private PlayerRender jp = null;
     private CanvasGameContainer cgc = null;
     private boolean uniformeAlternativo = false;
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -110,7 +110,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
     private JButton jButton7;
     private JComboBox<String> jComboBox1;
     private JComboBox<String> jComboBox4;
-    private JComboBox<EstiloUniforme> jComboBox7;
+    private JComboBox<UniformStyle> jComboBox7;
     private JDialog jDialog1;
     private JLabel jLabel15;
     private JLabel jLabel16;
@@ -174,7 +174,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
             public void init(GameContainer gc) throws SlickException {
                 SoundStore.get().clear();
                 InternalTextureLoader.get().clear();
-                jp = new PintaJugador(impl, uniformeAlternativo);
+                jp = new PlayerRender(impl, uniformeAlternativo);
                 pasto = new org.newdawn.slick.Image("imagenes/pasto.png");
                 gc.setTargetFrameRate(Constants.FPS);
                 gc.setShowFPS(false);
@@ -197,7 +197,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                 }
                 if (newImpl) {
                     try {
-                        jp = new PintaJugador(impl, uniformeAlternativo);
+                        jp = new PlayerRender(impl, uniformeAlternativo);
                         jp.update(uniformeAlternativo);
                     } catch (SlickException ex) {
                         logger.error("Error al update uniforme", ex);
@@ -1597,9 +1597,9 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
     private void jComboBox7ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jComboBox7ActionPerformed
         if (jComboBox4.getSelectedIndex() == 0) {
-            impl.setEstiloPrincipal((EstiloUniforme) jComboBox7.getSelectedItem());
+            impl.setEstiloPrincipal((UniformStyle) jComboBox7.getSelectedItem());
         } else {
-            impl.setEstilo2((EstiloUniforme) jComboBox7.getSelectedItem());
+            impl.setEstilo2((UniformStyle) jComboBox7.getSelectedItem());
         }
         repinta();
         newImpl = true;
@@ -1718,7 +1718,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jTextField1.setText(impl.getTacticName());
         jComboBox1.setSelectedItem(impl.getCountry());
         jTextField2.setText(impl.getCoach());
-        int num = ((EstiloUniforme) jComboBox7.getSelectedItem()).getNumero();
+        int num = ((UniformStyle) jComboBox7.getSelectedItem()).getNumero();
         PoligonosData d = data[num - 1];
         intx = d.intx;
         inty = d.inty;

@@ -7,9 +7,9 @@ import java.io.Serializable;
 public final class Position implements Serializable {
 
     private final double x, y;
-    private transient static final Position cero = new Position(0, 0);
+  private transient static final Position ZERO = new Position(0, 0);
 
-    /**Creates a new position in 0,0*/
+  /**Creates a new position in 0,0*/
     /**Instancia una nueva posicion en 0,0*/
     public Position() {
         x = 0;
@@ -239,19 +239,12 @@ public final class Position implements Serializable {
             return false;
         }
         final Position other = (Position) obj;
-        if (this.x != other.x) {
-            return false;
-        }
-        if (this.y != other.y) {
-            return false;
-        }
-        return true;
+      return this.x == other.x && this.y == other.y;
     }
 
     @Override
-    public int hashCode() {
-        int hash = 3;
-        return hash;
+    public int hashCode() { //TODO WTF?
+      return 3;
     }
 
     /**Returns the intersection between two lines*/
@@ -285,13 +278,13 @@ public final class Position implements Serializable {
     /**Returns the angle of the position in relation to point 0,0*/
     /**Retorna el angle de la posicion respecto del 0,0*/
     public double angle() {
-        return cero.angle(this);
+      return ZERO.angle(this);
     }
 
     /**Returns the distance of the position in relation to point 0,0*/
     /**Retorna la distancia de la posicion respecto del 0,0*/
     public double distance() {
-        return cero.distance(this);
+      return ZERO.distance(this);
     }
 
     /**Define a norm to compare distance, the calculation is fatster than use distance methods*/

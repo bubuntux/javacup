@@ -8,7 +8,7 @@ import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 
 public class DetalleTactica implements TacticDetail, Alineaciones {
 
@@ -59,8 +59,8 @@ public class DetalleTactica implements TacticDetail, Alineaciones {
 	}
 
 	@Override
-	public EstiloUniforme getStyle() {
-		return EstiloUniforme.SIN_ESTILO;
+	public UniformStyle getStyle() {
+		return UniformStyle.SIN_ESTILO;
 	}
 
 	@Override
@@ -89,8 +89,8 @@ public class DetalleTactica implements TacticDetail, Alineaciones {
 	}
 
 	@Override
-	public EstiloUniforme getStyle2() {
-		return EstiloUniforme.LINEAS_VERTICALES;
+	public UniformStyle getStyle2() {
+		return UniformStyle.LINEAS_VERTICALES;
 	}
 
 	class JugadorImpl implements PlayerDetail {

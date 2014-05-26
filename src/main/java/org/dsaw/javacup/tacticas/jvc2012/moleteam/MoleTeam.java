@@ -10,7 +10,8 @@ import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.command.Command;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
+
 import java.awt.Color;
 import java.util.*;
 
@@ -93,8 +94,8 @@ public class MoleTeam implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle() {
-            return EstiloUniforme.LINEAS_VERTICALES;
+        public UniformStyle getStyle() {
+            return UniformStyle.LINEAS_VERTICALES;
         }
 
         @Override
@@ -123,8 +124,8 @@ public class MoleTeam implements Tactic {
         }
 
         @Override
-        public EstiloUniforme getStyle2() {
-            return EstiloUniforme.FRANJA_HORIZONTAL;
+        public UniformStyle getStyle2() {
+            return UniformStyle.FRANJA_HORIZONTAL;
         }
 
         class JugadorImpl implements PlayerDetail {

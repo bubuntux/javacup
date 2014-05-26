@@ -1,7 +1,7 @@
 
 import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.engine.Partido;
+import org.dsaw.javacup.model.engine.Match;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.TacticValidate;
 import java.awt.CardLayout;
@@ -29,7 +29,7 @@ public class Torneo {
     TacticDetail localDetalle;
     Tactic visita;
     TacticDetail visitaDetalle;
-    Partido partido;
+    Match partido;
 
     /**
      * Ejecuta un partido de torneo, se indica la instancia (cuartos, semi, clasificatorias, etc), La fecha de ejecucion y las tacticas
@@ -59,7 +59,7 @@ public class Torneo {
         TacticValidate.validateDetail(visitaDetalle.getTacticName(), visitaDetalle);
         this.local = local;
         this.visita = visita;
-        partido = new Partido(local, visita, true);
+        partido = new Match(local, visita, true);
         //partido.inicioRapido();
         int iter = 0;
         for (int i = 0; partido.getEstado() != 7; i++) {
@@ -92,7 +92,7 @@ public class Torneo {
     /**
      * Retorna el partido ejecutado
      */
-    public Partido getPartido() {
+    public Match getPartido() {
         return partido;
     }
     /**
@@ -581,7 +581,7 @@ public class Torneo {
         boolean ok;
         LinkedList<Class> pasan = new LinkedList<>();
         LinkedList<Class> pasan2 = new LinkedList<>();
-        Partido p = null;
+        Match p = null;
         for (Class[] clases : clasificados) {
             pasan.addAll(Arrays.asList(clases));
         }
@@ -760,7 +760,7 @@ public class Torneo {
                             ok = false;
                         }
                     } while (!ok);
-                    Partido p = pt.getPartido();
+                    Match p = pt.getPartido();
                     try {
                         p.getPartidoGuardado().save(new File(filename));
                     } catch (Exception e) {

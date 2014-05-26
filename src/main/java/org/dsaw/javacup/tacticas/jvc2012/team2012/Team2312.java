@@ -19,7 +19,7 @@ import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
 
 public class Team2312 implements Tactic {
 
@@ -161,8 +161,8 @@ public class Team2312 implements Tactic {
 		}
 
 		@Override
-                public EstiloUniforme getStyle() {
-			return EstiloUniforme.SIN_ESTILO;
+                public UniformStyle getStyle() {
+			return UniformStyle.SIN_ESTILO;
 		}
 
 		@Override
@@ -191,8 +191,8 @@ public class Team2312 implements Tactic {
 		}
 
 		@Override
-                public EstiloUniforme getStyle2() {
-			return EstiloUniforme.SIN_ESTILO;
+                public UniformStyle getStyle2() {
+			return UniformStyle.SIN_ESTILO;
 		}
 
 		class JugadorImpl implements PlayerDetail {

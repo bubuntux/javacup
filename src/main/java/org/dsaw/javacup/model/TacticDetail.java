@@ -1,6 +1,7 @@
 package org.dsaw.javacup.model;
 
-import org.dsaw.javacup.render.EstiloUniforme;
+import org.dsaw.javacup.render.UniformStyle;
+
 import java.awt.Color;
 
 /**Interfaz que define la configuración de una táctica*/
@@ -31,7 +32,7 @@ public interface TacticDetail {
     public Color getGoalKeeper();
 
     /**Estilo de la vestimenta*/
-    public EstiloUniforme getStyle();
+    public UniformStyle getStyle();
 
     /**Color de la camiseta2*/
     public Color getShirtColor2();
@@ -49,7 +50,7 @@ public interface TacticDetail {
     public Color getGoalKeeper2();
 
     /**Estilo de la vestimenta2*/
-    public EstiloUniforme getStyle2();
+    public UniformStyle getStyle2();
 
     /**Array de Objetos PlayerDetail,
      * que definen las caracteristicas de los jugadores*/
