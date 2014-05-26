@@ -12,7 +12,7 @@ import org.dsaw.javacup.model.util.Position;
 
 public class Common {
     GameSituations commonSp;
-    LinkedList <Command> comCom = new LinkedList<Command>();
+    LinkedList <Command> comCom = new LinkedList<>();
     static int pCo = -1;
     static int[] eC = {-1,-1,-1,-1,-1,-1,-1,-1,-1,-1,-1};
     

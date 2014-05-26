@@ -13,7 +13,7 @@ import java.util.LinkedList;
 
 public class Tactica implements Tactic {
 
-    LinkedList<Command> comandos = new LinkedList<Command>();
+    LinkedList<Command> comandos = new LinkedList<>();
     boolean delanteroAtacando = false;
     int pasadorAnterior;
     java.util.Random r = new java.util.Random();

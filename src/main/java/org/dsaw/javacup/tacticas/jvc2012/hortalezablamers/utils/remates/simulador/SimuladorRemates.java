@@ -116,7 +116,7 @@ public class SimuladorRemates {
     }
     
     protected Boolean isGoal() {
-    	Vector<Integer> indicesPendientesIntercepcion = new Vector<Integer>();
+    	Vector<Integer> indicesPendientesIntercepcion = new Vector<>();
     	for(int i = 0; i < posicionVisita.length; i++)
     		indicesPendientesIntercepcion.add(i);
     	
@@ -128,7 +128,7 @@ public class SimuladorRemates {
             Position posicionBalon = new Position(posBalon[0], posBalon[1]);
             double alturaBalon = posBalon[2];
             if (alturaBalon <= Constants.ALTO_ARCO) {
-            	Vector<Integer> indicesAEliminar = new Vector<Integer>();
+            	Vector<Integer> indicesAEliminar = new Vector<>();
             	for(int i : indicesPendientesIntercepcion) {
             		if (alturaBalon <= (Common.dentroAreaRival(posicionBalon) ? Constants.ALTO_ARCO : Constants.ALTURA_CONTROL_BALON)) {
             			Position pJug = posicionVisita[i];

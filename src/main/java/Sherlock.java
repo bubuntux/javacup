@@ -56,7 +56,7 @@ public class Sherlock {
     }
 
     private static LinkedList<File> getFiles(String path) {
-        LinkedList<File> l = new LinkedList<File>();
+        LinkedList<File> l = new LinkedList<>();
         File[] hijos = new File(path).listFiles();
         if (hijos == null) {
             System.out.println(path);
@@ -126,7 +126,7 @@ public class Sherlock {
         }
         if (result.trim().length() > 0) {
             String resuls[] = result.split("\n");
-            ArrayList<Registro> lista = new ArrayList<Registro>();
+            ArrayList<Registro> lista = new ArrayList<>();
             Registro reg = null;
 
             for (String s : resuls) {

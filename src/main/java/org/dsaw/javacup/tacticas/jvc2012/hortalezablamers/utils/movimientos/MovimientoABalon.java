@@ -16,7 +16,7 @@ public class MovimientoABalon {
 	private boolean intentandoDesplazarRival = false;
 	
 	public List<Command> correrHaciaBalon(GameSituations gs) {
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 
 		//Obtiene los datos de recuperacion del balon
 		int[] recuperadores = getRecoveryBall(gs);
@@ -84,7 +84,7 @@ public class MovimientoABalon {
         boolean found = false;
         double dist0, dist;
         int idxFound = -1;
-        LinkedList<Double> founds = new LinkedList<Double>();
+        LinkedList<Double> founds = new LinkedList<>();
         while (!found) {
             double[] posBalon = gs.getTrajectory(it);
         	Position posicionBalon = new Position(posBalon[0], posBalon[1]);
@@ -136,7 +136,7 @@ public class MovimientoABalon {
         boolean found = false;
         double dist0, dist;
         int idxFound = -1;
-        LinkedList<Double> founds = new LinkedList<Double>();
+        LinkedList<Double> founds = new LinkedList<>();
         while (!found) {
             double[] posBalon = gs.getTrajectory(it);
         	Position posicionBalon = new Position(posBalon[0], posBalon[1]);

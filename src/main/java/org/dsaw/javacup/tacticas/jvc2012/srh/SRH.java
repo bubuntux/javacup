@@ -16,7 +16,7 @@ import org.dsaw.javacup.model.util.Position;
 public class SRH implements Tactic {
 
 	//Lista de comandos
-	LinkedList<Command> comandos = new LinkedList<Command>();
+	LinkedList<Command> comandos = new LinkedList<>();
 
 	// Variables de la clase
 	GameSituations sitAct;
@@ -312,7 +312,7 @@ public class SRH implements Tactic {
 	// Lista índices de rivales que están por debajo de la mitad de mi campo
 	private ArrayList<Integer> getRivalDelanteros() {
 		// Calculamos los índices de jugadores rivales que están en mi área
-		ArrayList<Integer> salida = new ArrayList<Integer>();
+		ArrayList<Integer> salida = new ArrayList<>();
 
 		// Recorremos los jugadores contrarios
 		for(int indexRival = 0; indexRival < rivales.length; indexRival++) {
@@ -331,7 +331,7 @@ public class SRH implements Tactic {
 		double distAlRival = 0;
 
 		// Jugadores a quien pasar en función de quien pasa
-		List<Integer> jugadoresARevisar = new ArrayList<Integer>();;
+		List<Integer> jugadoresARevisar = new ArrayList<>();;
 		switch(n) {
 		case 0: case 1: case 2: case 3: case 4:
 			jugadoresARevisar.add(1);

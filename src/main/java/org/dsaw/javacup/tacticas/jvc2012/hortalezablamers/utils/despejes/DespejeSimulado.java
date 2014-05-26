@@ -16,7 +16,7 @@ public class DespejeSimulado {
 	public static final double DELTA_ANGULO = 7.5;
 	public static final double MAX_ANGULO = 180.;
 
-	public static Vector<Double> angulos = new Vector<Double>();
+	public static Vector<Double> angulos = new Vector<>();
 
 	static {
 		angulos.add(0.);
@@ -32,7 +32,7 @@ public class DespejeSimulado {
 		
 		SimuladorDespejes sd = new SimuladorDespejes(gs);
 		
-		Vector<CommandHitBallSimulated> comandosSimulados = new Vector<CommandHitBallSimulated>();
+		Vector<CommandHitBallSimulated> comandosSimulados = new Vector<>();
 		for(double angulo : angulos) { // indice de angulos
 			CommandHitBall chb = new CommandHitBall(indiceRematador, angulo, HBConstants.FUERZA_GOLPEO_MAXIMA, HBConstants.ANGULO_GOLPEO_DESPEJE);
 			CommandHitBallSimulated chbs = sd.simularDespeje(chb);

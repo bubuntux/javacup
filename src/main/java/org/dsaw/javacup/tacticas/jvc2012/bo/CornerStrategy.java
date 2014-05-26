@@ -26,7 +26,7 @@ public class CornerStrategy implements SoccerStrategy {
 
     @Override
     public List<Command> makeStrategy() {
-        List<Command> commands = new ArrayList<Command>();
+        List<Command> commands = new ArrayList<>();
 
         if (gameSituation.isStarts()
                 && (gameSituation.ballPosition() == Constants.cornerSupDer

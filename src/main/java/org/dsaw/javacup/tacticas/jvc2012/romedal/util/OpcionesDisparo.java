@@ -12,8 +12,8 @@ public class OpcionesDisparo implements Comparable<OpcionesDisparo> {
 	public OpcionesDisparo(final double fuerza, final int tipoDisparo) {
 		this.fuerza = fuerza;
 		this.tipoDisparo = tipoDisparo;
-		this.opciones = new TreeMap<Double, TreeSet<InfoTrayectoria>>();
-		this.opcionesAngCero = new TreeSet<InfoTrayectoria>();
+		this.opciones = new TreeMap<>();
+		this.opcionesAngCero = new TreeSet<>();
 	}
 
 	public OpcionesDisparo(final double fuerza, final int tipoDisparo, final TreeMap<Double, TreeSet<InfoTrayectoria>> opciones, final TreeSet<InfoTrayectoria> opcionesAngCero) {

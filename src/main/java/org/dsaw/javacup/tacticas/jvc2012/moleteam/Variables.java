@@ -24,8 +24,8 @@ public final class Variables {
     public Players myPlayers;
     public Players rivalPlayers;
     public GameSituations gs;
-    public LinkedList<MCommand> mcommands = new LinkedList<MCommand>();
-    public LinkedList<Command> finalCommands = new  LinkedList<Command>();
+    public LinkedList<MCommand> mcommands = new LinkedList<>();
+    public LinkedList<Command> finalCommands = new  LinkedList<>();
     public static boolean playerAloneEnabled = true;
     public Variables(GameSituations gs)
     {

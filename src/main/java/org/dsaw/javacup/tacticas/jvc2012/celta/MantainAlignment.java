@@ -16,7 +16,7 @@ public class MantainAlignment extends BasicCommandGenerator {
 	@Override
 	public List<Command> getCommandList(GameSituations sp) {
 		super.getCommandList(sp);
-		List<Command> commands = new ArrayList<Command>();
+		List<Command> commands = new ArrayList<>();
 		Position[] players = sp.myPlayers();
 		double[] ball = sp.getTrajectory(5);
 		for (int i = 1; i < players.length; i++) {

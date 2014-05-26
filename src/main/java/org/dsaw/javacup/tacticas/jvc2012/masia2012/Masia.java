@@ -11,7 +11,7 @@ import org.dsaw.javacup.model.util.Position;
 
 public class Masia implements Tactic{
 
-	private List<Command> comandos = new LinkedList<Command>();
+	private List<Command> comandos = new LinkedList<>();
 	private Analysis analysis = new Analysis(); 
 	private Goalkeeper goalkeeper = new Goalkeeper(comandos, analysis);
 	private Pass pass = new Pass(comandos, analysis);

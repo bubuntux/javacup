@@ -202,7 +202,7 @@ public class Sotilezos implements Tactic {
     }
 
     public List<Command> execute(GameSituations sp) {
-    	LinkedList<Command> comandos = new LinkedList<Command>();
+    	LinkedList<Command> comandos = new LinkedList<>();
     	Position[] jug_propios = sp.myPlayers();
     	
      	if(!sp.isRivalStarts() && !sp.isStarts()){

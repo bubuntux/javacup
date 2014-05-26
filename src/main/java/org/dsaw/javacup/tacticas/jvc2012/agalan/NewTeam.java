@@ -26,7 +26,7 @@ public class NewTeam implements Tactic {
     }
 
     //Lista de comandos
-    LinkedList<Command> comandos = new LinkedList<Command>();
+    LinkedList<Command> comandos = new LinkedList<>();
     Alineaciones alineaciones = new Alineaciones();
     
     public List<Command> execute(GameSituations sp) {

@@ -103,7 +103,7 @@ public class Pringaos2012 implements Tactic {
             new Position(22.580152671755727,-1.3059701492537314)
         };
 
-    public LinkedList<Command> comandos = new LinkedList<Command>();
+    public LinkedList<Command> comandos = new LinkedList<>();
     
 	public Pringaos2012() {
 	
@@ -311,7 +311,7 @@ public class Pringaos2012 implements Tactic {
     	LinkedList<Pases> pases;
     	Trayectoria tra;
         
-    	pases = new LinkedList<Pases>();
+    	pases = new LinkedList<>();
         for(angulo = 0; angulo <= Constants.ANGULO_VERTICAL_MAX; angulo += 10) {
         	angulorad = (angulo * Math.PI) / 180;
         	for(fuerza = 0.2f; fuerza <= 1; fuerza += 0.2f) {

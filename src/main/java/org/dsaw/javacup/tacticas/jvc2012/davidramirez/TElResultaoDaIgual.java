@@ -249,7 +249,7 @@ public class TElResultaoDaIgual implements Tactic {
     }
 
     //Lista de comandos
-    LinkedList<Command> comandos = new LinkedList<Command>();
+    LinkedList<Command> comandos = new LinkedList<>();
     Position lastPosBall = null;
     Position[] newPosJugs = null;
     int[] idsDefensa = new int[] {1, 2, 3, 4};

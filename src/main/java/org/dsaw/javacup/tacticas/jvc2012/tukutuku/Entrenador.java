@@ -75,8 +75,8 @@ public class Entrenador
 	{
 		tactica = tactic;
 		entrenador = this;		
-		comandos = new ArrayList<Command>();
-		misJugadores = new ArrayList<Jugador>();
+		comandos = new ArrayList<>();
+		misJugadores = new ArrayList<>();
 		
 	}
 
@@ -235,7 +235,7 @@ public class Entrenador
 		
 		//Rellenamos la lista de jugadores sin asignar accion
 		if (jugadoresDisponibles == null)
-			jugadoresDisponibles = new ArrayList<Integer>();
+			jugadoresDisponibles = new ArrayList<>();
 		else
 			jugadoresDisponibles.clear();
 		
@@ -340,7 +340,7 @@ public class Entrenador
 	{
 	    	
 	      	
-	    	HashSet<Integer> rivalesMarcados = new HashSet<Integer>();
+	    	HashSet<Integer> rivalesMarcados = new HashSet<>();
 	    	int defensasQueMarcan = 0;
 	    	
 	    	int[] arrayRivalesCercanos = Constants.centroArcoInf.nearestIndexes(Gs.rivalPlayers());

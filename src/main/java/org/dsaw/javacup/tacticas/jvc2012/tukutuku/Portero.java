@@ -28,7 +28,7 @@ public class Portero extends Jugador {
 	@Override
 	public ArrayList<Command> accionDefensa() 
 	{
-		ArrayList<Command> accion = new ArrayList<Command>();
+		ArrayList<Command> accion = new ArrayList<>();
 		
 		//Colocamos el portero segun la posicion del balon
 		
@@ -67,7 +67,7 @@ public class Portero extends Jugador {
 	public ArrayList<Command> accionRecuperacion(Position recuperacionPos) 
 	{
 		
-		ArrayList<Command> accion = new ArrayList<Command>();
+		ArrayList<Command> accion = new ArrayList<>();
 		
 		accion.add(new CommandMoveTo(numero, recuperacionPos));
 		
@@ -78,7 +78,7 @@ public class Portero extends Jugador {
 	public ArrayList<Command> accionRemate() 
 	{
 		
-		ArrayList<Command> accion = new ArrayList<Command>();
+		ArrayList<Command> accion = new ArrayList<>();
 		accion.add(new CommandHitBall(numero, posicionJugador.angle(entrenador.Gs.myPlayers()[Constants.centroArcoSup.nearestIndex(entrenador.Gs.myPlayers())])*(180/Math.PI), 1, true));
 		return accion;	
 	}

@@ -30,7 +30,7 @@ public class Defensa extends Jugador
 			
 	public ArrayList<Command> accionRemate()
 	{
-		ArrayList<Command> accion = new ArrayList<Command>();
+		ArrayList<Command> accion = new ArrayList<>();
 		
 		
 		//Si estamos en las proximidades del area chica despejamos

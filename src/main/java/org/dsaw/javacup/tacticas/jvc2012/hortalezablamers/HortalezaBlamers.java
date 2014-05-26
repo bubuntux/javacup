@@ -29,7 +29,7 @@ public class HortalezaBlamers implements Tactic {
 	private Position alineacionRecibe[] = Alineacion.alineacionRecibe;
 
 	// variables
-	private LinkedList<Command> comandos = new LinkedList<Command>();
+	private LinkedList<Command> comandos = new LinkedList<>();
 	private int indicePorteroPropio;
 	private int indicePorteroRival = -1;
 	private MovimientoCoberturaLimitada movimientoCobertura;
@@ -123,7 +123,7 @@ public class HortalezaBlamers implements Tactic {
 	 * @param gs
 	 */
 	private List<Command> rematarBalonEnJuego(GameSituations gs) {
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 
 		int rematan[] = gs.canKick();
 		
@@ -177,7 +177,7 @@ public class HortalezaBlamers implements Tactic {
 		}
 		
 		// en este punto ya se que mi jugador es el m�s cercano a la porteria rival
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 //		comandos.add(new CommandMoveTo(indiceRematador, Constants.centroArcoSup));
 //		comandos.add(new CommandHitBall(indiceRematador));
 		// parece que el autopase no funciona bien en el framework (o no se usarlo)

@@ -25,7 +25,7 @@ public class MovimientoBascular {
 	 */
 	public static List<Command> movimientoBascular(Position posicionBalon, 
 			int indicePorteroPropio) {
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 		
 		for (int i = 0; i < 11; i++) {
 			Position p;

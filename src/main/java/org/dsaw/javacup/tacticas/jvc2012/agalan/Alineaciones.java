@@ -1,9 +1,9 @@
 package org.dsaw.javacup.tacticas.jvc2012.agalan;
 
+import org.dsaw.javacup.model.util.Position;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import org.dsaw.javacup.model.util.Position;
 
 public class Alineaciones {
 	
@@ -36,10 +36,10 @@ public class Alineaciones {
     };
 
     Position[] alineaciones[] = new Position[][]{inicial,ultraDefensivo};
-    List<Integer> defensores = new ArrayList<Integer>();
-    List<Integer> medios = new ArrayList<Integer>();
-    List<Integer> extremos = new ArrayList<Integer>();
-    List<Integer> delanteros = new ArrayList<Integer>();
+    List<Integer> defensores = new ArrayList<>();
+    List<Integer> medios = new ArrayList<>();
+    List<Integer> extremos = new ArrayList<>();
+    List<Integer> delanteros = new ArrayList<>();
     int portero = 10;
 
     public Position[] getAlineacion(int pos){

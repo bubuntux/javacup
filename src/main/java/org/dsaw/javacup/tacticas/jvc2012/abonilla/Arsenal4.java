@@ -275,7 +275,7 @@ public class Arsenal4 implements Tactic {
         return alineacion6;
     }
     //Lista de Commands
-    LinkedList<Command> Commands = new LinkedList<Command>();
+    LinkedList<Command> Commands = new LinkedList<>();
     
     int cont;
     boolean activarZigZag = false;

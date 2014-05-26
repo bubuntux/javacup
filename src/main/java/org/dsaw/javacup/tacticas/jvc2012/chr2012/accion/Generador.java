@@ -1498,7 +1498,7 @@ public class Generador {
     		// finalmente los incrementos y situaciones lÃ­mite.
     		Hashtable<String, Object> tablaCorreccion = corregirAnguloZVariacionTiro(sp, jugador, inicioTiro, fuerza, posicionXY, anguloZ);
     		
-    		tabla = new Hashtable<String, Object>();
+    		tabla = new Hashtable<>();
     		tabla.put("posicion", tablaCorreccion.get("posicionXY"));
     		tabla.put("anguloZ", tablaCorreccion.get("anguloZ"));
     		tabla.put("variacion", (varFin - varIni));
@@ -1602,7 +1602,7 @@ public class Generador {
     private Hashtable<String, Object> corregirAnguloZVariacionTiro(GameSituations sp, Jugador jugador, Position inicioTiro, double fuerza, Position posicionXY, double anguloZ) {
 
     	// Variable en la que devolveremos las correcciones.
-    	Hashtable<String, Object> tablaCorreccion = new Hashtable<String, Object>();
+    	Hashtable<String, Object> tablaCorreccion = new Hashtable<>();
     	
     	// Almacenamos el Ã¡nguloZ original para realizar el cÃ¡lculo Ã³ptimo.
     	double anguloOriginal = anguloZ;
@@ -1804,7 +1804,7 @@ public class Generador {
     										 Position inicioTiro, boolean opcionTiroSeguro,
     										 double fuerza, double anguloZ) {
     	
-    	ArrayList<String> lista = new ArrayList<String>();
+    	ArrayList<String> lista = new ArrayList<>();
     	
     	double incremento = 0.1;
     	double variacion = 0.0;

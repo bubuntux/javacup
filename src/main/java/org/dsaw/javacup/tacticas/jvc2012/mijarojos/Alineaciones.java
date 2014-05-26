@@ -134,7 +134,7 @@ public final class Alineaciones {
 	}
 
 	public static List<CommandMoveTo> execute(GameSituations sp) {
-		LinkedList<CommandMoveTo> comandos = new LinkedList<CommandMoveTo>();
+		LinkedList<CommandMoveTo> comandos = new LinkedList<>();
 		// Obtiene las posiciones de tus jugadores
 		Position[] jugadores = sp.myPlayers();
 		Position posDespTemp;

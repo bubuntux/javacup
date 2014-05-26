@@ -43,7 +43,7 @@ public class GoalKeeper extends BasicCommandGenerator {
 	@Override
 	public List<Command> getCommandList(GameSituations sp) {
 		super.getCommandList(sp);
-		List<Command> commands = new LinkedList<Command>();
+		List<Command> commands = new LinkedList<>();
 		
 		// si es un tiro a puerta, intentamos pararlo
 		if (isPossibleGoal()) {

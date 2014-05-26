@@ -242,8 +242,8 @@ public class Pequeo implements org.dsaw.javacup.model.Tactic {
 		return alineacion2;
 	}
 
-	private LinkedList<Integer> posiciones = new LinkedList<Integer>();
-	private LinkedList<Position> desmarcados = new LinkedList<Position>();
+	private LinkedList<Integer> posiciones = new LinkedList<>();
+	private LinkedList<Position> desmarcados = new LinkedList<>();
 	private int jugadormascercano = 0;
 	private int jugadormascercano2 = 0;
 	private int marcajes [] = new int[11];
@@ -263,8 +263,8 @@ public class Pequeo implements org.dsaw.javacup.model.Tactic {
 	
 	
 	private void Desmarcados(GameSituations sp) {
-		posiciones = new LinkedList<Integer>();
-		desmarcados = new LinkedList<Position>();
+		posiciones = new LinkedList<>();
+		desmarcados = new LinkedList<>();
 		Position[] jugadores = sp.myPlayers();
 		Position[] rivales = sp.rivalPlayers();
 		for (int i = 0; i < jugadores.length; i++) {
@@ -417,7 +417,7 @@ public class Pequeo implements org.dsaw.javacup.model.Tactic {
 			ali = alineacion4;
 		else
 			ali = alineacion3;
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 		// Obtiene las posiciones de tus jugadores
 		Position[] jugadores = sp.myPlayers();
 		for (int i = 0; i < jugadores.length; i++) {

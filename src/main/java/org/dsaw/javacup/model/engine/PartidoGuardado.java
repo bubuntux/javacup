@@ -1,6 +1,11 @@
 package org.dsaw.javacup.model.engine;
 
 import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.util.Constants;
+import org.dsaw.javacup.model.util.Position;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -15,12 +20,8 @@ import java.util.Enumeration;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipFile;
 import java.util.zip.ZipOutputStream;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
-import org.dsaw.javacup.model.util.Constants;
-import org.dsaw.javacup.model.util.Position;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+
+import javax.swing.*;
 
 /** Clase usada para cargar y guardar partidos, uso interno*/
 public final class PartidoGuardado implements PartidoInterface, Serializable {
@@ -30,7 +31,7 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
     transient private int tiempo = -1;
     transient private Iteracion iteracion;
     /**Lista de iteraciones, uso interno*/
-    public ArrayList<Iteracion> partido = new ArrayList<Iteracion>(Constants.ITERACIONES);
+    public ArrayList<Iteracion> partido = new ArrayList<>(Constants.ITERACIONES);
     private TacticDetail detalleLocal;
     private TacticDetail detalleVisita;
 
@@ -62,7 +63,7 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
             tiempo = partido.size() - 1;
         }
         this.tiempo = tiempo;
-        iteracion = partido.get((int) tiempo);
+        iteracion = partido.get(tiempo);
     }
 
     /**Retorna la iteracion actual*/
@@ -267,7 +268,7 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
             tempFile.deleteOnExit();
             FileOutputStream fos = new FileOutputStream(tempFile);
             is = url.openStream();
-            int read = 0;
+            int read;
             while ((read = is.read(bytes)) > -1) {
                 fos.write(bytes, 0, read);
             }

@@ -13,7 +13,7 @@ public class Unmark {
 	private List<Command> commands;
 	private final Analysis analysis;
 	
-	List<AttackPosition> selected = new ArrayList<AttackPosition>();
+	List<AttackPosition> selected = new ArrayList<>();
 	private double[] rivalBallAngle = new double[11];
 	Position ball;
 	
@@ -54,7 +54,7 @@ public class Unmark {
 		for (int i = 0; i < rivalBallAngle.length; i++) {
 			rivalBallAngle[i] = ball.angle(analysis.rivalPlayers[i]);
 		}
-		List<AttackPosition> positions = new ArrayList<AttackPosition>();
+		List<AttackPosition> positions = new ArrayList<>();
 		while(ratio > 0){
 			double angle = 0;
 			while(angle < 2*Math.PI){

@@ -38,5 +38,5 @@ public class PrincipalDatos {
     public int tipoTexto = 0;
     public String local;
     public String visita;
-    public ArrayList<URL> guardados = new ArrayList<URL>();
+    public ArrayList<URL> guardados = new ArrayList<>();
 }

@@ -291,7 +291,7 @@ public class TacticasUtil {
 	}
 	
 	public static ArrayList<Rival> calcularRivalesDetrasLinea (Rival [] rivales, double linea){
-		ArrayList <Rival> rivalesDetras = new ArrayList <Rival>();
+		ArrayList <Rival> rivalesDetras = new ArrayList<>();
 		for (int i = 0; i < rivales.length; i++) {
 			if(rivales[i].getPosicion().getY()<linea){
 				rivalesDetras.add(rivales[i]);
@@ -498,7 +498,7 @@ public class TacticasUtil {
 			}
 		}
 		
-		ArrayList <Jugador> jugadoresSolos = new ArrayList <Jugador> ();
+		ArrayList <Jugador> jugadoresSolos = new ArrayList<>();
 		
 		for (int i = 0; i < jugadores.length; i++) {			
 			Position posConducir = puedoConducir(jugadores[i], rivales);
@@ -680,7 +680,7 @@ public class TacticasUtil {
 	
 	public static Rival [] obtenerRivalesZona(Jugador jugador ,Rival[] rivales){
 		
-		ArrayList <Rival> rivalesZona = new ArrayList<Rival>();
+		ArrayList <Rival> rivalesZona = new ArrayList<>();
 		
 		Zona zona = new Zona(0);
 		int RADIO_ZONA = 13;
@@ -712,7 +712,7 @@ public class TacticasUtil {
 	
 	public static Position puedoConducir(Jugador jugador, Rival[] rivales){
 		
-		ArrayList <Rival> rivalesZona = new ArrayList<Rival>();
+		ArrayList <Rival> rivalesZona = new ArrayList<>();
 		
 		if(jugador.getPosicion().getY()>Constants.centroArcoSup.getY()-Constants.ANCHO_AREA_GRANDE){
 			return null;

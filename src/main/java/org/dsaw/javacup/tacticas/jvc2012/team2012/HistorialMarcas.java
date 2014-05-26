@@ -21,7 +21,7 @@ import org.dsaw.javacup.model.util.Position;
  */
 public class HistorialMarcas {
 
-	private Map<Integer, ArrayList<PosicionJugador>>	marcasRivales	= new HashMap<Integer, ArrayList<PosicionJugador>>();
+	private Map<Integer, ArrayList<PosicionJugador>>	marcasRivales	= new HashMap<>();
 
 	public HistorialMarcas() {
 
@@ -38,7 +38,7 @@ public class HistorialMarcas {
 			int idRival = rivales[i];
 			ArrayList<PosicionJugador> marcaRival = marcasRivales.get(idRival);
 			if (marcaRival == null) {
-				marcaRival = new ArrayList<PosicionJugador>();
+				marcaRival = new ArrayList<>();
 			}
 			Position pRival = sp.rivalPlayers()[idRival];
 			int[] puedenPatear = sp.canKick();

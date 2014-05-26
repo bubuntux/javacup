@@ -59,7 +59,7 @@ public class SimuladorPases {
 			Integer indiceReceptor = null;
 			double x = 0.;
 			double y = 0.;
-			Vector<Integer> iteracionesRecuperacion = new Vector<Integer>();
+			Vector<Integer> iteracionesRecuperacion = new Vector<>();
 			for(int k = 0; k < NUMERO_SIMULACIONES; k++) { // indice de estadistica de pase
 				setGameSituation();
 				executeCommand(chb);//ejecuta los comandos

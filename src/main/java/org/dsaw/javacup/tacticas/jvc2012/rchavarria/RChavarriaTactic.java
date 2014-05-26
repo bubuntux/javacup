@@ -33,7 +33,7 @@ public class RChavarriaTactic implements Tactic {
     }
 
     public List<Command> execute(GameSituations sp) {
-        List<Command> commands = new LinkedList<Command>();
+        List<Command> commands = new LinkedList<>();
 
         arrangePlayers(sp, commands);
         tryToRecoverBall(sp, commands);

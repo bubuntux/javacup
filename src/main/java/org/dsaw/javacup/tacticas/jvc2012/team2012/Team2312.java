@@ -294,7 +294,7 @@ public class Team2312 implements Tactic {
 		return alineacion6;
 	}
 
-	ArrayList<Command> comandos = new ArrayList<Command>();
+	ArrayList<Command> comandos = new ArrayList<>();
 	Random r = new Random();
 	Util23 util23 = null;
 	HistorialMarcas historialMarcas = new HistorialMarcas();
@@ -305,7 +305,7 @@ public class Team2312 implements Tactic {
 	@Override
 	public List<Command> execute(final GameSituations sp) {
 		comandos.clear();
-		final List<Command> com = new ArrayList<Command>();
+		final List<Command> com = new ArrayList<>();
 		if (sp.iteration() > 0) {
 			new Random().nextDouble();
 			historialMarcas.addMarcasRivalIteracionActual(sp);
@@ -415,7 +415,7 @@ public class Team2312 implements Tactic {
 			}
 			balonPasado = sp.ballPosition().setInsideGameField();
 
-			final ArrayList<CommandMoveTo> listaBorrar = new ArrayList<CommandMoveTo>();
+			final ArrayList<CommandMoveTo> listaBorrar = new ArrayList<>();
 			for (final Command c : com) {
 				if (c instanceof CommandMoveTo) {
 					final CommandMoveTo cmd = (CommandMoveTo) c;
@@ -448,7 +448,7 @@ public class Team2312 implements Tactic {
 		final double velocidadRemate = Constants.getVelocidadRemate(pateador
 				.getPower());
 		final double maxX = (Constants.LARGO_ARCO / 2);
-		final LinkedList<Position> opciones = new LinkedList<Position>();
+		final LinkedList<Position> opciones = new LinkedList<>();
 		final Position pInicial = Constants.centroArcoSup;
 
 		opciones.add(pInicial);
@@ -470,7 +470,7 @@ public class Team2312 implements Tactic {
 							Math.min(angZ, Constants.ANGULO_VERTICAL_MAX))
 							* (RAD);
 					// si el tiro es preciso al punto calculado
-					final LinkedList<Ball> trayectoriaBalon = new LinkedList<Ball>();
+					final LinkedList<Ball> trayectoriaBalon = new LinkedList<>();
 					// se obtiene la trayectoria del balon al punto
 					final int iteraciones = obtenerTrayectoriaCalculada(
 							trayectoriaBalon, balon, potencia, angleXY,

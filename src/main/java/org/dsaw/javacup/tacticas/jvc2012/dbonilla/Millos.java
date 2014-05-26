@@ -315,9 +315,9 @@ public class Millos implements Tactic {
     boolean[] defense, middle, attack;
     GameSituations Tacticsp;
     public Millos() {
-        commands = new ArrayList<Command>();
-        availablePlayers = new ArrayList<Integer>();
-        dangerousEnemies = new ArrayList<Integer>();
+        commands = new ArrayList<>();
+        availablePlayers = new ArrayList<>();
+        dangerousEnemies = new ArrayList<>();
         ballwithZ = new MYPosition(new Position());
         theNextBall = new MYPosition(new Position());
         minDestinations = new MYPosition[align1.length];
@@ -710,7 +710,7 @@ public class Millos implements Tactic {
                 oldDz = dz;
                 //System.out.println("dz = " + dz);
 
-                ArrayList<DecisionScore> dsList = new ArrayList<DecisionScore>();
+                ArrayList<DecisionScore> dsList = new ArrayList<>();
                 double anglestep = 3;
                 for (double angle = 0; angle < 360; angle+=anglestep) {
                     MYPosition[] evolution = predictShot(player, ball, strength, angle, angleZ);

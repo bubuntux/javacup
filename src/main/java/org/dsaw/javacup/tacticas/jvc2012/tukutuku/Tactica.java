@@ -256,7 +256,7 @@ public class Tactica implements Tactic {
 
 
 
-        public ArrayList<Position[]>alineaciones = new ArrayList<Position[]>();
+        public ArrayList<Position[]>alineaciones = new ArrayList<>();
         
 
 

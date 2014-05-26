@@ -77,7 +77,7 @@ public class ListaIndices extends LinkedList<Integer> {
 	}
 	
 	public Position[] toPositionArray(Position[] jugadores){
-		ArrayList<Position> lst = new ArrayList<Position>();
+		ArrayList<Position> lst = new ArrayList<>();
 		for(Integer i : this){
 			if(jugadores.length > (i.intValue() + 1)){
 				lst.add(new Position(jugadores[i.intValue()]));

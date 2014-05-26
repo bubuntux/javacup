@@ -23,18 +23,18 @@ public class MovimientoCoberturaLimitada {
 	protected int iteracionesParaComprobarCoberturas;
 	
 	public MovimientoCoberturaLimitada() {
-		coberturas = new HashMap<Integer, Integer>();
+		coberturas = new HashMap<>();
 		coberturasFijadas = false;
-		sumatorioDistancias = new HashMap<Integer, Double>();
+		sumatorioDistancias = new HashMap<>();
 		iteracionesParaComprobarCoberturas = 0;
 	}
 
 	public List<Command> fijarCoberturas(GameSituations gs) {
 
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 		
 		// obtengo los 3 rivales mas cercanos a la porteria
-		Vector<IndiceYDistancia> distanciasRivalesAPorteria = new Vector<IndiceYDistancia>();
+		Vector<IndiceYDistancia> distanciasRivalesAPorteria = new Vector<>();
 		for(int i = 0; i < 11; i++)
 			distanciasRivalesAPorteria.add(new IndiceYDistancia(i, gs.rivalPlayers()[i].distance(Constants.centroArcoInf)));
 		
@@ -69,17 +69,17 @@ public class MovimientoCoberturaLimitada {
 			iteracionesParaComprobarCoberturas++;
 			if(iteracionesParaComprobarCoberturas % ITERACIONES_PARA_COMPROBAR_COBERTURAS == 0) {
 				// obtengo los 3 rivales mas cercanos a la porteria
-				Vector<IndiceYDistancia> distanciasMediasRivalesAPorteria = new Vector<IndiceYDistancia>();
+				Vector<IndiceYDistancia> distanciasMediasRivalesAPorteria = new Vector<>();
 				for(int i = 0; i < 11; i++)
 					distanciasMediasRivalesAPorteria.add(new IndiceYDistancia(i, sumatorioDistancias.get(i)));
 
 				// cubro a los n jugadores con medias mas cercanas a mi porteria
 				Collections.sort(distanciasMediasRivalesAPorteria);
-				Vector<Integer> jugadoresPropiosUsados = new Vector<Integer>();
+				Vector<Integer> jugadoresPropiosUsados = new Vector<>();
 				for(int i = 0; i < 4; i++) {
 					Integer indiceCubierto = distanciasMediasRivalesAPorteria.get(i).getIndice();
 					// compruebo que jugador mio esta mas cerca del rival
-					Vector<IndiceYDistancia> distanciasRivalAPropios = new Vector<IndiceYDistancia>();
+					Vector<IndiceYDistancia> distanciasRivalAPropios = new Vector<>();
 					for(int j = 1; j < 11; j++)
 						if(!jugadoresPropiosUsados.contains(j))
 							distanciasRivalAPropios.add(new IndiceYDistancia(j, gs.rivalPlayers()[indiceCubierto].distance(gs.myPlayers()[j])));

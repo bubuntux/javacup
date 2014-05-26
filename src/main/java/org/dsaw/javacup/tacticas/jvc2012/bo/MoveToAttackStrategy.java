@@ -43,7 +43,7 @@ public class MoveToAttackStrategy implements SoccerStrategy {
     
     @Override
     public List<Command> makeStrategy() {
-        List<Command> commands = new ArrayList<Command>();
+        List<Command> commands = new ArrayList<>();
         Position[] newPositions = calculatePositions(alineacionNormal);
         
         for (int i = 0; i < newPositions.length; i++) {

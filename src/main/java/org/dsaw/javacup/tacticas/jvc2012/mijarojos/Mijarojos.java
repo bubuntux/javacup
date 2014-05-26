@@ -175,7 +175,7 @@ public class Mijarojos implements Tactic {
     	return cadDescripcionString;
     }
 
-	LinkedList<Command> comandos = new LinkedList<Command>();
+	LinkedList<Command> comandos = new LinkedList<>();
 
 	@Override
 	public List<Command> execute(GameSituations sp) {

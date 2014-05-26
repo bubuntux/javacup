@@ -32,7 +32,7 @@ public class PassStrategy implements SoccerStrategy {
     @Override
     public List<Command> makeStrategy()
     {
-        List<Command> commands = new ArrayList<Command>();
+        List<Command> commands = new ArrayList<>();
 
         int[] canShoot = currentSituation.canKick();
         players = currentSituation.myPlayers();

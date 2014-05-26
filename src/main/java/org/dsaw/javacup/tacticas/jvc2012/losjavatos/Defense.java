@@ -7,7 +7,7 @@ import org.dsaw.javacup.model.util.Position;
 
 public class Defense {
     GameSituations sp;
-    LinkedList <Command> comandos = new LinkedList<Command>();
+    LinkedList <Command> comandos = new LinkedList<>();
     public Defense(GameSituations sp) {
         this.sp = sp;
     }

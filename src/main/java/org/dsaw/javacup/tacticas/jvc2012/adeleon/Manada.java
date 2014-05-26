@@ -463,7 +463,7 @@ public int[] enZonaRoja(Position[] rivales){
 	else return null;
 }
     
-    List<Command> commands= new ArrayList<Command>();
+    List<Command> commands= new ArrayList<>();
     @Override
     public List<Command> execute(GameSituations sp) {
     	commands.clear();

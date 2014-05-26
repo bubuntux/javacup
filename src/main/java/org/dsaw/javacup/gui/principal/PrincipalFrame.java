@@ -39,7 +39,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
     private final DefaultListModel tacticasModel = new DefaultListModel();
     private JFileChooser jfc;
     private Class tl = null, tv = null;
-    private ArrayList<File> filedirs = new ArrayList<File>();
+    private ArrayList<File> filedirs = new ArrayList<>();
     private static Logger logger = LoggerFactory.getLogger(PrincipalFrame.class);
 
     /**Busca tacticas en el classpath*/
@@ -101,8 +101,8 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
     void setEnableSlickButtons(boolean enable) {
         jButton7.setEnabled(enable);
     }
-    LinkedList<File> directorios = new LinkedList<File>();
-    final HashMap<Class, TacticDetail> tactics = new HashMap<Class, TacticDetail>();
+    LinkedList<File> directorios = new LinkedList<>();
+    final HashMap<Class, TacticDetail> tactics = new HashMap<>();
 
     /** Creates new form Principal */
     public PrincipalFrame() throws Exception {
@@ -204,7 +204,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
             }
         }
         if (datos.guardados == null) {
-            datos.guardados = new ArrayList<URL>();
+            datos.guardados = new ArrayList<>();
         }
         scanForTactics(directorios);
         fromDatos();
@@ -1307,7 +1307,7 @@ private void jCheckBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
         int partidosPorFecha = partidos / fechas;
         //System.out.println(partidos + " partidos, " + fechas + " fechas, " + partidosPorFecha + " partidos por fecha");
         int[][][] tmp = new int[fechas][partidosPorFecha][2];
-        ArrayList<int[]> list = new ArrayList<int[]>();
+        ArrayList<int[]> list = new ArrayList<>();
         for (int i = 0; i < n - 1; i++) {
             for (int j = i + 1; j < n; j++) {
                 if ((i + j) % 2 == 0) {
@@ -1352,7 +1352,7 @@ private void jCheckBox11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-F
     Class[] getClases(File src, String paquete, Class claseAsignable, boolean recursivo) throws Exception {
         paquete = paquete.replace('.', '/');
 
-        LinkedList<Class> classes = new LinkedList<Class>();
+        LinkedList<Class> classes = new LinkedList<>();
         if (!paquete.endsWith("//svn")) {
             File directory = null;
             try {

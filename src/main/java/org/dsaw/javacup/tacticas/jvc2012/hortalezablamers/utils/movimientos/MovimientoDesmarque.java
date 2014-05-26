@@ -17,7 +17,7 @@ public class MovimientoDesmarque {
 	protected static final double ITERACIONES_DE_DESMARQUE = 1;
 	
 	public static List<Command> mover(GameSituations gs) {
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 
 		IndiceEIteracion iei = getMyPlayersRecovery(gs);
 		Integer iteracionRecuperacionRival = getRivalPlayersRecoveryIteration(gs);

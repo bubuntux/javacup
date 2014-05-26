@@ -176,7 +176,7 @@ public class LosJavatos implements Tactic {
     
     
     
-    LinkedList<Command> comandos = new LinkedList<Command>();
+    LinkedList<Command> comandos = new LinkedList<>();
     
            
     @Override

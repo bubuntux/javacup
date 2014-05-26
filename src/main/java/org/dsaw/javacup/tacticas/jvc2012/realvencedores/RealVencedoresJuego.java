@@ -52,7 +52,7 @@ public class RealVencedoresJuego implements Tactic {
      */
     public List<Command> execute(GameSituations sp) {
         // Lista de comandos
-        LinkedList<Command> comandos = new LinkedList<Command>();
+        LinkedList<Command> comandos = new LinkedList<>();
 
         // Distribución normal de juego
         Position[] distribucionNormal = this.distribuciones.getNormal();

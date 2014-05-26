@@ -433,7 +433,7 @@ public class Player {
              }
              if(shootAngleZ > 0)
              {
-                ArrayList<Position3D> result = new ArrayList<Position3D>();
+                ArrayList<Position3D> result = new ArrayList<>();
                 for(int i=0;i<coords.size();i++)
                 {
                     Position3D c3d = coords.get(i);
@@ -455,7 +455,7 @@ public class Player {
            
             AbstractTrajectory trajectory = new AirTrajectory(Math.cos(angleZ) * speed, Math.sin(angleZ) * speed, 0, 0);
             Position3D newBall = new Position3D(vars.gs.ballPosition(), vars.gs.ballAltitude());
-            ArrayList<Position3D> result = new ArrayList<Position3D>();
+            ArrayList<Position3D> result = new ArrayList<>();
             result.add(newBall);
             double oldtrX = 1000;
             double oldtrY = 1000;
@@ -611,7 +611,7 @@ public class Player {
                        {
                              return;
                         }
-                        LinkedList<Integer> l = new LinkedList<Integer>();
+                        LinkedList<Integer> l = new LinkedList<>();
                         for (int i = 0; i < 32; l.add(++i));
                         Collections.shuffle(l);
                         Integer[] randomAngles = l.toArray(new Integer[0]);
@@ -628,7 +628,7 @@ public class Player {
                }
                if(hitAngle == -1 && trayectory == MConstants.ShootTrayectory.backward)
                {
-                    LinkedList<Integer> l = new LinkedList<Integer>();
+                    LinkedList<Integer> l = new LinkedList<>();
                     for (int i = 0; i < 32; l.add(++i));
                     Collections.shuffle(l);
                     Integer[] randomAngles = l.toArray(new Integer[0]);

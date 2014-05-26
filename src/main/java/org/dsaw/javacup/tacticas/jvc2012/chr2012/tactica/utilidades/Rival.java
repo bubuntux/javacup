@@ -14,7 +14,7 @@ public class Rival {
     private int indice;
     private Position posicion;
     private char sector;
-    private ArrayList<Position> movimientos = new ArrayList<Position>();
+    private ArrayList<Position> movimientos = new ArrayList<>();
     private Balon informacionAlcanceBalon;
     private int iteracionesAlcanceBalon;
 

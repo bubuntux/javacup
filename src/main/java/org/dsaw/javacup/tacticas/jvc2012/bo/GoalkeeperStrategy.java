@@ -34,7 +34,7 @@ public class GoalkeeperStrategy implements SoccerStrategy {
 
     @Override
     public List<Command> makeStrategy() {
-        List<Command> commands = new ArrayList<Command>();
+        List<Command> commands = new ArrayList<>();
 
         Position pos = moveItTo();
         commands.add(new CommandMoveTo(goalKeeperIndex, pos));

@@ -21,7 +21,7 @@ public class Defense extends BasicCommandGenerator {
 	@Override
 	public List<Command> getCommandList(GameSituations sp) {
 		super.getCommandList(sp);
-		List<Command> commands = new LinkedList<Command>();
+		List<Command> commands = new LinkedList<>();
 		
 		if(!sp.isRivalStarts() && !isGoalKick()) {
 			commands.addAll(coverAttackers());
@@ -36,7 +36,7 @@ public class Defense extends BasicCommandGenerator {
 	 * @return	Lista de comandos de movimiento
 	 */
 	protected List<Command> recoveryBall() {
-		LinkedList<Command> commands = new LinkedList<Command>();
+		LinkedList<Command> commands = new LinkedList<>();
 		int[] recoveryBall = sp.getRecoveryBall();
 		// si es posible recuperar el balón
 		if (recoveryBall.length > 1) {
@@ -55,7 +55,7 @@ public class Defense extends BasicCommandGenerator {
 	 * @return	Lista de comandos de movimiento
 	 */
 	protected List<Command> coverAttackers() {
-		LinkedList<Command> commands = new LinkedList<Command>();
+		LinkedList<Command> commands = new LinkedList<>();
 		List<Position> attackers = getRivalAttackers();
 		for (Position pos : attackers) {			
 			// obtenemos el defensor más cercano
@@ -72,7 +72,7 @@ public class Defense extends BasicCommandGenerator {
 	 * @return	Posiciones de los delanteros rivales
 	 */
 	protected List<Position> getRivalAttackers() {
-		LinkedList<Position> attackers = new LinkedList<Position>();
+		LinkedList<Position> attackers = new LinkedList<>();
 		Position ball = sp.ballPosition();
 		
 		Position[] rivalPositions = sp.rivalPlayers();

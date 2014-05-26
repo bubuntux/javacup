@@ -264,7 +264,7 @@ public class Petardos implements Tactic {
 	// que permite filtrado de movimientos pequeños en cada iteración
 	private Position[] aComandoIrA = new Position[N];
 	
-	private ArrayList<Command> comandos = new ArrayList<Command>();
+	private ArrayList<Command> comandos = new ArrayList<>();
 
 	//
 	// Métodos de táctica

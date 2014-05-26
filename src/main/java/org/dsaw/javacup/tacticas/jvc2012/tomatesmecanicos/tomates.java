@@ -237,7 +237,7 @@ public class tomates implements Tactic {
     public Position[] getNoStartPositions(GameSituations sp) {
         return alineacion6;
     }
-    LinkedList<Command> comandos = new LinkedList<Command>();
+    LinkedList<Command> comandos = new LinkedList<>();
 
     public List<Command> execute(GameSituations sp) {
 

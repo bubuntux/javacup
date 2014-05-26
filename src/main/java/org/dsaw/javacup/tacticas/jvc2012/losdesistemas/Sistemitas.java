@@ -12,7 +12,7 @@ import org.dsaw.javacup.model.TacticDetail;
 
 public class Sistemitas implements Tactic{
 
-	private List<Command> comandos = new LinkedList<Command>();
+	private List<Command> comandos = new LinkedList<>();
 	private GameSituations sp;
 	private Datines data = new Datines(); 
 	private MessiLaSacaHastaConLaCho goalkeeper = new MessiLaSacaHastaConLaCho(comandos, data);

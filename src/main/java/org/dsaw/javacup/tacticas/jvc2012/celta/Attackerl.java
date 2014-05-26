@@ -39,7 +39,7 @@ public class Attackerl extends BasicCommandGenerator {
     @Override
     public List<Command> getCommandList(GameSituations sp) {
         super.getCommandList(sp);
-        List<Command> commands = new ArrayList<Command>();
+        List<Command> commands = new ArrayList<>();
 
         for (int i : sp.canKick()) {
             Command command = null;
@@ -310,7 +310,7 @@ public class Attackerl extends BasicCommandGenerator {
      */
     protected List<Command> run(int playerIdx) {
         Position destination = Alignment.INITIAL[playerIdx].movePosition(0, 15);
-        List<Command> commands = new LinkedList<Command>();
+        List<Command> commands = new LinkedList<>();
         if (probabilityToLooseTheBall(sp.myPlayers()[playerIdx], destination) < .7) {
             commands.add(new CommandHitBall(playerIdx));
             commands.add(new CommandMoveTo(playerIdx, destination));
@@ -340,7 +340,7 @@ public class Attackerl extends BasicCommandGenerator {
      */
     protected Position getRandomPlayerInsideLargeArea() {
         Position[] players = sp.myPlayers();
-        List<Position> posiblePlayers = new LinkedList<Position>();
+        List<Position> posiblePlayers = new LinkedList<>();
         for (int i = 0; i < players.length; i++) {
             if (isPlayerInsideLargeArea(i)) {
                 posiblePlayers.add(players[i]);

@@ -18,7 +18,7 @@ import java.util.List;
 public class Iria implements Tactic {
 
 	// Lista de comandos
-	LinkedList<Command> comandos = new LinkedList<Command>();
+	LinkedList<Command> comandos = new LinkedList<>();
 
 	@SuppressWarnings("unchecked")
 	@Override

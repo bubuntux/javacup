@@ -285,7 +285,7 @@ public class TacticaPulgarcitos implements Tactic {
     public Position[] getNoStartPositions(GameSituations sp) {
         return alineacion6;
     }
-    List<Command> commands = new LinkedList<Command>(); // list of output commands
+    List<Command> commands = new LinkedList<>(); // list of output commands
     List<Integer> availablePlayers; // Players who can be used for the strategy
     boolean attacking;
     MyPosition[] enemies;
@@ -302,7 +302,7 @@ public class TacticaPulgarcitos implements Tactic {
     MyPosition[] minDestinations, maxDestinations;
     boolean[] defense, middle, attack;
     GameSituations tacticasp;
-    private List<Command> comandos = new LinkedList<Command>();
+    private List<Command> comandos = new LinkedList<>();
     private GameSituations sp;
     private Data data = new Data();
     private Goalkeeper goalkeeper = new Goalkeeper(commands, data);
@@ -353,9 +353,9 @@ public class TacticaPulgarcitos implements Tactic {
     }
 
     public TacticaPulgarcitos() {
-        commands = new ArrayList<Command>();
-        availablePlayers = new ArrayList<Integer>();
-        dangerousEnemies = new ArrayList<Integer>();
+        commands = new ArrayList<>();
+        availablePlayers = new ArrayList<>();
+        dangerousEnemies = new ArrayList<>();
         ballwithZ = new MyPosition(new Position());
         theNextBall = new MyPosition(new Position());
         minDestinations = new MyPosition[align1.length];
@@ -889,7 +889,7 @@ public class TacticaPulgarcitos implements Tactic {
 
 
 
-                ArrayList<DecisionScore> dsList = new ArrayList<DecisionScore>();
+                ArrayList<DecisionScore> dsList = new ArrayList<>();
                 double anglestep = 3;
                 for (double angle = 0; angle < 360; angle += anglestep) {
                     MyPosition[] evolution = predictShot(player, ball, strength, angle, angleZ);

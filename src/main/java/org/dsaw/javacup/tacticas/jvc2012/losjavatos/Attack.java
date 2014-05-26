@@ -8,7 +8,7 @@ import org.dsaw.javacup.model.util.Position;
 
 public class Attack {
     GameSituations atSp;
-    LinkedList <Command> comandos = new LinkedList<Command>();
+    LinkedList <Command> comandos = new LinkedList<>();
     static int porContra = -1;
     public Attack(GameSituations sp) {
         atSp = sp;

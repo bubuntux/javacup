@@ -87,7 +87,7 @@ public class ShootStrategy implements SoccerStrategy {
 
     @Override
     public List<Command> makeStrategy() {
-        List<Command> commands = new ArrayList<Command>();
+        List<Command> commands = new ArrayList<>();
         
         double power = 1;
         for (int i = 0; i < canShoot.length; i++) {

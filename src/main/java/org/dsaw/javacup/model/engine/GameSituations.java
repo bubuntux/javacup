@@ -224,7 +224,7 @@ public final class GameSituations {
         Position pJug;
         double dist0, dist;
         int idxFound = -1;
-        LinkedList<Double> founds = new LinkedList<Double>();
+        LinkedList<Double> founds = new LinkedList<>();
         PlayerDetail detalles[] = myPlayersDetail();
         
         while (!found) {
@@ -399,7 +399,7 @@ private	void calculateOffSidePlayers() {
     private int golesMios, golesContrarios, iteracion, iterReal;
     private Position[] misJugadores, rivales;
     private boolean saco, sacaRival;
-    private ArrayList<Integer> quienes = new ArrayList<Integer>(11);
+    private ArrayList<Integer> quienes = new ArrayList<>(11);
     private PlayerDetail[][] jugadores;
     private int[][] iteracionesParaRematar = new int[2][11];
     private boolean[] puedenRematar = new boolean[11];

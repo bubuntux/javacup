@@ -16,7 +16,7 @@ import org.dsaw.javacup.model.util.Position;
  */
 public class HistorialBalon {
 
-	private ArrayList<PosicionBalon>	posicionesBalon	= new ArrayList<PosicionBalon>();
+	private ArrayList<PosicionBalon>	posicionesBalon	= new ArrayList<>();
 
 	public void addPosicionBalonIteracionActual(GameSituations sp) {
 		PosicionBalon pb = new PosicionBalon(sp.ballPosition(), sp.iteration(), sp.ballAltitude());
@@ -57,7 +57,7 @@ public class HistorialBalon {
 	}
 
 	public ArrayList<PosicionBalon> predecirBalon(GameSituations sp, int numIteraciones) {
-		ArrayList<PosicionBalon> result = new ArrayList<PosicionBalon>();
+		ArrayList<PosicionBalon> result = new ArrayList<>();
 		int itActual = sp.iteration();
 		for (int i = 1; i <= numIteraciones; i++) {
 			double[] posBalon = sp.getTrajectory(itActual + i);

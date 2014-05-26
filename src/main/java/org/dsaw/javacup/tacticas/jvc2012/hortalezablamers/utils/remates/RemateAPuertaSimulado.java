@@ -37,7 +37,7 @@ public class RemateAPuertaSimulado {
         anguloAPosteIzdo = Math.toDegrees(anguloAPosteIzdo);
         anguloAPosteDcho = Math.toDegrees(anguloAPosteDcho);
         
-        Vector<Double> angulos = new Vector<Double>();
+        Vector<Double> angulos = new Vector<>();
         angulos.add(anguloACentroPorteria);
         
         double deltaAngulo = Math.toDegrees((error / 2) * Math.PI);

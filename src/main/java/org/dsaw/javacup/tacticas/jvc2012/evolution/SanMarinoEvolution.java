@@ -14,7 +14,7 @@ import org.dsaw.javacup.model.util.Position;
 
 public class SanMarinoEvolution implements Tactic {
 	
-	private LinkedList<Command> comandos = new LinkedList<Command>();
+	private LinkedList<Command> comandos = new LinkedList<>();
 	private static boolean inicio = true;
 	private static Jugador [] jugadores;
     private static Rival [] rivales;
@@ -234,15 +234,15 @@ public class SanMarinoEvolution implements Tactic {
 	
 	private static LinkedList<Command> tacticaDefensa(GameSituations sp, Jugador[] jugadores,
 			Rival[] rivales){
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 		
 		MovimientosDefensa.calcularLineasHorizontales(rivales, sp.ballPosition(), jugadores);
 		
 		if(rivalesDetrasDefensa==null){
-			rivalesDetrasDefensa=new ArrayList<Rival>();
+			rivalesDetrasDefensa=new ArrayList<>();
 		}
 		if(rivalesDetrasCentro==null){
-			rivalesDetrasCentro=new ArrayList<Rival>();
+			rivalesDetrasCentro=new ArrayList<>();
 		}
 		
 		
@@ -327,11 +327,11 @@ public class SanMarinoEvolution implements Tactic {
 	
 	private static LinkedList<Command> tacticaAtaque(GameSituations sp, Jugador[] jugadores,
 			Rival[] rivales){
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 		
 		
 		Position posicionBalon = sp.ballPosition();
-		ArrayList <Jugador> colocados = new ArrayList <Jugador> ();
+		ArrayList <Jugador> colocados = new ArrayList<>();
 		
 		
 		int defensas = TacticasUtil.obtenerNumeroJugadores(jugadores, Jugador.DEFENSA);
@@ -417,7 +417,7 @@ public class SanMarinoEvolution implements Tactic {
 	
 	private static LinkedList<Command> saqueBandaFavor(GameSituations sp, Jugador[] jugadores,
 			Rival[] rivales){
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 		
 
 		
@@ -427,7 +427,7 @@ public class SanMarinoEvolution implements Tactic {
 	
 	private static LinkedList<Command> cornerAFavor(GameSituations sp, Jugador[] jugadores,
 			Rival[] rivales){
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 		
 
 		
@@ -536,8 +536,8 @@ public class SanMarinoEvolution implements Tactic {
 		}
 		
 		
-		rivalesDetrasDefensa=new ArrayList<Rival>();
-		rivalesDetrasDefensa=new ArrayList<Rival>();
+		rivalesDetrasDefensa=new ArrayList<>();
+		rivalesDetrasDefensa=new ArrayList<>();
 		
 	}
 

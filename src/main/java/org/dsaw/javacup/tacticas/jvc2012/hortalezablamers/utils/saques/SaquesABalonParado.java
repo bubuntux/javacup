@@ -18,7 +18,7 @@ public class SaquesABalonParado {
 	 * @param gs
 	 */
 	public static List<Command> sacarABalonParado(GameSituations gs) {
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 		
 		int rematan[] = gs.canKick();
 		if(rematan.length > 0) {

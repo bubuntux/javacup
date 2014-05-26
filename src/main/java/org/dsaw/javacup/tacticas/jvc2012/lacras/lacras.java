@@ -209,7 +209,7 @@ public class lacras implements Tactic {
 
     
     public lacras(){
-        commands = new ArrayList<Command>();
+        commands = new ArrayList<>();
     }
     
     //Deprecated
@@ -413,7 +413,7 @@ public class lacras implements Tactic {
         double dist,dist2;
         int jaux = 0;
         boolean isPosible = false;
-        ArrayList<Double> whoP = new ArrayList<Double>();
+        ArrayList<Double> whoP = new ArrayList<>();
         int[] select = new int[1];
         
         for(int j=0; j<jty.rebounds.size()&&!isPosible; j++){
@@ -581,8 +581,8 @@ public class lacras implements Tactic {
     
         public MyTrajectory(){
             x = y = m = 0;
-            rebounds = new ArrayList<Position>();
-            iterations = new ArrayList<Integer>();
+            rebounds = new ArrayList<>();
+            iterations = new ArrayList<>();
             air = false;
         }
         public MyTrajectory (Position a, Position b){

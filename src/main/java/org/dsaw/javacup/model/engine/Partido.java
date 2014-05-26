@@ -63,8 +63,8 @@ public final class Partido implements PartidoInterface {
     ///////
     /////// Variables de uso interno
     ///////
-    private ArrayList<ComandoEquipo> listGolpearBalon = new ArrayList<ComandoEquipo>(88);//usado internamente para almacenar los comando golpearbalon
-    private ArrayList<ComandoEquipo> listIrA = new ArrayList<ComandoEquipo>(88);//usado internamente para almacenar los comando irA
+    private ArrayList<ComandoEquipo> listGolpearBalon = new ArrayList<>(88);//usado internamente para almacenar los comando golpearbalon
+    private ArrayList<ComandoEquipo> listIrA = new ArrayList<>(88);//usado internamente para almacenar los comando irA
     private Position balonInv = new Position(Constants.centroCampoJuego);//usado internamente para guardar la posicion invertida del ballPosition
     private Position balonVisible = new Position(Constants.centroCampoJuego);//usado internamente para guardar la posicion del ballPosition cuando sale del campo
     private Random rand = new Random();//random para la aleatoriedad
@@ -116,7 +116,7 @@ public final class Partido implements PartidoInterface {
         energiaLocal = new double[11];
         energiaVisita = new double[11];
         
-        distanciaSaqueInsuficiente = new ArrayList<Integer>();
+        distanciaSaqueInsuficiente = new ArrayList<>();
 
         for (int i = 0; i < 11; i++) {
             angDireccion[0][i] = Math.PI / 2;
@@ -631,13 +631,13 @@ public final class Partido implements PartidoInterface {
         remate = false;//se setean los remates en falso
         puedenRematar();//obtiene quienes pueden rematar
                        
-        List<Command> comandosLocales = new LinkedList<Command>();
+        List<Command> comandosLocales = new LinkedList<>();
         try {
             comandosLocales = tacticaLocal.execute(spLocal);//envia la situacion del partido y obtiene los comandos de la tactica local
         } catch (Exception e) {
             logger.error("Error al ejecutar tactica local", e);
         }
-        List<Command> comandosVisita = new LinkedList<Command>();
+        List<Command> comandosVisita = new LinkedList<>();
         try {
             comandosVisita = tacticaVisita.execute(spVisita);//envia la situacion del partido y obtiene los comandos de la tactica visita
         } catch (Exception e) {
@@ -841,7 +841,7 @@ public final class Partido implements PartidoInterface {
     /**Elimina los comandos duplicados por jugador, si la lista de comandos es un null, retorna una lista sin elementos*/
     private List<Command> limpiarComandos(List<Command> comandos, boolean local) {
         
-    	LinkedList<Command> list = new LinkedList<Command>();//lista de comandos
+    	LinkedList<Command> list = new LinkedList<>();//lista de comandos
         
         if (comandos == null) return list;
         
@@ -1490,7 +1490,7 @@ public final class Partido implements PartidoInterface {
         //Ejecutamos comandos IrA de la tactica que tiene que sacar
 
         
-        List <Command>list = new LinkedList <Command>();
+        List <Command>list = new LinkedList<>();
         list = tacticaSaca.execute(spSaca);
 
         for (Command cmd : list)
@@ -1595,7 +1595,7 @@ public final class Partido implements PartidoInterface {
     	/// COMANDOS LOCALES ///
     	
     	 //Jugadores a los que no se les asigna comando
-        ArrayList <Integer>playersNoCommand = new ArrayList <Integer>();
+        ArrayList <Integer>playersNoCommand = new ArrayList<>();
         for (int x=0; x < 11; ++x)
         {
             playersNoCommand.add(new Integer(x));

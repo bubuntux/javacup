@@ -78,7 +78,7 @@ public class Situacion {
         Position pJug;
         double dist0, dist;
         int idxFound = -1;
-        LinkedList<Double> founds = new LinkedList<Double>();
+        LinkedList<Double> founds = new LinkedList<>();
         PlayerDetail detalles[] = sp.myPlayersDetail();
         while (!found) {
             double[] posBalon = sp.getTrajectory(it);

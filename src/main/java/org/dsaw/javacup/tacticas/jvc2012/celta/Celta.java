@@ -32,7 +32,7 @@ public class Celta implements Tactic {
 	 * Construye la clase, indicando que generadores de commandos se van a emplear.
 	 */
 	public Celta() {
-		commandGenerators = new ArrayList<CommandGenerator>();
+		commandGenerators = new ArrayList<>();
 		commandGenerators.add(new MantainAlignment());
 		commandGenerators.add(new Defense());
 		commandGenerators.add(new Attackerl());		
@@ -69,7 +69,7 @@ public class Celta implements Tactic {
 	 * @return Lista de commandos 
 	 */
 	public List<Command> execute(GameSituations sp) {
-		List<Command> commands = new ArrayList<Command>();
+		List<Command> commands = new ArrayList<>();
 		for (CommandGenerator generator : commandGenerators)
 			commands.addAll(generator.getCommandList(sp));
 		return commands;

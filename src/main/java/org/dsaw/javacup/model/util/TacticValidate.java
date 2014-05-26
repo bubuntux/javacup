@@ -41,7 +41,7 @@ public final class TacticValidate {
 
         int porteros = 0;
         double creditos = 0;
-        HashSet<Integer> set = new HashSet<Integer>();
+        HashSet<Integer> set = new HashSet<>();
         for (int i = 0; i < 11; i++) {
             if (t.getPlayers()[i] == null) {
                 throw new Exception(name + "TacticDetail: Jugador[" + i + "] nulo");

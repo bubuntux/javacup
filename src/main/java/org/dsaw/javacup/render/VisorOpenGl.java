@@ -57,7 +57,7 @@ public class VisorOpenGl implements Game {
     int paso = 0;
     double escalaGradual = 0;
     boolean noAutoEscalar = false;
-    ArrayList<Object[]> lista = new ArrayList<Object[]>();
+    ArrayList<Object[]> lista = new ArrayList<>();
     private PrincipalFrame principal;
     private PartidoInterface partido = null;
     private int sx, sy;

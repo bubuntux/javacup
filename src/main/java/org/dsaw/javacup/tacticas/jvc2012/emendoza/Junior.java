@@ -245,7 +245,7 @@ public class Junior implements Tactic {
     }
   
   //Lista de comandos
-    LinkedList<Command> comandos = new LinkedList<Command>();
+    LinkedList<Command> comandos = new LinkedList<>();
     
     public List<Command> execute(GameSituations sp) {
 		//Limpia la lista de comandos

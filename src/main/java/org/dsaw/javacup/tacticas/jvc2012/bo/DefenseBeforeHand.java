@@ -36,7 +36,7 @@ public class DefenseBeforeHand implements SoccerStrategy {
 
     @Override
     public List<Command> makeStrategy() {
-        List<Command> commands = new ArrayList<Command>();
+        List<Command> commands = new ArrayList<>();
 
         int freeDefenses[] = getFreeDefenses(gameSituation);
         Position[] closerRivalPositions = getRivalsPositionsAroundGoalKeeper(gameSituation);
@@ -93,7 +93,7 @@ public class DefenseBeforeHand implements SoccerStrategy {
             return this.indexDefenses;
 
         } else {
-            List<Integer> freeDefensesList = new LinkedList<Integer>();
+            List<Integer> freeDefensesList = new LinkedList<>();
 
             for (int i = 0; i < this.indexDefenses.length; i++) {
 

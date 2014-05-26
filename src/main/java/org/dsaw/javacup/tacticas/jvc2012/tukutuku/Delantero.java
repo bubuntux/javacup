@@ -41,7 +41,7 @@ public class Delantero extends Jugador {
 	@Override
 	public ArrayList<Command> accionRemate() 
 	{
-		ArrayList<Command> accion = new ArrayList<Command>();
+		ArrayList<Command> accion = new ArrayList<>();
 		
 			
 		//Disparamos si estamos proximos al area

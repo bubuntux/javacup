@@ -98,7 +98,7 @@ public class Torneo {
     /**
      * Lista de tacticas aceptadas
      */
-    private static LinkedList<Class> tacticas = new LinkedList<Class>();
+    private static LinkedList<Class> tacticas = new LinkedList<>();
 
     /**
      * Metodo practico para crear liguillas todos contra todos, se debe indicar 'n' como la cantidad de equipos. Retorna un array donde: el primer indice representa la fecha el segundo representa el
@@ -256,7 +256,7 @@ public class Torneo {
     @SuppressWarnings("unchecked")
     private static Class[] getClases(File src, String paquete, Class claseAsignable, boolean recursivo) throws Exception {
         paquete = paquete.replace('.', '/');
-        LinkedList<Class> classes = new LinkedList<Class>();
+        LinkedList<Class> classes = new LinkedList<>();
         if (!paquete.endsWith("//svn")) {
             File directory = null;
             try {
@@ -579,8 +579,8 @@ public class Torneo {
         Tactic tl, tv;
         Torneo pt = null;
         boolean ok;
-        LinkedList<Class> pasan = new LinkedList<Class>();
-        LinkedList<Class> pasan2 = new LinkedList<Class>();
+        LinkedList<Class> pasan = new LinkedList<>();
+        LinkedList<Class> pasan2 = new LinkedList<>();
         Partido p = null;
         for (Class[] clases : clasificados) {
             pasan.addAll(Arrays.asList(clases));
@@ -705,10 +705,10 @@ public class Torneo {
 
     //ejecuta la fase 1, guarda los resultados en path
     static void primeraFase(String path) {
-        HashMap<Class, Integer> puntos = new HashMap<Class, Integer>();
-        HashMap<Class, Integer> goles = new HashMap<Class, Integer>();
-        HashMap<Class, Integer> golesafavor = new HashMap<Class, Integer>();
-        HashMap<Class, Integer> juegos = new HashMap<Class, Integer>();
+        HashMap<Class, Integer> puntos = new HashMap<>();
+        HashMap<Class, Integer> goles = new HashMap<>();
+        HashMap<Class, Integer> golesafavor = new HashMap<>();
+        HashMap<Class, Integer> juegos = new HashMap<>();
         for (Class c : tactics) {
             puntos.put(c, 0);
             goles.put(c, 0);

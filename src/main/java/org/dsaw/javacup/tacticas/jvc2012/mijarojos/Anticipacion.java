@@ -19,7 +19,7 @@ public class Anticipacion {
 	
     public LinkedList<CommandMoveTo> execute(){
 
-		LinkedList<CommandMoveTo> comandos = new LinkedList<CommandMoveTo>();
+		LinkedList<CommandMoveTo> comandos = new LinkedList<>();
 		
 		Position[] misJugadores = sp.myPlayers();
 		Position[] jugadoresRival = sp.rivalPlayers();

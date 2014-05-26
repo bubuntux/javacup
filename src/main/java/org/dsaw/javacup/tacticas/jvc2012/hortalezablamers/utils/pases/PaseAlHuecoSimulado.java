@@ -22,11 +22,11 @@ public class PaseAlHuecoSimulado {
 	public static final double MAX_ANGULO_2 = 105.;
 	public static final double MAX_ANGULO_3 = 180.;
 
-	public static Vector<Double> angulosRelativos1 = new Vector<Double>();
-	public static Vector<Double> angulosRelativos2 = new Vector<Double>();
-	public static Vector<Double> angulosRelativos3 = new Vector<Double>();
-	public static Vector<Double> potencias = new Vector<Double>();
-	public static Vector<Double> angulosVerticales = new Vector<Double>();
+	public static Vector<Double> angulosRelativos1 = new Vector<>();
+	public static Vector<Double> angulosRelativos2 = new Vector<>();
+	public static Vector<Double> angulosRelativos3 = new Vector<>();
+	public static Vector<Double> potencias = new Vector<>();
+	public static Vector<Double> angulosVerticales = new Vector<>();
 	public static Random random = new Random();
 
 	static {
@@ -78,7 +78,7 @@ public class PaseAlHuecoSimulado {
 		CommandMoveTo cmt = new CommandMoveTo(chbsToReturn.getIndiceReceptor(), chbsToReturn.getPosicionRecepcionMedia());
 
 		// devuelvo los comandos
-		Vector<Command> comandos = new Vector<Command>();
+		Vector<Command> comandos = new Vector<>();
 		comandos.add(chbsToReturn.getChb());
 		comandos.add(cmt);
 		return comandos;
@@ -96,7 +96,7 @@ public class PaseAlHuecoSimulado {
 		//PASES HACIA DELANTE
 		Vector<CommandHitBallSimulated> comandosSimulados = simularComandosPase(sp, gs, indicePasador, angulosRelativos1);
 		// filtramos los que tienen la diferencia de iteraciones en positivo
-		Vector<CommandHitBallSimulated> comandosSimuladosBeneficiosos = new Vector<CommandHitBallSimulated>();
+		Vector<CommandHitBallSimulated> comandosSimuladosBeneficiosos = new Vector<>();
 		for(CommandHitBallSimulated chbs : comandosSimulados)
 			if(chbs.getDiferenciaIteraciones() <= -3)
 				comandosSimuladosBeneficiosos.add(chbs);
@@ -106,7 +106,7 @@ public class PaseAlHuecoSimulado {
 			return decidirMejorPase(gs, comandosSimuladosBeneficiosos);
 		
 		// filtramos los que tienen la diferencia de iteraciones en positivo
-		Vector<CommandHitBallSimulated> comandosSimuladosAlLimite = new Vector<CommandHitBallSimulated>();
+		Vector<CommandHitBallSimulated> comandosSimuladosAlLimite = new Vector<>();
 		for(CommandHitBallSimulated chbs : comandosSimulados)
 			if(chbs.getDiferenciaIteraciones() < 0)
 				comandosSimuladosAlLimite.add(chbs);
@@ -118,7 +118,7 @@ public class PaseAlHuecoSimulado {
 		//PASES HACIA LOS LATERALES
 		comandosSimulados = simularComandosPase(sp, gs, indicePasador, angulosRelativos2);
 		// filtramos los que tienen la diferencia de iteraciones en positivo
-		comandosSimuladosBeneficiosos = new Vector<CommandHitBallSimulated>();
+		comandosSimuladosBeneficiosos = new Vector<>();
 		for(CommandHitBallSimulated chbs : comandosSimulados)
 			if(chbs.getDiferenciaIteraciones() <= -3 && !paseDemasiadoAtras(gs, chbs))
 				comandosSimuladosBeneficiosos.add(chbs);
@@ -128,7 +128,7 @@ public class PaseAlHuecoSimulado {
 			return decidirMejorPase(gs, comandosSimuladosBeneficiosos);
 		
 		// filtramos los que tienen la diferencia de iteraciones en positivo
-		comandosSimuladosAlLimite = new Vector<CommandHitBallSimulated>();
+		comandosSimuladosAlLimite = new Vector<>();
 		for(CommandHitBallSimulated chbs : comandosSimulados)
 			if(chbs.getDiferenciaIteraciones() < 0 && !paseDemasiadoAtras(gs, chbs))
 				comandosSimuladosAlLimite.add(chbs);
@@ -140,7 +140,7 @@ public class PaseAlHuecoSimulado {
 		//PASES HACIA ATRAS
 		comandosSimulados = simularComandosPase(sp, gs, indicePasador, angulosRelativos3);
 		// filtramos los que tienen la diferencia de iteraciones en positivo
-		comandosSimuladosBeneficiosos = new Vector<CommandHitBallSimulated>();
+		comandosSimuladosBeneficiosos = new Vector<>();
 		for(CommandHitBallSimulated chbs : comandosSimulados)
 			if(chbs.getDiferenciaIteraciones() <= -3 && !paseDemasiadoAtras(gs, chbs))
 				comandosSimuladosBeneficiosos.add(chbs);
@@ -150,7 +150,7 @@ public class PaseAlHuecoSimulado {
 			return decidirMejorPase(gs, comandosSimuladosBeneficiosos);
 		
 		// filtramos los que tienen la diferencia de iteraciones en positivo
-		comandosSimuladosAlLimite = new Vector<CommandHitBallSimulated>();
+		comandosSimuladosAlLimite = new Vector<>();
 		for(CommandHitBallSimulated chbs : comandosSimulados)
 			if(chbs.getDiferenciaIteraciones() < 0 && !paseDemasiadoAtras(gs, chbs))
 				comandosSimuladosAlLimite.add(chbs);
@@ -177,7 +177,7 @@ public class PaseAlHuecoSimulado {
 	 * @return
 	 */
 	private static Vector<CommandHitBallSimulated> simularComandosPase(SimuladorPases sp, GameSituations gs, int indicePasador, Vector<Double> angulosRelativos) {
-		Vector<CommandHitBallSimulated> comandosSimulados = new Vector<CommandHitBallSimulated>();
+		Vector<CommandHitBallSimulated> comandosSimulados = new Vector<>();
 		double anguloAPorteria = Math.toDegrees(gs.ballPosition().angle(Constants.centroArcoSup));
 		for(double anguloRelativo : angulosRelativos) // indice de angulos
 			for(double potencia : potencias) // indice de potencias
@@ -231,7 +231,7 @@ public class PaseAlHuecoSimulado {
 		Collections.sort(comandosSimulados);
 
 		double diferencia = comandosSimulados.firstElement().getDiferenciaIteraciones();
-		Vector<CommandHitBallSimulated> comandosSimuladosDeIgualDiferencia = new Vector<CommandHitBallSimulated>();
+		Vector<CommandHitBallSimulated> comandosSimuladosDeIgualDiferencia = new Vector<>();
 		for(CommandHitBallSimulated chbs : comandosSimulados) {
 			if(chbs.getDiferenciaIteraciones() == diferencia)
 				comandosSimuladosDeIgualDiferencia.add(chbs);

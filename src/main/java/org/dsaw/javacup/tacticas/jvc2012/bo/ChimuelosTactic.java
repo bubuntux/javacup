@@ -22,7 +22,7 @@ public class ChimuelosTactic implements Tactic {
     private Position[] alineacionRecibiendo;
    
     private TacticDetail detalle = new TacticSpecification();
-    private List<Command> commands = new LinkedList<Command>();
+    private List<Command> commands = new LinkedList<>();
     
     private int indexGoalKeeper;
     private int[] indexDefenses = {1, 2, 3, 4};

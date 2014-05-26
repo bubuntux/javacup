@@ -34,9 +34,9 @@ public class Shoot {
 		}
 	}
 	
-	private List<Double> bestLongProbability = new ArrayList<Double>();
-	private List<Double> bestMiddleProbability = new ArrayList<Double>();
-	private List<Double> bestShortProbability = new ArrayList<Double>();
+	private List<Double> bestLongProbability = new ArrayList<>();
+	private List<Double> bestMiddleProbability = new ArrayList<>();
+	private List<Double> bestShortProbability = new ArrayList<>();
 	
 	private double calculateThreshold(double probability) {
 		if(analysis.ball.distance(Constants.centroArcoSup) > 35){
@@ -74,7 +74,7 @@ public class Shoot {
 		double minAngle = ball.angle(Constants.posteDerArcoSup.movePosition(-Constants.RADIO_BALON, 0));
 		double maxAngle = ball.angle(Constants.posteIzqArcoSup.movePosition(Constants.RADIO_BALON, 0));
 		ShootData shoot = new ShootData(0, 0, 0, -1, 0);
-		List<ShootData> shoots = new ArrayList<ShootData>();
+		List<ShootData> shoots = new ArrayList<>();
 		int errorAngle = (int) Math.floor(Constants.getErrorAngular(precision)*90);
 		double angle = minAngle;
 		while(verticalAngle <= maxVerticalAngle){

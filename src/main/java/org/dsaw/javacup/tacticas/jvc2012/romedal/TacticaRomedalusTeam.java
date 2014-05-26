@@ -43,7 +43,7 @@ public class TacticaRomedalusTeam implements Tactic, Alineaciones {
 	private static Position				metaArribaDerecha	= Constants.esqSupIzqAreaChicaInf.movePosition(Constants.LARGO_AREA_CHICA, 0);
 
 	// comandos a ejecutar por iteracion
-	private final ArrayList<Command>	comandos			= new ArrayList<Command>();
+	private final ArrayList<Command>	comandos			= new ArrayList<>();
 	// detalle de mis jugadores
 	private final DetalleTactica		detalle				= new DetalleTactica(this.getClass().getSimpleName().substring(7));
 	// indica el indice del portero rival
@@ -63,15 +63,15 @@ public class TacticaRomedalusTeam implements Tactic, Alineaciones {
 	// posicion de destino para pase en vacio
 	private Balon						balonDestinoPase	= null;
 	// lista de jugadores que se encuentran realizando marcacion de rivales
-	final List<Integer>					marcando			= new ArrayList<Integer>();
+	final List<Integer>					marcando			= new ArrayList<>();
 	// lista de jugadores que intentan recuperar el balon
-	final List<Integer>					recuperando			= new ArrayList<Integer>();
+	final List<Integer>					recuperando			= new ArrayList<>();
 	// posicion del balon en la iteracion anterior
 	Balon								balonAnt			= null;
 	// informaci�n de la trayectoria del balon en las iteraciones siguientes
-	private final LinkedList<Balon>		trayectoria			= new LinkedList<Balon>();
+	private final LinkedList<Balon>		trayectoria			= new LinkedList<>();
 	// lista con las diferentes opciones de disparo
-	final TreeSet<OpcionesDisparo>		opcionesDisparo		= new TreeSet<OpcionesDisparo>();
+	final TreeSet<OpcionesDisparo>		opcionesDisparo		= new TreeSet<>();
 	// posision de los rivales en la iteracion anterior
 	private Position[]					rivales				= null;
 	double								puntosMios			= 0;
@@ -132,7 +132,7 @@ public class TacticaRomedalusTeam implements Tactic, Alineaciones {
 			}
 		}
 		if (pos != null) {
-			final ArrayList<CommandMoveTo> listaBorrar = new ArrayList<CommandMoveTo>();
+			final ArrayList<CommandMoveTo> listaBorrar = new ArrayList<>();
 			for (final Command c : comandos) {
 				if (c instanceof CommandMoveTo) {
 					final CommandMoveTo cmd = (CommandMoveTo) c;
@@ -222,7 +222,7 @@ public class TacticaRomedalusTeam implements Tactic, Alineaciones {
 							// se obtiene la trayectoria del balon al punto
 							final InfoTrayectoria info = obtenerDistanciaCalculada(balon, fuerza, potencia, angRadZ, velocidadJugador);
 							if (info != null) {
-								TreeSet<InfoTrayectoria> set = new TreeSet<InfoTrayectoria>();
+								TreeSet<InfoTrayectoria> set = new TreeSet<>();
 								final TreeMap<Double, TreeSet<InfoTrayectoria>> map = opcion.getOpciones();
 								if (map.containsKey(info.getDistancia())) {
 									set = map.get(info.getDistancia());
@@ -269,7 +269,7 @@ public class TacticaRomedalusTeam implements Tactic, Alineaciones {
 		final double x = balon.getPosition().getX();// cos(90)=0 por eso se omite
 		boolean altMax = false;
 		// iteraciones simuladas
-		final TreeSet<Double> distancias = new TreeSet<Double>();
+		final TreeSet<Double> distancias = new TreeSet<>();
 		distancias.add(0d);
 		for (int step = 1; step <= 200; step++) {
 
@@ -898,7 +898,7 @@ public class TacticaRomedalusTeam implements Tactic, Alineaciones {
 	 * Se ubica la alineaci�n dependiendo de la situraci�n del partido
 	 */
 	private void setAlineacion() {
-		final List<Integer> excluir = new ArrayList<Integer>();
+		final List<Integer> excluir = new ArrayList<>();
 		// se determinan los jugadores que ya tienen un comando de movimiento
 		// asignado para no reubicarlos en la alineacion
 		for (final Command com : comandos) {
@@ -1120,7 +1120,7 @@ public class TacticaRomedalusTeam implements Tactic, Alineaciones {
 		// velocidad de desplazamiento del receptor
 		final double velReceptor = Constants.getVelocidad(sp.getMyPlayerSpeed(idxReceptor));
 
-		final LinkedHashMap<Integer, TreeSet<ComandoGolpear>> angulosPosibles = new LinkedHashMap<Integer, TreeSet<ComandoGolpear>>();
+		final LinkedHashMap<Integer, TreeSet<ComandoGolpear>> angulosPosibles = new LinkedHashMap<>();
 
 		// posicion final de avance
 		// final Position pAvance = receptor.getX() < 0 ? Constants.centroArcoSup.movePosition(-16, -6) : Constants.centroArcoSup.movePosition(16, -6);
@@ -1177,7 +1177,7 @@ public class TacticaRomedalusTeam implements Tactic, Alineaciones {
 								return comando;
 							}
 							comando.setAnguloXY(ang);
-							TreeSet<ComandoGolpear> list = new TreeSet<ComandoGolpear>();
+							TreeSet<ComandoGolpear> list = new TreeSet<>();
 							if (angulosPosibles.get(ang) != null) {
 								list = angulosPosibles.get(ang);
 							}
@@ -1219,7 +1219,7 @@ public class TacticaRomedalusTeam implements Tactic, Alineaciones {
 			final double angleXY = sp.ballPosition().angle(pFinal);
 
 			// si el tiro es preciso al punto calculado
-			final LinkedList<Balon> trayectoriaBalon = new LinkedList<Balon>();
+			final LinkedList<Balon> trayectoriaBalon = new LinkedList<>();
 			// se obtiene la trayectoria del balon al punto y las iteraciones que pasan hasta que el receptor reciba el balon
 			final int iterReceptor = obtenerTrayectoriaCalculada(trayectoriaBalon, balon, info.getPotencia(), angleXY, info.getAngulo(), pFinal, true, idxReceptor, 100);
 			// si el metodo retorna mas de una iteracion, es pq se alcanza el punto deseado
@@ -1381,7 +1381,7 @@ public class TacticaRomedalusTeam implements Tactic, Alineaciones {
 
 		final double velocidadRemate = Constants.getVelocidadRemate(pateador.getPower());
 		final double maxX = (Constants.LARGO_ARCO / 2);
-		final LinkedList<Position> opciones = new LinkedList<Position>();
+		final LinkedList<Position> opciones = new LinkedList<>();
 		final Position pInicial = Constants.centroArcoSup;
 
 		opciones.add(pInicial);
@@ -1402,7 +1402,7 @@ public class TacticaRomedalusTeam implements Tactic, Alineaciones {
 					// angulo vertical en radianes
 					final double angRadZ = Math.max(0, Math.min(angZ, Constants.ANGULO_VERTICAL_MAX)) * (TO_RAD);
 					// si el tiro es preciso al punto calculado
-					final LinkedList<Balon> trayectoriaBalon = new LinkedList<Balon>();
+					final LinkedList<Balon> trayectoriaBalon = new LinkedList<>();
 					// se obtiene la trayectoria del balon al punto
 					final int iteraciones = obtenerTrayectoriaCalculada(trayectoriaBalon, balon, potencia, angleXY, angRadZ, position, false, -1, 100);
 					// si el metodo retorna mas de una iteracion, es pq se alcanza el punto deseado

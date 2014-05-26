@@ -20,7 +20,7 @@ public class TacticaImpl {
 	int tipo = 1;
 	static int inicioRetrasoSaquePorteria = -1;
 	static int porteroRival = 0;
-	List<Position> desmarques = new ArrayList<Position>();
+	List<Position> desmarques = new ArrayList<>();
 
 	
 	public TacticaImpl(GameSituations gameSituation) {
@@ -68,7 +68,7 @@ public class TacticaImpl {
 	public Position jugadorAdelantadoMasCercano (Position punto) {
 		Position pos = null;
 		Position posOptima = null;
-		List<Position> jug = new ArrayList<Position>();
+		List<Position> jug = new ArrayList<>();
 		// Obtenemos los jugadores adelantados
 		int margen = 10;
 		for(Position p : sp.myPlayers()){
@@ -427,7 +427,7 @@ public class TacticaImpl {
 		Integer indice;
 		int idRemove = 0;
 		
-		List<Integer> aux = new ArrayList<Integer>();
+		List<Integer> aux = new ArrayList<>();
 		for (int j=0;j<alineaciones.getDefensores().size();j++){
 			aux.add((Integer) alineaciones.getDefensores().get(j));
 		}

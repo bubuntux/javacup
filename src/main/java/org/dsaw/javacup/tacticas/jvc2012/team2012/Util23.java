@@ -13,13 +13,13 @@ public class Util23 {
 
 	private static final Integer			RIVALES_SIN_MARCA	= 0;
 
-	private static Map<Integer, Integer>	marcas				= new HashMap<Integer, Integer>();
+	private static Map<Integer, Integer>	marcas				= new HashMap<>();
 
 	private boolean							optimizarTrayectoria;
 
 	public Util23(GameSituations gs) {
 		optimizarTrayectoria = true;
-		ArrayList<Integer> miosMarcando = new ArrayList<Integer>();
+		ArrayList<Integer> miosMarcando = new ArrayList<>();
 		int[] posRivales = Constants.centroCampoJuego.nearestIndexes(gs.rivalPlayers());
 		int sinMarca = 0;
 		for (int i = 1; i < posRivales.length - RIVALES_SIN_MARCA; i++) {

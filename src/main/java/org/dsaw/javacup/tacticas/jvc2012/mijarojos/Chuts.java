@@ -137,7 +137,7 @@ public class Chuts {
 	
 	public LinkedList<CommandHitBall> execute(){
 		Position[] misJugadores = this.sp.myPlayers();
-		LinkedList<CommandHitBall> comandos = new LinkedList<CommandHitBall>();
+		LinkedList<CommandHitBall> comandos = new LinkedList<>();
 		// Recorre la lista de mis jugadores que pueden rematar
 		for (int i : sp.canKick()) {
 			if(this.esElUltimoConRivales(i)){

@@ -44,18 +44,18 @@ public class TacticaTiquiTacaTeam implements Tactic {
 
 	
     TacticaTiquiTacaTeamDetalle detalle = new TacticaTiquiTacaTeamDetalle();
-    LinkedList<Command> comandos = new LinkedList<Command>();
+    LinkedList<Command> comandos = new LinkedList<>();
 
     // Variables que contendrán los indices de los jugadores atendiendo a su ubicación.
-    HashSet<Jugador> conjuntoDefensas = new HashSet<Jugador>();
-    HashSet<Jugador> conjuntoMedios = new HashSet<Jugador>();
-    HashSet<Jugador> conjuntoDelanteros = new HashSet<Jugador>();
-    HashSet<Jugador> conjuntoJugadores = new HashSet<Jugador>();
+    HashSet<Jugador> conjuntoDefensas = new HashSet<>();
+    HashSet<Jugador> conjuntoMedios = new HashSet<>();
+    HashSet<Jugador> conjuntoDelanteros = new HashSet<>();
+    HashSet<Jugador> conjuntoJugadores = new HashSet<>();
 
     // Variables que contendr�n los indices de los rivalPlayers atendiendo a su ubicaci�n.
-    HashSet<Rival> rivalesSectorDefensa = new HashSet<Rival>();
-    HashSet<Rival> rivalesSectorMedio = new HashSet<Rival>();
-    HashSet<Rival> rivalesSectorAtaque = new HashSet<Rival>();
+    HashSet<Rival> rivalesSectorDefensa = new HashSet<>();
+    HashSet<Rival> rivalesSectorMedio = new HashSet<>();
+    HashSet<Rival> rivalesSectorAtaque = new HashSet<>();
 
     Jugador[] arrayJugadores = new Jugador[11];
     Rival[] arrayRivales = new Rival[11];
@@ -160,7 +160,7 @@ public class TacticaTiquiTacaTeam implements Tactic {
         }
         
         // Instanciamos el objeto en el que almacenaremos la trayectoria del bal�n.
-        listaTrayectoria = new ArrayList<Balon>();
+        listaTrayectoria = new ArrayList<>();
         
         // Instanciamos el objeto que nos permitira generar las acciones a realizar.
         gen = new Generador();
@@ -247,7 +247,7 @@ public class TacticaTiquiTacaTeam implements Tactic {
     
     private void cargaValoresPase (int i) {
     	
-    	Hashtable<Integer, Double> t = new Hashtable<Integer, Double>();
+    	Hashtable<Integer, Double> t = new Hashtable<>();
     	
     	// Jugador de máxima fuerza de remate.
     	if (detalle.getPlayers()[i].getPower() == 1) {
@@ -562,7 +562,7 @@ public class TacticaTiquiTacaTeam implements Tactic {
     		jugador.setMarcaje(null);
     	}
     	
-    	HashSet<Integer> rivalesMarcados = new HashSet<Integer>();
+    	HashSet<Integer> rivalesMarcados = new HashSet<>();
     	int defensasQueMarcan = 0;
     	
     	int[] arrayRivalesCercanos = Constants.centroArcoInf.nearestIndexes(sp.rivalPlayers());

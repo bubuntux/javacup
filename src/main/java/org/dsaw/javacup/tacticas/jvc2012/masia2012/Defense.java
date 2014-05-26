@@ -126,7 +126,7 @@ public class Defense {
 
 	
 	private List<PositionsDefend> calculatePositionsDefends() {
-		List<PositionsDefend> positionsDefends = new ArrayList<Defense.PositionsDefend>();
+		List<PositionsDefend> positionsDefends = new ArrayList<>();
 		for (int i = 0; i < analysis.rivalPlayers.length; i++) {
 			if(i != analysis.rivalClosestToBall)
 				positionsDefends.add(new PositionsDefend(analysis.rivalPlayers[i], false));

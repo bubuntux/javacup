@@ -18,15 +18,15 @@ public class MovimientoCobertura {
 	protected Vector<Integer> propiosCubridores;
 	
 	public MovimientoCobertura() {
-		rivalesCubiertos = new HashMap<Integer, Integer>();
+		rivalesCubiertos = new HashMap<>();
 	}
 
 	public List<Command> fijarCoberturas(GameSituations gs) {
 	
-		LinkedList<Command> comandos = new LinkedList<Command>();
+		LinkedList<Command> comandos = new LinkedList<>();
 
 		// ordeno los rivales que estan en mi campo en funcion de su distancia a mi porteria
-		Vector<IndiceYDistancia> distanciaRivalesAPorteria = new Vector<IndiceYDistancia>();
+		Vector<IndiceYDistancia> distanciaRivalesAPorteria = new Vector<>();
 		for(Integer i = 0; i < 11; i++) {
 			if(gs.rivalPlayers()[i].getY() < 0)
 				distanciaRivalesAPorteria.add(new IndiceYDistancia(i, gs.rivalPlayers()[i].distance(Constants.centroArcoInf)));

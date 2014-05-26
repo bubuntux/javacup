@@ -178,8 +178,8 @@ public final class TacticDetailImpl implements TacticDetail {
     private Color colorPortero2;
     private EstiloUniforme estilo2;
     private JugadorImpl[] jugadores = new JugadorImpl[11];
-    private ArrayList<Position[]> alineaciones = new ArrayList<Position[]>();
-    private ArrayList<Integer> tipoAlineacion = new ArrayList<Integer>();
+    private ArrayList<Position[]> alineaciones = new ArrayList<>();
+    private ArrayList<Integer> tipoAlineacion = new ArrayList<>();
     private transient Random rand = new Random();
 
     /**Modifica una alineacion*/
