@@ -14,7 +14,7 @@ public final class BallRender {
 
   public BallRender() throws SlickException {
     for (int i = 0; i < 6; i++) {
-      ball[i] = new Image("imagenes/balon/ball" + i + ".png");
+      ball[i] = new Image("imagenes/balon/balon" + i + ".png");
     }
     shadow = new Image("imagenes/balon/sombra.png");
   }
