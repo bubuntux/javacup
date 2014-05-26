@@ -94,62 +94,77 @@ public class tomates implements Tactic {
 
     class TacticDetailImpl implements TacticDetail {
 
+        @Override
         public String getTacticName() {
             return "Tomates Mecanicos";
         }
 
+        @Override
         public String getCountry() {
             return "Colombia";
         }
 
+        @Override
         public String getCoach() {
             return "Diego Parra";
         }
 
+        @Override
         public Color getShirtColor() {
             return new Color(255, 0, 0);
         }
 
+        @Override
         public Color getShortsColor() {
             return new Color(0, 0, 0);
         }
 
+        @Override
         public Color getShirtLineColor() {
             return new Color(0, 0, 0);
         }
 
+        @Override
         public Color getSocksColor() {
             return new Color(51, 51, 51);
         }
 
+        @Override
         public Color getGoalKeeper() {
             return new Color(0, 153, 0);
         }
 
+        @Override
         public EstiloUniforme getStyle() {
             return EstiloUniforme.LINEAS_VERTICALES;
         }
 
+        @Override
         public Color getShirtColor2() {
             return new Color(0, 0, 0);
         }
 
+        @Override
         public Color getShortsColor2() {
             return new Color(153, 0, 0);
         }
 
+        @Override
         public Color getShirtLineColor2() {
             return new Color(255, 255, 255);
         }
 
+        @Override
         public Color getSocksColor2() {
             return new Color(255, 255, 255);
         }
 
+        @Override
         public Color getGoalKeeper2() {
             return new Color(255, 255, 0);
         }
 
+        @Override
         public EstiloUniforme getStyle2() {
             return EstiloUniforme.SIN_ESTILO;
         }
@@ -175,39 +190,48 @@ public class tomates implements Tactic {
                 this.portero = portero;
             }
 
+            @Override
             public String getPlayerName() {
                 return nombre;
             }
 
+            @Override
             public Color getSkinColor() {
                 return piel;
             }
 
+            @Override
             public Color getHairColor() {
                 return pelo;
             }
 
+            @Override
             public int getNumber() {
                 return numero;
             }
 
+            @Override
             public boolean isGoalKeeper() {
                 return portero;
             }
 
+            @Override
             public double getSpeed() {
                 return velocidad;
             }
 
+            @Override
             public double getPower() {
                 return remate;
             }
 
+            @Override
             public double getPrecision() {
                 return presicion;
             }
         }
 
+        @Override
         public PlayerDetail[] getPlayers() {
             return new PlayerDetail[]{
                         new JugadorImpl("Fabian", 1, new Color(255, 200, 150), new Color(50, 0, 0), 0.92d, 0.95d, 0.76d, true),
@@ -226,19 +250,23 @@ public class tomates implements Tactic {
     }
     TacticDetail detalle = new TacticDetailImpl();
 
+    @Override
     public TacticDetail getDetail() {
         return detalle;
     }
 
+    @Override
     public Position[] getStartPositions(GameSituations sp) {
         return alineacion5;
     }
 
+    @Override
     public Position[] getNoStartPositions(GameSituations sp) {
         return alineacion6;
     }
     LinkedList<Command> comandos = new LinkedList<>();
 
+    @Override
     public List<Command> execute(GameSituations sp) {
 
         comandos.clear();

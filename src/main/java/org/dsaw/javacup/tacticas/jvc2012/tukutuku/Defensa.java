@@ -28,7 +28,8 @@ public class Defensa extends Jugador
 	}
 
 			
-	public ArrayList<Command> accionRemate()
+	@Override
+        public ArrayList<Command> accionRemate()
 	{
 		ArrayList<Command> accion = new ArrayList<>();
 		

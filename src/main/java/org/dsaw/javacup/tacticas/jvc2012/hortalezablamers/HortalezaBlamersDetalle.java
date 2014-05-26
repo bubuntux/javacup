@@ -9,63 +9,78 @@ import org.dsaw.javacup.render.EstiloUniforme;
 
 public class HortalezaBlamersDetalle implements TacticDetail {
 
-	public String getTacticName() {
+	@Override
+        public String getTacticName() {
 		return "HortalezaBlamers";
 	}
 
-	public String getCountry() {
+	@Override
+        public String getCountry() {
 		return "España";
 	}
 
-	public String getCoach() {
+	@Override
+        public String getCoach() {
 		return "Al Jabber";
 	}
 
-	public Color getShirtColor() {
+	@Override
+        public Color getShirtColor() {
 		return new Color(255, 102, 0);
 	}
 
-	public Color getShortsColor() {
+	@Override
+        public Color getShortsColor() {
 		return new Color(0, 0, 153);
 	}
 
-	public Color getShirtLineColor() {
+	@Override
+        public Color getShirtLineColor() {
 		return new Color(255, 255, 255);
 	}
 
-	public Color getSocksColor() {
+	@Override
+        public Color getSocksColor() {
 		return new Color(255, 102, 0);
 	}
 
-	public Color getGoalKeeper() {
+	@Override
+        public Color getGoalKeeper() {
 		return new Color(102, 102, 102);
 	}
 
-	public EstiloUniforme getStyle() {
+	@Override
+        public EstiloUniforme getStyle() {
 		return EstiloUniforme.LINEAS_VERTICALES;
 	}
 
-	public Color getShirtColor2() {
+	@Override
+        public Color getShirtColor2() {
 		return new Color(192, 138, 142);
 	}
 
-	public Color getShortsColor2() {
+	@Override
+        public Color getShortsColor2() {
 		return new Color(32, 71, 66);
 	}
 
-	public Color getShirtLineColor2() {
+	@Override
+        public Color getShirtLineColor2() {
 		return new Color(85, 169, 111);
 	}
 
-	public Color getSocksColor2() {
+	@Override
+        public Color getSocksColor2() {
 		return new Color(215, 153, 189);
 	}
 
-	public Color getGoalKeeper2() {
+	@Override
+        public Color getGoalKeeper2() {
 		return new Color(45, 101, 149);
 	}
 
-	public EstiloUniforme getStyle2() {
+	@Override
+        public EstiloUniforme getStyle2() {
 		return EstiloUniforme.LINEAS_HORIZONTALES;
 	}
 
@@ -90,40 +105,49 @@ public class HortalezaBlamersDetalle implements TacticDetail {
 			this.portero=portero;
 		}
 
-		public String getPlayerName() {
+		@Override
+                public String getPlayerName() {
 			return nombre;
 		}
 
-		public Color getSkinColor() {
+		@Override
+                public Color getSkinColor() {
 			return piel;
 		}
 
-		public Color getHairColor() {
+		@Override
+                public Color getHairColor() {
 			return pelo;
 		}
 
-		public int getNumber() {
+		@Override
+                public int getNumber() {
 			return numero;
 		}
 
-		public boolean isGoalKeeper() {
+		@Override
+                public boolean isGoalKeeper() {
 			return portero;
 		}
 
-		public double getSpeed() {
+		@Override
+                public double getSpeed() {
 			return velocidad;
 		}
 
-		public double getPower() {
+		@Override
+                public double getPower() {
 			return remate;
 		}
 
-		public double getPrecision() {
+		@Override
+                public double getPrecision() {
 			return presicion;
 		}
 
 	}
 
+    @Override
     public PlayerDetail[] getPlayers() {
         return new PlayerDetail[]{
         		new JugadorImpl("Joven", 1, new Color(255,200,150), new Color(50,0,0),         1d,     1d,  1d, true),

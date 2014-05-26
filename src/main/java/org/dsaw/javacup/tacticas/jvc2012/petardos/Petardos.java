@@ -66,63 +66,78 @@ public class Petardos implements Tactic {
 
 	class TacticDetailImpl implements TacticDetail {
 		
-		public String getTacticName() {
+		@Override
+                public String getTacticName() {
 			return "Petardos";
 		}
 
-		public String getCountry() {
+		@Override
+                public String getCountry() {
 			return "España";
 		}
 
-		public String getCoach() {
+		@Override
+                public String getCoach() {
 			return "jge_coco";
 		}
 
-		public Color getShirtColor() {
+		@Override
+                public Color getShirtColor() {
 			return new Color(255, 255, 0);
 		}
 
-		public Color getShortsColor() {
+		@Override
+                public Color getShortsColor() {
 			return new Color(204, 102, 0);
 		}
 
-		public Color getShirtLineColor() {
+		@Override
+                public Color getShirtLineColor() {
 			return new Color(255, 255, 255);
 		}
 
-		public Color getSocksColor() {
+		@Override
+                public Color getSocksColor() {
 			return new Color(255, 255, 0);
 		}
 
-		public Color getGoalKeeper() {
+		@Override
+                public Color getGoalKeeper() {
 			return new Color(204, 204, 204);
 		}
 
-		public EstiloUniforme getStyle() {
+		@Override
+                public EstiloUniforme getStyle() {
 			return EstiloUniforme.SIN_ESTILO;
 		}
 
-		public Color getShirtColor2() {
+		@Override
+                public Color getShirtColor2() {
 			return new Color(255, 255, 255);
 		}
 
-		public Color getShortsColor2() {
+		@Override
+                public Color getShortsColor2() {
 			return new Color(255, 0, 102);
 		}
 
-		public Color getShirtLineColor2() {
+		@Override
+                public Color getShirtLineColor2() {
 			return new Color(255, 255, 255);
 		}
 
-		public Color getSocksColor2() {
+		@Override
+                public Color getSocksColor2() {
 			return new Color(255, 204, 0);
 		}
 
-		public Color getGoalKeeper2() {
+		@Override
+                public Color getGoalKeeper2() {
 			return new Color(155, 53, 201);
 		}
 
-		public EstiloUniforme getStyle2() {
+		@Override
+                public EstiloUniforme getStyle2() {
 			return EstiloUniforme.SIN_ESTILO;
 		}
 
@@ -147,41 +162,50 @@ public class Petardos implements Tactic {
 				this.portero = portero;
 			}
 
-			public String getPlayerName() {
+			@Override
+                        public String getPlayerName() {
 				return nombre;
 			}
 
-			public Color getSkinColor() {
+			@Override
+                        public Color getSkinColor() {
 				return piel;
 			}
 
-			public Color getHairColor() {
+			@Override
+                        public Color getHairColor() {
 				return pelo;
 			}
 
-			public int getNumber() {
+			@Override
+                        public int getNumber() {
 				return numero;
 			}
 
-			public boolean isGoalKeeper() {
+			@Override
+                        public boolean isGoalKeeper() {
 				return portero;
 			}
 
-			public double getSpeed() {
+			@Override
+                        public double getSpeed() {
 				return velocidad;
 			}
 
-			public double getPower() {
+			@Override
+                        public double getPower() {
 				return remate;
 			}
 
-			public double getPrecision() {
+			@Override
+                        public double getPrecision() {
 				return presicion;
 			}
 			
 		}
 
-		public PlayerDetail[] getPlayers() {
+		@Override
+                public PlayerDetail[] getPlayers() {
 			return new PlayerDetail[]{
 				new JugadorImpl("Petardo01",  1, new Color(255,200,150), new Color(50,0,0),1.0d,0.5d,1.0d, true),
 				new JugadorImpl("Petardo02",  2, new Color(255,200,150), new Color(50,0,0),1.0d,0.5d,1.0d, false),
@@ -200,15 +224,18 @@ public class Petardos implements Tactic {
 
 	TacticDetail detalle = new TacticDetailImpl();
 
-	public TacticDetail getDetail() {
+	@Override
+        public TacticDetail getDetail() {
 		return detalle;
 	}
 	
-	public Position[] getStartPositions(GameSituations sp) {
+	@Override
+        public Position[] getStartPositions(GameSituations sp) {
 		return alineacion1;
 	}
 	
-	public Position[] getNoStartPositions(GameSituations sp) {
+	@Override
+        public Position[] getNoStartPositions(GameSituations sp) {
 		return alineacion2;
 	}
 
@@ -744,7 +771,8 @@ public class Petardos implements Tactic {
 		return ampp;
 	}
 	
-	public List<Command> execute(GameSituations sp) {
+	@Override
+        public List<Command> execute(GameSituations sp) {
 
 		actualizarDatosEntradaIteracion(sp);
 		

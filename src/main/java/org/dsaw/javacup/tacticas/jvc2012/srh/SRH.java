@@ -21,7 +21,8 @@ public class SRH implements Tactic {
 	// Variables de la clase
 	GameSituations sitAct;
 
-	public TacticDetail getDetail() {
+	@Override
+        public TacticDetail getDetail() {
 		return new SRHTacticDetail();
 	}
 
@@ -124,11 +125,13 @@ public class SRH implements Tactic {
 	Position[] rivales;
 	Position balon;
 
-	public Position[] getStartPositions(GameSituations sp) {
+	@Override
+        public Position[] getStartPositions(GameSituations sp) {
 		return alineacion5;
 	}
 
-	public Position[] getNoStartPositions(GameSituations sp) {
+	@Override
+        public Position[] getNoStartPositions(GameSituations sp) {
 		return alineacion6;
 	}
 

@@ -63,9 +63,9 @@ public class Torneo {
         //partido.inicioRapido();
         int iter = 0;
         for (int i = 0; partido.getEstado() != 7; i++) {
-            bar.setValue(partido.getIteracion());
+            bar.setValue(partido.getIteration());
             partido.iterar();
-            iter = partido.getIteracion();
+            iter = partido.getIteration();
             if (i > 100000) {
                 throw new Exception("partido bloqueado");
             }

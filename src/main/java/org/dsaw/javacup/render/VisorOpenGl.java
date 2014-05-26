@@ -656,7 +656,7 @@ public class VisorOpenGl implements Game {
             escalaTemporal = escala;
             if (!noAutoEscalar) {
                 escala = Math.min(escala, escalaAjustada);
-                if (partido.getIteracion() < 50) {
+                if (partido.getIteration() < 50) {
                     escalaGradual = escalaGradual + (escala - escalaGradual) * 0.01;
                 } else {
                     escalaGradual = escalaGradual + (escala - escalaGradual) * 0.2;
@@ -791,7 +791,7 @@ public class VisorOpenGl implements Game {
             pc.pintaEstadio(g, p, escala);
         }
         if (marcador) {
-            pm.pintaMarcador(partido.getGolesLocal(), partido.getGolesVisita(), partido.getIteracion(), partido.getPosesionBalonLocal(), g);
+            pm.pintaMarcador(partido.getGolesLocal(), partido.getGolesVisita(), partido.getIteration(), partido.getPosesionBalonLocal(), g);
         }
         if (golIter > 0) {
             double zoom = 1 + 0.05 * (golIter % 3);
@@ -840,7 +840,7 @@ public class VisorOpenGl implements Game {
             g.drawLine(sx - 13, sy - 23 - valorInicio, sx - 12, sy - 23 - valorInicio);
         }
         if (showTexto) {
-            if (partido.getIteracion() < 50) {
+            if (partido.getIteration() < 50) {
                 g.setColor(Color.black);
                 g.drawString(partido.getDetalleVisita().getTacticName() + " (Visita)", sx2 + 11, sy2 + 11);
                 g.drawString("vs", sx2 + 41, sy2 + 41);
@@ -852,7 +852,7 @@ public class VisorOpenGl implements Game {
             }
         }
         if (showTexto) {
-            if (partido.getIteracion() > Constants.ITERACIONES) {
+            if (partido.getIteration() > Constants.ITERACIONES) {
                 g.setColor(Color.black);
                 g.drawString("Gana", sx2 + 11, sy2 + 11);
                 if ((partido.getGolesLocal() > partido.getGolesVisita()) ||

@@ -99,62 +99,77 @@ public class Junior implements Tactic {
 
     class TacticDetailImpl implements TacticDetail {
 
+        @Override
         public String getTacticName() {
             return "Junior";
         }
 
+        @Override
         public String getCountry() {
             return "Colombia";
         }
 
+        @Override
         public String getCoach() {
             return "Eliecer Mendoza";
         }
 
+        @Override
         public Color getShirtColor() {
             return new Color(255, 0, 51);
         }
 
+        @Override
         public Color getShortsColor() {
             return new Color(0, 51, 255);
         }
 
+        @Override
         public Color getShirtLineColor() {
             return new Color(255, 255, 255);
         }
 
+        @Override
         public Color getSocksColor() {
             return new Color(255, 255, 255);
         }
 
+        @Override
         public Color getGoalKeeper() {
             return new Color(242, 7, 42        );
         }
 
+        @Override
         public EstiloUniforme getStyle() {
             return EstiloUniforme.LINEAS_VERTICALES;
         }
 
+        @Override
         public Color getShirtColor2() {
             return new Color(162, 0, 255);
         }
 
+        @Override
         public Color getShortsColor2() {
             return new Color(150, 217, 101);
         }
 
+        @Override
         public Color getShirtLineColor2() {
             return new Color(188, 76, 203);
         }
 
+        @Override
         public Color getSocksColor2() {
             return new Color(152, 204, 80);
         }
 
+        @Override
         public Color getGoalKeeper2() {
             return new Color(53, 150, 144        );
         }
 
+        @Override
         public EstiloUniforme getStyle2() {
             return EstiloUniforme.FRANJA_HORIZONTAL;
         }
@@ -180,40 +195,49 @@ public class Junior implements Tactic {
                 this.portero=portero;
             }
 
+            @Override
             public String getPlayerName() {
                 return nombre;
             }
 
+            @Override
             public Color getSkinColor() {
                 return piel;
             }
 
+            @Override
             public Color getHairColor() {
                 return pelo;
             }
 
+            @Override
             public int getNumber() {
                 return numero;
             }
 
+            @Override
             public boolean isGoalKeeper() {
                 return portero;
             }
 
+            @Override
             public double getSpeed() {
                 return velocidad;
             }
 
+            @Override
             public double getPower() {
                 return remate;
             }
 
+            @Override
             public double getPrecision() {
                 return presicion;
             }
 
         }
 
+        @Override
         public PlayerDetail[] getPlayers() {
             return new PlayerDetail[]{
                 new JugadorImpl("Adrián Berbia", 1, new Color(255,200,150), new Color(50,0,0),0.6d,0.5d,0.5d, true),
@@ -232,14 +256,17 @@ public class Junior implements Tactic {
     }
 
     TacticDetail detalle=new TacticDetailImpl();
+    @Override
     public TacticDetail getDetail() {
         return detalle;
     }
 
+    @Override
     public Position[] getStartPositions(GameSituations sp) {
     return alineacion3;
     }
 
+    @Override
     public Position[] getNoStartPositions(GameSituations sp) {
     return alineacion2;
     }
@@ -247,6 +274,7 @@ public class Junior implements Tactic {
   //Lista de comandos
     LinkedList<Command> comandos = new LinkedList<>();
     
+    @Override
     public List<Command> execute(GameSituations sp) {
 		//Limpia la lista de comandos
 		comandos.clear();

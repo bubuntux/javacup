@@ -263,62 +263,77 @@ public class Tactica implements Tactic {
 
     class TacticDetailImpl implements TacticDetail {
 
+        @Override
         public String getTacticName() {
             return "Tuku-Tuku";
         }
 
+        @Override
         public String getCountry() {
             return "España";
         }
 
+        @Override
         public String getCoach() {
             return "Victor Revelationi";
         }
 
+        @Override
         public Color getShirtColor() {
             return new Color(255, 0, 0);
         }
 
+        @Override
         public Color getShortsColor() {
             return new Color(255, 0, 0);
         }
 
+        @Override
         public Color getShirtLineColor() {
             return new Color(0, 0, 0);
         }
 
+        @Override
         public Color getSocksColor() {
             return new Color(255, 0, 1);
         }
 
+        @Override
         public Color getGoalKeeper() {
             return new Color(255, 153, 51        );
         }
 
+        @Override
         public EstiloUniforme getStyle() {
             return EstiloUniforme.LINEAS_VERTICALES;
         }
 
+        @Override
         public Color getShirtColor2() {
             return new Color(41, 51, 38);
         }
 
+        @Override
         public Color getShortsColor2() {
             return new Color(192, 180, 103);
         }
 
+        @Override
         public Color getShirtLineColor2() {
             return new Color(220, 123, 194);
         }
 
+        @Override
         public Color getSocksColor2() {
             return new Color(207, 157, 30);
         }
 
+        @Override
         public Color getGoalKeeper2() {
             return new Color(52, 148, 88        );
         }
 
+        @Override
         public EstiloUniforme getStyle2() {
             return EstiloUniforme.FRANJA_HORIZONTAL;
         }
@@ -344,40 +359,49 @@ public class Tactica implements Tactic {
                 this.portero=portero;
             }
 
+            @Override
             public String getPlayerName() {
                 return nombre;
             }
 
+            @Override
             public Color getSkinColor() {
                 return piel;
             }
 
+            @Override
             public Color getHairColor() {
                 return pelo;
             }
 
+            @Override
             public int getNumber() {
                 return numero;
             }
 
+            @Override
             public boolean isGoalKeeper() {
                 return portero;
             }
 
+            @Override
             public double getSpeed() {
                 return velocidad;
             }
 
+            @Override
             public double getPower() {
                 return remate;
             }
 
+            @Override
             public double getPrecision() {
                 return presicion;
             }
 
         }
 
+        @Override
         public PlayerDetail[] getPlayers() {
             return new PlayerDetail[]{
             		 new JugadorImpl("Bambino", 1, new Color(255,200,150), new Color(255,204,0),1.0d,1.0d,0.0d, true),
@@ -396,21 +420,25 @@ public class Tactica implements Tactic {
     }
 
     TacticDetail detalle=new TacticDetailImpl();
+    @Override
     public TacticDetail getDetail() {
         return detalle;
     }
 
+    @Override
     public Position[] getStartPositions(GameSituations sp) {
     return alineacion12;
     }
 
+    @Override
     public Position[] getNoStartPositions(GameSituations sp) {
     return alineacion13;
     }
 
     
     
-    public List<Command> execute(GameSituations sp) 
+    @Override
+    public List<Command> execute(GameSituations sp)
     {
     	
     	return entrenador.procesarIteraccion(sp);

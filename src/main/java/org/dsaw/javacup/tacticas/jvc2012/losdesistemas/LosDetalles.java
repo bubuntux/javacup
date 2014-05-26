@@ -9,62 +9,77 @@ import org.dsaw.javacup.model.TacticDetail;
 
 public class LosDetalles implements TacticDetail{
 	
-	public String getTacticName() {
+	@Override
+        public String getTacticName() {
         return "LOS DE SISTEMAS";
     }
 
+    @Override
     public String getCountry() {
         return "Argentina";
     }
 
+    @Override
     public String getCoach() {
         return "Los Pibes";
     }
 
+    @Override
     public Color getShirtColor() {
         return new Color(0, 0, 255);
     }
 
+    @Override
     public Color getShortsColor() {
         return new Color(255, 255, 255);
     }
 
+    @Override
     public Color getShirtLineColor() {
         return new Color(255, 255, 255);
     }
 
+    @Override
     public Color getSocksColor() {
         return new Color(255, 255, 255);
     }
 
+    @Override
     public Color getGoalKeeper() {
         return new Color(255, 255, 255        );
     }
 
+    @Override
     public EstiloUniforme getStyle() {
         return EstiloUniforme.FRANJA_HORIZONTAL;
     }
 
+    @Override
     public Color getShirtColor2() {
         return new Color(255, 255, 0);
     }
 
+    @Override
     public Color getShortsColor2() {
         return new Color(0, 0, 255);
     }
 
+    @Override
     public Color getShirtLineColor2() {
         return new Color(0, 0, 255);
     }
 
+    @Override
     public Color getSocksColor2() {
         return new Color(255, 255, 0);
     }
 
+    @Override
     public Color getGoalKeeper2() {
         return new Color(255, 255, 0        );
     }
 
+    @Override
     public EstiloUniforme getStyle2() {
         return EstiloUniforme.FRANJA_HORIZONTAL;
     }
@@ -90,40 +105,49 @@ public class LosDetalles implements TacticDetail{
             this.portero=portero;
         }
 
+        @Override
         public String getPlayerName() {
             return nombre;
         }
 
+        @Override
         public Color getSkinColor() {
             return piel;
         }
 
+        @Override
         public Color getHairColor() {
             return pelo;
         }
 
+        @Override
         public int getNumber() {
             return numero;
         }
 
+        @Override
         public boolean isGoalKeeper() {
             return portero;
         }
 
+        @Override
         public double getSpeed() {
             return velocidad;
         }
 
+        @Override
         public double getPower() {
             return remate;
         }
 
+        @Override
         public double getPrecision() {
             return presicion;
         }
 
     }
 
+    @Override
     public PlayerDetail[] getPlayers() {
         return new PlayerDetail[]{
         		new PlayerDetailImpl("Messi", 1, new Color(255,200,150), new Color(50,0,0),0.5d,0.5d,0.59d, true),

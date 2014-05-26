@@ -52,62 +52,77 @@ public class MoleTeam implements Tactic {
 
 
     class TacticDetailImpl implements TacticDetail {
+        @Override
         public String getTacticName() {
             return "MoleTeam";
         }
 
+        @Override
         public String getCountry() {
             return "España";
         }
 
+        @Override
         public String getCoach() {
             return "Jagoba Los Arcos";
         }
 
+        @Override
         public Color getShirtColor() {
             return new Color(255, 0, 0);
         }
 
+        @Override
         public Color getShortsColor() {
             return new Color(0, 0, 0);
         }
 
+        @Override
         public Color getShirtLineColor() {
             return new Color(255, 255, 255);
         }
 
+        @Override
         public Color getSocksColor() {
             return new Color(0, 0, 0);
         }
 
+        @Override
         public Color getGoalKeeper() {
             return new Color(0, 255, 0        );
         }
 
+        @Override
         public EstiloUniforme getStyle() {
             return EstiloUniforme.LINEAS_VERTICALES;
         }
 
+        @Override
         public Color getShirtColor2() {
             return new Color(89, 60, 75);
         }
 
+        @Override
         public Color getShortsColor2() {
             return new Color(135, 251, 251);
         }
 
+        @Override
         public Color getShirtLineColor2() {
             return new Color(171, 1, 167);
         }
 
+        @Override
         public Color getSocksColor2() {
             return new Color(189, 54, 6);
         }
 
+        @Override
         public Color getGoalKeeper2() {
             return new Color(203, 229, 164        );
         }
 
+        @Override
         public EstiloUniforme getStyle2() {
             return EstiloUniforme.FRANJA_HORIZONTAL;
         }
@@ -133,40 +148,49 @@ public class MoleTeam implements Tactic {
                 this.portero=portero;
             }
 
+            @Override
             public String getPlayerName() {
                 return nombre;
             }
 
+            @Override
             public Color getSkinColor() {
                 return piel;
             }
 
+            @Override
             public Color getHairColor() {
                 return pelo;
             }
 
+            @Override
             public int getNumber() {
                 return numero;
             }
 
+            @Override
             public boolean isGoalKeeper() {
                 return portero;
             }
 
+            @Override
             public double getSpeed() {
                 return velocidad;
             }
 
+            @Override
             public double getPower() {
                 return remate;
             }
 
+            @Override
             public double getPrecision() {
                 return presicion;
             }
 
         }
 
+        @Override
         public PlayerDetail[] getPlayers() {
             /*Full Speed*/
              return new PlayerDetail[]{
@@ -200,18 +224,22 @@ public class MoleTeam implements Tactic {
     }
 
     TacticDetail detalle=new TacticDetailImpl();
+    @Override
     public TacticDetail getDetail() {
         return detalle;
     }
 
+    @Override
     public Position[] getStartPositions(GameSituations sp) {
     return alineacionSacando;
     }
 
+    @Override
     public Position[] getNoStartPositions(GameSituations sp) {
     return alineacionRecibiendo;
     }
     Variables vars;
+    @Override
     public List<Command> execute(GameSituations sp) {
         vars = new Variables(sp);
         for(int i=0;i<11;i++)

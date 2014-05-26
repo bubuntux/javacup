@@ -27,35 +27,43 @@ public class PlayerImpl implements PlayerDetail {
 		this.goalKeeper = portero;
 	}
 
-	public String getPlayerName() {
+	@Override
+        public String getPlayerName() {
 		return name;
 	}
 
-	public Color getSkinColor() {
+	@Override
+        public Color getSkinColor() {
 		return skin;
 	}
 
-	public Color getHairColor() {
+	@Override
+        public Color getHairColor() {
 		return hair;
 	}
 
-	public int getNumber() {
+	@Override
+        public int getNumber() {
 		return number;
 	}
 
-	public boolean isGoalKeeper() {
+	@Override
+        public boolean isGoalKeeper() {
 		return goalKeeper;
 	}
 
-	public double getSpeed() {
+	@Override
+        public double getSpeed() {
 		return velocity;
 	}
 
-	public double getPower() {
+	@Override
+        public double getPower() {
 		return shot;
 	}
 
-	public double getPrecision() {
+	@Override
+        public double getPrecision() {
 		return presicion;
 	}
 

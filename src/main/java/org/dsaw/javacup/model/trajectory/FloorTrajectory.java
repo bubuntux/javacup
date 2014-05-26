@@ -12,6 +12,7 @@ public class FloorTrajectory extends AbstractTrajectory {
         xf = getX(dt);
     }
 
+    @Override
     public double getX(double t) {
         if (t > dt) {
             return xf;
@@ -21,10 +22,12 @@ public class FloorTrajectory extends AbstractTrajectory {
         }
     }
 
+    @Override
     public double getY(double t) {
         return 0;
     }
 
+    @Override
     public double getDt() {
         return vx0 / k;
     }

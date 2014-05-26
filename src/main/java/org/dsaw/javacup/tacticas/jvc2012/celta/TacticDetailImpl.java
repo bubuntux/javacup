@@ -8,67 +8,83 @@ import org.dsaw.javacup.render.EstiloUniforme;
 
 public class TacticDetailImpl implements TacticDetail {
 
-	public String getTacticName() {
+	@Override
+        public String getTacticName() {
 		return "Celta";
 	}
 
-	public String getCountry() {
+	@Override
+        public String getCountry() {
 		return "España";
 	}
 
-	public String getCoach() {
+	@Override
+        public String getCoach() {
 		return "Cristian González";
 	}
 
-	public Color getShirtColor() {
+	@Override
+        public Color getShirtColor() {
 		return new Color(102, 204, 255);
 	}
 
-	public Color getShortsColor() {
+	@Override
+        public Color getShortsColor() {
 		return new Color(255, 255, 255);
 	}
 
-	public Color getShirtLineColor() {
+	@Override
+        public Color getShirtLineColor() {
 		return new Color(255, 51, 51);
 	}
 
-	public Color getSocksColor() {
+	@Override
+        public Color getSocksColor() {
 		return new Color(102, 204, 255);
 	}
 
-	public Color getGoalKeeper() {
+	@Override
+        public Color getGoalKeeper() {
 		return new Color(255, 51, 51);
 	}
 
-	public EstiloUniforme getStyle() {
+	@Override
+        public EstiloUniforme getStyle() {
 		return EstiloUniforme.SIN_ESTILO;
 	}
 
-	public Color getShirtColor2() {
+	@Override
+        public Color getShirtColor2() {
 		return new Color(255, 51, 51);
 	}
 
-	public Color getShortsColor2() {
+	@Override
+        public Color getShortsColor2() {
 		return new Color(255, 0, 0);
 	}
 
-	public Color getShirtLineColor2() {
+	@Override
+        public Color getShirtLineColor2() {
 		return new Color(255, 255, 255);
 	}
 
-	public Color getSocksColor2() {
+	@Override
+        public Color getSocksColor2() {
 		return new Color(255, 51, 51);
 	}
 
-	public Color getGoalKeeper2() {
+	@Override
+        public Color getGoalKeeper2() {
 		return new Color(51, 51, 51);
 	}
 
-	public EstiloUniforme getStyle2() {
+	@Override
+        public EstiloUniforme getStyle2() {
 		return EstiloUniforme.SIN_ESTILO;
 	}
 	
-	public PlayerDetail[] getPlayers() {
+	@Override
+        public PlayerDetail[] getPlayers() {
 		return new PlayerDetail[] {
 				new PlayerImpl("Yoel", 1, new Color(255, 200, 150), new Color(
 						50, 0, 0), 0.87d, 1.0d, 1.0d, true),//.57

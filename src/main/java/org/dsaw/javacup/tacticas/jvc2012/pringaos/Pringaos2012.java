@@ -475,62 +475,77 @@ class Pases {
 class Pringaos2012Detalle implements TacticDetail {
 
 
+    @Override
     public String getTacticName() {
         return "Los Pringaos";
     }
 
+    @Override
     public String getCountry() {
         return "España";
     }
 
+    @Override
     public String getCoach() {
         return "Sito";
     }
 
+    @Override
     public Color getShirtColor() {
         return new Color(255, 0, 0);
     }
 
+    @Override
     public Color getShortsColor() {
         return new Color(47, 66, 203);
     }
 
+    @Override
     public Color getShirtLineColor() {
         return new Color(255, 255, 255);
     }
 
+    @Override
     public Color getSocksColor() {
         return new Color(255, 0, 0);
     }
 
+    @Override
     public Color getGoalKeeper() {
         return new Color(255, 255, 0        );
     }
 
+    @Override
     public EstiloUniforme getStyle() {
         return EstiloUniforme.LINEAS_VERTICALES;
     }
 
+    @Override
     public Color getShirtColor2() {
         return new Color(0, 0, 0);
     }
 
+    @Override
     public Color getShortsColor2() {
         return new Color(0, 0, 0);
     }
 
+    @Override
     public Color getShirtLineColor2() {
         return new Color(255, 0, 0);
     }
 
+    @Override
     public Color getSocksColor2() {
         return new Color(0, 0, 0);
     }
 
+    @Override
     public Color getGoalKeeper2() {
         return new Color(255, 255, 0        );
     }
 
+    @Override
     public EstiloUniforme getStyle2() {
         return EstiloUniforme.SIN_ESTILO;
     }
@@ -556,40 +571,49 @@ class Pringaos2012Detalle implements TacticDetail {
             this.portero=portero;
         }
 
+        @Override
         public String getPlayerName() {
             return nombre;
         }
 
+        @Override
         public Color getSkinColor() {
             return piel;
         }
 
+        @Override
         public Color getHairColor() {
             return pelo;
         }
 
+        @Override
         public int getNumber() {
             return numero;
         }
 
+        @Override
         public boolean isGoalKeeper() {
             return portero;
         }
 
+        @Override
         public double getSpeed() {
             return velocidad;
         }
 
+        @Override
         public double getPower() {
             return remate;
         }
 
+        @Override
         public double getPrecision() {
             return precision;
         }
 
     }
 
+    @Override
     public PlayerDetail[] getPlayers() {
         return new PlayerDetail[]{
            new JugadorImpl("Calamardo", 1, new Color(255,200,150), new Color(255,200,150),1.0d,1.0d,0.67d, true),

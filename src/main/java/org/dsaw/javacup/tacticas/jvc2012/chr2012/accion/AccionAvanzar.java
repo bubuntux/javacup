@@ -20,7 +20,8 @@ public class AccionAvanzar implements Accion {
 	}
 
 	
-	public Command comando() {
+	@Override
+        public Command comando() {
 		return comando;
 	}
 

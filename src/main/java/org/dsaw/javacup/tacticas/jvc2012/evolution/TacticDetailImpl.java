@@ -9,62 +9,77 @@ import org.dsaw.javacup.model.util.Position;;
 
 public class TacticDetailImpl implements TacticDetail {
 
+    @Override
     public String getTacticName() {
         return "San Marino Evolution";
     }
 
+    @Override
     public String getCountry() {
         return "España";
     }
 
+    @Override
     public String getCoach() {
         return "Joserra";
     }
 
+    @Override
     public Color getShirtColor() {
         return new Color(102, 0, 204);
     }
 
+    @Override
     public Color getShortsColor() {
         return new Color(0, 0, 0);
     }
 
+    @Override
     public Color getShirtLineColor() {
         return new Color(153, 153, 0);
     }
 
+    @Override
     public Color getSocksColor() {
         return new Color(0, 0, 0);
     }
 
+    @Override
     public Color getGoalKeeper() {
         return new Color(204, 204, 204        );
     }
 
+    @Override
     public EstiloUniforme getStyle() {
         return EstiloUniforme.SIN_ESTILO;
     }
 
+    @Override
     public Color getShirtColor2() {
         return new Color(33, 94, 85);
     }
 
+    @Override
     public Color getShortsColor2() {
         return new Color(229, 204, 244);
     }
 
+    @Override
     public Color getShirtLineColor2() {
         return new Color(218, 235, 195);
     }
 
+    @Override
     public Color getSocksColor2() {
         return new Color(235, 236, 24);
     }
 
+    @Override
     public Color getGoalKeeper2() {
         return new Color(67, 208, 45        );
     }
 
+    @Override
     public EstiloUniforme getStyle2() {
         return EstiloUniforme.LINEAS_VERTICALES;
     }
@@ -90,40 +105,49 @@ public class TacticDetailImpl implements TacticDetail {
             this.portero=portero;
         }
 
+        @Override
         public String getPlayerName() {
             return nombre;
         }
 
+        @Override
         public Color getSkinColor() {
             return piel;
         }
 
+        @Override
         public Color getHairColor() {
             return pelo;
         }
 
+        @Override
         public int getNumber() {
             return numero;
         }
 
+        @Override
         public boolean isGoalKeeper() {
             return portero;
         }
 
+        @Override
         public double getSpeed() {
             return velocidad;
         }
 
+        @Override
         public double getPower() {
             return remate;
         }
 
+        @Override
         public double getPrecision() {
             return presicion;
         }
 
     }
 
+    @Override
     public PlayerDetail[] getPlayers() {
         return new PlayerDetail[]{
         		new JugadorImpl("Nete", 7, new Color(255,200,150), new Color(50,0,0),1.0d,0.7d,0.75d, false),

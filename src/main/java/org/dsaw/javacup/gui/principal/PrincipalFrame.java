@@ -514,6 +514,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         setIconImage(new ImageIcon("recursos/imagenes/iconos/icon.png").getImage());
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -535,6 +536,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         tacticas.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         tacticas.setFocusable(false);
         tacticas.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 tacticasMouseReleased(evt);
             }
@@ -571,6 +573,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         jButton5.setPreferredSize(new java.awt.Dimension(150, 35));
         jButton5.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton5.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
@@ -618,6 +621,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         jButton6.setPreferredSize(new java.awt.Dimension(150, 35));
         jButton6.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton6.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
@@ -662,6 +666,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         jButton1.setMaximumSize(new java.awt.Dimension(400, 27));
         jButton1.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton1.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
@@ -698,6 +703,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         jButton7.setPreferredSize(new java.awt.Dimension(150, 35));
         jButton7.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton7.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
@@ -713,6 +719,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         jComboBox1.setMinimumSize(new java.awt.Dimension(150, 20));
         jComboBox1.setPreferredSize(new java.awt.Dimension(150, 20));
         jComboBox1.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox1ActionPerformed(evt);
             }
@@ -750,6 +757,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         jButton10.setFocusable(false);
         jButton10.setMaximumSize(new java.awt.Dimension(2048, 25));
         jButton10.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton10ActionPerformed(evt);
             }
@@ -767,6 +775,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         jButton14.setMaximumSize(new java.awt.Dimension(2048, 25));
         jButton14.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton14.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton14ActionPerformed(evt);
             }
@@ -796,6 +805,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         jButton12.setPreferredSize(new java.awt.Dimension(87, 50));
         jButton12.setVerticalTextPosition(javax.swing.SwingConstants.BOTTOM);
         jButton12.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton12ActionPerformed(evt);
             }
@@ -810,6 +820,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         jComboBox3.setMaximumSize(new java.awt.Dimension(32767, 25));
         jComboBox3.setMinimumSize(new java.awt.Dimension(25, 19));
         jComboBox3.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jComboBox3ActionPerformed(evt);
             }
@@ -838,6 +849,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         jCheckBox11.setFont(new java.awt.Font("Arial", 0, 10));
         jCheckBox11.setText("Activar Sonidos"); // NOI18N
         jCheckBox11.addActionListener(new java.awt.event.ActionListener() {
+            @Override
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jCheckBox11ActionPerformed(evt);
             }
@@ -1204,7 +1216,7 @@ private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 VisorBasico.sonidos = datos.sonidos;
                 VisorBasico.fps = datos.fps;
                 if (jCheckBox12.isSelected()) {
-                    while (p.getIteracion() < Constants.ITERACIONES) {
+                    while (p.getIteration() < Constants.ITERACIONES) {
                         try {
                             p.iterar();
                         } catch (Exception e) {
@@ -1231,7 +1243,7 @@ private void jButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRS
                 VisorOpenGl.setTexto(datos.tipoTexto);
                 VisorOpenGl.sonidos = datos.sonidos;
                 if (jCheckBox12.isSelected()) {
-                    while (p.getIteracion() < Constants.ITERACIONES) {
+                    while (p.getIteration() < Constants.ITERACIONES) {
                         try {
                             p.iterar();
                         } catch (Exception e) {

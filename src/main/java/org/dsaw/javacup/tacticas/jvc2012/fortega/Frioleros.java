@@ -77,63 +77,78 @@ public class Frioleros implements Tactic {
 
 	class TacticDetailImpl implements TacticDetail {
 
-		public String getTacticName() {
+		@Override
+                public String getTacticName() {
 			return "Frioleros";
 		}
 
-		public String getCountry() {
+		@Override
+                public String getCountry() {
 			return "Groenlandia";
 		}
 
-		public String getCoach() {
+		@Override
+                public String getCoach() {
 			return "Sr Ortega";
 		}
 
-		public Color getShirtColor() {
+		@Override
+                public Color getShirtColor() {
 			return new Color(0, 0, 0);
 		}
 
-		public Color getShortsColor() {
+		@Override
+                public Color getShortsColor() {
 			return new Color(0, 0, 0);
 		}
 
-		public Color getShirtLineColor() {
+		@Override
+                public Color getShirtLineColor() {
 			return new Color(255, 255, 0);
 		}
 
-		public Color getSocksColor() {
+		@Override
+                public Color getSocksColor() {
 			return new Color(0, 0, 0);
 		}
 
-		public Color getGoalKeeper() {
+		@Override
+                public Color getGoalKeeper() {
 			return new Color(255, 255, 0);
 		}
 
-		public EstiloUniforme getStyle() {
+		@Override
+                public EstiloUniforme getStyle() {
 			return EstiloUniforme.SIN_ESTILO;
 		}
 
-		public Color getShirtColor2() {
+		@Override
+                public Color getShirtColor2() {
 			return new Color(255, 255, 51);
 		}
 
-		public Color getShortsColor2() {
+		@Override
+                public Color getShortsColor2() {
 			return new Color(0, 0, 0);
 		}
 
-		public Color getShirtLineColor2() {
+		@Override
+                public Color getShirtLineColor2() {
 			return new Color(255, 255, 0);
 		}
 
-		public Color getSocksColor2() {
+		@Override
+                public Color getSocksColor2() {
 			return new Color(0, 0, 0);
 		}
 
-		public Color getGoalKeeper2() {
+		@Override
+                public Color getGoalKeeper2() {
 			return new Color(0, 0, 0);
 		}
 
-		public EstiloUniforme getStyle2() {
+		@Override
+                public EstiloUniforme getStyle2() {
 			return EstiloUniforme.SIN_ESTILO;
 		}
 
@@ -159,40 +174,49 @@ public class Frioleros implements Tactic {
 				this.portero = portero;
 			}
 
-			public String getPlayerName() {
+			@Override
+                        public String getPlayerName() {
 				return nombre;
 			}
 
-			public Color getSkinColor() {
+			@Override
+                        public Color getSkinColor() {
 				return piel;
 			}
 
-			public Color getHairColor() {
+			@Override
+                        public Color getHairColor() {
 				return pelo;
 			}
 
-			public int getNumber() {
+			@Override
+                        public int getNumber() {
 				return numero;
 			}
 
-			public boolean isGoalKeeper() {
+			@Override
+                        public boolean isGoalKeeper() {
 				return portero;
 			}
 
-			public double getSpeed() {
+			@Override
+                        public double getSpeed() {
 				return velocidad;
 			}
 
-			public double getPower() {
+			@Override
+                        public double getPower() {
 				return remate;
 			}
 
-			public double getPrecision() {
+			@Override
+                        public double getPrecision() {
 				return presicion;
 			}
 		}
 
-		public PlayerDetail[] getPlayers() {
+		@Override
+                public PlayerDetail[] getPlayers() {
 			return new PlayerDetail[] {
 					new JugadorImpl("Eustoquio", 1, new Color(51, 51, 51),
 							new Color(0, 0, 0), 1.0d, 1.0d, 1.0d, true),
@@ -221,15 +245,18 @@ public class Frioleros implements Tactic {
 
 	TacticDetail detalle = new TacticDetailImpl();
 
-	public TacticDetail getDetail() {
+	@Override
+        public TacticDetail getDetail() {
 		return detalle;
 	}
 
-	public Position[] getStartPositions(GameSituations sp) {
+	@Override
+        public Position[] getStartPositions(GameSituations sp) {
 		return alineacion2;
 	}
 
-	public Position[] getNoStartPositions(GameSituations sp) {
+	@Override
+        public Position[] getNoStartPositions(GameSituations sp) {
 		return alineacion3;
 	}
 

@@ -14,62 +14,77 @@ public class Mijarojos implements Tactic {
 
     class TacticDetailImpl implements TacticDetail {
 
+        @Override
         public String getTacticName() {
             return "mijarojos";
         }
 
+        @Override
         public String getCountry() {
             return "España";
         }
 
+        @Override
         public String getCoach() {
             return "Gus";
         }
 
+        @Override
         public Color getShirtColor() {
             return new Color(255, 255, 0);
         }
 
+        @Override
         public Color getShortsColor() {
             return new Color(0, 0, 0);
         }
 
+        @Override
         public Color getShirtLineColor() {
             return new Color(0, 0, 0);
         }
 
+        @Override
         public Color getSocksColor() {
             return new Color(255, 255, 0);
         }
 
+        @Override
         public Color getGoalKeeper() {
             return new Color(132, 24, 188        );
         }
 
+        @Override
         public EstiloUniforme getStyle() {
             return EstiloUniforme.SIN_ESTILO;
         }
 
+        @Override
         public Color getShirtColor2() {
             return new Color(143, 253, 190);
         }
 
+        @Override
         public Color getShortsColor2() {
             return new Color(110, 154, 138);
         }
 
+        @Override
         public Color getShirtLineColor2() {
             return new Color(170, 16, 34);
         }
 
+        @Override
         public Color getSocksColor2() {
             return new Color(242, 33, 152);
         }
 
+        @Override
         public Color getGoalKeeper2() {
             return new Color(212, 12, 149        );
         }
 
+        @Override
         public EstiloUniforme getStyle2() {
             return EstiloUniforme.LINEAS_HORIZONTALES;
         }
@@ -95,40 +110,49 @@ public class Mijarojos implements Tactic {
                 this.portero=portero;
             }
 
+            @Override
             public String getPlayerName() {
                 return nombre;
             }
 
+            @Override
             public Color getSkinColor() {
                 return piel;
             }
 
+            @Override
             public Color getHairColor() {
                 return pelo;
             }
 
+            @Override
             public int getNumber() {
                 return numero;
             }
 
+            @Override
             public boolean isGoalKeeper() {
                 return portero;
             }
 
+            @Override
             public double getSpeed() {
                 return velocidad;
             }
 
+            @Override
             public double getPower() {
                 return remate;
             }
 
+            @Override
             public double getPrecision() {
                 return presicion;
             }
 
         }
 
+        @Override
         public PlayerDetail[] getPlayers() {
             return new PlayerDetail[]{
                     new JugadorImpl("Jugador", 1, new Color(255,200,150), new Color(50,0,0),1.0d,1.0d,0.5d, true),
@@ -147,14 +171,17 @@ public class Mijarojos implements Tactic {
     }
 
     TacticDetail detalle=new TacticDetailImpl();
+    @Override
     public TacticDetail getDetail() {
         return detalle;
     }
 
+    @Override
     public Position[] getStartPositions(GameSituations sp) {
     	return Alineaciones.alineacion2;
     }
 
+    @Override
     public Position[] getNoStartPositions(GameSituations sp) {
     	return Alineaciones.alineacion3;
     }

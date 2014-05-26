@@ -28,7 +28,8 @@ public class AccionPasar implements Accion {
 
 
 
-	public Command comando() {
+	@Override
+        public Command comando() {
 		return comando;
 	}
 

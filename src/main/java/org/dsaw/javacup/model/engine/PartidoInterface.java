@@ -63,7 +63,7 @@ public interface PartidoInterface {
     public int getGolesVisita();
 
     /**Retorna el numero de la iteracion*/
-    public int getIteracion();
+    public int getIteration();
 
     /**Retorna la posecion del balon del local*/
     public double getPosesionBalonLocal();

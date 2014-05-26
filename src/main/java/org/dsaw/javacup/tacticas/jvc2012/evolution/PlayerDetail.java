@@ -26,34 +26,42 @@ class JugadorImpl implements PlayerDetail {
         this.portero=portero;
     }
 
+    @Override
     public String getPlayerName() {
         return nombre;
     }
 
+    @Override
     public Color getSkinColor() {
         return piel;
     }
 
+    @Override
     public Color getHairColor() {
         return pelo;
     }
 
+    @Override
     public int getNumber() {
         return numero;
     }
 
+    @Override
     public boolean isGoalKeeper() {
         return portero;
     }
 
+    @Override
     public double getSpeed() {
         return velocidad;
     }
 
+    @Override
     public double getPower() {
         return remate;
     }
 
+    @Override
     public double getPrecision() {
         return presicion;
     }

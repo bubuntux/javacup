@@ -14,63 +14,78 @@ import java.awt.Color;
  */
 public class TacticaTiquiTacaTeamDetalle  implements TacticDetail {
 
+    @Override
     public String getTacticName() {
         return "Tiqui-Taca Team";
     }
 
+    @Override
     public String getCountry() {
         return "España";
     }
 
+    @Override
     public String getCoach() {
         return "El Sabio de Hortaleza";
     }
 
     
+    @Override
     public Color getShirtColor() {
         return new Color(0, 0, 0);
     }
 
+    @Override
     public Color getShortsColor() {
         return new Color(0, 0, 0);
     }
 
+    @Override
     public Color getShirtLineColor() {
         return new Color(255, 255, 0);
     }
 
+    @Override
     public Color getSocksColor() {
         return new Color(0, 0, 0);
     }
 
+    @Override
     public Color getGoalKeeper() {
         return new Color(255, 255, 0        );
     }
 
+    @Override
     public EstiloUniforme getStyle() {
         return EstiloUniforme.SIN_ESTILO;
     }
 
+    @Override
     public Color getShirtColor2() {
         return new Color(255, 255, 0);
     }
 
+    @Override
     public Color getShortsColor2() {
         return new Color(255, 255, 0);
     }
 
+    @Override
     public Color getShirtLineColor2() {
         return new Color(0, 0, 0);
     }
 
+    @Override
     public Color getSocksColor2() {
         return new Color(255, 255, 0);
     }
 
+    @Override
     public Color getGoalKeeper2() {
         return new Color(0, 0, 0        );
     }
 
+    @Override
     public EstiloUniforme getStyle2() {
         return EstiloUniforme.SIN_ESTILO;
     }    
@@ -97,40 +112,49 @@ public class TacticaTiquiTacaTeamDetalle  implements TacticDetail {
             this.portero=portero;
         }
 
+        @Override
         public String getPlayerName() {
             return nombre;
         }
 
+        @Override
         public Color getSkinColor() {
             return piel;
         }
 
+        @Override
         public Color getHairColor() {
             return pelo;
         }
 
+        @Override
         public int getNumber() {
             return numero;
         }
 
+        @Override
         public boolean isGoalKeeper() {
             return portero;
         }
 
+        @Override
         public double getSpeed() {
             return velocidad;
         }
 
+        @Override
         public double getPower() {
             return remate;
         }
 
+        @Override
         public double getPrecision() {
             return presicion;
         }
 
     }
 
+    @Override
     public PlayerDetail[] getPlayers() {
     	 																					// velocidad, remate, presicion
         return new PlayerDetail[]{

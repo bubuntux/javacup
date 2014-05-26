@@ -92,6 +92,7 @@ public final class PintaJugadorNew extends PintaJugador {
 
     /**Actualiza los cambios sobre la implementacion en los graficos
      */
+    @Override
     public synchronized void update(boolean alternativa) throws SlickException {
         Image all = null;
         if (impl.getStyle() == EstiloUniforme.SIN_ESTILO) {
@@ -169,10 +170,12 @@ public final class PintaJugadorNew extends PintaJugador {
         }
     }
 
+    @Override
     public void setImpl(TacticDetail impl) {
         this.impl = impl;
     }
 
+    @Override
     public void pintaJugador(int jugador, int iter, double angulo, double escala, double x, double y, Graphics g) {
         escala = escala / 14;
         x = x - 23 * escala;
@@ -205,12 +208,14 @@ public final class PintaJugadorNew extends PintaJugador {
     }
     private TrueTypeFont font = new TrueTypeFont(new java.awt.Font("lucida console", 1, 12), true);
 
+    @Override
     public void pintaNumero(int jugador, double x, double y, Graphics g) {
         g.setColor(Color.yellow);
         g.setFont(font);
         g.drawString("" + impl.getPlayers()[jugador].getNumber(), (int) x - 6, (int) y - (int) (3 * Constants.ESCALA));
     }
 
+    @Override
     public void pintaNombre(int jugador, double x, double y, Graphics g) {
         g.setColor(Color.white);
         g.setFont(font);
@@ -218,6 +223,7 @@ public final class PintaJugadorNew extends PintaJugador {
         g.drawString(nombre, (int) x - nombre.length() * 4, (int) y + (int) Constants.ESCALA);
     }
 
+    @Override
     public void pintaSombra(int jugador, int iter, double angulo, double escala, double x, double y, Graphics g) {
         escala = escala / 10;
         x = x - 15 * escala;

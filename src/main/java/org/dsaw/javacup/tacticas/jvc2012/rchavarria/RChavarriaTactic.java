@@ -20,18 +20,22 @@ public class RChavarriaTactic implements Tactic {
     private GoalKeeper goalKeeper = new GoalKeeper();
     private Recoveries recoveries = new Recoveries();
     
+    @Override
     public TacticDetail getDetail() {
         return detail;
     }
 
+    @Override
     public Position[] getStartPositions(GameSituations sp) {
         return lineups.getStartPositions();
     }
 
+    @Override
     public Position[] getNoStartPositions(GameSituations sp) {
         return lineups.getNoStartPositions();
     }
 
+    @Override
     public List<Command> execute(GameSituations sp) {
         List<Command> commands = new LinkedList<>();
 

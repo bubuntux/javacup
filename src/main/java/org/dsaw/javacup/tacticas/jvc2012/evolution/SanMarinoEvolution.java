@@ -88,15 +88,18 @@ public class SanMarinoEvolution implements Tactic {
         
 	TacticDetail detalle = new TacticDetailImpl();
 
-	public TacticDetail getDetail() {
+	@Override
+        public TacticDetail getDetail() {
 		return detalle;
 	}
 
-	public Position[] getStartPositions(GameSituations sp) {
+	@Override
+        public Position[] getStartPositions(GameSituations sp) {
 		return alineacionStarts;
 	}
 
-	public Position[] getNoStartPositions(GameSituations sp) {
+	@Override
+        public Position[] getNoStartPositions(GameSituations sp) {
 		return alineacionNoStarts;
 	}
 

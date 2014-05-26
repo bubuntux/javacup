@@ -200,7 +200,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
                         jp = new PintaJugador(impl, uniformeAlternativo);
                         jp.update(uniformeAlternativo);
                     } catch (SlickException ex) {
-                        logger.error("Error al actualizar uniforme", ex);
+                        logger.error("Error al update uniforme", ex);
                     }
                     newImpl = false;
                 }
@@ -309,6 +309,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jComboBox7 = new JComboBox();
         JPanel jPanel3 = new JPanel() {
 
+            @Override
             public void paint(Graphics g) {
                 g.drawImage(cancha, 0, 0, null);
                 Color c;
@@ -422,6 +423,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         setCursor(new Cursor(Cursor.DEFAULT_CURSOR));
         setResizable(false);
         addWindowListener(new WindowAdapter() {
+            @Override
             public void windowClosing(WindowEvent evt) {
                 formWindowClosing(evt);
             }
@@ -440,6 +442,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jTextField1.setFont(new Font("Arial", 0, 12));
         jTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
             public void focusLost(FocusEvent evt) {
                 jTextField1FocusLost(evt);
             }
@@ -454,6 +457,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jComboBox1.setFont(new Font("Arial", 0, 12));
         jComboBox1.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
             public void focusLost(FocusEvent evt) {
                 jComboBox1FocusLost(evt);
             }
@@ -468,6 +472,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jTextField2.setFont(new Font("Arial", 0, 12));
         jTextField2.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
             public void focusLost(FocusEvent evt) {
                 jTextField2FocusLost(evt);
             }
@@ -507,6 +512,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jComboBox7.setFont(new Font("Arial", 0, 12));
         jComboBox7.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jComboBox7ActionPerformed(evt);
             }
@@ -530,6 +536,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton1.setText(" "); // NOI18N
         jButton1.setFocusable(false);
         jButton1.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
@@ -541,6 +548,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton2.setText(" "); // NOI18N
         jButton2.setFocusable(false);
         jButton2.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton2ActionPerformed(evt);
             }
@@ -552,6 +560,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton3.setText(" "); // NOI18N
         jButton3.setFocusable(false);
         jButton3.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton3ActionPerformed(evt);
             }
@@ -563,6 +572,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton4.setText(" "); // NOI18N
         jButton4.setFocusable(false);
         jButton4.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton4ActionPerformed(evt);
             }
@@ -574,6 +584,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton5.setText(" "); // NOI18N
         jButton5.setFocusable(false);
         jButton5.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton5ActionPerformed(evt);
             }
@@ -585,6 +596,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton8.setText("Al Azar"); // NOI18N
         jButton8.setFocusable(false);
         jButton8.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton8ActionPerformed(evt);
             }
@@ -595,6 +607,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jComboBox4.setFont(new Font("Arial", 0, 12));
         jComboBox4.setModel(new DefaultComboBoxModel(new String[]{"Equipamiento Principal", "Equipamiento Secundario"}));
         jComboBox4.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jComboBox4ActionPerformed(evt);
             }
@@ -622,19 +635,23 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jTextField3.setFont(new Font("Arial", 0, 12));
         jTextField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
             public void focusGained(FocusEvent evt) {
                 jTextField3FocusGained(evt);
             }
 
+            @Override
             public void focusLost(FocusEvent evt) {
                 jTextField3FocusLost(evt);
             }
         });
         jTextField3.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
             public void keyPressed(KeyEvent evt) {
                 jTextField3KeyPressed(evt);
             }
 
+            @Override
             public void keyReleased(KeyEvent evt) {
                 jTextField3KeyReleased(evt);
             }
@@ -642,19 +659,23 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
 
         jTextField4.setFont(new Font("Arial", 0, 12));
         jTextField4.addFocusListener(new java.awt.event.FocusAdapter() {
+            @Override
             public void focusGained(FocusEvent evt) {
                 jTextField4FocusGained(evt);
             }
 
+            @Override
             public void focusLost(FocusEvent evt) {
                 jTextField4FocusLost(evt);
             }
         });
         jTextField4.addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
             public void keyPressed(KeyEvent evt) {
                 jTextField4KeyPressed(evt);
             }
 
+            @Override
             public void keyReleased(KeyEvent evt) {
                 jTextField4KeyReleased(evt);
             }
@@ -664,6 +685,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton6.setText(" "); // NOI18N
         jButton6.setFocusable(false);
         jButton6.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton6ActionPerformed(evt);
             }
@@ -673,6 +695,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton7.setText(" "); // NOI18N
         jButton7.setFocusable(false);
         jButton7.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton7ActionPerformed(evt);
             }
@@ -703,6 +726,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton9.setText("Usar estos colores en todos"); // NOI18N
         jButton9.setFocusable(false);
         jButton9.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton9ActionPerformed(evt);
             }
@@ -713,6 +737,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jSlider1.setMinimumSize(new Dimension(200, 20));
         jSlider1.setPreferredSize(new Dimension(200, 20));
         jSlider1.addChangeListener(new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent evt) {
                 jSlider1StateChanged(evt);
             }
@@ -723,6 +748,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jSlider2.setMinimumSize(new Dimension(200, 20));
         jSlider2.setPreferredSize(new Dimension(200, 20));
         jSlider2.addChangeListener(new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent evt) {
                 jSlider2StateChanged(evt);
             }
@@ -733,6 +759,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jSlider3.setMinimumSize(new Dimension(200, 20));
         jSlider3.setPreferredSize(new Dimension(200, 20));
         jSlider3.addChangeListener(new ChangeListener() {
+            @Override
             public void stateChanged(ChangeEvent evt) {
                 jSlider3StateChanged(evt);
             }
@@ -773,6 +800,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jButton18.setText("Este Jugador es Portero");
         jButton18.setFocusable(false);
         jButton18.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton18ActionPerformed(evt);
             }
@@ -851,6 +879,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jList1.setFont(new Font("Arial", 0, 10));
         jList1.setFocusable(false);
         jList1.addListSelectionListener(new javax.swing.event.ListSelectionListener() {
+            @Override
             public void valueChanged(javax.swing.event.ListSelectionEvent evt) {
                 jList1ValueChanged(evt);
             }
@@ -865,6 +894,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jMenuItem1.setFont(new Font("Arial", 0, 12));
         jMenuItem1.setText("Abrir"); // NOI18N
         jMenuItem1.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem1ActionPerformed(evt);
             }
@@ -874,6 +904,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jMenuItem2.setFont(new Font("Arial", 0, 12));
         jMenuItem2.setText("Guardar"); // NOI18N
         jMenuItem2.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem2ActionPerformed(evt);
             }
@@ -884,6 +915,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jMenuItem3.setFont(new Font("Arial", 0, 12));
         jMenuItem3.setText("Generar Codigo de Tactica"); // NOI18N
         jMenuItem3.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem3ActionPerformed(evt);
             }
@@ -893,6 +925,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jMenuItem4.setFont(new Font("Arial", 0, 12));
         jMenuItem4.setText("Generar Codigo de Tactica, Sin TacticaDetalle"); // NOI18N
         jMenuItem4.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
             }
@@ -902,6 +935,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jMenuItem5.setFont(new Font("Arial", 0, 12));
         jMenuItem5.setText("Generar Codigo de TacticaDetalle"); // NOI18N
         jMenuItem5.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem5ActionPerformed(evt);
             }
@@ -911,6 +945,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jMenuItem6.setFont(new Font("Arial", 0, 12));
         jMenuItem6.setText("Generar Codigo de Alineaciones"); // NOI18N
         jMenuItem6.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem6ActionPerformed(evt);
             }
@@ -921,6 +956,7 @@ public class AsistenteFrame extends javax.swing.JFrame implements Runnable {
         jMenuItem7.setFont(new Font("Arial", 0, 12));
         jMenuItem7.setText("Validar Tactica"); // NOI18N
         jMenuItem7.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jMenuItem7ActionPerformed(evt);
             }

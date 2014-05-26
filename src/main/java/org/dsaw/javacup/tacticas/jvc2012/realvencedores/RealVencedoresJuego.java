@@ -33,14 +33,17 @@ public class RealVencedoresJuego implements Tactic {
     /** Equipo */
     EquipoImpl equipo = new EquipoImpl();
 
+    @Override
     public TacticDetail getDetail() {
         return this.equipo;
     }
 
+    @Override
     public Position[] getStartPositions(GameSituations sp) {
         return this.distribuciones.getInicioSacando();
     }
 
+    @Override
     public Position[] getNoStartPositions(GameSituations sp) {
         return this.distribuciones.getInicioRecibiendo();
     }
@@ -50,6 +53,7 @@ public class RealVencedoresJuego implements Tactic {
      * 
      * @see org.dsaw.javacup.model.Tactic#execute(org.dsaw.javacup.model.engine.GameSituations)
      */
+    @Override
     public List<Command> execute(GameSituations sp) {
         // Lista de comandos
         LinkedList<Command> comandos = new LinkedList<>();

@@ -140,47 +140,58 @@ public class Team2312 implements Tactic {
 			return new Color(255, 200, 150);
 		}
 
-		public Color getShortsColor() {
+		@Override
+                public Color getShortsColor() {
 			return new Color(255, 200, 150);
 		}
 
-		public Color getShirtLineColor() {
+		@Override
+                public Color getShirtLineColor() {
 			return new Color(255, 200, 150);
 		}
 
-		public Color getSocksColor() {
+		@Override
+                public Color getSocksColor() {
 			return new Color(0, 0, 0);
 		}
 
-		public Color getGoalKeeper() {
+		@Override
+                public Color getGoalKeeper() {
 			return new Color(255, 200, 150);
 		}
 
-		public EstiloUniforme getStyle() {
+		@Override
+                public EstiloUniforme getStyle() {
 			return EstiloUniforme.SIN_ESTILO;
 		}
 
-		public Color getShirtColor2() {
+		@Override
+                public Color getShirtColor2() {
 			return new Color(255, 200, 150);
 		}
 
-		public Color getShortsColor2() {
+		@Override
+                public Color getShortsColor2() {
 			return new Color(255, 200, 150);
 		}
 
-		public Color getShirtLineColor2() {
+		@Override
+                public Color getShirtLineColor2() {
 			return new Color(255, 200, 150);
 		}
 
-		public Color getSocksColor2() {
+		@Override
+                public Color getSocksColor2() {
 			return new Color(255, 200, 150);
 		}
 
-		public Color getGoalKeeper2() {
+		@Override
+                public Color getGoalKeeper2() {
 			return new Color(255, 200, 150);
 		}
 
-		public EstiloUniforme getStyle2() {
+		@Override
+                public EstiloUniforme getStyle2() {
 			return EstiloUniforme.SIN_ESTILO;
 		}
 

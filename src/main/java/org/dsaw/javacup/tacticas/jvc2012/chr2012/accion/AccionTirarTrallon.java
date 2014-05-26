@@ -15,7 +15,8 @@ public class AccionTirarTrallon implements Accion {
 		this.comando = comando;
 	}
 	
-	public Command comando() {
+	@Override
+        public Command comando() {
 		return comando;
 	}
 }

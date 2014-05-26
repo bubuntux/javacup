@@ -1,24 +1,25 @@
 package org.dsaw.javacup.model.engine;
 
-import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.command.CommandHitBall;
-import org.dsaw.javacup.model.command.Command;
-import org.dsaw.javacup.model.command.CommandMoveTo;
-import org.dsaw.javacup.model.command.Command.CommandType;
-import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
-import org.dsaw.javacup.model.trajectory.FloorTrajectory;
-import org.dsaw.javacup.model.trajectory.AirTrajectory;
-import java.util.ArrayList;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
 import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.command.Command;
+import org.dsaw.javacup.model.command.Command.CommandType;
+import org.dsaw.javacup.model.command.CommandHitBall;
+import org.dsaw.javacup.model.command.CommandMoveTo;
+import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
+import org.dsaw.javacup.model.trajectory.AirTrajectory;
+import org.dsaw.javacup.model.trajectory.FloorTrajectory;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.util.TacticValidate;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 /**Esta clase se encarga de la ejecucion de partidos*/
 public final class Partido implements PartidoInterface {
@@ -34,8 +35,8 @@ public final class Partido implements PartidoInterface {
     private Position[] posLocalInv;//posiciones invertidas de jugadores locales
     private Position[] posVisitaInv;//posiciones invertidas de jugadores visita
     
-    private Aceleracion[] aceleracionLocal;//aceleracion de los jugadores
-    private Aceleracion[] aceleracionVisita;
+    private Acceleration[] accelerationLocal;//aceleracion de los jugadores
+    private Acceleration[] accelerationVisita;
     
     private double[] energiaLocal;//energia de los jugadores
     private double[] energiaVisita;
@@ -110,8 +111,8 @@ public final class Partido implements PartidoInterface {
         posLocalInv = new Position[11];
         posVisitaInv = new Position[11];
         
-        aceleracionLocal = new Aceleracion[11];
-        aceleracionVisita = new Aceleracion[11];
+        accelerationLocal = new Acceleration[11];
+        accelerationVisita = new Acceleration[11];
         
         energiaLocal = new double[11];
         energiaVisita = new double[11];
@@ -130,8 +131,8 @@ public final class Partido implements PartidoInterface {
             palCamarin[i] = new Position(-60, 0);
             palCamarin2[i] = new Position(60, 0);
 
-            aceleracionLocal[i] = new Aceleracion();
-            aceleracionVisita[i] = new Aceleracion();
+            accelerationLocal[i] = new Acceleration();
+            accelerationVisita[i] = new Acceleration();
             
             energiaLocal[i] = 1;
             energiaVisita[i] = 1;
@@ -142,8 +143,8 @@ public final class Partido implements PartidoInterface {
     /**Instancia un nuevo partido, indicando la tactica local y la tactica visita*/
     public Partido(Tactic tacticaLocal, Tactic tacticaVisita, boolean save) throws Exception {
         this();
-        this.tacticaLocal = new TacticaImpl(tacticaLocal);//deja inmutables las aptitudes, colores, nombres, etc.
-        this.tacticaVisita = new TacticaImpl(tacticaVisita);//deja inmutables las aptitudes, colores, nombres, etc.
+        this.tacticaLocal = new TacticImpl(tacticaLocal);//deja inmutables las aptitudes, colores, nombres, etc.
+        this.tacticaVisita = new TacticImpl(tacticaVisita);//deja inmutables las aptitudes, colores, nombres, etc.
         this.save = save;
         TacticValidate.validateDetail("Tactica local:", tacticaLocal.getDetail());
         TacticValidate.validateDetail("Tactica visita:", tacticaVisita.getDetail());
@@ -167,7 +168,7 @@ public final class Partido implements PartidoInterface {
 
     /**Retorna la iteriacion en curso*/
     @Override
-    public int getIteracion() {
+    public int getIteration() {
         return iteracion;
     }
 
@@ -552,7 +553,7 @@ public final class Partido implements PartidoInterface {
    
         updatePosiciones();
         if (save) {
-            guardado.partido.add(new Iteracion(gol, poste, rebote, ovacion, remate, sacaLocal | sacaVisita, silbato, cambioSaque, isOffSide, isLibreIndirecto(), alturaBalon, getPosVisibleBalon(), getPosiciones(), iteracion, golesLocal, golesVisita, getPosesionBalonLocal()));
+            guardado.partido.add(new Iteration(gol, poste, rebote, ovacion, remate, sacaLocal | sacaVisita, silbato, cambioSaque, isOffSide, isLibreIndirecto(), alturaBalon, getPosVisibleBalon(), getPosiciones(), iteracion, golesLocal, golesVisita, getPosesionBalonLocal()));
         }
     }
 
@@ -812,8 +813,10 @@ public final class Partido implements PartidoInterface {
         posLocalInv = invertir(posLocal);
         posVisitaInv = invertir(posVisita);
         balonInv = balon.getInvertedPosition();
-        spLocal.set(balon, alturaBalon, golesLocal, golesVisita, iteracion, posLocal, posVisitaInv, aceleracionLocal, aceleracionVisita, energiaLocal, energiaVisita, sacaLocal, sacaVisita, golpeaBalonIter[0], golpeaBalonIter[1], trayectoria, x0Trayectoria, y0Trayectoria, t0Trayectoria, angTrayectoria, iteracionReal, false);
-        spVisita.set(balonInv, alturaBalon, golesVisita, golesLocal, iteracion, posVisita, posLocalInv, aceleracionVisita, aceleracionLocal, energiaVisita, energiaLocal, sacaVisita, sacaLocal, golpeaBalonIter[1], golpeaBalonIter[0], trayectoria, x0Trayectoria, y0Trayectoria, t0Trayectoria, angTrayectoria, iteracionReal, true);
+        spLocal.set(balon, alturaBalon, golesLocal, golesVisita, iteracion, posLocal, posVisitaInv,
+                    accelerationLocal, accelerationVisita, energiaLocal, energiaVisita, sacaLocal, sacaVisita, golpeaBalonIter[0], golpeaBalonIter[1], trayectoria, x0Trayectoria, y0Trayectoria, t0Trayectoria, angTrayectoria, iteracionReal, false);
+        spVisita.set(balonInv, alturaBalon, golesVisita, golesLocal, iteracion, posVisita, posLocalInv,
+                     accelerationVisita, accelerationLocal, energiaVisita, energiaLocal, sacaVisita, sacaLocal, golpeaBalonIter[1], golpeaBalonIter[0], trayectoria, x0Trayectoria, y0Trayectoria, t0Trayectoria, angTrayectoria, iteracionReal, true);
     }
 
     private Position ubicarEnBorde(Position p) {
@@ -1249,9 +1252,9 @@ public final class Partido implements PartidoInterface {
     	
     	//Actualizamos la aceleracion con el movimiento actual
     	if (t == tacticaLocal) 
-    		aceleracionLocal[indJugador].actualizar(irA);
+    		accelerationLocal[indJugador].update(irA);
     	else
-    		aceleracionVisita[indJugador].actualizar(irA);
+    		accelerationVisita[indJugador].update(irA);
     	
     	
     	//Comprobamos si el jugador esta en sprint y comprobamos que cumpla las condiciones para ello (Tener una energia superior a Constants.SPRINT_ENERGIA_MIN

@@ -8,66 +8,82 @@ import org.dsaw.javacup.render.EstiloUniforme;
 
 class TacticDetailImpl implements TacticDetail {
 
+    @Override
     public String getTacticName() {
         return "AA_New_Team";
     }
 
+    @Override
     public String getCountry() {
         return "España";
     }
 
+    @Override
     public String getCoach() {
         return "José Mourinho";
     }
 
+    @Override
     public Color getShirtColor() {
         return new Color(255, 255, 0);
     }
 
+    @Override
     public Color getShortsColor() {
         return new Color(8, 35, 252);
     }
 
+    @Override
     public Color getShirtLineColor() {
         return new Color(0, 0, 255);
     }
 
+    @Override
     public Color getSocksColor() {
         return new Color(0, 0, 255);
     }
 
+    @Override
     public Color getGoalKeeper() {
         return new Color(255, 0, 0        );
     }
 
+    @Override
     public EstiloUniforme getStyle() {
         return EstiloUniforme.SIN_ESTILO;
     }
 
+    @Override
     public Color getShirtColor2() {
         return new Color(92, 131, 50);
     }
 
+    @Override
     public Color getShortsColor2() {
         return new Color(62, 4, 67);
     }
 
+    @Override
     public Color getShirtLineColor2() {
         return new Color(140, 160, 102);
     }
 
+    @Override
     public Color getSocksColor2() {
         return new Color(85, 92, 177);
     }
 
+    @Override
     public Color getGoalKeeper2() {
         return new Color(167, 211, 223        );
     }
 
+    @Override
     public EstiloUniforme getStyle2() {
         return EstiloUniforme.LINEAS_HORIZONTALES;
     }
     
+    @Override
     public PlayerDetail[] getPlayers() {
         return new PlayerDetail[]{
     		new JugadorImpl("Paquete", 11, new Color(255,200,150), new Color(50,0,0),1,1,1,false),

@@ -350,7 +350,7 @@ public class VisorBasico extends javax.swing.JFrame {
         }
         gr.setColor(Color.yellow);
         String time = "0";
-        int sec = p.getIteracion() * Constants.DELAY / 1000;
+        int sec = p.getIteration() * Constants.DELAY / 1000;
         time = time + sec / 60 + ":";
         sec = sec % 60;
         if (sec < 10) {
@@ -424,7 +424,7 @@ public class VisorBasico extends javax.swing.JFrame {
                 }
                 audioAmbienteIdx++;
 
-                if (p.getIteracion() < Constants.ITERACIONES) {
+                if (p.getIteration() < Constants.ITERACIONES) {
                     try {
                         for (int i = 0; i < 11; i++) {
                             panterior[0][i] = pos[0][i];
@@ -523,11 +523,13 @@ public class VisorBasico extends javax.swing.JFrame {
         setAlwaysOnTop(true);
         setResizable(false);
         addWindowListener(new java.awt.event.WindowAdapter() {
+            @Override
             public void windowClosing(java.awt.event.WindowEvent evt) {
                 formWindowClosing(evt);
             }
         });
         addKeyListener(new java.awt.event.KeyAdapter() {
+            @Override
             public void keyPressed(java.awt.event.KeyEvent evt) {
                 formKeyPressed(evt);
             }

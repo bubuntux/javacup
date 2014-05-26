@@ -54,20 +54,24 @@ public class HortalezaBlamers implements Tactic {
 	/**
 	 * Metodos para el framework
 	 */
-	public Position[] getStartPositions(GameSituations gs) {
+	@Override
+        public Position[] getStartPositions(GameSituations gs) {
 		return alineacionSaca;
 	}
-	public Position[] getNoStartPositions(GameSituations gs) {
+	@Override
+        public Position[] getNoStartPositions(GameSituations gs) {
 		return alineacionRecibe;
 	}
-	public TacticDetail getDetail() {
+	@Override
+        public TacticDetail getDetail() {
 		return detalle;
 	}
 
 	/**
 	 * Metodo de entrada para cada iteracion
 	 */
-	public List<Command> execute(GameSituations gs) {
+	@Override
+        public List<Command> execute(GameSituations gs) {
 		try {
 			comandos.clear();
 

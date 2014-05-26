@@ -13,14 +13,17 @@ public class NewTeam implements Tactic {
 
 
     TacticDetail detalle=new TacticDetailImpl();
+    @Override
     public TacticDetail getDetail() {
         return detalle;
     }
 
+    @Override
     public Position[] getStartPositions(GameSituations sp) {
     	return alineaciones.getAlineacionSacando();
     }
 
+    @Override
     public Position[] getNoStartPositions(GameSituations sp) {
     	return alineaciones.getAlineacionSinBalon();
     }
@@ -29,6 +32,7 @@ public class NewTeam implements Tactic {
     LinkedList<Command> comandos = new LinkedList<>();
     Alineaciones alineaciones = new Alineaciones();
     
+    @Override
     public List<Command> execute(GameSituations sp) {
     	//Limpia la lista de comandos
         comandos.clear();

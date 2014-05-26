@@ -2,10 +2,11 @@ package org.dsaw.javacup.model.engine;
 
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
-import java.util.ArrayList;
-import java.util.LinkedList;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.ArrayList;
+import java.util.LinkedList;
 
 /**Esta clase provee información de la situacion del partido a las tacticas*/
 public final class GameSituations {
@@ -27,12 +28,12 @@ public final class GameSituations {
     }
     /**Aceleracion de mis jugadores**/
     public double getMyPlayerAceleration(int jugIndex) {
-    	return miAceleracion[jugIndex].obtenerAceleracionGlobal(); //La aceleracion se compone de las dos aceleraciones en los dos ejes
+    	return miAcceleration[jugIndex].getAccelerationGlobal(); //La aceleracion se compone de las dos aceleraciones en los dos ejes
     }
     
     /**Aceleracion del rival**/
     public double getRivalAceleration(int jugIndex) {
-    	return rivalAceleracion[jugIndex].obtenerAceleracionX() * rivalAceleracion[jugIndex].obtenerAceleracionY(); //La aceleracion se compone de las dos aceleraciones en los dos ejes
+    	return rivalAcceleration[jugIndex].getAccelerationX() * rivalAcceleration[jugIndex].getAccelerationY(); //La aceleracion se compone de las dos aceleraciones en los dos ejes
     }
             
     /**Energia de los jugadores**/
@@ -168,8 +169,8 @@ public final class GameSituations {
     	//Calculamos la aceleracion en cada uno de los ejes
     	double incrementoAcel = (Constants.ACELERACION_INCR * iter);
     	
-    	double acelXiter = miAceleracion[playerIndex].obtenerAceleracionX() + incrementoAcel;
-    	double acelYiter = miAceleracion[playerIndex].obtenerAceleracionY() + incrementoAcel;
+    	double acelXiter = miAcceleration[playerIndex].getAccelerationX() + incrementoAcel;
+    	double acelYiter = miAcceleration[playerIndex].getAccelerationY() + incrementoAcel;
     	
     	//Si superan el valor maximo de 1 las establecemos en ese valor.
     	
@@ -321,7 +322,7 @@ public final class GameSituations {
     }
 
     /**Usada internamente para establecer la situacion en una iteration*/
-    protected void set(Position balon, double alturaBalon, int golesMios, int golesContrarios, int iteracion, Position[] mios, Position[] contrarios, Aceleracion[] miAceleracion, Aceleracion[] rivalAceleracion, double[] miEnergia, double[] rivalEnergia, boolean saco, boolean sacaRival, int[] iterGolpearBalonLocal, int[] iterGolpearBalonVisita, AbstractTrajectory trayectoria, double x0, double y0, double t0, double a0, int iterReal, boolean invert) {
+    protected void set(Position balon, double alturaBalon, int golesMios, int golesContrarios, int iteracion, Position[] mios, Position[] contrarios, Acceleration[] miAcceleration, Acceleration[] rivalAcceleration, double[] miEnergia, double[] rivalEnergia, boolean saco, boolean sacaRival, int[] iterGolpearBalonLocal, int[] iterGolpearBalonVisita, AbstractTrajectory trayectoria, double x0, double y0, double t0, double a0, int iterReal, boolean invert) {
         this.balon = balon;
         this.golesMios = golesMios;
         this.golesContrarios = golesContrarios;
@@ -333,8 +334,8 @@ public final class GameSituations {
             this.rivales[i] = contrarios[i];
             this.iteracionesParaRematar[0][i] = iterGolpearBalonLocal[i];
             this.iteracionesParaRematar[1][i] = iterGolpearBalonVisita[i];
-            this.miAceleracion[i] = miAceleracion[i];
-            this.rivalAceleracion[i] = rivalAceleracion[i];
+            this.miAcceleration[i] = miAcceleration[i];
+            this.rivalAcceleration[i] = rivalAcceleration[i];
             this.miEnergia = miEnergia;
             this.rivalEnergia = rivalEnergia;
         }
@@ -409,8 +410,8 @@ private	void calculateOffSidePlayers() {
     private boolean invert;
     private double miEnergia[] = new double[11];
     private double rivalEnergia[] = new double[11];
-    private Aceleracion miAceleracion[] = new Aceleracion[11];
-    private Aceleracion rivalAceleracion[] = new Aceleracion[11];
+    private Acceleration miAcceleration[] = new Acceleration[11];
+    private Acceleration rivalAcceleration[] = new Acceleration[11];
     private boolean offSidePlayers[] = new boolean[11];
 
 }

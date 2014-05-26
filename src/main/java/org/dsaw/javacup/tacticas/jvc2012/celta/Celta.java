@@ -43,7 +43,8 @@ public class Celta implements Tactic {
 	 * Devuelve el detalle de la táctica (equipación, características de jugadores, etc.).
 	 * @return Detalle de la táctica
 	 */
-	public TacticDetail getDetail() {
+	@Override
+        public TacticDetail getDetail() {
 		if (tacticDetail == null)
 			tacticDetail = new TacticDetailImpl();
 		return tacticDetail;
@@ -52,7 +53,8 @@ public class Celta implements Tactic {
 	/**
 	 * Devuelve un array con las posiciones de saque de centro (cuando sacamos nosotros).
 	 */
-	public Position[] getStartPositions(GameSituations sp) {
+	@Override
+        public Position[] getStartPositions(GameSituations sp) {
 		return Alignment.START_POSITIONS;
 	}
 
@@ -60,7 +62,8 @@ public class Celta implements Tactic {
 	 * Devuelve un array con las posiciones de saque de centro (cuando saca el rival).
 	 * @return Array de posiciones 
 	 */
-	public Position[] getNoStartPositions(GameSituations sp) {
+	@Override
+        public Position[] getNoStartPositions(GameSituations sp) {
 		return Alignment.NO_START_POSITIONS;
 	}
 
@@ -68,7 +71,8 @@ public class Celta implements Tactic {
 	 * Devuelve la lista de comandos a ejecutar en la iteración.
 	 * @return Lista de commandos 
 	 */
-	public List<Command> execute(GameSituations sp) {
+	@Override
+        public List<Command> execute(GameSituations sp) {
 		List<Command> commands = new ArrayList<>();
 		for (CommandGenerator generator : commandGenerators)
 			commands.addAll(generator.getCommandList(sp));

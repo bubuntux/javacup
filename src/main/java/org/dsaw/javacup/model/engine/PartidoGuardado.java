@@ -29,9 +29,9 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
     private static Logger logger = LoggerFactory.getLogger(PartidoGuardado.class);
     private static final long serialVersionUID = 1L;
     transient private int tiempo = -1;
-    transient private Iteracion iteracion;
+    transient private Iteration iteration;
     /**Lista de iteraciones, uso interno*/
-    public ArrayList<Iteracion> partido = new ArrayList<>(Constants.ITERACIONES);
+    public ArrayList<Iteration> partido = new ArrayList<>(Constants.ITERACIONES);
     private TacticDetail detalleLocal;
     private TacticDetail detalleVisita;
 
@@ -63,7 +63,7 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
             tiempo = partido.size() - 1;
         }
         this.tiempo = tiempo;
-        iteracion = partido.get(tiempo);
+        iteration = partido.get(tiempo);
     }
 
     /**Retorna la iteracion actual*/
@@ -73,59 +73,59 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
 
     @Override
     public boolean esGol() {
-        return iteracion.gol;
+        return iteration.gol;
     }
 
     @Override
     public boolean esPoste() {
-        return iteracion.poste;
+        return iteration.poste;
     }
 
     @Override
     public boolean estaRebotando() {
-        return iteracion.rebotando;
+        return iteration.rebotando;
     }
 
     @Override
     public boolean estanOvacionando() {
-        return iteracion.ovacionando;
+        return iteration.ovacionando;
     }
 
     @Override
     public boolean estanRematando() {
-        return iteracion.rematando;
+        return iteration.rematando;
     }
 
     @Override
     public boolean estanSacando() {
-        return iteracion.sacando;
+        return iteration.sacando;
     }
 
     @Override
     public boolean estanSilbando() {
-        return iteracion.silbando;
+        return iteration.silbando;
     }
 
     @Override
     public boolean cambioDeSaque() {
-        return iteracion.cambioSaque;
+        return iteration.cambioSaque;
     }
     
 	@Override
 	public boolean isOffSide() {
 		
-		return iteracion.isOffSide;
+		return iteration.isOffSide;
 	}
 
 	@Override
 	public boolean isLibreIndirecto() {
 		
-		return iteracion.isLibreIndirecto;
+		return iteration.isLibreIndirecto;
 	}
 	
     @Override
     public double getAlturaBalon() {
-        return (double) iteracion.alturaBalon / 256d;
+        return (double) iteration.alturaBalon / 256d;
     }
 
     @Override
@@ -140,17 +140,17 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
 
     @Override
     public Position getPosVisibleBalon() {
-        return new Position((double) iteracion.posVisibleBalonX / 256d, (double) iteracion.posVisibleBalonY / 256d);
+        return new Position((double) iteration.posVisibleBalonX / 256d, (double) iteration.posVisibleBalonY / 256d);
     }
 
     @Override
     public Position[][] getPosiciones() {
         Position[][] pos = new Position[3][11];
         for (int i = 0; i < 11; i++) {
-            pos[0][i] = new Position((double) iteracion.posiciones[0][i][0] / 256d, (double) iteracion.posiciones[0][i][1] / 256d);
-            pos[1][i] = new Position((double) iteracion.posiciones[1][i][0] / 256d, (double) iteracion.posiciones[1][i][1] / 256d);
+            pos[0][i] = new Position((double) iteration.posiciones[0][i][0] / 256d, (double) iteration.posiciones[0][i][1] / 256d);
+            pos[1][i] = new Position((double) iteration.posiciones[1][i][0] / 256d, (double) iteration.posiciones[1][i][1] / 256d);
         }
-        pos[2][0] = new Position((double) iteracion.posiciones[2][0][0] / 256d, (double) iteracion.posiciones[2][0][1] / 256d);
+        pos[2][0] = new Position((double) iteration.posiciones[2][0][0] / 256d, (double) iteration.posiciones[2][0][1] / 256d);
         return pos;
     }
 
@@ -164,22 +164,22 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
 
     @Override
     public int getGolesLocal() {
-        return iteracion.golesLocal;
+        return iteration.golesLocal;
     }
 
     @Override
     public int getGolesVisita() {
-        return iteracion.golesVisita;
+        return iteration.golesVisita;
     }
 
     @Override
-    public int getIteracion() {
-        return iteracion.iteracion;
+    public int getIteration() {
+        return iteration.iteracion;
     }
 
     @Override
     public double getPosesionBalonLocal() {
-        return (double) iteracion.posecionBalonLocal / 256d;
+        return (double) iteration.posecionBalonLocal / 256d;
     }
 
     @Override
@@ -205,7 +205,7 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
         detalleLocal = pg.detalleLocal;
         detalleVisita = pg.detalleVisita;
         partido = pg.partido;
-        iteracion = partido.get(0);
+        iteration = partido.get(0);
     }
 
     private static File unzip(File file) throws Exception {
@@ -285,7 +285,7 @@ public final class PartidoGuardado implements PartidoInterface, Serializable {
             tempFile.delete();
             unziped.delete();
             //System.out.println("borrando " + unziped);
-            p.iteracion = p.partido.get(0);
+            p.iteration = p.partido.get(0);
             if (SHOWFRAME) {
                 frame.setVisible(false);
                 frame.dispose();

@@ -26,7 +26,8 @@ public class AccionTirar implements Accion {
 		this.tiroSeguro = tiroSeguro;
 	}
 
-	public Command comando() {
+	@Override
+        public Command comando() {
 		return comando;
 	}
 	

@@ -67,6 +67,7 @@ public class FormationAndSimulationTab {
         jToggleButton2.setText("Constantes");
         jToggleButton2.setFocusable(false);
         jToggleButton2.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jToggleButton2ActionPerformed();
             }
@@ -82,6 +83,7 @@ public class FormationAndSimulationTab {
         jButton11.setIcon(new ImageIcon(getClass().getResource("/imagenes/iconos/add.png")));
         jButton11.setFocusable(false);
         jButton11.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton11ActionPerformed();
             }
@@ -90,6 +92,7 @@ public class FormationAndSimulationTab {
         jButton12.setIcon(new ImageIcon(getClass().getResource("/imagenes/iconos/delete.png")));
         jButton12.setFocusable(false);
         jButton12.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton12ActionPerformed();
             }
@@ -100,6 +103,7 @@ public class FormationAndSimulationTab {
         jButton10.setIcon(new ImageIcon(getClass().getResource("/imagenes/iconos/up.png")));
         jButton10.setFocusable(false);
         jButton10.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton10ActionPerformed();
             }
@@ -108,6 +112,7 @@ public class FormationAndSimulationTab {
         jButton13.setIcon(new ImageIcon(getClass().getResource("/imagenes/iconos/down.png")));
         jButton13.setFocusable(false);
         jButton13.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jButton13ActionPerformed();
             }
@@ -118,6 +123,7 @@ public class FormationAndSimulationTab {
         jComboBox3.setFont(_font);
         jComboBox3.setModel(new DefaultComboBoxModel<>(new String[]{"1"}));
         jComboBox3.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jComboBox3ActionPerformed();
             }
@@ -127,6 +133,7 @@ public class FormationAndSimulationTab {
         jComboBox2.setFont(_font);
         jComboBox2.setModel(new DefaultComboBoxModel<>(new String[]{"Normal", "Inicio Sacando", "Inicio Recibiendo"}));
         jComboBox2.addActionListener(new ActionListener() {
+            @Override
             public void actionPerformed(ActionEvent evt) {
                 jComboBox2ActionPerformed();
             }
@@ -204,6 +211,7 @@ public class FormationAndSimulationTab {
 
             Font f = new Font("lucida console", 0, 10);
 
+            @Override
             public void paint(Graphics g) {
                 g.drawImage(campo, 0, 0, null);
                 Position p;
@@ -278,15 +286,18 @@ public class FormationAndSimulationTab {
         jPanel5.setPreferredSize(preferredSize);
 
         jPanel5.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
             public void mousePressed(MouseEvent evt) {
                 jPanel5MousePressed(evt);
             }
         });
         jPanel5.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            @Override
             public void mouseDragged(MouseEvent evt) {
                 jPanel5MouseDragged(evt);
             }
 
+            @Override
             public void mouseMoved(MouseEvent evt) {
                 jPanel5MouseMoved(evt);
             }
