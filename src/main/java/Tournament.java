@@ -1,28 +1,24 @@
-
-import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.engine.Match;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.TacticValidate;
 
-import java.awt.CardLayout;
-import java.awt.Image;
+import java.awt.*;
 import java.io.BufferedReader;
-import java.util.Arrays;
 import java.io.File;
 import java.io.FileReader;
 import java.lang.reflect.Constructor;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Random;
 
-import javax.swing.ImageIcon;
-import javax.swing.JFrame;
-import javax.swing.JProgressBar;
+import javax.swing.*;
 
 public class Tournament {
 
@@ -270,9 +266,9 @@ public class Tournament {
         if (directory.exists()) {
           File[] files = directory.listFiles();
           String name, cls;
-          for (int i = 0; i < files.length; i++) {
-            name = files[i].getName();
-            if (files[i].isFile() && name.endsWith(".class")) {
+          for (File file : files) {
+            name = file.getName();
+            if (file.isFile() && name.endsWith(".class")) {
               cls = (paquete + '/' + name.substring(0, name.length() - 6)).replace('/', '.');
               if (cls.startsWith(".")) {
                 cls = cls.substring(1);
@@ -281,7 +277,7 @@ public class Tournament {
               if (!c.equals(claseAsignable) && claseAsignable.isAssignableFrom(c)) {
                 classes.add(c);
               }
-            } else if (files[i].isDirectory()) {
+            } else if (file.isDirectory()) {
               cls = paquete + "/" + name;
               for (Class c : getClases(src, cls, claseAsignable,
                                        recursivo)) {
@@ -343,35 +339,35 @@ public class Tournament {
       org.dsaw.javacup.tactics.jvc2012.losdesistemas.Sistemitas.class,//28 puntos.
       org.dsaw.javacup.tactics.jvc2012.iriveros.Chelsea.class,
 //28 puntos. (descalificado por ser copia identica del campeon 2011)
-org.dsaw.javacup.tactics.jvc2012.dbonilla.Millos.class,
+      org.dsaw.javacup.tactics.jvc2012.dbonilla.Millos.class,
 //26 puntos. (descalificado por ser copia identica del campeon 2011)
-org.dsaw.javacup.tactics.jvc2012.iria.Iria.class,//25 puntos.
-org.dsaw.javacup.tactics.jvc2012.arturo8a.TacticaPulgarcitos.class,//24 puntos.
-org.dsaw.javacup.tactics.jvc2012.chr2012.tactica.TacticaTiquiTacaTeam.class,//23 puntos.
-org.dsaw.javacup.tactics.jvc2012.fortega.Frioleros.class,//23 puntos.
-org.dsaw.javacup.tactics.jvc2012.team2012.Team2312.class,//22 puntos.
-org.dsaw.javacup.tactics.jvc2012.tukutuku.Tactica.class,//21 puntos.
-org.dsaw.javacup.tactics.jvc2012.davidramirez.TElResultaoDaIgual.class,//20 puntos.
-org.dsaw.javacup.tactics.jvc2012.evolution.SanMarinoEvolution.class,//18 puntos.
-org.dsaw.javacup.tactics.jvc2012.agalan.NewTeam.class,//18 puntos.
-org.dsaw.javacup.tactics.jvc2012.losjavatos.LosJavatos.class,//17 puntos.
-org.dsaw.javacup.tactics.jvc2012.mijarojos.Mijarojos.class,//17 puntos.
-org.dsaw.javacup.tactics.jvc2012.moleteam.MoleTeam.class,//13 puntos.
-org.dsaw.javacup.tactics.jvc2012.lgarza.Tactica.class,//13 puntos.
-org.dsaw.javacup.tactics.jvc2012.srh.SRH.class,//12 puntos.
-org.dsaw.javacup.tactics.jvc2012.abonilla.Arsenal4.class,//11 puntos.
-org.dsaw.javacup.tactics.jvc2012.realvencedores.RealVencedoresJuego.class,//11 puntos.
-org.dsaw.javacup.tactics.jvc2012.pringaos.Pringaos2012.class,//11 puntos.
-org.dsaw.javacup.tactics.jvc2012.adeleon.Manada.class,//11 puntos.
-org.dsaw.javacup.tactics.jvc2012.emendoza.Junior.class,//8 puntos.
-org.dsaw.javacup.tactics.jvc2012.ateixeira.Artenara.class,//7 puntos.
-org.dsaw.javacup.tactics.jvc2012.lacras.lacras.class,//7 puntos.
-org.dsaw.javacup.tactics.jvc2012.rchavarria.RChavarriaTactic.class,//7 puntos.
-org.dsaw.javacup.tactics.jvc2012.petardos.Petardos.class,//5 puntos.
-org.dsaw.javacup.tactics.jvc2012.vnavarro.Pequeo.class,//4 puntos.
-org.dsaw.javacup.tactics.jvc2012.sotilezos.Sotilezos.class,//3 puntos.
-org.dsaw.javacup.tactics.jvc2012.celta.Celta.class,//3 puntos.
-org.dsaw.javacup.tactics.jvc2012.tomatesmecanicos.tomates.class,//2 puntos.
+      org.dsaw.javacup.tactics.jvc2012.iria.Iria.class,//25 puntos.
+      org.dsaw.javacup.tactics.jvc2012.arturo8a.TacticaPulgarcitos.class,//24 puntos.
+      org.dsaw.javacup.tactics.jvc2012.chr2012.tactica.TacticaTiquiTacaTeam.class,//23 puntos.
+      org.dsaw.javacup.tactics.jvc2012.fortega.Frioleros.class,//23 puntos.
+      org.dsaw.javacup.tactics.jvc2012.team2012.Team2312.class,//22 puntos.
+      org.dsaw.javacup.tactics.jvc2012.tukutuku.Tactica.class,//21 puntos.
+      org.dsaw.javacup.tactics.jvc2012.davidramirez.TElResultaoDaIgual.class,//20 puntos.
+      org.dsaw.javacup.tactics.jvc2012.evolution.SanMarinoEvolution.class,//18 puntos.
+      org.dsaw.javacup.tactics.jvc2012.agalan.NewTeam.class,//18 puntos.
+      org.dsaw.javacup.tactics.jvc2012.losjavatos.LosJavatos.class,//17 puntos.
+      org.dsaw.javacup.tactics.jvc2012.mijarojos.Mijarojos.class,//17 puntos.
+      org.dsaw.javacup.tactics.jvc2012.moleteam.MoleTeam.class,//13 puntos.
+      org.dsaw.javacup.tactics.jvc2012.lgarza.Tactica.class,//13 puntos.
+      org.dsaw.javacup.tactics.jvc2012.srh.SRH.class,//12 puntos.
+      org.dsaw.javacup.tactics.jvc2012.abonilla.Arsenal4.class,//11 puntos.
+      org.dsaw.javacup.tactics.jvc2012.realvencedores.RealVencedoresJuego.class,//11 puntos.
+      org.dsaw.javacup.tactics.jvc2012.pringaos.Pringaos2012.class,//11 puntos.
+      org.dsaw.javacup.tactics.jvc2012.adeleon.Manada.class,//11 puntos.
+      org.dsaw.javacup.tactics.jvc2012.emendoza.Junior.class,//8 puntos.
+      org.dsaw.javacup.tactics.jvc2012.ateixeira.Artenara.class,//7 puntos.
+      org.dsaw.javacup.tactics.jvc2012.lacras.lacras.class,//7 puntos.
+      org.dsaw.javacup.tactics.jvc2012.rchavarria.RChavarriaTactic.class,//7 puntos.
+      org.dsaw.javacup.tactics.jvc2012.petardos.Petardos.class,//5 puntos.
+      org.dsaw.javacup.tactics.jvc2012.vnavarro.Pequeo.class,//4 puntos.
+      org.dsaw.javacup.tactics.jvc2012.sotilezos.Sotilezos.class,//3 puntos.
+      org.dsaw.javacup.tactics.jvc2012.celta.Celta.class,//3 puntos.
+      org.dsaw.javacup.tactics.jvc2012.tomatesmecanicos.tomates.class,//2 puntos.
   };
 
   //array de grupos de la primera fase
@@ -428,8 +424,8 @@ org.dsaw.javacup.tactics.jvc2012.tomatesmecanicos.tomates.class,//2 puntos.
     Class[][] grupos = new Class[equipos.length][max];
     for (int j = 0; j < max; j++) {
       int sum = 0;
-      for (int i = 0; i < equipos.length; i++) {
-        if (j < equipos[i]) {
+      for (int equipo : equipos) {
+        if (j < equipo) {
           sum++;
         }
       }
@@ -601,9 +597,9 @@ org.dsaw.javacup.tactics.jvc2012.tomatesmecanicos.tomates.class,//2 puntos.
     int[][]
         cruce =
         new int[][]{{0, 9}, {1, 8}, {2, 11}, {3, 10}, {4, 13}, {5, 12}, {6, 15}, {7, 14}};
-    for (int i = 0; i < cruce.length; i++) {
-      tl = instance(pasan.get(cruce[i][0]));
-      tv = instance(pasan.get(cruce[i][1]));
+    for (int[] aCruce2 : cruce) {
+      tl = instance(pasan.get(aCruce2[0]));
+      tv = instance(pasan.get(aCruce2[1]));
       String nl = tl.getDetail().getTacticName(), nv = tv.getDetail().getTacticName();
       nl = nl.trim().toLowerCase();
       nl =
@@ -635,9 +631,9 @@ org.dsaw.javacup.tactics.jvc2012.tomatesmecanicos.tomates.class,//2 puntos.
     }
     pasan.clear();
     cruce = new int[][]{{0, 4}, {1, 5}, {2, 6}, {3, 7}};
-    for (int i = 0; i < cruce.length; i++) {
-      tl = instance(pasan2.get(cruce[i][0]));
-      tv = instance(pasan2.get(cruce[i][1]));
+    for (int[] aCruce1 : cruce) {
+      tl = instance(pasan2.get(aCruce1[0]));
+      tv = instance(pasan2.get(aCruce1[1]));
       String nl = tl.getDetail().getTacticName(), nv = tv.getDetail().getTacticName();
       nl = nl.trim().toLowerCase();
       nl =
@@ -669,9 +665,9 @@ org.dsaw.javacup.tactics.jvc2012.tomatesmecanicos.tomates.class,//2 puntos.
     }
     pasan2.clear();
     cruce = new int[][]{{0, 2}, {1, 3}};
-    for (int i = 0; i < cruce.length; i++) {
-      tl = instance(pasan.get(cruce[i][0]));
-      tv = instance(pasan.get(cruce[i][1]));
+    for (int[] aCruce : cruce) {
+      tl = instance(pasan.get(aCruce[0]));
+      tv = instance(pasan.get(aCruce[1]));
       String nl = tl.getDetail().getTacticName(), nv = tv.getDetail().getTacticName();
       nl = nl.trim().toLowerCase();
       nl =
@@ -818,12 +814,12 @@ org.dsaw.javacup.tactics.jvc2012.tomatesmecanicos.tomates.class,//2 puntos.
           System.out.println(
               "\t\t\tRESULTADO: " + p.getGolesLocal() + "-" + p.getGolesVisita() + "\t" + p
                   .getPosesionBalonLocal() + "-" + (1 - p.getPosesionBalonLocal()));
-          goles.put(cl, goles.get(cl).intValue() + p.getGolesLocal() - p.getGolesVisita());
-          goles.put(cv, goles.get(cv).intValue() + p.getGolesVisita() - p.getGolesLocal());
-          golesafavor.put(cl, golesafavor.get(cl).intValue() + p.getGolesLocal());
-          golesafavor.put(cv, golesafavor.get(cv).intValue() + p.getGolesVisita());
-          juegos.put(cv, juegos.get(cv).intValue() + 1);
-          juegos.put(cl, juegos.get(cl).intValue() + 1);
+          goles.put(cl, goles.get(cl) + p.getGolesLocal() - p.getGolesVisita());
+          goles.put(cv, goles.get(cv) + p.getGolesVisita() - p.getGolesLocal());
+          golesafavor.put(cl, golesafavor.get(cl) + p.getGolesLocal());
+          golesafavor.put(cv, golesafavor.get(cv) + p.getGolesVisita());
+          juegos.put(cv, juegos.get(cv) + 1);
+          juegos.put(cl, juegos.get(cl) + 1);
           int pl = 0;
           int pv = 0;
           if (p.getGolesLocal() == p.getGolesVisita()) {
@@ -834,8 +830,8 @@ org.dsaw.javacup.tactics.jvc2012.tomatesmecanicos.tomates.class,//2 puntos.
           } else {
             pv = 3;
           }
-          puntos.put(cl, puntos.get(cl).intValue() + pl);
-          puntos.put(cv, puntos.get(cv).intValue() + pv);
+          puntos.put(cl, puntos.get(cl) + pl);
+          puntos.put(cv, puntos.get(cv) + pv);
         }
 
         for (int j = 0; j < grupos[k].length; j++) {

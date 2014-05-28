@@ -1,11 +1,11 @@
 package org.dsaw.javacup.tactics.jvc2012.mijarojos;
 
-import java.util.LinkedList;
-
 import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.LinkedList;
 
 public class Anticipacion {
 	
@@ -79,7 +79,7 @@ public class Anticipacion {
 				//lista de mis jugadores que presionar�n a los m�s cercanos que pueden recuperar del rival
 				ListaIndices lstIndPase = new ListaIndices(false);
 				for(Integer i : lstIndPaseRival){
-					int indice = jugadoresRival[i.intValue()].nearestIndex(
+					int indice = jugadoresRival[i].nearestIndex(
 							misJugadores, lstMisJugadores.toIntArray());
 
 					if(indice >= 1){

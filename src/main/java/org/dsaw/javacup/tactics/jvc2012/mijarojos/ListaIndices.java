@@ -24,7 +24,7 @@ public class ListaIndices extends LinkedList<Integer> {
 	
 	public boolean sacar(int indice){
 		for(Integer i : this){
-			if(i.intValue() == indice){
+			if(i == indice){
 				super.remove(i);
 				return true;
 			}				
@@ -51,7 +51,7 @@ public class ListaIndices extends LinkedList<Integer> {
 	
 	public boolean meter(int indice){
 		for(Integer i : this){
-			if(i.intValue() == indice){
+			if(i == indice){
 				return false;
 			}				
 		}
@@ -79,8 +79,8 @@ public class ListaIndices extends LinkedList<Integer> {
 	public Position[] toPositionArray(Position[] jugadores){
 		ArrayList<Position> lst = new ArrayList<>();
 		for(Integer i : this){
-			if(jugadores.length > (i.intValue() + 1)){
-				lst.add(new Position(jugadores[i.intValue()]));
+			if(jugadores.length > (i + 1)){
+				lst.add(new Position(jugadores[i]));
 			}
 		}
 		return lst.toArray(new Position[0]);
@@ -90,7 +90,7 @@ public class ListaIndices extends LinkedList<Integer> {
 		int[] array = new int[this.size()];
 		int cont = 0;
 		for(Integer i : this){
-			array[cont++] = i.intValue();
+			array[cont++] = i;
 		}
 		return array;
 	}

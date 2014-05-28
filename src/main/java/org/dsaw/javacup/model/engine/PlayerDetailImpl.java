@@ -6,7 +6,7 @@ import java.awt.*;
 import java.io.Serializable;
 
 /**Implementacion de PlayerDetail que define la configuración de un jugador, uso interno*/
-class PlayerImpl implements PlayerDetail, Serializable {
+class PlayerDetailImpl implements PlayerDetail, Serializable {
 
 	private final String nombre;
 	private final Color piel;
@@ -17,7 +17,7 @@ class PlayerImpl implements PlayerDetail, Serializable {
 	private final double presicion;
 	private final boolean portero;
 
-	public PlayerImpl(PlayerDetail det) {
+	public PlayerDetailImpl(PlayerDetail det) {
 		this.nombre = det.getPlayerName();
 		this.numero = det.getNumber();
 		this.piel = det.getSkinColor();
@@ -49,8 +49,8 @@ class PlayerImpl implements PlayerDetail, Serializable {
 		this.portero = det.isGoalKeeper();
 	}
 
-	public PlayerImpl(String nombre, int numero, Color piel, Color pelo,
-                          double velocidad, double remate, double presicion, boolean portero) {
+	public PlayerDetailImpl(String nombre, int numero, Color piel, Color pelo,
+                                double velocidad, double remate, double presicion, boolean portero) {
 		this.nombre = nombre;
 		this.numero = numero;
 		this.piel = piel;

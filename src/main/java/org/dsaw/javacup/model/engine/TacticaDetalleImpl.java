@@ -25,7 +25,7 @@ import org.dsaw.javacup.model.TacticDetail;
     private final Color colorFranja2;
     private final Color colorPortero2;
     private final UniformStyle estilo2;
-    private final PlayerImpl[] jugadores = new PlayerImpl[11];
+    private final PlayerDetailImpl[] jugadores = new PlayerDetailImpl[11];
 
 	/**Copia el detalle y deja inmutables sus valores*/
     TacticaDetalleImpl(TacticDetail impl) {
@@ -45,7 +45,7 @@ import org.dsaw.javacup.model.TacticDetail;
         this.colorPortero2 = impl.getGoalKeeper2();
         this.estilo2 = impl.getStyle2();
         for (int i = 0; i < 11; i++) {
-            this.jugadores[i] = new PlayerImpl(impl.getPlayers()[i]);
+            this.jugadores[i] = new PlayerDetailImpl(impl.getPlayers()[i]);
         }
     }
 

@@ -521,7 +521,7 @@ public class TacticaImpl {
 		for ( Position p : desmarques ) {
 			dist = p.distance(pasador);
 			if ( minima == null ) minima = dist;
-			if ( !isInside(p, 5,5, sp.rivalPlayers()) && dist.doubleValue() <= minima.doubleValue()) {
+			if ( !isInside(p, 5,5, sp.rivalPlayers()) && dist <= minima) {
 				mejor = p;
 				minima = dist;
 			}
