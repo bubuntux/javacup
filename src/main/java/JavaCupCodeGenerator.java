@@ -1,6 +1,6 @@
 import javax.swing.*;
 import java.awt.*;
-import org.dsaw.javacup.gui.asistente.AsistenteFrame;
+import org.dsaw.javacup.gui.assistant.AssistantFrame;
 
 public class JavaCupCodeGenerator {
 
@@ -9,7 +9,7 @@ public class JavaCupCodeGenerator {
             UIManager.setLookAndFeel("com.jtattoo.plaf.graphite.GraphiteLookAndFeel");
         } catch (Exception ignored) {
         }
-        AsistenteFrame a = new AsistenteFrame();
+        AssistantFrame a = new AssistantFrame();
         a.setSize(new Dimension(710, 440));
         a.setLocationRelativeTo(null);
     }

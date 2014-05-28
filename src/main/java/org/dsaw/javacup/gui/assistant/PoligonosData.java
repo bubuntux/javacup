@@ -1,4 +1,4 @@
-package org.dsaw.javacup.gui.asistente;
+package org.dsaw.javacup.gui.assistant;
 
 import java.awt.Color;
 import java.util.ArrayList;

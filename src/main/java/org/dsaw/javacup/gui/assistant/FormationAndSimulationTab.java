@@ -1,4 +1,4 @@
-package org.dsaw.javacup.gui.asistente;
+package org.dsaw.javacup.gui.assistant;
 
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
@@ -27,7 +27,7 @@ public class FormationAndSimulationTab {
         new Position[]{Constants.centroArcoInf, Constants.posteDerArcoSup, Constants.posteIzqArcoSup, Constants.cornerSupDer, Constants.cornerSupIzq,
             Constants.penalSup, Constants.centroArcoSup, Constants.posteDerArcoInf, Constants.posteIzqArcoInf, Constants.cornerInfDer,
             Constants.cornerInfIzq, Constants.penalInf, Constants.centroCampoJuego};
-    private final JList<JugadorImpl> _playerList;
+    private final JList<PlayerDetailImpl> _playerList;
     private final TacticDetailImpl _tacticDetail;
     boolean cupdate = true;
     JPanel jPanel4 = new JPanel();
@@ -52,7 +52,7 @@ public class FormationAndSimulationTab {
     private int _angle;
     private int _angleZ;
 
-    public FormationAndSimulationTab(TacticDetailImpl tacticDetail, JList<JugadorImpl> playerList) {
+    public FormationAndSimulationTab(TacticDetailImpl tacticDetail, JList<PlayerDetailImpl> playerList) {
         _tacticDetail = tacticDetail;
         _playerList = playerList;
 
@@ -630,7 +630,7 @@ public class FormationAndSimulationTab {
         return sx * r / Constants.LARGO_CAMPO_JUEGO;
     }
 
-    private JugadorImpl getJugador() {
+    private PlayerDetailImpl getJugador() {
         return _playerList.getSelectedValue();
     }
 

@@ -1,12 +1,13 @@
-package org.dsaw.javacup.gui.asistente;
+package org.dsaw.javacup.gui.assistant;
 
-import java.awt.Color;
 import org.dsaw.javacup.model.PlayerDetail;
 
-/**Esta clase implementa PlayerDetail es usada internamente por el Asistente*/
-class JugadorImpl implements PlayerDetail {
+import java.awt.*;
 
-    private JugadorImpl() {
+/**Esta clase implementa PlayerDetail es usada internamente por el Asistente*/
+class PlayerDetailImpl implements PlayerDetail {
+
+    private PlayerDetailImpl() {
     }
 
     static final Color cpiel = new Color(255, 200, 150);
@@ -20,7 +21,7 @@ class JugadorImpl implements PlayerDetail {
     private double presicion = .5;
     private boolean portero = false;
 
-    public JugadorImpl(String nombre, int numero) {
+    public PlayerDetailImpl(String nombre, int numero) {
         this.numero = numero;
         this.nombre = nombre;
     }

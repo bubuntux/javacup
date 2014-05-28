@@ -1,4 +1,4 @@
-package org.dsaw.javacup.gui.asistente;
+package org.dsaw.javacup.gui.assistant;
 
 import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.util.Position;
@@ -21,9 +21,9 @@ import org.slf4j.LoggerFactory;
 
 /**Esta clase implementa TacticDetail es usada internamente por el Asistente, pero
 tambien puede usarse para cargar dinamicamente desde un archivo guardado en el codigo, una clase TacticDetail */
-public final class TacticaDetalleImpl implements TacticDetail {
+public final class TacticDetailImpl implements TacticDetail {
 
-    private static Logger logger = LoggerFactory.getLogger(TacticaDetalleImpl.class);
+    private static Logger logger = LoggerFactory.getLogger(TacticDetailImpl.class);
     private transient Position alineacion1[] = new Position[]{
         new Position(0.2595419847328244, -50.41044776119403),
         new Position(-19.46564885496183, -31.6044776119403),
@@ -177,7 +177,7 @@ public final class TacticaDetalleImpl implements TacticDetail {
     private Color colorFranja2;
     private Color colorPortero2;
     private UniformStyle estilo2;
-    private JugadorImpl[] jugadores = new JugadorImpl[11];
+    private PlayerDetailImpl[] jugadores = new PlayerDetailImpl[11];
     private ArrayList<Position[]> alineaciones = new ArrayList<>();
     private ArrayList<Integer> tipoAlineacion = new ArrayList<>();
     private transient Random rand = new Random();
@@ -223,13 +223,13 @@ public final class TacticaDetalleImpl implements TacticDetail {
     /**Carga una tactica detalle a partir de un recurso url
      * Ej: si el recurso esta en el mismo paquete desde donde se invoca el constructor
      * podria llamarse de la siguiente forma:
-     * new TacticaDetalleImpl(this.getClass().getResource('miTacticaDetalle'));
+     * new TacticDetailImpl(this.getClass().getResource('miTacticaDetalle'));
      * @param url
      */
-    public TacticaDetalleImpl(URL url) {
-        TacticaDetalleImpl impl = new TacticaDetalleImpl();
+    public TacticDetailImpl(URL url) {
+        TacticDetailImpl impl = new TacticDetailImpl();
         try {
-            impl = TacticaDetalleImpl.loadRecurso(url);
+            impl = TacticDetailImpl.loadRecurso(url);
         } catch (Exception ex) {
             logger.error("Error al cargar TacticaDetalle", ex);
         }
@@ -265,9 +265,9 @@ public final class TacticaDetalleImpl implements TacticDetail {
         return new Color(rand.nextInt(256), rand.nextInt(256), rand.nextInt(256));
     }
 
-    TacticaDetalleImpl() {
+    TacticDetailImpl() {
         for (int i = 0; i < 11; i++) {
-            jugadores[i] = new JugadorImpl("Jugador", i + 1);
+            jugadores[i] = new PlayerDetailImpl("Jugador", i + 1);
         }
         jugadores[0].setPortero(true);
         alineaciones.add(alineacion1);
@@ -291,17 +291,17 @@ public final class TacticaDetalleImpl implements TacticDetail {
     private static XStream xs = new XStream(new DomDriver("utf-8"));
 
     /**Carga una TacticDetail a partir de un fichero*/
-    protected static TacticaDetalleImpl loadFichero(File file) throws IOException {
-        return (TacticaDetalleImpl) xs.fromXML(new FileInputStream(file));
+    protected static TacticDetailImpl loadFichero(File file) throws IOException {
+        return (TacticDetailImpl) xs.fromXML(new FileInputStream(file));
     }
 
     /**Carga una TacticDetail a partir de un recurso url*/
-    protected static TacticaDetalleImpl loadRecurso(URL url) throws IOException, ClassNotFoundException {
-        return (TacticaDetalleImpl) xs.fromXML(url.openStream());
+    protected static TacticDetailImpl loadRecurso(URL url) throws IOException, ClassNotFoundException {
+        return (TacticDetailImpl) xs.fromXML(url.openStream());
     }
 
-    /**Guarda una TacticaDetalleImpl en un fichero*/
-    protected static void save(TacticaDetalleImpl tacticaDetalle, File file) throws FileNotFoundException, IOException {
+    /**Guarda una TacticDetailImpl en un fichero*/
+    protected static void save(TacticDetailImpl tacticaDetalle, File file) throws FileNotFoundException, IOException {
         FileOutputStream fos = new FileOutputStream(file);
         xs.toXML(tacticaDetalle, fos);
         fos.close();
