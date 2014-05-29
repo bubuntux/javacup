@@ -2,6 +2,8 @@
 config.xml
 props
 
+.temp
+
 # Idea Files #
 *.iml
 .idea
