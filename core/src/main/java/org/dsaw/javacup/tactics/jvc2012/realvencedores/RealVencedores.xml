@@ -1,4 +1,4 @@
-<org.dsaw.javacup.gui.asistente.TacticDetailImpl>
+<org.dsaw.javacup.gui.assistant.TacticDetailImpl>
   <nombre>Real Vencedores</nombre>
   <pais>España</pais>
   <entrenador>Alvarito y Roman</entrenador>
@@ -65,7 +65,7 @@
   </colorPortero2>
   <estilo2>SIN_ESTILO</estilo2>
   <jugadores>
-    <org.dsaw.javacup.gui.asistente.JugadorImpl>
+    <org.dsaw.javacup.gui.assistant.JugadorImpl>
       <nombre>Iker Estanterias</nombre>
       <colorPiel>
         <red>255</red>
@@ -84,8 +84,8 @@
       <remate>0.95</remate>
       <presicion>1.0</presicion>
       <portero>true</portero>
-    </org.dsaw.javacup.gui.asistente.JugadorImpl>
-    <org.dsaw.javacup.gui.asistente.JugadorImpl>
+    </org.dsaw.javacup.gui.assistant.JugadorImpl>
+    <org.dsaw.javacup.gui.assistant.JugadorImpl>
       <nombre>Pepe Rompehuesos</nombre>
       <colorPiel>
         <red>196</red>
@@ -93,24 +93,24 @@
         <blue>52</blue>
         <alpha>255</alpha>
       </colorPiel>
-      <colorPelo reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPelo"/>
+      <colorPelo reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPelo"/>
       <numero>3</numero>
       <velocidad>0.67</velocidad>
       <remate>0.31</remate>
       <presicion>0.5</presicion>
       <portero>false</portero>
-    </org.dsaw.javacup.gui.asistente.JugadorImpl>
-    <org.dsaw.javacup.gui.asistente.JugadorImpl>
+    </org.dsaw.javacup.gui.assistant.JugadorImpl>
+    <org.dsaw.javacup.gui.assistant.JugadorImpl>
       <nombre>Sergio Ramos de Flores</nombre>
-      <colorPiel reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPiel"/>
-      <colorPelo reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPelo"/>
+      <colorPiel reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPiel"/>
+      <colorPelo reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPelo"/>
       <numero>4</numero>
       <velocidad>0.76</velocidad>
       <remate>0.3</remate>
       <presicion>0.5</presicion>
       <portero>false</portero>
-    </org.dsaw.javacup.gui.asistente.JugadorImpl>
-    <org.dsaw.javacup.gui.asistente.JugadorImpl>
+    </org.dsaw.javacup.gui.assistant.JugadorImpl>
+    <org.dsaw.javacup.gui.assistant.JugadorImpl>
       <nombre>Lassy</nombre>
       <colorPiel>
         <red>0</red>
@@ -129,77 +129,77 @@
       <remate>0.37</remate>
       <presicion>0.34</presicion>
       <portero>false</portero>
-    </org.dsaw.javacup.gui.asistente.JugadorImpl>
-    <org.dsaw.javacup.gui.asistente.JugadorImpl>
+    </org.dsaw.javacup.gui.assistant.JugadorImpl>
+    <org.dsaw.javacup.gui.assistant.JugadorImpl>
       <nombre>Chavi Alonso</nombre>
-      <colorPiel reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPiel"/>
-      <colorPelo reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPelo"/>
+      <colorPiel reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPiel"/>
+      <colorPelo reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPelo"/>
       <numero>14</numero>
       <velocidad>0.72</velocidad>
       <remate>0.3</remate>
       <presicion>0.5</presicion>
       <portero>false</portero>
-    </org.dsaw.javacup.gui.asistente.JugadorImpl>
-    <org.dsaw.javacup.gui.asistente.JugadorImpl>
+    </org.dsaw.javacup.gui.assistant.JugadorImpl>
+    <org.dsaw.javacup.gui.assistant.JugadorImpl>
       <nombre>Concentrao</nombre>
-      <colorPiel reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPiel"/>
-      <colorPelo reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPelo"/>
+      <colorPiel reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPiel"/>
+      <colorPelo reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPelo"/>
       <numero>15</numero>
       <velocidad>1.0</velocidad>
       <remate>0.69</remate>
       <presicion>0.64</presicion>
       <portero>false</portero>
-    </org.dsaw.javacup.gui.asistente.JugadorImpl>
-    <org.dsaw.javacup.gui.asistente.JugadorImpl>
+    </org.dsaw.javacup.gui.assistant.JugadorImpl>
+    <org.dsaw.javacup.gui.assistant.JugadorImpl>
       <nombre>Cristiano Ronaldo</nombre>
-      <colorPiel reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPiel"/>
-      <colorPelo reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPelo"/>
+      <colorPiel reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPiel"/>
+      <colorPelo reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPelo"/>
       <numero>7</numero>
       <velocidad>1.0</velocidad>
       <remate>1.0</remate>
       <presicion>1.0</presicion>
       <portero>false</portero>
-    </org.dsaw.javacup.gui.asistente.JugadorImpl>
-    <org.dsaw.javacup.gui.asistente.JugadorImpl>
+    </org.dsaw.javacup.gui.assistant.JugadorImpl>
+    <org.dsaw.javacup.gui.assistant.JugadorImpl>
       <nombre>Caca</nombre>
-      <colorPiel reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPiel"/>
-      <colorPelo reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPelo"/>
+      <colorPiel reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPiel"/>
+      <colorPelo reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPelo"/>
       <numero>8</numero>
       <velocidad>0.75</velocidad>
       <remate>0.61</remate>
       <presicion>0.82</presicion>
       <portero>false</portero>
-    </org.dsaw.javacup.gui.asistente.JugadorImpl>
-    <org.dsaw.javacup.gui.asistente.JugadorImpl>
+    </org.dsaw.javacup.gui.assistant.JugadorImpl>
+    <org.dsaw.javacup.gui.assistant.JugadorImpl>
       <nombre>Cigarrillo Higuain</nombre>
-      <colorPiel reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPiel"/>
-      <colorPelo reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPelo"/>
+      <colorPiel reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPiel"/>
+      <colorPelo reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPelo"/>
       <numero>20</numero>
       <velocidad>1.0</velocidad>
       <remate>1.0</remate>
       <presicion>0.77</presicion>
       <portero>false</portero>
-    </org.dsaw.javacup.gui.asistente.JugadorImpl>
-    <org.dsaw.javacup.gui.asistente.JugadorImpl>
+    </org.dsaw.javacup.gui.assistant.JugadorImpl>
+    <org.dsaw.javacup.gui.assistant.JugadorImpl>
       <nombre>Perdema</nombre>
-      <colorPiel reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPiel"/>
-      <colorPelo reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPelo"/>
+      <colorPiel reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPiel"/>
+      <colorPelo reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPelo"/>
       <numero>9</numero>
       <velocidad>1.0</velocidad>
       <remate>1.0</remate>
       <presicion>0.88</presicion>
       <portero>false</portero>
-    </org.dsaw.javacup.gui.asistente.JugadorImpl>
-    <org.dsaw.javacup.gui.asistente.JugadorImpl>
+    </org.dsaw.javacup.gui.assistant.JugadorImpl>
+    <org.dsaw.javacup.gui.assistant.JugadorImpl>
       <nombre>Collejón</nombre>
-      <colorPiel reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPiel"/>
-      <colorPelo reference="../../org.dsaw.javacup.gui.asistente.JugadorImpl/colorPelo"/>
+      <colorPiel reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPiel"/>
+      <colorPelo reference="../../org.dsaw.javacup.gui.assistant.JugadorImpl/colorPelo"/>
       <numero>21</numero>
       <velocidad>0.76</velocidad>
       <remate>0.9</remate>
       <presicion>1.0</presicion>
       <portero>false</portero>
-    </org.dsaw.javacup.gui.asistente.JugadorImpl>
+    </org.dsaw.javacup.gui.assistant.JugadorImpl>
   </jugadores>
   <alineaciones>
     <org.dsaw.javacup.model.util.Position-array>
@@ -487,4 +487,4 @@
     <int>0</int>
     <int>0</int>
   </tipoAlineacion>
-</org.dsaw.javacup.gui.asistente.TacticDetailImpl>
+</org.dsaw.javacup.gui.assistant.TacticDetailImpl>
