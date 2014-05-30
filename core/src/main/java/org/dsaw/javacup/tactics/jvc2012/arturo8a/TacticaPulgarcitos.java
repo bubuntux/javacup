@@ -1,19 +1,23 @@
 package org.dsaw.javacup.tactics.jvc2012.arturo8a;
 
-import org.dsaw.javacup.model.engine.GameSituations;
-import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.model.util.Constants;
+import com.neovisionaries.i18n.CountryCode;
+
+import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.command.Command;
-import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.command.CommandHitBall;
-import org.dsaw.javacup.model.trajectory.AirTrajectory;
+import org.dsaw.javacup.model.command.CommandMoveTo;
+import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
+import org.dsaw.javacup.model.trajectory.AirTrajectory;
+import org.dsaw.javacup.model.util.Constants;
+import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
-import java.awt.Color;
+
+import java.awt.*;
 import java.util.ArrayList;
 import java.util.LinkedList;
-import org.dsaw.javacup.model.*;
-
 import java.util.List;
 import java.util.Random;
 
@@ -145,8 +149,8 @@ public class TacticaPulgarcitos implements Tactic {
         }
 
         @Override
-        public String getCountry() {
-            return "Peru";
+        public CountryCode getCountry() {
+            return CountryCode.PE;
         }
 
         @Override

@@ -1,9 +1,6 @@
 package org.dsaw.javacup.tactics.jvc2012.pringaos;
 
-import java.awt.Color;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
+import com.neovisionaries.i18n.CountryCode;
 
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.Tactic;
@@ -17,6 +14,11 @@ import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
+
+import java.awt.*;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 public class Pringaos2012 implements Tactic {
     Position alineacion1[]=new Position[]{
@@ -481,8 +483,8 @@ class Pringaos2012Detalle implements TacticDetail {
     }
 
     @Override
-    public String getCountry() {
-        return "España";
+    public CountryCode getCountry() {
+        return CountryCode.ES;
     }
 
     @Override

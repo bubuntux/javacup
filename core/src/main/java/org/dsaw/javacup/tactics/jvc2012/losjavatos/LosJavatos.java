@@ -1,13 +1,17 @@
 package org.dsaw.javacup.tactics.jvc2012.losjavatos;
 
-import java.awt.Color;
-import java.util.LinkedList;
-import org.dsaw.javacup.model.*;
-import org.dsaw.javacup.model.util.*;
-import org.dsaw.javacup.render.UniformStyle;
-import org.dsaw.javacup.model.command.*;
-import org.dsaw.javacup.model.engine.GameSituations;
+import com.neovisionaries.i18n.CountryCode;
 
+import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.command.Command;
+import org.dsaw.javacup.model.engine.GameSituations;
+import org.dsaw.javacup.model.util.Position;
+import org.dsaw.javacup.render.UniformStyle;
+
+import java.awt.*;
+import java.util.LinkedList;
 import java.util.List;
 
 public class LosJavatos implements Tactic {
@@ -33,8 +37,8 @@ public class LosJavatos implements Tactic {
         }
 
         @Override
-        public String getCountry() {
-            return "España";
+        public CountryCode getCountry() {
+            return CountryCode.ES;
         }
 
         @Override

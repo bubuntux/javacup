@@ -20,6 +20,8 @@ package org.dsaw.javacup.tactics.jvc2012.petardos;
 //package javaCup2012_Petardos;
 
 //import org.javahispano.javacup.tacticas.tacticas_aceptadas.Petardos.*;
+import com.neovisionaries.i18n.CountryCode;
+
 import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,8 +74,8 @@ public class Petardos implements Tactic {
 		}
 
 		@Override
-                public String getCountry() {
-			return "España";
+                public CountryCode getCountry() {
+			return CountryCode.ES;
 		}
 
 		@Override

@@ -1,5 +1,7 @@
 package org.dsaw.javacup.model;
 
+import com.neovisionaries.i18n.CountryCode;
+
 import org.dsaw.javacup.render.UniformStyle;
 
 import java.awt.Color;
@@ -11,7 +13,7 @@ public interface TacticDetail {
     public String getTacticName();
 
     /**Pais del equipo*/
-    public String getCountry();
+    public CountryCode getCountry();
 
     /**Nombre del entrenador*/
     public String getCoach();

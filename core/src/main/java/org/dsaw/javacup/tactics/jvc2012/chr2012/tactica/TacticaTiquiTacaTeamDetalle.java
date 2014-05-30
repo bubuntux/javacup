@@ -1,5 +1,7 @@
 package org.dsaw.javacup.tactics.jvc2012.chr2012.tactica;
 
+import com.neovisionaries.i18n.CountryCode;
+
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.PlayerDetail;
@@ -21,8 +23,8 @@ public class TacticaTiquiTacaTeamDetalle  implements TacticDetail {
     }
 
     @Override
-    public String getCountry() {
-        return "España";
+    public CountryCode getCountry() {
+        return CountryCode.ES;
     }
 
     @Override

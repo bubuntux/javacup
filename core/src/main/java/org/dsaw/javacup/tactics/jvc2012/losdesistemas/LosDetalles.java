@@ -1,11 +1,13 @@
 package org.dsaw.javacup.tactics.jvc2012.losdesistemas;
 
-import java.awt.Color;
+import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.render.UniformStyle;
 import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.util.Position;
+import org.dsaw.javacup.render.UniformStyle;
+
+import java.awt.*;
 
 public class LosDetalles implements TacticDetail{
 	
@@ -15,8 +17,8 @@ public class LosDetalles implements TacticDetail{
     }
 
     @Override
-    public String getCountry() {
-        return "Argentina";
+    public CountryCode getCountry() {
+        return CountryCode.AR;
     }
 
     @Override

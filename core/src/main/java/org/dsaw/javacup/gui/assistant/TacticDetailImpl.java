@@ -1,23 +1,25 @@
 package org.dsaw.javacup.gui.assistant;
 
-import org.dsaw.javacup.model.TacticDetail;
-import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.model.PlayerDetail;
+import com.neovisionaries.i18n.CountryCode;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.awt.Color;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.net.URL;
-import java.util.ArrayList;
-import java.util.Random;
 
+import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
+import java.awt.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Random;
 
 /**Esta clase implementa TacticDetail es usada internamente por el Asistente, pero
 tambien puede usarse para cargar dinamicamente desde un archivo guardado en el codigo, una clase TacticDetail */
@@ -335,8 +337,8 @@ public final class TacticDetailImpl implements TacticDetail {
     }
 
     @Override
-    public String getCountry() {
-        return pais;
+    public CountryCode getCountry() {
+        return CountryCode.ES; //TODO fix
     }
 
     @Override

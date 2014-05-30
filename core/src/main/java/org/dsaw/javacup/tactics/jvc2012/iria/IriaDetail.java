@@ -1,9 +1,13 @@
 package org.dsaw.javacup.tactics.jvc2012.iria;
 
-import java.awt.Color;
-import org.dsaw.javacup.model.*;
-import org.dsaw.javacup.model.util.*;
+import com.neovisionaries.i18n.CountryCode;
+
+import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
+
+import java.awt.*;
 
 public class IriaDetail implements TacticDetail {
 
@@ -13,8 +17,8 @@ public class IriaDetail implements TacticDetail {
     }
 
     @Override
-    public String getCountry() {
-        return "España";
+    public CountryCode getCountry() {
+        return CountryCode.ES;
     }
 
     @Override

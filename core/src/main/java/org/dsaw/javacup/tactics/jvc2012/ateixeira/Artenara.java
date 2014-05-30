@@ -1,5 +1,7 @@
 package org.dsaw.javacup.tactics.jvc2012.ateixeira;
 
+import com.neovisionaries.i18n.CountryCode;
+
 import java.awt.Color;
 import java.util.LinkedList;
 import org.dsaw.javacup.model.*;
@@ -117,8 +119,8 @@ public class Artenara implements Tactic {
         }
 
         @Override
-        public String getCountry() {
-            return "España";
+        public CountryCode getCountry() {
+            return CountryCode.ES;
         }
 
         @Override

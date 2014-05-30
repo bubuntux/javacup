@@ -10,6 +10,7 @@ public class DesktopStarter {
 
   public static void main(String[] args) {
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
+    config.title = "JavaCup";
     config.useGL30 = true;
     new LwjglApplication(new JavaCup(), config);
   }

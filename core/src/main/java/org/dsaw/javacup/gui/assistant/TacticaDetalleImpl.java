@@ -1,5 +1,6 @@
 package org.dsaw.javacup.gui.assistant;
 
+import com.neovisionaries.i18n.CountryCode;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
@@ -336,8 +337,8 @@ public final class TacticaDetalleImpl implements TacticDetail {
     }
 
     @Override
-    public String getCountry() {
-        return pais;
+    public CountryCode getCountry() {
+        return CountryCode.ES; //TODO fix pais;
     }
 
     @Override

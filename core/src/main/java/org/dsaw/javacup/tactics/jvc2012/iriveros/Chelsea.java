@@ -1,6 +1,8 @@
 package org.dsaw.javacup.tactics.jvc2012.iriveros;
 
 
+import com.neovisionaries.i18n.CountryCode;
+
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.util.Constants;
@@ -155,8 +157,8 @@ public class Chelsea implements Tactic {
         }
 
         @Override
-        public String getCountry() {
-            return "Colombia";
+        public CountryCode getCountry() {
+            return CountryCode.CO;
         }
 
         @Override

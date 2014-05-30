@@ -4,10 +4,13 @@
  */
 package org.dsaw.javacup.tactics.jvc2012.bo;
 
-import java.awt.Color;
+import com.neovisionaries.i18n.CountryCode;
+
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.render.UniformStyle;
+
+import java.awt.*;
 
 /**
  *
@@ -21,8 +24,8 @@ public class TacticSpecification implements TacticDetail {
     }
 
     @Override
-    public String getCountry() {
-        return "Bolivia";
+    public CountryCode getCountry() {
+        return CountryCode.BO;
     }
 
     @Override

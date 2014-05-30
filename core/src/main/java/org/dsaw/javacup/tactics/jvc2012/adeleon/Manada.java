@@ -1,5 +1,7 @@
 package org.dsaw.javacup.tactics.jvc2012.adeleon;
 
+import com.neovisionaries.i18n.CountryCode;
+
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.util.Constants;
@@ -112,8 +114,8 @@ public class Manada implements Tactic {
 	        }
 
 	        @Override
-                public String getCountry() {
-	            return "México";
+                public CountryCode getCountry() {
+	            return CountryCode.MX;
 	        }
 
 	        @Override
