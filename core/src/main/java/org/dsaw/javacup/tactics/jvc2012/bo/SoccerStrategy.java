@@ -4,9 +4,10 @@
  */
 package org.dsaw.javacup.tactics.jvc2012.bo;
 
-import java.util.List;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
+
+import java.util.List;
 
 /**
  *

@@ -1,13 +1,13 @@
 package org.dsaw.javacup.tactics.jvc2012.team2012;
 
+import org.dsaw.javacup.model.engine.GameSituations;
+import org.dsaw.javacup.model.util.Constants;
+import org.dsaw.javacup.model.util.Position;
+
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-import org.dsaw.javacup.model.engine.GameSituations;
-import org.dsaw.javacup.model.util.Constants;
-import org.dsaw.javacup.model.util.Position;
 
 public class Util23 {
 

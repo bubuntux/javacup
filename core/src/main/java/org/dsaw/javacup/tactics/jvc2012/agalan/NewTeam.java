@@ -1,13 +1,13 @@
 package org.dsaw.javacup.tactics.jvc2012.agalan;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public class NewTeam implements Tactic {
 

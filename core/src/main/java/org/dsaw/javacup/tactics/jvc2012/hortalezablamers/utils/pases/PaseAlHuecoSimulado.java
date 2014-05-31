@@ -1,19 +1,18 @@
 package org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.pases;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Random;
-import java.util.Vector;
-
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
-
 import org.dsaw.javacup.tactics.jvc2012.hortalezablamers.HBConstants;
 import org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.pases.simulador.CommandHitBallSimulated;
 import org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.pases.simulador.SimuladorPases;
+
+import java.util.Collections;
+import java.util.List;
+import java.util.Random;
+import java.util.Vector;
 
 public class PaseAlHuecoSimulado {
 	

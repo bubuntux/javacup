@@ -1,6 +1,5 @@
 package org.dsaw.javacup.tactics.jvc2012.losjavatos;
 
-import java.util.LinkedList;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -9,6 +8,8 @@ import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.LinkedList;
 
 public class Common {
     GameSituations commonSp;

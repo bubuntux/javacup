@@ -4,8 +4,9 @@
  */
 package org.dsaw.javacup.tactics.jvc2012.moleteam;
 
-import java.util.ArrayList;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.ArrayList;
 
 /**
  *

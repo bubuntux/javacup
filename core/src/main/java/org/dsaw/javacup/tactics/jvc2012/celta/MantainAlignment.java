@@ -1,12 +1,12 @@
 package org.dsaw.javacup.tactics.jvc2012.celta;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Generador de commandos para que el equipo mantenga la alineación, teniendo en cuenta la posición del balón.

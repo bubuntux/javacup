@@ -4,7 +4,7 @@
  */
 package org.dsaw.javacup.tactics.jvc2012.moleteam;
 
-import org.dsaw.javacup.model.command.*;
+import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.util.Position;
 /**
  *

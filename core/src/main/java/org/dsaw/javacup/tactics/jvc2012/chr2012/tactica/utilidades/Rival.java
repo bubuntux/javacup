@@ -1,7 +1,8 @@
 package org.dsaw.javacup.tactics.jvc2012.chr2012.tactica.utilidades;
 
-import java.util.ArrayList;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.ArrayList;
 
 /**
  * Clase que representa a los rivales, en la cual se almacenar� toda la informaci�n necesaria que se desee

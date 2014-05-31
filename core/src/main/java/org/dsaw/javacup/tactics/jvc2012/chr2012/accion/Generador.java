@@ -1,20 +1,19 @@
 package org.dsaw.javacup.tactics.jvc2012.chr2012.accion;
 
-import java.util.ArrayList;
-import java.util.Hashtable;
-import java.util.StringTokenizer;
-
-import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
+import org.dsaw.javacup.model.engine.GameSituations;
+import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
+import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.model.engine.GameSituations;
-import org.dsaw.javacup.model.trajectory.AirTrajectory;
-
 import org.dsaw.javacup.tactics.jvc2012.chr2012.tactica.utilidades.Entorno;
 import org.dsaw.javacup.tactics.jvc2012.chr2012.tactica.utilidades.Jugador;
 import org.dsaw.javacup.tactics.jvc2012.chr2012.tactica.utilidades.Rival;
+
+import java.util.ArrayList;
+import java.util.Hashtable;
+import java.util.StringTokenizer;
 
 
 

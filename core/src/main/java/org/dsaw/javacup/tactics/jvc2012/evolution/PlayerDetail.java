@@ -1,9 +1,11 @@
 package org.dsaw.javacup.tactics.jvc2012.evolution;
 
-import java.awt.Color;
-
 import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.util.Position;;
+import org.dsaw.javacup.model.util.Position;
+
+import java.awt.*;
+
+;
 
 class JugadorImpl implements PlayerDetail {
 

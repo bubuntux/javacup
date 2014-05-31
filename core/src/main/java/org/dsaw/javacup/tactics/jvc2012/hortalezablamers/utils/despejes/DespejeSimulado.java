@@ -1,15 +1,14 @@
 package org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.despejes;
 
-import java.util.Collections;
-import java.util.Vector;
-
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
-
 import org.dsaw.javacup.tactics.jvc2012.hortalezablamers.HBConstants;
 import org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.despejes.simulador.CommandHitBallSimulated;
 import org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.despejes.simulador.SimuladorDespejes;
+
+import java.util.Collections;
+import java.util.Vector;
 
 public class DespejeSimulado {
 

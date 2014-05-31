@@ -8,9 +8,6 @@ package org.dsaw.javacup.tactics.jvc2012.tukutuku;
  *  
  */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
@@ -20,6 +17,9 @@ import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.ArrayList;
+import java.util.Arrays;
 
 
 //Interface que debe implementar cualquier modalidad de jugador

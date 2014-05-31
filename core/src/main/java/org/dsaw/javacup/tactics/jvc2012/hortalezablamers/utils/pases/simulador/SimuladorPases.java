@@ -1,8 +1,5 @@
 package org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.pases.simulador;
 
-import java.util.Random;
-import java.util.Vector;
-
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.engine.GameSituations;
@@ -11,8 +8,10 @@ import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.trajectory.FloorTrajectory;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
-
 import org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.Common;
+
+import java.util.Random;
+import java.util.Vector;
 
 public class SimuladorPases {
 

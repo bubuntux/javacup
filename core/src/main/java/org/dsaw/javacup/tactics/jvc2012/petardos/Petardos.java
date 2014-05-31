@@ -20,11 +20,9 @@ package org.dsaw.javacup.tactics.jvc2012.petardos;
 //package javaCup2012_Petardos;
 
 //import org.javahispano.javacup.tacticas.tacticas_aceptadas.Petardos.*;
+
 import com.neovisionaries.i18n.CountryCode;
 
-import java.awt.Color;
-import java.util.ArrayList;
-import java.util.List;
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.TacticDetail;
@@ -35,6 +33,10 @@ import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
+
+import java.awt.*;
+import java.util.ArrayList;
+import java.util.List;
 
 public class Petardos implements Tactic {
 

@@ -1,21 +1,13 @@
 package org.dsaw.javacup.tactics.jvc2012.chr2012.tactica;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.Hashtable;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
-import org.dsaw.javacup.model.command.Command;
-import org.dsaw.javacup.model.command.CommandMoveTo;
-import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.TacticDetail;
-
+import org.dsaw.javacup.model.command.Command;
+import org.dsaw.javacup.model.command.CommandMoveTo;
+import org.dsaw.javacup.model.engine.GameSituations;
+import org.dsaw.javacup.model.util.Constants;
+import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.tactics.jvc2012.chr2012.accion.Accion;
 import org.dsaw.javacup.tactics.jvc2012.chr2012.accion.AccionAvanzar;
 import org.dsaw.javacup.tactics.jvc2012.chr2012.accion.AccionDespejar;
@@ -26,11 +18,17 @@ import org.dsaw.javacup.tactics.jvc2012.chr2012.accion.AccionRegatear;
 import org.dsaw.javacup.tactics.jvc2012.chr2012.accion.AccionTirar;
 import org.dsaw.javacup.tactics.jvc2012.chr2012.accion.AccionTirarTrallon;
 import org.dsaw.javacup.tactics.jvc2012.chr2012.accion.Generador;
-
 import org.dsaw.javacup.tactics.jvc2012.chr2012.tactica.utilidades.Balon;
 import org.dsaw.javacup.tactics.jvc2012.chr2012.tactica.utilidades.Entorno;
 import org.dsaw.javacup.tactics.jvc2012.chr2012.tactica.utilidades.Jugador;
 import org.dsaw.javacup.tactics.jvc2012.chr2012.tactica.utilidades.Rival;
+
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Hashtable;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 
 

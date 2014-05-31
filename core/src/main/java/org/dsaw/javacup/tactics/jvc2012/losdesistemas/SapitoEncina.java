@@ -1,13 +1,13 @@
 package org.dsaw.javacup.tactics.jvc2012.losdesistemas;
 
-import java.util.List;
-
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
+import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.model.engine.GameSituations;
+
+import java.util.List;
 
 public class SapitoEncina {
 	private GameSituations sp;

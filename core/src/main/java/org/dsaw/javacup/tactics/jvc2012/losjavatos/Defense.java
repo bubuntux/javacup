@@ -1,9 +1,11 @@
 package org.dsaw.javacup.tactics.jvc2012.losjavatos;
-import java.util.LinkedList;
+
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.LinkedList;
 
 public class Defense {
     GameSituations sp;

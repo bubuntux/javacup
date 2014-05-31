@@ -1,13 +1,13 @@
 package org.dsaw.javacup.tactics.jvc2012.evolution;
 
-import java.util.ArrayList;
-
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.ArrayList;
 
 public class TacticasUtil {
 

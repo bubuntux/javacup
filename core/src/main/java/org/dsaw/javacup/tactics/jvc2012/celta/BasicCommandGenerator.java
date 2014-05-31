@@ -1,14 +1,13 @@
 package org.dsaw.javacup.tactics.jvc2012.celta;
 
-import java.util.List;
-
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
-
 import org.dsaw.javacup.tactics.jvc2012.celta.geom.Line;
+
+import java.util.List;
 
 public class BasicCommandGenerator implements CommandGenerator {
 

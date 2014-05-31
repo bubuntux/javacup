@@ -1,9 +1,9 @@
 package org.dsaw.javacup.tactics.jvc2012.rchavarria;
 
-import java.awt.Color;
-
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.util.Position;
+
+import java.awt.*;
 
 class PlayerImpl implements PlayerDetail {
 

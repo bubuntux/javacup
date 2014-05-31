@@ -1,13 +1,5 @@
 package org.dsaw.javacup.tactics.jvc2012.romedal;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.NavigableSet;
-import java.util.TreeMap;
-import java.util.TreeSet;
-
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.TacticDetail;
@@ -19,12 +11,19 @@ import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
-
 import org.dsaw.javacup.tactics.jvc2012.romedal.util.Balon;
 import org.dsaw.javacup.tactics.jvc2012.romedal.util.ComandoGolpear;
 import org.dsaw.javacup.tactics.jvc2012.romedal.util.DestinoBalon;
 import org.dsaw.javacup.tactics.jvc2012.romedal.util.InfoTrayectoria;
 import org.dsaw.javacup.tactics.jvc2012.romedal.util.OpcionesDisparo;
+
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.NavigableSet;
+import java.util.TreeMap;
+import java.util.TreeSet;
 
 /**
  * @author Roland Cruz

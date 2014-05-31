@@ -3,15 +3,15 @@
  */
 package org.dsaw.javacup.tactics.jvc2012.team2012;
 
+import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.engine.GameSituations;
+import org.dsaw.javacup.model.util.Position;
+
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
-
-import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.engine.GameSituations;
-import org.dsaw.javacup.model.util.Position;
 
 /**
  * Clase que contiene el historial de las marcas durante el partido

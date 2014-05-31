@@ -356,7 +356,7 @@ public final class GameSituations {
     }
     /**
 	 * Calcula los jugadores que estan en el pase actual y rellena el array outOfGamePlayers con dicha informaci�n.
-	 * @param isLocal Verdadero si es el equipo local el que ha rematado
+	 *  Verdadero si es el equipo local el que ha rematado
 	 */
 private	void calculateOffSidePlayers() {
 	

@@ -1,9 +1,9 @@
 package org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.pases.simulador;
 
-import java.util.Vector;
-
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.Vector;
 
 public class CommandHitBallSimulated implements Comparable<CommandHitBallSimulated> {
 

@@ -1,12 +1,12 @@
 package org.dsaw.javacup.tactics.jvc2012.masia2012;
 
-import java.util.List;
-
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.List;
 
 public class Pass {
 	

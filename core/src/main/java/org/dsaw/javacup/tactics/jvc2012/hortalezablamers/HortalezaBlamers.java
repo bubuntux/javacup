@@ -1,5 +1,13 @@
 package org.dsaw.javacup.tactics.jvc2012.hortalezablamers;
 
+import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.command.Command;
+import org.dsaw.javacup.model.command.CommandHitBall;
+import org.dsaw.javacup.model.command.CommandMoveTo;
+import org.dsaw.javacup.model.engine.GameSituations;
+import org.dsaw.javacup.model.util.Constants;
+import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.despejes.DespejeSimulado;
 import org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.movimientos.MovimientoABalon;
 import org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.movimientos.MovimientoBascular;
@@ -11,15 +19,6 @@ import org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.saques.SaquesABal
 
 import java.util.LinkedList;
 import java.util.List;
-
-import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
-import org.dsaw.javacup.model.command.Command;
-import org.dsaw.javacup.model.command.CommandHitBall;
-import org.dsaw.javacup.model.command.CommandMoveTo;
-import org.dsaw.javacup.model.engine.GameSituations;
-import org.dsaw.javacup.model.util.Constants;
-import org.dsaw.javacup.model.util.Position;
 
 public class HortalezaBlamers implements Tactic {
 

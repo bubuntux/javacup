@@ -3,7 +3,6 @@ package org.dsaw.javacup.tactics.jvc2012.chr2012.accion;
 
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.util.Position;
-
 import org.dsaw.javacup.tactics.jvc2012.chr2012.tactica.utilidades.Jugador;
 
 

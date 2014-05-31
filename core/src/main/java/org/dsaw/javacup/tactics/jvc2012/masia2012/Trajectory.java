@@ -1,9 +1,9 @@
 package org.dsaw.javacup.tactics.jvc2012.masia2012;
 
 import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
+import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.model.trajectory.AirTrajectory;
 
 public class Trajectory{
 	public Position[] positions;

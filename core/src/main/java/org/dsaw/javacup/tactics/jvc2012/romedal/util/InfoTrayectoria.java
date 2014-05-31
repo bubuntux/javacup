@@ -1,8 +1,8 @@
 package org.dsaw.javacup.tactics.jvc2012.romedal.util;
 
-import java.util.TreeSet;
-
 import org.dsaw.javacup.tactics.jvc2012.romedal.TacticaRomedalusTeam;
+
+import java.util.TreeSet;
 
 public class InfoTrayectoria implements Comparable<InfoTrayectoria> {
 	double			fuerza;

@@ -1,9 +1,9 @@
 package org.dsaw.javacup.tactics.jvc2012.celta;
 
-import java.awt.Color;
-
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.util.Position;
+
+import java.awt.*;
 
 public class PlayerImpl implements PlayerDetail {
 

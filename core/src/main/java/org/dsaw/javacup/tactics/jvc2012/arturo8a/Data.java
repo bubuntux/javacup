@@ -1,8 +1,9 @@
 package org.dsaw.javacup.tactics.jvc2012.arturo8a;
-import org.dsaw.javacup.model.util.Constants;
+
 import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.engine.GameSituations;
+import org.dsaw.javacup.model.util.Constants;
+import org.dsaw.javacup.model.util.Position;
 
 public class Data {
 

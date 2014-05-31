@@ -3,10 +3,10 @@
  */
 package org.dsaw.javacup.tactics.jvc2012.team2012;
 
-import java.util.ArrayList;
-
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.ArrayList;
 
 /**
  * Historial del balon en el partido

@@ -1,0 +1,109 @@
+/*
+ * To change this template, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package org.dsaw.javacup.tactics.jvc2013.mansporting;
+
+import com.neovisionaries.i18n.CountryCode;
+
+import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.render.UniformStyle;
+
+import java.awt.*;
+import java.util.Collection;
+import java.util.LinkedList;
+import java.util.List;
+
+/**
+ *
+ * @author MaN
+ */
+public class MSGTacticaDetalle implements TacticDetail {
+
+    private static final String NOMBRE = "Mansporting de Gijón";
+    private static final CountryCode PAIS = CountryCode.ES;
+    private static final String ENTRENADOR = "MaN";
+    private static final Color COLOR_CAMISETA = new Color(217, 227, 228);
+    private static final Color COLOR_PANTALON = new Color(28, 75, 155);
+    private static final Color COLOR_FRANJA = new Color(120, 0, 0);
+    private static final Color COLOR_CALCETOS = new Color(28, 75, 155);
+    private static final Color COLOR_PORTERO = new Color(88, 181, 111);
+    private static final UniformStyle ESTILO_UNIFORME = UniformStyle.LINEAS_VERTICALES;
+    private static final Color COLOR_CAMISETA2 = new Color(200, 0, 0);
+    private static final Color COLOR_PANTALON2 = new Color(200, 0, 0);
+    private static final Color COLOR_FRANJA2 = new Color(200, 0, 0);
+    private static final Color COLOR_CALCETOS2 = new Color(200, 0, 0);
+    private static final Color COLOR_PORTERO2 = new Color(255, 143, 83);
+    private static final UniformStyle ESTILO_UNIFORME2 = UniformStyle.SIN_ESTILO;
+    private final List<MSGJugadorDetalle> jugadoresDetalle;
+
+    public MSGTacticaDetalle(Collection<? extends MSGJugadorDetalle> jugadoresDetalle) {
+        this.jugadoresDetalle = new LinkedList<MSGJugadorDetalle>();
+        this.jugadoresDetalle.addAll(jugadoresDetalle);
+    }
+
+    public String getTacticName() {
+        return NOMBRE;
+    }
+
+    public CountryCode getCountry() {
+        return PAIS;
+    }
+
+    public String getCoach() {
+        return ENTRENADOR;
+    }
+
+    public Color getShirtColor() {
+        return COLOR_CAMISETA;
+    }
+
+    public Color getShortsColor() {
+        return COLOR_PANTALON;
+    }
+
+    public Color getShirtLineColor() {
+        return COLOR_FRANJA;
+    }
+
+    public Color getSocksColor() {
+        return COLOR_CALCETOS;
+    }
+
+    public Color getGoalKeeper() {
+        return COLOR_PORTERO;
+    }
+
+    public UniformStyle getStyle() {
+        return ESTILO_UNIFORME;
+    }
+
+    public Color getShirtColor2() {
+        return COLOR_CAMISETA2;
+    }
+
+    public Color getShortsColor2() {
+        return COLOR_PANTALON2;
+    }
+
+    public Color getShirtLineColor2() {
+        return COLOR_FRANJA2;
+    }
+
+    public Color getSocksColor2() {
+        return COLOR_CALCETOS2;
+    }
+
+    public Color getGoalKeeper2() {
+        return COLOR_PORTERO2;
+    }
+
+    public UniformStyle getStyle2() {
+        return ESTILO_UNIFORME2;
+    }
+
+    public PlayerDetail[] getPlayers() {
+        return MSGUtils.convertJugadores(jugadoresDetalle);
+    }
+}

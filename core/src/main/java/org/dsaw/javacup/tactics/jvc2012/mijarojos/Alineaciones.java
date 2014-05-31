@@ -1,12 +1,12 @@
 package org.dsaw.javacup.tactics.jvc2012.mijarojos;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
+
+import java.util.LinkedList;
+import java.util.List;
 
 public final class Alineaciones {
     

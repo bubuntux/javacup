@@ -1,7 +1,7 @@
 package org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils;
 
-import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.util.Constants;
+import org.dsaw.javacup.model.util.Position;
 
 public class Common {
 

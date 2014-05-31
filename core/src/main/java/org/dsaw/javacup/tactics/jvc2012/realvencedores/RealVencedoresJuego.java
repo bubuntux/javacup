@@ -1,9 +1,5 @@
 package org.dsaw.javacup.tactics.jvc2012.realvencedores;
 
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.command.Command;
@@ -12,9 +8,12 @@ import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
-
 import org.dsaw.javacup.tactics.jvc2012.realvencedores.equipo.Distribucion;
 import org.dsaw.javacup.tactics.jvc2012.realvencedores.equipo.EquipoImpl;
+
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
 
 /**
  * Tactica del Equipo Real Vencedores.<br/>

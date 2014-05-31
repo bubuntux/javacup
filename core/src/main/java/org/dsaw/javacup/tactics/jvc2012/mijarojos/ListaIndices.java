@@ -1,9 +1,9 @@
 package org.dsaw.javacup.tactics.jvc2012.mijarojos;
 
+import org.dsaw.javacup.model.util.Position;
+
 import java.util.ArrayList;
 import java.util.LinkedList;
-
-import org.dsaw.javacup.model.util.Position;
 
 public class ListaIndices extends LinkedList<Integer> {
 	

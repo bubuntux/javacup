@@ -6,16 +6,16 @@ package org.dsaw.javacup.tactics.jvc2012.moleteam;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.engine.GameSituations;
-import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.PlayerDetail;
 import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.command.Command;
+import org.dsaw.javacup.model.engine.GameSituations;
+import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
 
-import java.awt.Color;
-import java.util.*;
+import java.awt.*;
+import java.util.List;
 
 /**
  *

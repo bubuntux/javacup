@@ -1,10 +1,12 @@
 package org.dsaw.javacup.tactics.jvc2012.iria;
 
-import org.dsaw.javacup.model.*;
-import org.dsaw.javacup.model.util.*;
-import org.dsaw.javacup.model.command.*;
+import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.command.Command;
+import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.engine.GameSituations;
-
+import org.dsaw.javacup.model.util.Constants;
+import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.tactics.jvc2012.iria.util.GoalKeeper;
 import org.dsaw.javacup.tactics.jvc2012.iria.util.Pass;
 import org.dsaw.javacup.tactics.jvc2012.iria.util.TacticUtils;

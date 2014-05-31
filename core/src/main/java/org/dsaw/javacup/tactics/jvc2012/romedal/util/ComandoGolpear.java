@@ -1,10 +1,9 @@
 package org.dsaw.javacup.tactics.jvc2012.romedal.util;
 
-import java.util.LinkedList;
-
 import org.dsaw.javacup.model.command.CommandHitBall;
-
 import org.dsaw.javacup.tactics.jvc2012.romedal.TacticaRomedalusTeam;
+
+import java.util.LinkedList;
 
 public class ComandoGolpear implements Comparable<ComandoGolpear> {
 	private CommandHitBall		comando;

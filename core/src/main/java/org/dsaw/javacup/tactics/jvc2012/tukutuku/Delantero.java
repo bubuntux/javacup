@@ -8,12 +8,12 @@ package org.dsaw.javacup.tactics.jvc2012.tukutuku;
  *  
  */
 
-import java.util.ArrayList;
-
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.util.Constants;
+
+import java.util.ArrayList;
 
 public class Delantero extends Jugador {
 	

@@ -1,15 +1,14 @@
 package org.dsaw.javacup.tactics.jvc2012.celta;
 
-import java.util.LinkedList;
-import java.util.List;
-
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
-
 import org.dsaw.javacup.tactics.jvc2012.celta.geom.Line;
+
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  * Generador de comandos para el portero.

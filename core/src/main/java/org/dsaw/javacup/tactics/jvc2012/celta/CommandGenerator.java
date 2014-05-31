@@ -1,9 +1,9 @@
 package org.dsaw.javacup.tactics.jvc2012.celta;
 
-import java.util.List;
-
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
+
+import java.util.List;
 
 /** 
  * Interfaz para generadores de commandos  
