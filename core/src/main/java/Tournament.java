@@ -150,7 +150,7 @@ public class Tournament {
           }
           int l = subTmp[j][0];
           int v = subTmp[j][1];
-          boolean invertir = false;
+          boolean invertir;
           if (l >= v) {
             invertir = (l + v) % 2 == 0;
           } else {
@@ -300,7 +300,7 @@ public class Tournament {
   }
 
   private static void scanDir(File dir) throws Exception {
-    Class[] classes = new Class[]{};
+    Class[] classes;
     try {
       classes = getClases(dir, "", Tactic.class, true);
     } catch (Exception e) {
@@ -420,7 +420,7 @@ public class Tournament {
         max = i;
       }
     }
-    int idx = 0, idx0 = 0;
+    int idx, idx0 = 0;
     Class[][] grupos = new Class[equipos.length][max];
     for (int j = 0; j < max; j++) {
       int sum = 0;
@@ -499,7 +499,7 @@ public class Tournament {
         r =
         new BufferedReader(new FileReader(new File("H:\\torneo\\torneo2009\\resultados.txt")));
     int grupo = -1;
-    int fecha = -1;
+    int fecha;
     int dia = -1;
 
     while ((s = r.readLine()) != null) {

@@ -4,105 +4,105 @@ import org.dsaw.javacup.model.util.Position;
 
 public class Jugador {
 
-	public static final int DELANTERO = 4;
-	public static final int CENTROCAMPISTA = 3;
-	public static final int DEFENSA = 2;
-	public static final int PORTERO = 1;
-	
-	public static int RADIO_ZONA = 10;
-	
-	private Integer id;
-	
-	private Position posicion;
-	
-	private Position posicionBase;
-	
-	private Position posicionAtaqueBase;
-	
-	private Position posicionDesmarque;
-	
-	private int rol;
-	
-	private boolean puedoRecuperar;
-	
-	private Rival rivalMarcado;
-	
-	private Rival [] rivalesZona;
-	
-	public Jugador (int i){
-		id = new Integer(i);
-	}
+  public static final int DELANTERO = 4;
+  public static final int CENTROCAMPISTA = 3;
+  public static final int DEFENSA = 2;
+  public static final int PORTERO = 1;
 
-	public Position getPosicion() {
-		return posicion;
-	}
+  public static int RADIO_ZONA = 10;
 
-	public void setPosicion(Position posicion) {
-		this.posicion = posicion;
-	}
+  private Integer id;
 
-	public Integer getId() {
-		return id;
-	}
+  private Position posicion;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  private Position posicionBase;
 
-	public Position getPosicionBase() {
-		return posicionBase;
-	}
+  private Position posicionAtaqueBase;
 
-	public void setPosicionBase(Position posicionBase) {
-		this.posicionBase = posicionBase;
-	}
+  private Position posicionDesmarque;
 
-	public int getRol() {
-		return rol;
-	}
+  private int rol;
 
-	public void setRol(int rol) {
-		this.rol = rol;
-	}
+  private boolean puedoRecuperar;
 
-	public boolean isPuedoRecuperar() {
-		return puedoRecuperar;
-	}
+  private Rival rivalMarcado;
 
-	public void setPuedoRecuperar(boolean puedoRecuperar) {
-		this.puedoRecuperar = puedoRecuperar;
-	}
+  private Rival[] rivalesZona;
 
-	public Rival getRivalMarcado() {
-		return rivalMarcado;
-	}
+  public Jugador(int i) {
+    id = i;
+  }
 
-	public void setRivalMarcado(Rival rivalMarcado) {
-		this.rivalMarcado = rivalMarcado;
-	}
+  public Position getPosicion() {
+    return posicion;
+  }
 
-	public Position getPosicionDesmarque() {
-		return posicionDesmarque;
-	}
+  public void setPosicion(Position posicion) {
+    this.posicion = posicion;
+  }
 
-	public void setPosicionDesmarque(Position posicionDesmarque) {
-		this.posicionDesmarque = posicionDesmarque;
-	}
+  public Integer getId() {
+    return id;
+  }
 
-	public Rival[] getRivalesZona() {
-		return rivalesZona;
-	}
+  public void setId(Integer id) {
+    this.id = id;
+  }
 
-	public void setRivalesZona(Rival[] rivalesZona) {
-		this.rivalesZona = rivalesZona;
-	}
+  public Position getPosicionBase() {
+    return posicionBase;
+  }
 
-	public Position getPosicionAtaqueBase() {
-		return posicionAtaqueBase;
-	}
+  public void setPosicionBase(Position posicionBase) {
+    this.posicionBase = posicionBase;
+  }
 
-	public void setPosicionAtaqueBase(Position posicionAtaqueBase) {
-		this.posicionAtaqueBase = posicionAtaqueBase;
-	}
-	
+  public int getRol() {
+    return rol;
+  }
+
+  public void setRol(int rol) {
+    this.rol = rol;
+  }
+
+  public boolean isPuedoRecuperar() {
+    return puedoRecuperar;
+  }
+
+  public void setPuedoRecuperar(boolean puedoRecuperar) {
+    this.puedoRecuperar = puedoRecuperar;
+  }
+
+  public Rival getRivalMarcado() {
+    return rivalMarcado;
+  }
+
+  public void setRivalMarcado(Rival rivalMarcado) {
+    this.rivalMarcado = rivalMarcado;
+  }
+
+  public Position getPosicionDesmarque() {
+    return posicionDesmarque;
+  }
+
+  public void setPosicionDesmarque(Position posicionDesmarque) {
+    this.posicionDesmarque = posicionDesmarque;
+  }
+
+  public Rival[] getRivalesZona() {
+    return rivalesZona;
+  }
+
+  public void setRivalesZona(Rival[] rivalesZona) {
+    this.rivalesZona = rivalesZona;
+  }
+
+  public Position getPosicionAtaqueBase() {
+    return posicionAtaqueBase;
+  }
+
+  public void setPosicionAtaqueBase(Position posicionAtaqueBase) {
+    this.posicionAtaqueBase = posicionAtaqueBase;
+  }
+
 }

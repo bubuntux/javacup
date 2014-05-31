@@ -5,11 +5,10 @@
 package org.dsaw.javacup.tactics.jvc2013.ifox.base;
 
 /**
- *
  * @author Usuario
  */
 public enum Mensaje {
-    PASAR_BALON,
-    RECIBIR_BALON,
-    AYUDAR_ATACANTE,
+  PASAR_BALON,
+  RECIBIR_BALON,
+  AYUDAR_ATACANTE,
 }

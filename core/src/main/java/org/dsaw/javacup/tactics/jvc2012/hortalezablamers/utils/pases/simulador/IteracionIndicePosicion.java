@@ -4,27 +4,27 @@ import org.dsaw.javacup.model.util.Position;
 
 public class IteracionIndicePosicion {
 
-	protected int iteracion;
-	protected int indice;
-	protected Position position;
-	
-	public IteracionIndicePosicion(int iteracion,
-			int indice, Position position) {
-		super();
-		this.iteracion = iteracion;
-		this.indice = indice;
-		this.position = position;
-	}
+  protected int iteracion;
+  protected int indice;
+  protected Position position;
 
-	public int getIteracion() {
-		return iteracion;
-	}
+  public IteracionIndicePosicion(int iteracion,
+                                 int indice, Position position) {
+    super();
+    this.iteracion = iteracion;
+    this.indice = indice;
+    this.position = position;
+  }
 
-	public int getIndice() {
-		return indice;
-	}
+  public int getIteracion() {
+    return iteracion;
+  }
 
-	public Position getPosition() {
-		return position;
-	}
+  public int getIndice() {
+    return indice;
+  }
+
+  public Position getPosition() {
+    return position;
+  }
 }

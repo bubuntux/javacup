@@ -13,34 +13,32 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- *
  * @author jsebas
  */
 public class CornerStrategy implements SoccerStrategy {
 
-    private GameSituations gameSituation;
+  private GameSituations gameSituation;
 
-    @Override
-    public void setCurrentGameSituations(GameSituations gameSituation) {
-        this.gameSituation = gameSituation;
+  @Override
+  public void setCurrentGameSituations(GameSituations gameSituation) {
+    this.gameSituation = gameSituation;
+  }
+
+  @Override
+  public List<Command> makeStrategy() {
+    List<Command> commands = new ArrayList<>();
+
+    if (gameSituation.isStarts()
+        && (gameSituation.ballPosition() == Constants.cornerSupDer
+            || gameSituation.ballPosition() == Constants.cornerSupDer)) {
+      int jugador = gameSituation.ballPosition().nearestIndex(gameSituation.myPlayers());
+      if (jugador != 10) {
+        commands.add(new CommandHitBall(jugador, gameSituation.myPlayers()[10], 1, true));
+      } else {
+        commands.add(new CommandHitBall(jugador, Constants.centroArcoSup, 1, true));
+      }
     }
 
-    @Override
-    public List<Command> makeStrategy() {
-        List<Command> commands = new ArrayList<>();
-
-        if (gameSituation.isStarts()
-                && (gameSituation.ballPosition() == Constants.cornerSupDer
-                || gameSituation.ballPosition() == Constants.cornerSupDer)) 
-        {
-            int jugador = gameSituation.ballPosition().nearestIndex(gameSituation.myPlayers());
-            if (jugador != 10) {
-                commands.add(new CommandHitBall(jugador, gameSituation.myPlayers()[10], 1, true));
-            } else {
-                commands.add(new CommandHitBall(jugador, Constants.centroArcoSup, 1, true));
-            }
-        }
-
-        return commands;
-    }
+    return commands;
+  }
 }

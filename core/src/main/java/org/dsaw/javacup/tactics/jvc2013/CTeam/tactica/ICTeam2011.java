@@ -6,31 +6,32 @@ import org.dsaw.javacup.tactics.jvc2013.CTeam.jugador.IJugadorCT;
 import java.util.List;
 
 public interface ICTeam2011 {
-	public List<IJugadorCT> getJugadores(IJugadorCT.Equipo equipo);
 
-	public int iteracionesRecuperacion();
+  public List<IJugadorCT> getJugadores(IJugadorCT.Equipo equipo);
 
-	public int iteracionesRecuperacionRival();
+  public int iteracionesRecuperacion();
 
-	public List<IJugadorCT> jugadoresRecuperacion();
-	
-	public List<IJugadorCT> previoJugadoresRecuperacion();
+  public int iteracionesRecuperacionRival();
 
-	public List<IJugadorCT> rivalesRecuperacion();
+  public List<IJugadorCT> jugadoresRecuperacion();
 
-	public IJugadorCT.Equipo posesionBalon();
+  public List<IJugadorCT> previoJugadoresRecuperacion();
 
-	public Position[] alineacionActual();
+  public List<IJugadorCT> rivalesRecuperacion();
 
-	public boolean posicionUsada(PosicionCT p);
+  public IJugadorCT.Equipo posesionBalon();
 
-	public void usada(PosicionCT p);
+  public Position[] alineacionActual();
 
-	public List<IJugadorCT> recuperando();
+  public boolean posicionUsada(PosicionCT p);
 
-	public void ultimoPase(PosicionCT ultimo);
+  public void usada(PosicionCT p);
 
-	public PosicionCT getUltimoPase();
-	
-	public boolean cambioPosesion();
+  public List<IJugadorCT> recuperando();
+
+  public void ultimoPase(PosicionCT ultimo);
+
+  public PosicionCT getUltimoPase();
+
+  public boolean cambioPosesion();
 }

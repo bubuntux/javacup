@@ -59,7 +59,7 @@ public abstract class AbstractJugador implements IJugadorCT {
     this.equipo = equipo;
     this.indice = indice;
     this.detalle = detalle;
-    this.posiciones = new LinkedList<PosicionCT>();
+    this.posiciones = new LinkedList<>();
     this.tactica = tactica;
     this.actual = new PosicionCT(0, 0);
     this.siguiente = null;
@@ -166,6 +166,7 @@ public abstract class AbstractJugador implements IJugadorCT {
   /**
    * retornal la distancia que puede recorred el jugador en el numero de iteraciones indicado
    */
+  @Override
   public double distanciaEn(int iteraciones) {
     return (double) iteraciones * Constants.getVelocidad(detalle.getSpeed());
   }

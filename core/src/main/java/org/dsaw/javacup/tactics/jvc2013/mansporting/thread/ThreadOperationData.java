@@ -5,24 +5,25 @@
 package org.dsaw.javacup.tactics.jvc2013.mansporting.thread;
 
 /**
- *
  * @author malvarez
  */
 public class ThreadOperationData<I, D> implements IdentificableData<I, D> {
 
-    private final I id;
-    private final D data;
+  private final I id;
+  private final D data;
 
-    public ThreadOperationData(I id, D data) {
-        this.id = id;
-        this.data = data;
-    }
+  public ThreadOperationData(I id, D data) {
+    this.id = id;
+    this.data = data;
+  }
 
-    public D getData() {
-        return data;
-    }
+  @Override
+  public D getData() {
+    return data;
+  }
 
-    public I getId() {
-        return id;
-    }
+  @Override
+  public I getId() {
+    return id;
+  }
 }

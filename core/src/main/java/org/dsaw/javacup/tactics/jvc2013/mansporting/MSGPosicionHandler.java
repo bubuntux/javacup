@@ -9,10 +9,10 @@ import org.dsaw.javacup.model.engine.GameSituations;
 import java.util.Map;
 
 /**
- *
  * @author MaN
  */
 public interface MSGPosicionHandler {
 
-    Map<Integer, MSGAlineacionPosicion> getPosicion(MSGTactica tactica, GameSituations sp, Boolean saco);
+  Map<Integer, MSGAlineacionPosicion> getPosicion(MSGTactica tactica, GameSituations sp,
+                                                  Boolean saco);
 }

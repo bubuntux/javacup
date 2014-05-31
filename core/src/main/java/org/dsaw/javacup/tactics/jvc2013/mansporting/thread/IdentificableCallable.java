@@ -8,10 +8,9 @@ package org.dsaw.javacup.tactics.jvc2013.mansporting.thread;
 import java.util.concurrent.Callable;
 
 /**
- *
  * @author malvarez
  */
 public interface IdentificableCallable<I, E> extends Callable<E> {
 
-    I getId();
+  I getId();
 }

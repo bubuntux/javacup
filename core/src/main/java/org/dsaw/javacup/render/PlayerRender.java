@@ -1,7 +1,7 @@
 package org.dsaw.javacup.render;
 
-import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.util.Constants;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
@@ -47,7 +47,7 @@ public class PlayerRender {
    */
   public synchronized void update(boolean alternativa) throws SlickException {
     int idx;
-    Color c0, c1 = null;
+    Color c0, c1;
     Color
         upolera =
         alternativa ? new Color(impl.getShirtColor2().getRed(), impl.getShirtColor2().getGreen(),

@@ -9,32 +9,35 @@ import org.dsaw.javacup.model.command.Command;
 import java.util.List;
 
 /**
- *
  * @author MaN
  */
 public interface MSGJugadorPropio extends MSGJugadorDetalle {
 
-    /**
-     * Alineación del jugador.
-     * @return alineación
-     */
-    MSGAlineacionPosicion getAlineacion();
+  /**
+   * Alineación del jugador.
+   *
+   * @return alineación
+   */
+  MSGAlineacionPosicion getAlineacion();
 
-    /**
-     * Indica si el jugador es el mas cercano.
-     * @return mas cercano.
-     */
-    boolean isJugadorMasCercano();
+  /**
+   * Indica si el jugador es el mas cercano.
+   *
+   * @return mas cercano.
+   */
+  boolean isJugadorMasCercano();
 
-    /**
-     * Ejecuta el comando seleccionado.
-     * @return ejecuta el comando seleccionado.
-     */
-    List<Command> ejecuta();
+  /**
+   * Ejecuta el comando seleccionado.
+   *
+   * @return ejecuta el comando seleccionado.
+   */
+  List<Command> ejecuta();
 
-    /**
-     * Devuelvel as minimas iteraciones de ventaja para que el jugador intente el pase.
-     * @return iteracioens de ventaja minimas para que el jugador intente el pase.
-     */
-    double getIteracionesVentajaPase();
+  /**
+   * Devuelvel as minimas iteraciones de ventaja para que el jugador intente el pase.
+   *
+   * @return iteracioens de ventaja minimas para que el jugador intente el pase.
+   */
+  double getIteracionesVentajaPase();
 }

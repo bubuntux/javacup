@@ -10,12 +10,12 @@ import org.dsaw.javacup.model.engine.GameSituations;
 import java.util.List;
 
 /**
- *
  * @author jsebas
  */
 public interface SoccerStrategy {
-    
-    public List<Command> makeStrategy();
-    public void setCurrentGameSituations(GameSituations sp);
-    
+
+  public List<Command> makeStrategy();
+
+  public void setCurrentGameSituations(GameSituations sp);
+
 }

@@ -30,7 +30,7 @@ public class CentroCampista extends Jugador {
 
   @Override
   public ArrayList<Command> accionRemate() {
-    ArrayList<Command> accion = new ArrayList<Command>();
+    ArrayList<Command> accion = new ArrayList<>();
 
     //Comprobamos que haya algun tiro posible
 

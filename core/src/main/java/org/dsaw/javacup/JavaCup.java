@@ -27,9 +27,7 @@ public class JavaCup extends Game {
     try {
       Tactic tactic = next.newInstance();
       tactic.getDetail();
-    } catch (InstantiationException e) {
-      e.printStackTrace();
-    } catch (IllegalAccessException e) {
+    } catch (InstantiationException | IllegalAccessException e) {
       e.printStackTrace();
     }
 

@@ -7,59 +7,60 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class DistanciaMinima {
-	private double mejorDistancia = 1000000.0;
 
-	private List<Integer> mejorOrden;
+  private double mejorDistancia = 1000000.0;
 
-	private List<IJugadorCT> ordenados;
+  private List<Integer> mejorOrden;
 
-	private List<PosicionCT> posiciones;
+  private List<IJugadorCT> ordenados;
 
-	public DistanciaMinima(List<IJugadorCT> jugadores, List<PosicionCT> posiciones) {
-		List<PosicionCT> posJugadores = new ArrayList<PosicionCT>();
-		for (IJugadorCT jug : jugadores) {
-			posJugadores.add(jug.getActual());
-		}
+  private List<PosicionCT> posiciones;
 
-		this.posiciones = posiciones;
+  public DistanciaMinima(List<IJugadorCT> jugadores, List<PosicionCT> posiciones) {
+    List<PosicionCT> posJugadores = new ArrayList<>();
+    for (IJugadorCT jug : jugadores) {
+      posJugadores.add(jug.getActual());
+    }
 
-		List<Integer> orden = new ArrayList<Integer>();
-		analizarOrden(orden, posJugadores);
+    this.posiciones = posiciones;
 
-		ordenados = new ArrayList<IJugadorCT>();
-		if (mejorOrden != null) {
-			for (int idx : mejorOrden) {
-				ordenados.add(jugadores.get(idx));
-			}
-		}
-	}
+    List<Integer> orden = new ArrayList<>();
+    analizarOrden(orden, posJugadores);
 
-	public List<IJugadorCT> getOrdenados() {
-		return ordenados;
-	}
+    ordenados = new ArrayList<>();
+    if (mejorOrden != null) {
+      for (int idx : mejorOrden) {
+        ordenados.add(jugadores.get(idx));
+      }
+    }
+  }
 
-	private void analizarOrden(List<Integer> orden, List<PosicionCT> posJugador) {
-		if (orden.size() == posJugador.size()) {
-			double dist = 0.0;
-			int pos = 0;
-			for (int idx : orden) {
-				PosicionCT p1 = posiciones.get(pos++);
-				PosicionCT p2 = posJugador.get(idx);
-				dist += p1.distancia(p2);
-			}
-			if (dist <= mejorDistancia) {
-				mejorOrden = new ArrayList<Integer>(orden);
-				mejorDistancia = dist;
-			}
-			return;
-		}
+  public List<IJugadorCT> getOrdenados() {
+    return ordenados;
+  }
 
-		for (int i = 0; i < posJugador.size(); i++) {
-			if (!orden.contains(i)) {
-				orden.add(i);
-				analizarOrden(orden, posJugador);
-				orden.remove((Integer) i);
-			}
-		}
-	}
+  private void analizarOrden(List<Integer> orden, List<PosicionCT> posJugador) {
+    if (orden.size() == posJugador.size()) {
+      double dist = 0.0;
+      int pos = 0;
+      for (int idx : orden) {
+        PosicionCT p1 = posiciones.get(pos++);
+        PosicionCT p2 = posJugador.get(idx);
+        dist += p1.distancia(p2);
+      }
+      if (dist <= mejorDistancia) {
+        mejorOrden = new ArrayList<>(orden);
+        mejorDistancia = dist;
+      }
+      return;
+    }
+
+    for (int i = 0; i < posJugador.size(); i++) {
+      if (!orden.contains(i)) {
+        orden.add(i);
+        analizarOrden(orden, posJugador);
+        orden.remove((Integer) i);
+      }
+    }
+  }
 }

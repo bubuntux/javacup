@@ -6,34 +6,34 @@ import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
 
 public class ControladorTirosPortero {
-	
-	private static ControladorTirosPortero instance;
-	
-	static {
-		instance = new ControladorTirosPortero();
-	}
-	
-	private ControladorTirosPortero() {
 
-	}
+  private static ControladorTirosPortero instance;
 
-	public static ControladorTirosPortero getInstance() {
-		return instance;
-	}
+  static {
+    instance = new ControladorTirosPortero();
+  }
 
-	public CommandHitBall getTiro(final int jugador, final GameSituations situacionPartido) {
-		Position destinoBola = null;
-		double ejeXDestino = ControladorUtils.getInstance().generaNumeroDobleAleatorioEntre(0, 34);
-		double fuerzaRemate = 1;
-		boolean tiraLadoDerecho = ControladorUtils.getInstance().generaBoleanoAleatorioEntre();
+  private ControladorTirosPortero() {
 
-		destinoBola = Constants.centroArcoSup;
-		if (tiraLadoDerecho) {
-			destinoBola.setPosition((ejeXDestino * -1), destinoBola.getY());
-		} else {
-			destinoBola.setPosition(ejeXDestino, destinoBola.getY());
-		}
+  }
 
-		return new CommandHitBall(jugador, destinoBola, fuerzaRemate, 30);
-	}
+  public static ControladorTirosPortero getInstance() {
+    return instance;
+  }
+
+  public CommandHitBall getTiro(final int jugador, final GameSituations situacionPartido) {
+    Position destinoBola;
+    double ejeXDestino = ControladorUtils.getInstance().generaNumeroDobleAleatorioEntre(0, 34);
+    double fuerzaRemate = 1;
+    boolean tiraLadoDerecho = ControladorUtils.getInstance().generaBoleanoAleatorioEntre();
+
+    destinoBola = Constants.centroArcoSup;
+    if (tiraLadoDerecho) {
+      destinoBola.setPosition((ejeXDestino * -1), destinoBola.getY());
+    } else {
+      destinoBola.setPosition(ejeXDestino, destinoBola.getY());
+    }
+
+    return new CommandHitBall(jugador, destinoBola, fuerzaRemate, 30);
+  }
 }

@@ -296,7 +296,7 @@ public class Arsenal implements Tactic {
   }
 
   //Lista de comandos
-  LinkedList<Command> comandos = new LinkedList<Command>();
+  LinkedList<Command> comandos = new LinkedList<>();
 
   private boolean enFormacion = false;
   private int jugadorConBalon = -1;

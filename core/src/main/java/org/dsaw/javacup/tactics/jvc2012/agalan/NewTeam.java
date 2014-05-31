@@ -12,34 +12,35 @@ import java.util.List;
 public class NewTeam implements Tactic {
 
 
-    TacticDetail detalle=new TacticDetailImpl();
-    @Override
-    public TacticDetail getDetail() {
-        return detalle;
-    }
+  TacticDetail detalle = new TacticDetailImpl();
 
-    @Override
-    public Position[] getStartPositions(GameSituations sp) {
-    	return alineaciones.getAlineacionSacando();
-    }
+  @Override
+  public TacticDetail getDetail() {
+    return detalle;
+  }
 
-    @Override
-    public Position[] getNoStartPositions(GameSituations sp) {
-    	return alineaciones.getAlineacionSinBalon();
-    }
+  @Override
+  public Position[] getStartPositions(GameSituations sp) {
+    return alineaciones.getAlineacionSacando();
+  }
 
-    //Lista de comandos
-    LinkedList<Command> comandos = new LinkedList<>();
-    Alineaciones alineaciones = new Alineaciones();
-    
-    @Override
-    public List<Command> execute(GameSituations sp) {
-    	//Limpia la lista de comandos
-        comandos.clear();
-        TacticaImpl tactica = new TacticaImpl(sp);    
-        tactica.situarEquipo(comandos);
-        return comandos;
-    }
+  @Override
+  public Position[] getNoStartPositions(GameSituations sp) {
+    return alineaciones.getAlineacionSinBalon();
+  }
+
+  //Lista de comandos
+  LinkedList<Command> comandos = new LinkedList<>();
+  Alineaciones alineaciones = new Alineaciones();
+
+  @Override
+  public List<Command> execute(GameSituations sp) {
+    //Limpia la lista de comandos
+    comandos.clear();
+    TacticaImpl tactica = new TacticaImpl(sp);
+    tactica.situarEquipo(comandos);
+    return comandos;
+  }
 
 
 }

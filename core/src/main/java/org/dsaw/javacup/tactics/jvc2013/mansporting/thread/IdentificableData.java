@@ -6,13 +6,12 @@
 package org.dsaw.javacup.tactics.jvc2013.mansporting.thread;
 
 /**
- *
  * @author malvarez
  */
 public interface IdentificableData<I, D> {
 
-    I getId();
+  I getId();
 
-    D getData();
+  D getData();
 
 }

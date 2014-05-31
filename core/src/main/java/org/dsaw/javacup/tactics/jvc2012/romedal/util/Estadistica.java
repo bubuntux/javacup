@@ -1,62 +1,62 @@
 package org.dsaw.javacup.tactics.jvc2012.romedal.util;
 
 public class Estadistica {
-	int opciones;
-	int goles;
-	int descartes;
 
-	public Estadistica(int opciones, int goles) {
-		super();
-		this.opciones = opciones;
-		this.goles = goles;
-		descartes = 0;
-	}
+  int opciones;
+  int goles;
+  int descartes;
 
-	public Estadistica() {
-		this(0, 0);
-	}
+  public Estadistica(int opciones, int goles) {
+    super();
+    this.opciones = opciones;
+    this.goles = goles;
+    descartes = 0;
+  }
 
-	public int getOpciones() {
-		return opciones;
-	}
+  public Estadistica() {
+    this(0, 0);
+  }
 
-	public void setOpciones(int opciones) {
-		this.opciones = opciones;
-	}
+  public int getOpciones() {
+    return opciones;
+  }
 
-	public int getGoles() {
-		return goles;
-	}
+  public void setOpciones(int opciones) {
+    this.opciones = opciones;
+  }
 
-	public void setGoles(int goles) {
-		this.goles = goles;
-	}
+  public int getGoles() {
+    return goles;
+  }
 
-	public void addGol() {
-		goles++;
-	}
+  public void setGoles(int goles) {
+    this.goles = goles;
+  }
 
-	public void addOpcion() {
-		opciones++;
-	}
+  public void addGol() {
+    goles++;
+  }
 
-	public void addDescarte() {
-		descartes++;
-	}
+  public void addOpcion() {
+    opciones++;
+  }
 
-	/**
-	 * @return the descartes
-	 */
-	public int getDescartes() {
-		return descartes;
-	}
+  public void addDescarte() {
+    descartes++;
+  }
 
-	/**
-	 * @param descartes
-	 *            the descartes to set
-	 */
-	public void setDescartes(int descartes) {
-		this.descartes = descartes;
-	}
+  /**
+   * @return the descartes
+   */
+  public int getDescartes() {
+    return descartes;
+  }
+
+  /**
+   * @param descartes the descartes to set
+   */
+  public void setDescartes(int descartes) {
+    this.descartes = descartes;
+  }
 
 }

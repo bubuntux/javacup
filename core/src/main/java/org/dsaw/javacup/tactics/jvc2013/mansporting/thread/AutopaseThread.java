@@ -6,7 +6,6 @@
 package org.dsaw.javacup.tactics.jvc2013.mansporting.thread;
 
 /**
- *
  * @author MaN
  */
 public class AutopaseThread {

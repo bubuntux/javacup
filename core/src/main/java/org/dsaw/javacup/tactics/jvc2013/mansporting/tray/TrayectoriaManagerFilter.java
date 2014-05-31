@@ -6,10 +6,9 @@
 package org.dsaw.javacup.tactics.jvc2013.mansporting.tray;
 
 /**
- *
  * @author MaN
  */
 public interface TrayectoriaManagerFilter {
 
-    boolean filter(TrayectoriaPunto candidato);
+  boolean filter(TrayectoriaPunto candidato);
 }

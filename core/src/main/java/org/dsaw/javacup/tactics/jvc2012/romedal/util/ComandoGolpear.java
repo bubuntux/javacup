@@ -6,111 +6,116 @@ import org.dsaw.javacup.tactics.jvc2012.romedal.TacticaRomedalusTeam;
 import java.util.LinkedList;
 
 public class ComandoGolpear implements Comparable<ComandoGolpear> {
-	private CommandHitBall		comando;
-	private double				anguloXY;
-	private int					iterJugador;
-	private int					iterRival;
-	private LinkedList<Balon>	trayectoria;
-	private final int			difIter;
 
-	private final boolean		arriba;
-	private boolean				autoPase;
-	private boolean				mejorSkill;
+  private CommandHitBall comando;
+  private double anguloXY;
+  private int iterJugador;
+  private int iterRival;
+  private LinkedList<Balon> trayectoria;
+  private final int difIter;
 
-	// @Deprecated
-	// public ComandoGolpear(final CommandHitBall comando, final LinkedList<Balon> trayectoria, final double anguloXY, final int iterJugador, final int iterRival, final int iterBalon) {
-	// super();
-	// this.comando = comando;
-	// this.trayectoria = trayectoria;
-	// this.anguloXY = anguloXY;
-	// this.iterJugador = iterJugador;
-	// this.iterRival = iterRival;
-	// }
+  private final boolean arriba;
+  private boolean autoPase;
+  private boolean mejorSkill;
 
-	public ComandoGolpear(final CommandHitBall comando, final LinkedList<Balon> trayectoria, final double anguloXY, final int iterJugador, final int iterRival, final boolean autoPase, final boolean mejorSkill) {
-		super();
-		this.comando = comando;
-		this.trayectoria = trayectoria;
-		this.anguloXY = anguloXY;
-		this.iterJugador = iterJugador;
-		this.iterRival = iterRival;
-		this.difIter = this.iterRival - this.iterJugador;
-		arriba = trayectoria.get(0).getPosition().getY() < comando.getDestiny().getY();
-	}
+  // @Deprecated
+  // public ComandoGolpear(final CommandHitBall comando, final LinkedList<Balon> trayectoria, final double anguloXY, final int iterJugador, final int iterRival, final int iterBalon) {
+  // super();
+  // this.comando = comando;
+  // this.trayectoria = trayectoria;
+  // this.anguloXY = anguloXY;
+  // this.iterJugador = iterJugador;
+  // this.iterRival = iterRival;
+  // }
 
-	public CommandHitBall getComando() {
-		return comando;
-	}
+  public ComandoGolpear(final CommandHitBall comando, final LinkedList<Balon> trayectoria,
+                        final double anguloXY, final int iterJugador, final int iterRival,
+                        final boolean autoPase, final boolean mejorSkill) {
+    super();
+    this.comando = comando;
+    this.trayectoria = trayectoria;
+    this.anguloXY = anguloXY;
+    this.iterJugador = iterJugador;
+    this.iterRival = iterRival;
+    this.difIter = this.iterRival - this.iterJugador;
+    arriba = trayectoria.get(0).getPosition().getY() < comando.getDestiny().getY();
+  }
 
-	public void setComando(final CommandHitBall comando) {
-		this.comando = comando;
-	}
+  public CommandHitBall getComando() {
+    return comando;
+  }
 
-	public double getAnguloXY() {
-		return anguloXY;
-	}
+  public void setComando(final CommandHitBall comando) {
+    this.comando = comando;
+  }
 
-	public void setAnguloXY(final double anguloXY) {
-		this.anguloXY = anguloXY;
-	}
+  public double getAnguloXY() {
+    return anguloXY;
+  }
 
-	public int getIterJugador() {
-		return iterJugador;
-	}
+  public void setAnguloXY(final double anguloXY) {
+    this.anguloXY = anguloXY;
+  }
 
-	public void setIterJugador(final int iterJugador) {
-		this.iterJugador = iterJugador;
-	}
+  public int getIterJugador() {
+    return iterJugador;
+  }
 
-	public int getIterRival() {
-		return iterRival;
-	}
+  public void setIterJugador(final int iterJugador) {
+    this.iterJugador = iterJugador;
+  }
 
-	public void setIterRival(final int iterRival) {
-		this.iterRival = iterRival;
-	}
+  public int getIterRival() {
+    return iterRival;
+  }
 
-	public LinkedList<Balon> getTrayectoria() {
-		return trayectoria;
-	}
+  public void setIterRival(final int iterRival) {
+    this.iterRival = iterRival;
+  }
 
-	public void setTrayectoria(final LinkedList<Balon> trayectoria) {
-		this.trayectoria = trayectoria;
-	}
+  public LinkedList<Balon> getTrayectoria() {
+    return trayectoria;
+  }
 
-	public int getDifIter() {
-		return difIter;
-	}
+  public void setTrayectoria(final LinkedList<Balon> trayectoria) {
+    this.trayectoria = trayectoria;
+  }
 
-	public boolean isArriba() {
-		return arriba;
-	}
+  public int getDifIter() {
+    return difIter;
+  }
 
-	public boolean isAutoPase() {
-		return autoPase;
-	}
+  public boolean isArriba() {
+    return arriba;
+  }
 
-	public boolean isMejorSkill() {
-		return mejorSkill;
-	}
+  public boolean isAutoPase() {
+    return autoPase;
+  }
 
-	@Override
-	public String toString() {
-		return comando.getPlayerIndex() + "\t" + comando.getDestiny() + "\tAngXY: " + anguloXY + "\tAngZ: " + TacticaRomedalusTeam.round(comando.getVerticalAngle(), 1) + "\tIter: " + iterJugador + "\tIterRival: " + iterRival + "\tdifIter" + difIter;
-	}
+  public boolean isMejorSkill() {
+    return mejorSkill;
+  }
 
-	@Override
-	public int compareTo(final ComandoGolpear o) {
-		if (iterRival != o.iterRival) {
-			final int difA = iterRival - iterJugador;
-			final int difB = o.iterRival - o.iterJugador;
-			if (difA > 0 || difB > 0) {
-				return difA - difB;
-			}
-		}
-		// if (iterJugador != o.iterJugador) {
-		// return iterJugador > o.iterJugador ? -1 : 1;
-		// }
-		return 0;// (int) Math.round(getComando().getDestiny().getY() - o.getComando().getDestiny().getY());
-	}
+  @Override
+  public String toString() {
+    return comando.getPlayerIndex() + "\t" + comando.getDestiny() + "\tAngXY: " + anguloXY
+           + "\tAngZ: " + TacticaRomedalusTeam.round(comando.getVerticalAngle(), 1) + "\tIter: "
+           + iterJugador + "\tIterRival: " + iterRival + "\tdifIter" + difIter;
+  }
+
+  @Override
+  public int compareTo(final ComandoGolpear o) {
+    if (iterRival != o.iterRival) {
+      final int difA = iterRival - iterJugador;
+      final int difB = o.iterRival - o.iterJugador;
+      if (difA > 0 || difB > 0) {
+        return difA - difB;
+      }
+    }
+    // if (iterJugador != o.iterJugador) {
+    // return iterJugador > o.iterJugador ? -1 : 1;
+    // }
+    return 0;// (int) Math.round(getComando().getDestiny().getY() - o.getComando().getDestiny().getY());
+  }
 }

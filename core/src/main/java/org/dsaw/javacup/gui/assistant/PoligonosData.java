@@ -1,21 +1,24 @@
 package org.dsaw.javacup.gui.assistant;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.ArrayList;
 
-/**Clase usada internamente por el asistente, que permite obtener los dibujos de las vestimentas*/
+/**
+ * Clase usada internamente por el asistente, que permite obtener los dibujos de las vestimentas
+ */
 class PoligonosData {
 
-    public ArrayList<Integer[]> intx;
-    public ArrayList<Integer[]> inty;
-    public ArrayList<Color> cols;
+  public ArrayList<Integer[]> intx;
+  public ArrayList<Integer[]> inty;
+  public ArrayList<Color> cols;
 
-    private PoligonosData() {
-    }
+  private PoligonosData() {
+  }
 
-    public PoligonosData(ArrayList<Integer[]> intx, ArrayList<Integer[]> inty, ArrayList<Color> cols) {
-        this.intx = intx;
-        this.inty = inty;
-        this.cols = cols;
-    }
+  public PoligonosData(ArrayList<Integer[]> intx, ArrayList<Integer[]> inty,
+                       ArrayList<Color> cols) {
+    this.intx = intx;
+    this.inty = inty;
+    this.cols = cols;
+  }
 }

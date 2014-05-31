@@ -9,98 +9,99 @@ import org.dsaw.javacup.tactics.jvc2013.CTeam.jugador.IJugadorCT;
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.dsaw.javacup.tactics.jvc2013.CTeam.jugador.IJugadorCT.Equipo.*;
+import static org.dsaw.javacup.tactics.jvc2013.CTeam.jugador.IJugadorCT.Equipo.PROPIO;
 
 public class CTeam2011 extends BaseCTeam2011 implements Tactic {
 
-	public List<Command> execute(GameSituations sp) {
-		List<Command> comandos = new ArrayList<Command>();
+  @Override
+  public List<Command> execute(GameSituations sp) {
+    List<Command> comandos = new ArrayList<>();
 
-		inicializar(sp);
-		try {
-			ultRecuperando.clear();
-			ultRecuperando.addAll(recuperando);
-			
-			usadas.clear();
-			recuperando.clear();
+    inicializar(sp);
+    try {
+      ultRecuperando.clear();
+      ultRecuperando.addAll(recuperando);
 
-			inicializarIteracion();
+      usadas.clear();
+      recuperando.clear();
 
-			calcularAlineacion();
-			int idx = 0;
-			for (IJugadorCT jug : getJugadores(PROPIO)) {
-				Position p = alineacionActual()[idx++];
-				jug.setSiguiente(new PosicionCT(p));
-			}
+      inicializarIteracion();
 
-			if (posesionBalon().equals(IJugadorCT.Equipo.PROPIO)) {
-				defensa = null;
-				tacticaAtaque();
-			} else {
-				ataque = null;
-				tacticaDefensa();
-			}
+      calcularAlineacion();
+      int idx = 0;
+      for (IJugadorCT jug : getJugadores(PROPIO)) {
+        Position p = alineacionActual()[idx++];
+        jug.setSiguiente(new PosicionCT(p));
+      }
 
-			for (IJugadorCT jug : getJugadores(PROPIO)) {
-				comandos.addAll(jug.jugar());
-			}
+      if (posesionBalon().equals(IJugadorCT.Equipo.PROPIO)) {
+        defensa = null;
+        tacticaAtaque();
+      } else {
+        ataque = null;
+        tacticaDefensa();
+      }
 
-			finalizarIteracion();
-		} catch (Exception ex) {
-			safeInvocation(comandos);
-			ex.printStackTrace();
-		}
+      for (IJugadorCT jug : getJugadores(PROPIO)) {
+        comandos.addAll(jug.jugar());
+      }
 
-		return comandos;
-	}
+      finalizarIteracion();
+    } catch (Exception ex) {
+      safeInvocation(comandos);
+      ex.printStackTrace();
+    }
 
-	private void safeInvocation(List<Command> comandos) {
-		try {
-			calcularAlineacion();
-			int idx = 0;
-			for (IJugadorCT jug : getJugadores(PROPIO)) {
-				Position p = alineacionActual()[idx++];
-				jug.setSiguiente(new PosicionCT(p));
-			}
+    return comandos;
+  }
 
-			for (IJugadorCT jug : getJugadores(PROPIO)) {
-				comandos.addAll(jug.jugar());
-			}
-		} catch (Exception ex) {
-			ex.printStackTrace();
-		}
-	}
+  private void safeInvocation(List<Command> comandos) {
+    try {
+      calcularAlineacion();
+      int idx = 0;
+      for (IJugadorCT jug : getJugadores(PROPIO)) {
+        Position p = alineacionActual()[idx++];
+        jug.setSiguiente(new PosicionCT(p));
+      }
 
-	IEstrategiaCT ataque = null;
+      for (IJugadorCT jug : getJugadores(PROPIO)) {
+        comandos.addAll(jug.jugar());
+      }
+    } catch (Exception ex) {
+      ex.printStackTrace();
+    }
+  }
 
-	IEstrategiaCT defensa = null;
+  IEstrategiaCT ataque = null;
 
-	private void tacticaDefensa() {
-		defensa = new EstrategiaDefensaCT(sp, this);
-		defensa.ejecutarIteracion();
-	}
+  IEstrategiaCT defensa = null;
 
-	private void tacticaAtaque() {
-		ataque = new EstrategiaAtaqueCT(sp, this, voronoiTodos, voronoiRivales, voronoiJugadores);
-		ataque.ejecutarIteracion();
-	}
+  private void tacticaDefensa() {
+    defensa = new EstrategiaDefensaCT(sp, this);
+    defensa.ejecutarIteracion();
+  }
 
-	private void calcularAlineacion() {
-		double y = sp.ballPosition().getY();
-		alineacion = 0;
-		for (int i = alineaciones.length - 1; i > 0; i--) {
-			boolean t = false;
-			for (int j = 1; j <= 4; j++) {
-				if (alineaciones[i][j].getY() > y) {
-					t = true;
-					break;
-				}
-			}
-			if (!t) {
-				alineacion = i;
-				break;
-			}
-		}
-	}
+  private void tacticaAtaque() {
+    ataque = new EstrategiaAtaqueCT(sp, this, voronoiTodos, voronoiRivales, voronoiJugadores);
+    ataque.ejecutarIteracion();
+  }
+
+  private void calcularAlineacion() {
+    double y = sp.ballPosition().getY();
+    alineacion = 0;
+    for (int i = alineaciones.length - 1; i > 0; i--) {
+      boolean t = false;
+      for (int j = 1; j <= 4; j++) {
+        if (alineaciones[i][j].getY() > y) {
+          t = true;
+          break;
+        }
+      }
+      if (!t) {
+        alineacion = i;
+        break;
+      }
+    }
+  }
 
 }

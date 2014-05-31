@@ -8,38 +8,38 @@ import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.tactics.jvc2013.mansporting.trig.Punto3D;
 
 /**
- *
  * @author MaN
  */
 public class MSGBalon implements MSGSituacionPartidoListener {
 
-    private Punto3D posicion;
-    private double probabilidadControl;
+  private Punto3D posicion;
+  private double probabilidadControl;
 
-    public MSGBalon() {
-    }
+  public MSGBalon() {
+  }
 
-    public void afterUpdate(MSGSituacionPartidoContext context) {
-        GameSituations situacionPartido = context.getSituacionPartido();
+  @Override
+  public void afterUpdate(MSGSituacionPartidoContext context) {
+    GameSituations situacionPartido = context.getSituacionPartido();
 
-        Punto3D punto = new Punto3D(
-                situacionPartido.ballPosition().getX(),
-                situacionPartido.ballPosition().getY(),
-                situacionPartido.ballAltitude());
-        this.probabilidadControl = MSGUtils.getProbabilidadControl(punto, this.posicion);
-        this.posicion = punto;
-    }
+    Punto3D punto = new Punto3D(
+        situacionPartido.ballPosition().getX(),
+        situacionPartido.ballPosition().getY(),
+        situacionPartido.ballAltitude());
+    this.probabilidadControl = MSGUtils.getProbabilidadControl(punto, this.posicion);
+    this.posicion = punto;
+  }
 
-    public Punto3D getPosicion() {
-        return posicion;
-    }
+  public Punto3D getPosicion() {
+    return posicion;
+  }
 
-    public double getProbabilidadControl() {
-        return probabilidadControl;
-    }
+  public double getProbabilidadControl() {
+    return probabilidadControl;
+  }
 
-    @Override
-    public String toString() {
-        return "MSGSituacionBalon{posicion=[" + getPosicion() + "]}";
-    }
+  @Override
+  public String toString() {
+    return "MSGSituacionBalon{posicion=[" + getPosicion() + "]}";
+  }
 }

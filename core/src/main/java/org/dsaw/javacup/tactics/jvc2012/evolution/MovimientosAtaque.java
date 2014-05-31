@@ -8,20 +8,22 @@ import org.dsaw.javacup.model.util.Position;
 
 public class MovimientosAtaque {
 
-	private static double LINEA_DEFENSA_TOPE = Constants.centroArcoInf.getY()+Constants.LARGO_AREA_GRANDE;
-	public static double LINEA_DEFENSA_BASE = -25;
-	public static double LINEA_CENTROCAMPO_BASE = 0;
-	public static double LINEA_DELANTERA_BASE = 25;
-	
-	private static double lineaDefensaActual=-1000;
-	private static double lineaCentroActual=-1000;
-	private static double lineaDelanteraActual=-1000;
-	
-	public static Command moverDefensa(Jugador jugador, Position posicionBalon, Jugador[] jugadores,
-			Rival[] rivales, GameSituations sp, Position posicion) {
-		// TODO Auto-generated method stub
-		Command comando = new CommandMoveTo(jugador.getId(), posicion);
-		Position posRecuperacion = TacticasUtil.puedoRecuperar(jugador, rivales, sp);
+  private static double
+      LINEA_DEFENSA_TOPE =
+      Constants.centroArcoInf.getY() + Constants.LARGO_AREA_GRANDE;
+  public static double LINEA_DEFENSA_BASE = -25;
+  public static double LINEA_CENTROCAMPO_BASE = 0;
+  public static double LINEA_DELANTERA_BASE = 25;
+
+  private static double lineaDefensaActual = -1000;
+  private static double lineaCentroActual = -1000;
+  private static double lineaDelanteraActual = -1000;
+
+  public static Command moverDefensa(Jugador jugador, Position posicionBalon, Jugador[] jugadores,
+                                     Rival[] rivales, GameSituations sp, Position posicion) {
+    // TODO Auto-generated method stub
+    Command comando = new CommandMoveTo(jugador.getId(), posicion);
+    Position posRecuperacion = TacticasUtil.puedoRecuperar(jugador, rivales, sp);
 //		if(TacticasUtil.tengoBalon(jugador.getId(), sp.canKick())){
 //			Pase pase = TacticasUtil.calcularPosicionPaseDefensa(jugador, jugadores, rivales, sp);
 //			
@@ -35,27 +37,30 @@ public class MovimientosAtaque {
 //			
 //			
 //		}else 
-		if(posRecuperacion!=null){
+    if (posRecuperacion != null) {
 
-			comando = new CommandMoveTo(jugador.getId(),posRecuperacion);
-		
-		}else{
-			Rival rival = TacticasUtil.calcularRivalMasCercano(Constants.centroArcoInf, rivales);
-			if(jugador.getPosicion().getY()<rival.getPosicion().getY()){
-				comando = new CommandMoveTo(jugador.getId(),jugador.getPosicion().movePosition(0, Constants.getVelocidad(sp.getMyPlayerSpeed(jugador.getId()))));
-			}else{
-				comando = new CommandMoveTo(jugador.getId(),jugador.getPosicion());
-			}
-		}
-		
-		return comando;
-	}
-	
-	public static Command moverCentrocampo(Jugador jugador, Position posicionBalon, Jugador[] jugadores,
-			Rival[] rivales, GameSituations sp, Position posicion) {
-		// TODO Auto-generated method stub
-		Command comando = new CommandMoveTo(jugador.getId(), posicion);
-		Position posRecuperacion = TacticasUtil.puedoRecuperar(jugador, rivales, sp);
+      comando = new CommandMoveTo(jugador.getId(), posRecuperacion);
+
+    } else {
+      Rival rival = TacticasUtil.calcularRivalMasCercano(Constants.centroArcoInf, rivales);
+      if (jugador.getPosicion().getY() < rival.getPosicion().getY()) {
+        comando =
+            new CommandMoveTo(jugador.getId(), jugador.getPosicion()
+                .movePosition(0, Constants.getVelocidad(sp.getMyPlayerSpeed(jugador.getId()))));
+      } else {
+        comando = new CommandMoveTo(jugador.getId(), jugador.getPosicion());
+      }
+    }
+
+    return comando;
+  }
+
+  public static Command moverCentrocampo(Jugador jugador, Position posicionBalon,
+                                         Jugador[] jugadores,
+                                         Rival[] rivales, GameSituations sp, Position posicion) {
+    // TODO Auto-generated method stub
+    Command comando = new CommandMoveTo(jugador.getId(), posicion);
+    Position posRecuperacion = TacticasUtil.puedoRecuperar(jugador, rivales, sp);
 //		if(TacticasUtil.tengoBalon(jugador.getId(), sp.canKick())){
 //			
 //			Pase pase = TacticasUtil.calcularPosicionPaseCentro(jugador, jugadores, rivales, sp);
@@ -71,29 +76,30 @@ public class MovimientosAtaque {
 //			}
 //				
 //		}else 
-		if(posRecuperacion!=null){
+    if (posRecuperacion != null) {
 
-			comando = new CommandMoveTo(jugador.getId(),posRecuperacion);
-		
-		}else{
-			
-			if(jugador.getPosicion().getY()<jugador.getPosicionAtaqueBase().getY()){
-				comando = new CommandMoveTo(jugador.getId(),jugador.getPosicion().movePosition(0, Constants.getVelocidad(sp.getMyPlayerSpeed(jugador.getId()))));
-			}
-			else{
-				comando = new CommandMoveTo(jugador.getId(),jugador.getPosicion());
-			}
-			
-		}
-		
-		return comando;
-	}
-	
-	public static Command moverDelantera(Jugador jugador, Position posicionBalon, Jugador[] jugadores,
-			Rival[] rivales, GameSituations sp, Position posicion) {
-		// TODO Auto-generated method stub
-		Command comando = new CommandMoveTo(jugador.getId(), jugador.getPosicion());
-		Position posRecuperacion = TacticasUtil.puedoRecuperar(jugador, rivales, sp);
+      comando = new CommandMoveTo(jugador.getId(), posRecuperacion);
+
+    } else {
+
+      if (jugador.getPosicion().getY() < jugador.getPosicionAtaqueBase().getY()) {
+        comando =
+            new CommandMoveTo(jugador.getId(), jugador.getPosicion()
+                .movePosition(0, Constants.getVelocidad(sp.getMyPlayerSpeed(jugador.getId()))));
+      } else {
+        comando = new CommandMoveTo(jugador.getId(), jugador.getPosicion());
+      }
+
+    }
+
+    return comando;
+  }
+
+  public static Command moverDelantera(Jugador jugador, Position posicionBalon, Jugador[] jugadores,
+                                       Rival[] rivales, GameSituations sp, Position posicion) {
+    // TODO Auto-generated method stub
+    Command comando = new CommandMoveTo(jugador.getId(), jugador.getPosicion());
+    Position posRecuperacion = TacticasUtil.puedoRecuperar(jugador, rivales, sp);
 //		if(TacticasUtil.tengoBalon(jugador.getId(), sp.canKick())){
 //
 //			double dPosteDerecho = Math.pow(Constants.posteDerArcoSup.getX()-rivales[0].getPosicion().getX(),2);
@@ -127,112 +133,115 @@ public class MovimientosAtaque {
 //			
 //			
 //		}else 
-		if(posRecuperacion!=null){
+    if (posRecuperacion != null) {
 
-			comando = new CommandMoveTo(jugador.getId(),posRecuperacion);
-		
-		}
-		else if(jugador.getPosicion().getY()<jugador.getPosicionAtaqueBase().getY()){
-			comando = new CommandMoveTo(jugador.getId(),jugador.getPosicion().movePosition(0, Constants.getVelocidad(sp.getMyPlayerSpeed(jugador.getId()))));
-		}
-		else{
-			comando = new CommandMoveTo(jugador.getId(),jugador.getPosicionAtaqueBase());
-		}
-		
-		return comando;
-	}
-	
-	
-	
-	public static double getLineaDefensaActual() {
-		return lineaDefensaActual;
-	}
+      comando = new CommandMoveTo(jugador.getId(), posRecuperacion);
 
-	public static void setLineaDefensaActual(double linea) {
-		lineaDefensaActual = linea;
-	}
+    } else if (jugador.getPosicion().getY() < jugador.getPosicionAtaqueBase().getY()) {
+      comando =
+          new CommandMoveTo(jugador.getId(), jugador.getPosicion()
+              .movePosition(0, Constants.getVelocidad(sp.getMyPlayerSpeed(jugador.getId()))));
+    } else {
+      comando = new CommandMoveTo(jugador.getId(), jugador.getPosicionAtaqueBase());
+    }
 
-	public static double getLineaCentroActual() {
-		return lineaCentroActual;
-	}
+    return comando;
+  }
 
-	public static void setLineaCentroActual(double linea) {
-		lineaCentroActual = linea;
-	}
 
-	public static double getLineaDelanteraActual() {
-		return lineaDelanteraActual;
-	}
+  public static double getLineaDefensaActual() {
+    return lineaDefensaActual;
+  }
 
-	public static void setLineaDelanteraActual(double linea) {
-		lineaDelanteraActual = linea;
-	}
-	
-	private static  void calcularLineaDefensa(Rival[] rivales, Position posicionBalon, Jugador [] jugadores){
-		
-		Position masAdelantado = TacticasUtil.posicionRivalMasAdelantado(rivales);
-		
-		if(getLineaDefensaActual()==-1000){
-			setLineaDefensaActual(LINEA_DEFENSA_BASE);
-		}
-		
-		if(!posicionBalon.isInsideGameField(0)){
-			setLineaDefensaActual(LINEA_DEFENSA_BASE);
-		}else if(masAdelantado.getY()<=getLineaDefensaActual()){
-			
+  public static void setLineaDefensaActual(double linea) {
+    lineaDefensaActual = linea;
+  }
+
+  public static double getLineaCentroActual() {
+    return lineaCentroActual;
+  }
+
+  public static void setLineaCentroActual(double linea) {
+    lineaCentroActual = linea;
+  }
+
+  public static double getLineaDelanteraActual() {
+    return lineaDelanteraActual;
+  }
+
+  public static void setLineaDelanteraActual(double linea) {
+    lineaDelanteraActual = linea;
+  }
+
+  private static void calcularLineaDefensa(Rival[] rivales, Position posicionBalon,
+                                           Jugador[] jugadores) {
+
+    Position masAdelantado = TacticasUtil.posicionRivalMasAdelantado(rivales);
+
+    if (getLineaDefensaActual() == -1000) {
+      setLineaDefensaActual(LINEA_DEFENSA_BASE);
+    }
+
+    if (!posicionBalon.isInsideGameField(0)) {
+      setLineaDefensaActual(LINEA_DEFENSA_BASE);
+    } else if (masAdelantado.getY() <= getLineaDefensaActual()) {
+
 //			if(masAdelantado.getY()< LINEA_DEFENSA_TOPE){
 //				setLineaDefensaActual(LINEA_DEFENSA_TOPE);
 //			}else{
-				setLineaDefensaActual(masAdelantado.getY()-1);
+      setLineaDefensaActual(masAdelantado.getY() - 1);
 //			}
-		}else{
-			if(masAdelantado.getY()<LINEA_CENTROCAMPO_BASE){
-				setLineaDefensaActual(masAdelantado.getY()-1);
-			}
+    } else {
+      if (masAdelantado.getY() < LINEA_CENTROCAMPO_BASE) {
+        setLineaDefensaActual(masAdelantado.getY() - 1);
+      }
 //			else{
 //				setLineaDefensaActual(LINEA_DEFENSA_BASE);
 //			}
-			
-		}
-	}
-	
-	private static void calcularLineaCentrocampo(Rival[] rivales, Position posicionBalon, Jugador [] jugadores){
-		
-		if(getLineaCentroActual()==-1000){
-			setLineaCentroActual(LINEA_CENTROCAMPO_BASE);
-		}
-		
-		if(!posicionBalon.isInsideGameField(0)){
-			setLineaCentroActual(LINEA_CENTROCAMPO_BASE);
-		}else{
-			setLineaCentroActual(posicionBalon.getY()+5);
-		}
 
-		
-	}
-	
-	private static void calcularLineaDelantera(Rival[] rivales, Position posicionBalon, Jugador [] jugadores){
-		
-		if(getLineaDelanteraActual()==-1000){
-			setLineaDelanteraActual(LINEA_DELANTERA_BASE);
-		}
-		
-		if(posicionBalon.getY()<getLineaDelanteraActual()
-				&& getLineaCentroActual()+30<=getLineaDelanteraActual()){
-			setLineaDelanteraActual(getLineaDelanteraActual()+10);
-		}else if(posicionBalon.getY()>getLineaDelanteraActual()){
-			setLineaDelanteraActual(posicionBalon.getY());
-		}else{
-			setLineaDelanteraActual(LINEA_DELANTERA_BASE);
-		}
-	}
-	
-	public static double[] calcularLineasHorizontales(Rival[] rivales, Position posicionBalon, Jugador [] jugadores){
-		
-		calcularLineaDefensa(rivales, posicionBalon, jugadores);
-		calcularLineaCentrocampo(rivales, posicionBalon,jugadores);
-		calcularLineaDelantera(rivales, posicionBalon, jugadores);
-		
-		return new double []{getLineaDefensaActual(),getLineaCentroActual(),getLineaDelanteraActual()};
-	}
+    }
+  }
+
+  private static void calcularLineaCentrocampo(Rival[] rivales, Position posicionBalon,
+                                               Jugador[] jugadores) {
+
+    if (getLineaCentroActual() == -1000) {
+      setLineaCentroActual(LINEA_CENTROCAMPO_BASE);
+    }
+
+    if (!posicionBalon.isInsideGameField(0)) {
+      setLineaCentroActual(LINEA_CENTROCAMPO_BASE);
+    } else {
+      setLineaCentroActual(posicionBalon.getY() + 5);
+    }
+
+
+  }
+
+  private static void calcularLineaDelantera(Rival[] rivales, Position posicionBalon,
+                                             Jugador[] jugadores) {
+
+    if (getLineaDelanteraActual() == -1000) {
+      setLineaDelanteraActual(LINEA_DELANTERA_BASE);
+    }
+
+    if (posicionBalon.getY() < getLineaDelanteraActual()
+        && getLineaCentroActual() + 30 <= getLineaDelanteraActual()) {
+      setLineaDelanteraActual(getLineaDelanteraActual() + 10);
+    } else if (posicionBalon.getY() > getLineaDelanteraActual()) {
+      setLineaDelanteraActual(posicionBalon.getY());
+    } else {
+      setLineaDelanteraActual(LINEA_DELANTERA_BASE);
+    }
+  }
+
+  public static double[] calcularLineasHorizontales(Rival[] rivales, Position posicionBalon,
+                                                    Jugador[] jugadores) {
+
+    calcularLineaDefensa(rivales, posicionBalon, jugadores);
+    calcularLineaCentrocampo(rivales, posicionBalon, jugadores);
+    calcularLineaDelantera(rivales, posicionBalon, jugadores);
+
+    return new double[]{getLineaDefensaActual(), getLineaCentroActual(), getLineaDelanteraActual()};
+  }
 }

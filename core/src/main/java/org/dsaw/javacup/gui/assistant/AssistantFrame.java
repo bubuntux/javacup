@@ -1094,7 +1094,7 @@ public class AssistantFrame extends JFrame implements Runnable {
 
   private void jMenuItem2ActionPerformed(
       ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-    int i = 0;
+    int i;
     for (i = 0; i < model.getSize(); i++) {
       impl.getPlayers()[i] = (PlayerDetail) model.get(i);
     }
@@ -1164,7 +1164,7 @@ public class AssistantFrame extends JFrame implements Runnable {
     name = paclas;
     if (paclas != null) {
       String paquete = null;
-      String clase = "";
+      String clase;
       int idx = paclas.lastIndexOf(".");
       if (idx != -1) {
         paquete = paclas.substring(0, idx);

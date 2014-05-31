@@ -10,25 +10,27 @@ import org.dsaw.javacup.tactics.jvc2013.mansporting.trig.Rectangulo;
 import java.awt.*;
 
 /**
- *
  * @author MaN
  */
 public class JugadorBalonDrawable extends AbstractDrawable<JugadoresBalonData> {
 
-    public JugadorBalonDrawable(JugadoresBalonData element) {
-        super(element, null);
+  public JugadorBalonDrawable(JugadoresBalonData element) {
+    super(element, null);
+  }
+
+  @Override
+  public void paint(VisualDebugGraphics g, Rectangulo canvas) {
+    if (element != null) {
+
+      if (element.getContrario() != null) {
+        new IteracionesBalonDrawable(element.getContrario(), new Color(255, 0, 0, 128))
+            .paint(g, canvas);
+      }
+      if (element.getPropio() != null) {
+        new IteracionesBalonDrawable(element.getPropio(), new Color(0, 0, 255, 128))
+            .paint(g, canvas);
+      }
+
     }
-
-    public void paint(VisualDebugGraphics g, Rectangulo canvas) {
-        if (element != null) {
-
-            if (element.getContrario() != null) {
-                new IteracionesBalonDrawable(element.getContrario(), new Color(255, 0, 0, 128)).paint(g, canvas);
-            }
-            if (element.getPropio() != null) {
-                new IteracionesBalonDrawable(element.getPropio(), new Color(0, 0, 255, 128)).paint(g, canvas);
-            }
-
-        }
-    }
+  }
 }

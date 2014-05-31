@@ -268,7 +268,7 @@ public class Generador {
           distanciaPorteria =
           sp.myPlayers()[jugador.getIndice()].distance(Constants.centroArcoSup);
 
-      boolean tiroPuertaVacia = false;
+      boolean tiroPuertaVacia;
       boolean tiroSeguro = false;
 
       // Si el calculo es para el jugador que tiene la posesi�n el inicio del tiro lo cogemos desde la posici�n
@@ -281,7 +281,7 @@ public class Generador {
       if (jugador.getDistanciaGolpeoAlto() > distanciaPorteria &&
           distanciaPorteria < Entorno.DISTANCIA_MINIMA_TIRO) {
 
-        Hashtable<String, Object> tabla = null;
+        Hashtable<String, Object> tabla;
 
         // Realizamos una primera pasada calculando si podemos realizar un tiro seguro.
         tabla = calculaPosicionTiro(sp, jugador, inicioTiro, true);
@@ -320,7 +320,7 @@ public class Generador {
 
   public AccionTirarTrallon tirarATrallon(GameSituations sp, Jugador jugador) {
 
-    AccionTirarTrallon accion = null;
+    AccionTirarTrallon accion;
 
     try {
 
@@ -341,7 +341,7 @@ public class Generador {
   public AccionDespejar despejar(GameSituations sp, Jugador jugador, Rival[] arrayRivales) {
 
     // Variable en la que devolveremos el resultado.
-    AccionDespejar despejar = null;
+    AccionDespejar despejar;
 
     try {
 
@@ -453,7 +453,7 @@ public class Generador {
 
     try {
 
-      Double anguloRegate = null;
+      Double anguloRegate;
 
       // Dado que vamos a avanzar, solamente nos interesa calcular si el jugador que avanza llega antes al bal�n
       // que los rivalPlayers.
@@ -665,14 +665,14 @@ public class Generador {
   public AccionPasarAlArea pasarAlArea(GameSituations sp, Jugador jugador,
                                        Jugador[] arrayJugadores, Rival[] arrayRivales) {
 
-    AccionPasarAlArea paseAlArea = null;
+    AccionPasarAlArea paseAlArea;
 
     try {
 
       Jugador jugadorDestino = arrayJugadores[Constants.penalSup.nearestIndex(sp.myPlayers())];
 
       // Variable en la que devolveremos el resultado.
-      boolean realizaPase = false;
+      boolean realizaPase;
 
       // Calculamos los par�metros necesarios para llamar al m�todo que calcula si el pase llegar�
       // a su destino.
@@ -1067,7 +1067,7 @@ public class Generador {
     AbstractTrajectory
         trayectoria = new AirTrajectory(Math.cos(angVer) * v0, Math.sin(angVer) * v0, 0, 0);
     double angTrayectoria = angulo;
-    double alturaBalon = 0;
+    double alturaBalon;
     // --------------------------------------------------------------------------------------------------
 
     // Una vez definidas las variables del golpeo, vamos a iterar hasta comprobar si nuestro jugador llega
@@ -1208,7 +1208,7 @@ public class Generador {
         trayectoria =
         new AirTrajectory(Math.cos(angVer) * v0, Math.sin(angVer) * v0, 0, 0);
     double angTrayectoria = angulo;
-    double alturaBalon = 0;
+    double alturaBalon;
     // --------------------------------------------------------------------------------------------------
 
     // Una vez definidas las variables del golpeo, vamos a iterar hasta comprobar si el bal�n alcanza
@@ -1318,7 +1318,7 @@ public class Generador {
     boolean alcanzoBalon = false;
     boolean otroLado = false;
     long contador = 0;
-    boolean cercaLinea = false;
+    boolean cercaLinea;
 
     do {
 
@@ -1441,7 +1441,7 @@ public class Generador {
     // Tenemos informaci�n disponible en el listado con las zonas encontradas para realizar un tiro.
     if (listadoZona != null && listadoZona.size() > 0) {
 
-      double ini = 0.0, fin = 0.0;
+      double ini, fin;
       for (String zona : listadoZona) {
 
         String[] arr = zona.split("#");
@@ -1474,7 +1474,7 @@ public class Generador {
           tablaCorreccion =
           corregirAnguloZVariacionTiro(sp, jugador, inicioTiro, fuerza, posicionXY, anguloZ);
 
-      tabla = new Hashtable<String, Object>();
+      tabla = new Hashtable<>();
       tabla.put("posicion", tablaCorreccion.get("posicionXY"));
       tabla.put("anguloZ", tablaCorreccion.get("anguloZ"));
       tabla.put("variacion", (varFin - varIni));
@@ -1531,7 +1531,7 @@ public class Generador {
           trayectoria =
           new AirTrajectory(Math.cos(angVer) * v0, Math.sin(angVer) * v0, 0, 0);
       double angTrayectoria = angulo;
-      double alturaBalon = 0;
+      double alturaBalon;
       // --------------------------------------------------------------------------------------------------
 
       // Variable en la que almacenaremos si la altura antes de superar la línea de meta es correcta.
@@ -1585,13 +1585,13 @@ public class Generador {
                                                                  double anguloZ) {
 
     // Variable en la que devolveremos las correcciones.
-    Hashtable<String, Object> tablaCorreccion = new Hashtable<String, Object>();
+    Hashtable<String, Object> tablaCorreccion = new Hashtable<>();
 
     // Almacenamos el ánguloZ original para realizar el cálculo óptimo.
     double anguloOriginal = anguloZ;
 
     // Variable en la que almacenamos el angulo corregido.
-    double anguloCorregido = anguloZ;
+    double anguloCorregido;
 
     // El ángulo de la posicionXY hacia donde va dirigido el tiro.
     double anguloXY;
@@ -1791,7 +1791,7 @@ public class Generador {
                                           Position inicioTiro, boolean opcionTiroSeguro,
                                           double fuerza, double anguloZ) {
 
-    ArrayList<String> lista = new ArrayList<String>();
+    ArrayList<String> lista = new ArrayList<>();
 
     double incremento = 0.1;
     double variacion = 0.0;
@@ -1915,7 +1915,7 @@ public class Generador {
         trayectoria =
         new AirTrajectory(Math.cos(angVer) * v0, Math.sin(angVer) * v0, 0, 0);
     double angTrayectoria = angulo;
-    double alturaBalon = 0;
+    double alturaBalon;
     // --------------------------------------------------------------------------------------------------
 
     boolean salir = false;

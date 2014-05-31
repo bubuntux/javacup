@@ -40,11 +40,11 @@ public class EstrategiaAtaqueCT implements IEstrategiaCT {
     double aBalon = sp.ballPosition().angle(balon.getPos());
 
     int maxRecuperacion = 3;
-    recuperacionActual = new ArrayList<IJugadorCT>();
+    recuperacionActual = new ArrayList<>();
     boolean controlBalon = false;
     double p[] = new double[]{0.0, -0.25, 0.25};
     int idx = 0;
-    List<IJugadorCT> aRecuperar = new ArrayList<IJugadorCT>();
+    List<IJugadorCT> aRecuperar = new ArrayList<>();
     for (IJugadorCT jug : tactica.previoJugadoresRecuperacion()) {
       if (tactica.jugadoresRecuperacion().contains(jug)) {
         aRecuperar.add(jug);
@@ -85,7 +85,7 @@ public class EstrategiaAtaqueCT implements IEstrategiaCT {
 
     // obtener Posiciones Posibles Pase
     int jugadoresRestantes = 8 - recuperacionActual.size();
-    Map<IJugadorCT, PosicionCT> posPases = new LinkedHashMap<IJugadorCT, PosicionCT>();
+    Map<IJugadorCT, PosicionCT> posPases = new LinkedHashMap<>();
 
     PosicionCT[] centros = voronoiRivales.centros().toArray(new PosicionCT[0]);
     int[] cercanos = balon.indicesMasCercanos(centros);
@@ -120,7 +120,7 @@ public class EstrategiaAtaqueCT implements IEstrategiaCT {
         break;
       }
     }
-    List<PosicionCT> posPasesFinal = new ArrayList<PosicionCT>(posPases.values());
+    List<PosicionCT> posPasesFinal = new ArrayList<>(posPases.values());
     for (IJugadorCT j : posPases.keySet()) {
       posPasesFinal.add(j.getActual());
     }
@@ -153,8 +153,8 @@ public class EstrategiaAtaqueCT implements IEstrategiaCT {
     }
 
     // mantener un par de defensas
-    List<PosicionCT> aDefender = new ArrayList<PosicionCT>();
-    List<IJugadorCT> defensas = new ArrayList<IJugadorCT>();
+    List<PosicionCT> aDefender = new ArrayList<>();
+    List<IJugadorCT> defensas = new ArrayList<>();
     int[] rivCercanos = centroArcoInf.nearestIndexes(sp.rivalPlayers());
     for (int i = 0; i < 2; i++) {
       Position r = sp.rivalPlayers()[rivCercanos[i]];

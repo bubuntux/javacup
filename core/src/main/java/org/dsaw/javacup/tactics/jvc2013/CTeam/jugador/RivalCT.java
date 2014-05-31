@@ -9,12 +9,12 @@ import java.util.Collection;
 
 public class RivalCT extends AbstractJugador {
 
-	public RivalCT(Equipo equipo, int indice, PlayerDetail detalle, ICTeam2011 tactica) {
-		super(equipo, indice, detalle, tactica);
-	}
+  public RivalCT(Equipo equipo, int indice, PlayerDetail detalle, ICTeam2011 tactica) {
+    super(equipo, indice, detalle, tactica);
+  }
 
-	@Override
-	public Collection<? extends Command> jugar() {
-		return new ArrayList<Command>(0);
-	}
+  @Override
+  public Collection<? extends Command> jugar() {
+    return new ArrayList<>(0);
+  }
 }

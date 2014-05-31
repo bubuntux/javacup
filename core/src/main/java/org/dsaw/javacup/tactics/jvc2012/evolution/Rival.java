@@ -4,50 +4,50 @@ import org.dsaw.javacup.model.util.Position;
 
 public class Rival {
 
-	private Integer id;
-	private boolean marcado = false;
-	private boolean tieneElBalon = false;
-	private Position posicion;
+  private Integer id;
+  private boolean marcado = false;
+  private boolean tieneElBalon = false;
+  private Position posicion;
 
-	public Rival (int i){
-		id = new Integer(i);
-	}
-	
-	public int getId() {
-		return id;
-	}
+  public Rival(int i) {
+    id = i;
+  }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+  public int getId() {
+    return id;
+  }
 
-	public boolean isMarcado() {
-		return marcado;
-	}
+  public void setId(int id) {
+    this.id = id;
+  }
 
-	public void setMarcado(boolean marcado) {
-		this.marcado = marcado;
-	}
+  public boolean isMarcado() {
+    return marcado;
+  }
 
-	public boolean isTieneElBalon() {
-		return tieneElBalon;
-	}
+  public void setMarcado(boolean marcado) {
+    this.marcado = marcado;
+  }
 
-	public void setTieneElBalon(boolean tieneElBalon) {
-		this.tieneElBalon = tieneElBalon;
-	}
+  public boolean isTieneElBalon() {
+    return tieneElBalon;
+  }
 
-	public Position getPosicion() {
-		return posicion;
-	}
+  public void setTieneElBalon(boolean tieneElBalon) {
+    this.tieneElBalon = tieneElBalon;
+  }
 
-	public void setPosicion(Position posicion) {
-		this.posicion = posicion;
-	}
+  public Position getPosicion() {
+    return posicion;
+  }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+  public void setPosicion(Position posicion) {
+    this.posicion = posicion;
+  }
 
-	
+  public void setId(Integer id) {
+    this.id = id;
+  }
+
+
 }

@@ -35,13 +35,13 @@ import static org.dsaw.javacup.tactics.jvc2013.CTeam.jugador.JugadorCT.Tipo.MEDI
 
 public abstract class BaseCTeam2011 implements ICTeam2011 {
 
-  List<IJugadorCT> jugadores = new ArrayList<IJugadorCT>();
+  List<IJugadorCT> jugadores = new ArrayList<>();
 
-  List<IJugadorCT> rivales = new ArrayList<IJugadorCT>();
+  List<IJugadorCT> rivales = new ArrayList<>();
 
-  List<IJugadorCT> jugadoresRecuperacion = new ArrayList<IJugadorCT>();
+  List<IJugadorCT> jugadoresRecuperacion = new ArrayList<>();
 
-  List<IJugadorCT> rivalesRecuperacion = new ArrayList<IJugadorCT>();
+  List<IJugadorCT> rivalesRecuperacion = new ArrayList<>();
 
   TacticDetail detalle = new TacticaDetalleImpl();
 
@@ -243,7 +243,7 @@ public abstract class BaseCTeam2011 implements ICTeam2011 {
   }
 
   public void analizarRecuperacionBalon() {
-    jugadoresRecuperacion = new ArrayList<IJugadorCT>();
+    jugadoresRecuperacion = new ArrayList<>();
     int[] recuperar = sp.getRecoveryBall();
     itRecuperacion = -1;
     if (recuperar != null && recuperar.length > 0) {
@@ -269,7 +269,7 @@ public abstract class BaseCTeam2011 implements ICTeam2011 {
     int i = 0;
     boolean fin = false;
 
-    rivalesRecuperacion = new ArrayList<IJugadorCT>();
+    rivalesRecuperacion = new ArrayList<>();
     itRecuperacionRival = -1;
     if (sp.isStarts()) {
       return;
@@ -381,11 +381,11 @@ public abstract class BaseCTeam2011 implements ICTeam2011 {
     usadas.add(p);
   }
 
-  protected final List<PosicionCT> usadas = new ArrayList<PosicionCT>();
+  protected final List<PosicionCT> usadas = new ArrayList<>();
 
-  protected final List<IJugadorCT> recuperando = new ArrayList<IJugadorCT>();
+  protected final List<IJugadorCT> recuperando = new ArrayList<>();
 
-  protected final List<IJugadorCT> ultRecuperando = new ArrayList<IJugadorCT>();
+  protected final List<IJugadorCT> ultRecuperando = new ArrayList<>();
 
   @Override
   public List<IJugadorCT> previoJugadoresRecuperacion() {

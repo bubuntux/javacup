@@ -53,7 +53,7 @@ public final class PlayerRenderNew extends PlayerRender {
     Color c;
     float[] v1 = new float[3];
     float[] v2 = new float[3];
-    float brillo = 0;
+    float brillo;
     for (int i = 0; i < width; i++) {
       for (int j = 0; j < height; j++) {
         for (int k = 0; k < colors.length; k = k + 2) {
@@ -115,7 +115,7 @@ public final class PlayerRenderNew extends PlayerRender {
    */
   @Override
   public synchronized void update(boolean alternativa) throws SlickException {
-    Image all = null;
+    Image all;
     if (impl.getStyle() == UniformStyle.SIN_ESTILO) {
       all = new Image("imagenes/running plain.png");
     } else {
@@ -250,7 +250,7 @@ public final class PlayerRenderNew extends PlayerRender {
     while (angulo < -90) {
       angulo = angulo + 360;
     }
-    int ang = 0;
+    int ang;
     if (angulo >= -22.5 && angulo <= 22.5) {
       ang = 2;
     } else if (angulo >= 22.5 && angulo <= 67.5) {

@@ -3,91 +3,94 @@ package org.dsaw.javacup.tactics.jvc2012.romedal.util;
 import org.dsaw.javacup.model.util.Position;
 
 public class DestinoBalon implements Comparable<DestinoBalon> {
-	Position	posBalon;
-	double		altura;
-	int			idxJugador;
-	int			iterJugador;
-	int			iterBalon;
-	boolean		ganaRival;
 
-	public DestinoBalon() {
-		posBalon = null;
-		this.altura = 0;
-		this.idxJugador = -1;
-		this.iterJugador = 1000;
-		ganaRival = false;
-	}
+  Position posBalon;
+  double altura;
+  int idxJugador;
+  int iterJugador;
+  int iterBalon;
+  boolean ganaRival;
 
-	public DestinoBalon(final Balon b, final int idxJugador, final int iterJugador, final int iterBalon) {
-		posBalon = new Position(b.getPosition()).setInsideGameField();
-		this.altura = b.getAltura();
-		this.idxJugador = idxJugador;
-		this.iterJugador = iterJugador;
-		this.iterBalon = iterBalon;
-		ganaRival = false;
-	}
+  public DestinoBalon() {
+    posBalon = null;
+    this.altura = 0;
+    this.idxJugador = -1;
+    this.iterJugador = 1000;
+    ganaRival = false;
+  }
 
-	public Position getPosBalon() {
-		return posBalon;
-	}
+  public DestinoBalon(final Balon b, final int idxJugador, final int iterJugador,
+                      final int iterBalon) {
+    posBalon = new Position(b.getPosition()).setInsideGameField();
+    this.altura = b.getAltura();
+    this.idxJugador = idxJugador;
+    this.iterJugador = iterJugador;
+    this.iterBalon = iterBalon;
+    ganaRival = false;
+  }
 
-	public void setPosBalon(final Position posBalon) {
-		this.posBalon = posBalon;
-	}
+  public Position getPosBalon() {
+    return posBalon;
+  }
 
-	public double getAltura() {
-		return altura;
-	}
+  public void setPosBalon(final Position posBalon) {
+    this.posBalon = posBalon;
+  }
 
-	public void setAltura(final double altura) {
-		this.altura = altura;
-	}
+  public double getAltura() {
+    return altura;
+  }
 
-	public int getIdxJugador() {
-		return idxJugador;
-	}
+  public void setAltura(final double altura) {
+    this.altura = altura;
+  }
 
-	public void setIdxJugador(final int idxJugador) {
-		this.idxJugador = idxJugador;
-	}
+  public int getIdxJugador() {
+    return idxJugador;
+  }
 
-	public int getIterJugador() {
-		return iterJugador;
-	}
+  public void setIdxJugador(final int idxJugador) {
+    this.idxJugador = idxJugador;
+  }
 
-	public void setIterJugador(final int iterJugador) {
-		this.iterJugador = iterJugador;
-	}
+  public int getIterJugador() {
+    return iterJugador;
+  }
 
-	public int getIterBalon() {
-		return iterBalon;
-	}
+  public void setIterJugador(final int iterJugador) {
+    this.iterJugador = iterJugador;
+  }
 
-	public void setIterBalon(final int iterBalon) {
-		this.iterBalon = iterBalon;
-	}
+  public int getIterBalon() {
+    return iterBalon;
+  }
 
-	public boolean isGanaRival() {
-		return ganaRival;
-	}
+  public void setIterBalon(final int iterBalon) {
+    this.iterBalon = iterBalon;
+  }
 
-	public void setGanaRival(final boolean ganaRival) {
-		this.ganaRival = ganaRival;
-	}
+  public boolean isGanaRival() {
+    return ganaRival;
+  }
 
-	@Override
-	public String toString() {
-		return "X [" + posBalon.getX() + "] Y [" + posBalon.getY() + "] Z[" + altura + "] " + "\tjugador: " + idxJugador + "\tEs rival: " + ganaRival;
-	}
+  public void setGanaRival(final boolean ganaRival) {
+    this.ganaRival = ganaRival;
+  }
 
-	@Override
-	public int compareTo(final DestinoBalon db) {
-		// if (iteracionesBalon == db.iteracionesBalon) {
-		// if (iteracionesJugador == db.iteracionesJugador) {
-		// return 1;
-		// }
-		return db.getIterJugador() - iterJugador;
-		// }
-		// return db.getIteracionesBalon() - iteracionesBalon;
-	}
+  @Override
+  public String toString() {
+    return "X [" + posBalon.getX() + "] Y [" + posBalon.getY() + "] Z[" + altura + "] "
+           + "\tjugador: " + idxJugador + "\tEs rival: " + ganaRival;
+  }
+
+  @Override
+  public int compareTo(final DestinoBalon db) {
+    // if (iteracionesBalon == db.iteracionesBalon) {
+    // if (iteracionesJugador == db.iteracionesJugador) {
+    // return 1;
+    // }
+    return db.getIterJugador() - iterJugador;
+    // }
+    // return db.getIteracionesBalon() - iteracionesBalon;
+  }
 }

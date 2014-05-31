@@ -4,63 +4,66 @@ import java.util.TreeMap;
 import java.util.TreeSet;
 
 public class OpcionesDisparo implements Comparable<OpcionesDisparo> {
-	double										fuerza;
-	int											tipoDisparo;
-	TreeMap<Double, TreeSet<InfoTrayectoria>>	opciones;
-	TreeSet<InfoTrayectoria>					opcionesAngCero;
 
-	public OpcionesDisparo(final double fuerza, final int tipoDisparo) {
-		this.fuerza = fuerza;
-		this.tipoDisparo = tipoDisparo;
-		this.opciones = new TreeMap<>();
-		this.opcionesAngCero = new TreeSet<>();
-	}
+  double fuerza;
+  int tipoDisparo;
+  TreeMap<Double, TreeSet<InfoTrayectoria>> opciones;
+  TreeSet<InfoTrayectoria> opcionesAngCero;
 
-	public OpcionesDisparo(final double fuerza, final int tipoDisparo, final TreeMap<Double, TreeSet<InfoTrayectoria>> opciones, final TreeSet<InfoTrayectoria> opcionesAngCero) {
-		this.fuerza = fuerza;
-		this.tipoDisparo = tipoDisparo;
-		this.opciones = opciones;
-		this.opcionesAngCero = opcionesAngCero;
-	}
+  public OpcionesDisparo(final double fuerza, final int tipoDisparo) {
+    this.fuerza = fuerza;
+    this.tipoDisparo = tipoDisparo;
+    this.opciones = new TreeMap<>();
+    this.opcionesAngCero = new TreeSet<>();
+  }
 
-	public int getTipoDisparo() {
-		return tipoDisparo;
-	}
+  public OpcionesDisparo(final double fuerza, final int tipoDisparo,
+                         final TreeMap<Double, TreeSet<InfoTrayectoria>> opciones,
+                         final TreeSet<InfoTrayectoria> opcionesAngCero) {
+    this.fuerza = fuerza;
+    this.tipoDisparo = tipoDisparo;
+    this.opciones = opciones;
+    this.opcionesAngCero = opcionesAngCero;
+  }
 
-	public void setTipoDisparo(final int tipoDisparo) {
-		this.tipoDisparo = tipoDisparo;
-	}
+  public int getTipoDisparo() {
+    return tipoDisparo;
+  }
 
-	public TreeMap<Double, TreeSet<InfoTrayectoria>> getOpciones() {
-		return opciones;
-	}
+  public void setTipoDisparo(final int tipoDisparo) {
+    this.tipoDisparo = tipoDisparo;
+  }
 
-	public void setOpciones(final TreeMap<Double, TreeSet<InfoTrayectoria>> opciones) {
-		this.opciones = opciones;
-	}
+  public TreeMap<Double, TreeSet<InfoTrayectoria>> getOpciones() {
+    return opciones;
+  }
 
-	public TreeSet<InfoTrayectoria> getOpcionesAngCero() {
-		return opcionesAngCero;
-	}
+  public void setOpciones(final TreeMap<Double, TreeSet<InfoTrayectoria>> opciones) {
+    this.opciones = opciones;
+  }
 
-	public void setOpcionesAngCero(final TreeSet<InfoTrayectoria> opcionesAngCero) {
-		this.opcionesAngCero = opcionesAngCero;
-	}
+  public TreeSet<InfoTrayectoria> getOpcionesAngCero() {
+    return opcionesAngCero;
+  }
 
-	public double getFuerza() {
-		return fuerza;
-	}
+  public void setOpcionesAngCero(final TreeSet<InfoTrayectoria> opcionesAngCero) {
+    this.opcionesAngCero = opcionesAngCero;
+  }
 
-	public void setFuerza(final double fuerza) {
-		this.fuerza = fuerza;
-	}
+  public double getFuerza() {
+    return fuerza;
+  }
 
-	@Override
-	public int compareTo(final OpcionesDisparo o) {
-		if (fuerza != o.getFuerza()) {
-			return fuerza > o.getFuerza() ? 1 : -1;
-		}
-		return tipoDisparo - o.getTipoDisparo();
-	}
+  public void setFuerza(final double fuerza) {
+    this.fuerza = fuerza;
+  }
+
+  @Override
+  public int compareTo(final OpcionesDisparo o) {
+    if (fuerza != o.getFuerza()) {
+      return fuerza > o.getFuerza() ? 1 : -1;
+    }
+    return tipoDisparo - o.getTipoDisparo();
+  }
 
 }

@@ -49,9 +49,9 @@ public abstract class Jugador {
 
 
   public ArrayList<Command> accionDefensa() {
-    ArrayList<Command> accion = new ArrayList<Command>();
+    ArrayList<Command> accion = new ArrayList<>();
                 /*
-		//Si el jugador es uno liberado de marcas, va directamente a cubrir al jugador m�s cercano a puerta si estamos defendiendo en nuestro campo
+                //Si el jugador es uno liberado de marcas, va directamente a cubrir al jugador m�s cercano a puerta si estamos defendiendo en nuestro campo
 				if ( ((numero == 8) || (numero == 9) || (numero == 10)) ) 
 				{
 					Position posJugRival = entrenador.Gs.rivalPlayers()[Constants.centroArcoInf.nearestIndexes( entrenador.Gs.rivalPlayers())[10-numero]];
@@ -119,7 +119,7 @@ public abstract class Jugador {
 
   //Accion comun a todos los jugadores
   public ArrayList<Command> accionRecuperacion(Position recuperacionPos) {
-    ArrayList<Command> accion = new ArrayList<Command>();
+    ArrayList<Command> accion = new ArrayList<>();
 
     accion.add(new CommandMoveTo(numero, recuperacionPos));
 
@@ -136,7 +136,7 @@ public abstract class Jugador {
   protected TiroInfo seleccionarTiro() {
 
     //ArrayList donde guardaremos los calculos de cada uno de los pases y al final decidiremos cual es el mejor
-    ArrayList<TiroInfo> pInfList = new ArrayList<TiroInfo>();
+    ArrayList<TiroInfo> pInfList = new ArrayList<>();
 
     //Calculamos los tiros en cinco puntos diferentes de la porteria
 
@@ -170,7 +170,7 @@ public abstract class Jugador {
    */
   private ArrayList<TiroInfo> obtenerPosiblesTiros(double angulo) {
     //Lista de PaseInfo
-    ArrayList<TiroInfo> pInfList = new ArrayList<TiroInfo>();
+    ArrayList<TiroInfo> pInfList = new ArrayList<>();
 
     //Calculamos todos los posibles pases al punto destino
     for (double fuerza = 0.8d; fuerza < 1.01; fuerza += 0.15d) {
@@ -200,7 +200,7 @@ public abstract class Jugador {
   protected PaseInfo seleccionarPase(double angA, double angB, int angIncr) {
 
     //ArrayList donde guardaremos los calculos de cada uno de los pases y al final decidiremos cual es el mejor
-    ArrayList<PaseInfo> pInfList = new ArrayList<PaseInfo>();
+    ArrayList<PaseInfo> pInfList = new ArrayList<>();
 
     //Calculamos todos los posibles pases
 
@@ -235,7 +235,7 @@ public abstract class Jugador {
    */
   private ArrayList<PaseInfo> obtenerPosiblesPases(double anguloRad) {
     //Lista de PaseInfo
-    ArrayList<PaseInfo> pInfList = new ArrayList<PaseInfo>();
+    ArrayList<PaseInfo> pInfList = new ArrayList<>();
 
     //Calculamos todos los posibles pases
     for (double fuerza = 0.1d; fuerza < 1.01; fuerza += 0.15d) {

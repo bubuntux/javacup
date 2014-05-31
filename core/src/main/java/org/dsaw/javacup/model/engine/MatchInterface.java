@@ -4,74 +4,118 @@ import org.dsaw.javacup.model.TacticDetail;
 import org.dsaw.javacup.model.util.Position;
 
 /**
-Interfaz partido, usada para ejecutar o visualizar partidos
+ * Interfaz partido, usada para ejecutar o visualizar partidos
  */
 public interface MatchInterface {
 
-    /**retorna si ocurrio un gol*/
-    public boolean esGol();
+  /**
+   * retorna si ocurrio un gol
+   */
+  public boolean esGol();
 
-    /**retorna si el balon a golpeado el poste*/
-    public boolean esPoste();
+  /**
+   * retorna si el balon a golpeado el poste
+   */
+  public boolean esPoste();
 
-    /**retorna si el balon esta rebotando en el cesped*/
-    public boolean estaRebotando();
+  /**
+   * retorna si el balon esta rebotando en el cesped
+   */
+  public boolean estaRebotando();
 
-    /**Retorna si el publico esta ovacionando*/
-    public boolean estanOvacionando();
+  /**
+   * Retorna si el publico esta ovacionando
+   */
+  public boolean estanOvacionando();
 
-    /**Retorna si un jugadore esta rematando el balon*/
-    public boolean estanRematando();
+  /**
+   * Retorna si un jugadore esta rematando el balon
+   */
+  public boolean estanRematando();
 
-    /**retorna si se debe ralizar un saque*/
-    public boolean estanSacando();
+  /**
+   * retorna si se debe ralizar un saque
+   */
+  public boolean estanSacando();
 
-    /**Retorna si estan silbando*/
-    public boolean estanSilbando();
+  /**
+   * Retorna si estan silbando
+   */
+  public boolean estanSilbando();
 
-    /**Retorna la altura del balon*/
-    public double getAlturaBalon();
+  /**
+   * Retorna la altura del balon
+   */
+  public double getAlturaBalon();
 
-    /**Retorna si el partido fue grabado*/
-    public boolean fueGrabado();
+  /**
+   * Retorna si el partido fue grabado
+   */
+  public boolean fueGrabado();
 
-    /**Retorna si ha ocurrido un cambio en el saque*/
-    public boolean cambioDeSaque();
+  /**
+   * Retorna si ha ocurrido un cambio en el saque
+   */
+  public boolean cambioDeSaque();
 
-    /**Retorna la TacticDetail del local*/
-    public TacticDetail getDetalleLocal();
+  /**
+   * Retorna la TacticDetail del local
+   */
+  public TacticDetail getDetalleLocal();
 
-    /**Retorna la TacticDetail de la visita*/
-    public TacticDetail getDetalleVisita();
+  /**
+   * Retorna la TacticDetail de la visita
+   */
+  public TacticDetail getDetalleVisita();
 
-    /**Retorna el partido guardado*/
-    public StoredMatch getPartidoGuardado();
+  /**
+   * Retorna el partido guardado
+   */
+  public StoredMatch getPartidoGuardado();
 
-    /**Retorna la posicion del balon visible*/
-    public Position getPosVisibleBalon();
+  /**
+   * Retorna la posicion del balon visible
+   */
+  public Position getPosVisibleBalon();
 
-    /**Retorna la posicion de los jugadores*/
-    public Position[][] getPosiciones();
+  /**
+   * Retorna la posicion de los jugadores
+   */
+  public Position[][] getPosiciones();
 
-    /**realiza una iteracion dentro del juego*/
-    public void iterar() throws Exception;
+  /**
+   * realiza una iteracion dentro del juego
+   */
+  public void iterar() throws Exception;
 
-    /**Retorna los goles del local*/
-    public int getGolesLocal();
+  /**
+   * Retorna los goles del local
+   */
+  public int getGolesLocal();
 
-    /**Retorna los goles de la visita*/
-    public int getGolesVisita();
+  /**
+   * Retorna los goles de la visita
+   */
+  public int getGolesVisita();
 
-    /**Retorna el numero de la iteracion*/
-    public int getIteration();
+  /**
+   * Retorna el numero de la iteracion
+   */
+  public int getIteration();
 
-    /**Retorna la posecion del balon del local*/
-    public double getPosesionBalonLocal();
-    
-    /**Retorna si se ha producido fuera de juego**/
-    public boolean isOffSide();
-    
-    /**Retorna si se ha producido una falta que da lugar a un tiro libre indirecto**/
-    public boolean isLibreIndirecto();    
+  /**
+   * Retorna la posecion del balon del local
+   */
+  public double getPosesionBalonLocal();
+
+  /**
+   * Retorna si se ha producido fuera de juego*
+   */
+  public boolean isOffSide();
+
+  /**
+   * Retorna si se ha producido una falta que da lugar a un tiro libre indirecto*
+   */
+  public boolean isLibreIndirecto();
 
 }

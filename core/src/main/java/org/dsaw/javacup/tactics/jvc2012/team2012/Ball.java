@@ -3,92 +3,93 @@ package org.dsaw.javacup.tactics.jvc2012.team2012;
 import org.dsaw.javacup.model.util.Position;
 
 public class Ball {
-	Position	position;
-	double		altura;
-	int			iteracion;
-	boolean		rebote;
 
-	public Ball(final double x, final double y, final double z) {
-		this(new Position(x, y), z, 0, false);
-	}
+  Position position;
+  double altura;
+  int iteracion;
+  boolean rebote;
 
-	public Ball(final double x, final double y, final double z, final int iteracion) {
-		this(new Position(x, y), z, iteracion, false);
-	}
+  public Ball(final double x, final double y, final double z) {
+    this(new Position(x, y), z, 0, false);
+  }
 
-	public Ball(final Position p, final double a) {
-		this(p, a, 0, false);
-	}
+  public Ball(final double x, final double y, final double z, final int iteracion) {
+    this(new Position(x, y), z, iteracion, false);
+  }
 
-	public Ball(final Position p, final double a, final int iteracion) {
-		this(p, a, iteracion, false);
-	}
+  public Ball(final Position p, final double a) {
+    this(p, a, 0, false);
+  }
 
-	public Ball(final Ball b) {
-		this(b.getPosition(), b.getAltura(), 0, false);
-	}
+  public Ball(final Position p, final double a, final int iteracion) {
+    this(p, a, iteracion, false);
+  }
 
-	public Ball(final Position position, final double altura, final int iteracion, final boolean rebote) {
-		this.position = new Position(position);
-		this.altura = altura;
-		this.iteracion = iteracion;
-		this.rebote = rebote;
-	}
+  public Ball(final Ball b) {
+    this(b.getPosition(), b.getAltura(), 0, false);
+  }
 
-	/**
-	 * @return the Position
-	 */
-	public Position getPosition() {
-		return position;
-	}
+  public Ball(final Position position, final double altura, final int iteracion,
+              final boolean rebote) {
+    this.position = new Position(position);
+    this.altura = altura;
+    this.iteracion = iteracion;
+    this.rebote = rebote;
+  }
 
-	/**
-	 * @param Position
-	 *            the Position to set
-	 */
-	public void setPosition(final Position Position) {
-		this.position = new Position(Position);
-	}
+  /**
+   * @return the Position
+   */
+  public Position getPosition() {
+    return position;
+  }
 
-	/**
-	 * @return the altura
-	 */
-	public double getAltura() {
-		return altura;
-	}
+  /**
+   * @param Position the Position to set
+   */
+  public void setPosition(final Position Position) {
+    this.position = new Position(Position);
+  }
 
-	/**
-	 * @param altura
-	 *            the altura to set
-	 */
-	public void setAltura(final double altura) {
-		this.altura = altura;
-	}
+  /**
+   * @return the altura
+   */
+  public double getAltura() {
+    return altura;
+  }
 
-	public int getIteracion() {
-		return iteracion;
-	}
+  /**
+   * @param altura the altura to set
+   */
+  public void setAltura(final double altura) {
+    this.altura = altura;
+  }
 
-	public void setIteracion(final int iteracion) {
-		this.iteracion = iteracion;
-	}
+  public int getIteracion() {
+    return iteracion;
+  }
 
-	public boolean isRebote() {
-		return rebote;
-	}
+  public void setIteracion(final int iteracion) {
+    this.iteracion = iteracion;
+  }
 
-	public void setRebote(final boolean rebote) {
-		this.rebote = rebote;
-	}
+  public boolean isRebote() {
+    return rebote;
+  }
 
-	@Override
-	public boolean equals(final Object obj) {
-		final Ball b = (Ball) obj;
-		return position.equals(b.getPosition()) && altura == b.getAltura();
-	}
+  public void setRebote(final boolean rebote) {
+    this.rebote = rebote;
+  }
 
-	@Override
-	public String toString() {
-		return "[" + position.getX() + "] [" + position.getY() + "] [" + altura + "] [" + iteracion + "][" + rebote + "]\n";
-	}
+  @Override
+  public boolean equals(final Object obj) {
+    final Ball b = (Ball) obj;
+    return position.equals(b.getPosition()) && altura == b.getAltura();
+  }
+
+  @Override
+  public String toString() {
+    return "[" + position.getX() + "] [" + position.getY() + "] [" + altura + "] [" + iteracion
+           + "][" + rebote + "]\n";
+  }
 }

@@ -2,9 +2,9 @@ package org.dsaw.javacup.tactics.jvc2012.hortalezablamers.utils.despejes.simulad
 
 public class RecoveryException extends Exception {
 
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = -3966833643925837199L;
+  /**
+   *
+   */
+  private static final long serialVersionUID = -3966833643925837199L;
 
 }

@@ -14,27 +14,31 @@ import java.util.List;
 
 
 public class EmAndEmTactica implements Tactic {
-	private Alineaciones alineaciones = new Alineaciones();
-	private TacticDetail detalle=new TacticaDetalleImpl();
-	private CPU cpu = new CPU();
-	
-	public TacticDetail getDetail() {
-		return detalle;
-	}
 
-	public Position[] getStartPositions(final GameSituations situacionPartido) {
-		ControladorAlineaciones.setProximaIteracionCambioAlineacion(0);
-		return this.alineaciones.getAlineacion5();
-	}
+  private Alineaciones alineaciones = new Alineaciones();
+  private TacticDetail detalle = new TacticaDetalleImpl();
+  private CPU cpu = new CPU();
 
-	public Position[] getNoStartPositions(final GameSituations situacionPartido) {
-		ControladorAlineaciones.setProximaIteracionCambioAlineacion(0);
-		return this.alineaciones.getAlineacion6();
-	}
+  @Override
+  public TacticDetail getDetail() {
+    return detalle;
+  }
 
-	//Lista de comandos a ejecutar.
-	@Override
-	public List<Command> execute(final GameSituations situacionPartido) {
-		return this.cpu.getComandosEjecutar(situacionPartido);
-	}
+  @Override
+  public Position[] getStartPositions(final GameSituations situacionPartido) {
+    ControladorAlineaciones.setProximaIteracionCambioAlineacion(0);
+    return this.alineaciones.getAlineacion5();
+  }
+
+  @Override
+  public Position[] getNoStartPositions(final GameSituations situacionPartido) {
+    ControladorAlineaciones.setProximaIteracionCambioAlineacion(0);
+    return this.alineaciones.getAlineacion6();
+  }
+
+  //Lista de comandos a ejecutar.
+  @Override
+  public List<Command> execute(final GameSituations situacionPartido) {
+    return this.cpu.getComandosEjecutar(situacionPartido);
+  }
 }

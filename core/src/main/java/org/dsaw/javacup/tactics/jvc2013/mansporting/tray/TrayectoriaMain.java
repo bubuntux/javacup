@@ -22,27 +22,31 @@ import java.util.List;
 import javax.swing.*;
 
 /**
- *
  * @author malvarez
  */
 public class TrayectoriaMain {
 
-    public static void main(String[] args) throws InterruptedException, IOException {
+  public static void main(String[] args) throws InterruptedException, IOException {
 
-        final VisualDebugFrame frame = new VisualDebugFrame();
-        SwingUtilities.invokeLater(new Runnable() {
+    final VisualDebugFrame frame = new VisualDebugFrame();
+    SwingUtilities.invokeLater(new Runnable() {
 
-            public void run() {
-                frame.setSize((int) ((Constants.ANCHO_CAMPO + VisualDebugFrame.Z_MAX) * MSGConstants.VISUAL_DEBUG_SCALE), (int) ((Constants.LARGO_CAMPO + VisualDebugFrame.Z_MAX) * MSGConstants.VISUAL_DEBUG_SCALE));
-                frame.setResizable(false);
-                frame.initComponents(MSGConstants.VISUAL_DEBUG_SCALE, Constants.ANCHO_CAMPO_JUEGO, Constants.LARGO_CAMPO_JUEGO, VisualDebugFrame.Z_MAX);
-                frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
-                frame.setVisible(true);
-                frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-            }
-        });
+      @Override
+      public void run() {
+        frame.setSize((int) ((Constants.ANCHO_CAMPO + VisualDebugFrame.Z_MAX)
+                             * MSGConstants.VISUAL_DEBUG_SCALE),
+                      (int) ((Constants.LARGO_CAMPO + VisualDebugFrame.Z_MAX)
+                             * MSGConstants.VISUAL_DEBUG_SCALE));
+        frame.setResizable(false);
+        frame.initComponents(MSGConstants.VISUAL_DEBUG_SCALE, Constants.ANCHO_CAMPO_JUEGO,
+                             Constants.LARGO_CAMPO_JUEGO, VisualDebugFrame.Z_MAX);
+        frame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        frame.setVisible(true);
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+      }
+    });
 
-        TrayectoriaManager manager = TrayectoriaManager.getInstance();
+    TrayectoriaManager manager = TrayectoriaManager.getInstance();
         /*Trayectorias trayectorias = manager.getTrayectorias();
 
         Trayectoria maximoDesplazamientoHorizontal = null;
@@ -132,39 +136,50 @@ public class TrayectoriaMain {
         }
         });*/
 
-        List<Double> keys = new ArrayList(manager.getDisparosByDistancia().keySet());
-        Collections.sort(keys);
-        for (final Double key : keys) {
+    List<Double> keys = new ArrayList(manager.getDisparosByDistancia().keySet());
+    Collections.sort(keys);
+    for (final Double key : keys) {
 
-            final TrayectoriaPunto value = manager.getDisparosByDistancia().get(key);
+      final TrayectoriaPunto value = manager.getDisparosByDistancia().get(key);
 
-            Thread.sleep(500L);
-            SwingUtilities.invokeLater(new Runnable() {
+      Thread.sleep(500L);
+      SwingUtilities.invokeLater(new Runnable() {
 
-                public void run() {
-                    frame.getCanvas().clearDrawablesXY();
-                    frame.getCanvas().clearDrawablesXZ();
-                    frame.getCanvas().clearDrawablesZY();
+        @Override
+        public void run() {
+          frame.getCanvas().clearDrawablesXY();
+          frame.getCanvas().clearDrawablesXZ();
+          frame.getCanvas().clearDrawablesZY();
 
-                    frame.getCanvas().addDrawableXZ(new RectaDrawable(new Recta(new Punto(0, Constants.ALTURA_CONTROL_BALON), new Punto(1, Constants.ALTURA_CONTROL_BALON)), Color.GREEN));
-                    frame.getCanvas().addDrawableZY(new RectaDrawable(new Recta(new Punto(Constants.ALTURA_CONTROL_BALON, 0), new Punto(Constants.ALTURA_CONTROL_BALON, 1)), Color.GREEN));
+          frame.getCanvas().addDrawableXZ(new RectaDrawable(
+              new Recta(new Punto(0, Constants.ALTURA_CONTROL_BALON),
+                        new Punto(1, Constants.ALTURA_CONTROL_BALON)), Color.GREEN));
+          frame.getCanvas().addDrawableZY(new RectaDrawable(
+              new Recta(new Punto(Constants.ALTURA_CONTROL_BALON, 0),
+                        new Punto(Constants.ALTURA_CONTROL_BALON, 1)), Color.GREEN));
 
-                    for (TrayectoriaPunto desplazamiento : value.getTrayectoria().getPuntos()) {
-                        Color color;
-                        if (desplazamiento.getDesplazamientoH() >= key) {
-                            color = new Color(0, 255, 0, (int) (desplazamiento.getProbabilidadControl() * 255));
-                        }  else {
-                            color = new Color(255, 0, 0, (int) (desplazamiento.getProbabilidadControl() * 255));
-                        }
-                        frame.getCanvas().addDrawableXY(new CirculoDrawable(new Circulo(new Punto(0, desplazamiento.getDesplazamientoH()), Constants.RADIO_BALON * 2), color));
-                        frame.getCanvas().addDrawableXZ(new CirculoDrawable(new Circulo(new Punto(0, desplazamiento.getDesplazamientoV()), Constants.RADIO_BALON * 2), color));
-                        frame.getCanvas().addDrawableZY(new CirculoDrawable(new Circulo(new Punto(desplazamiento.getDesplazamientoV(), desplazamiento.getDesplazamientoH()), Constants.RADIO_BALON * 2), color));
-                    }
-                    frame.getCanvas().repaint();
-                }
-            });
-
+          for (TrayectoriaPunto desplazamiento : value.getTrayectoria().getPuntos()) {
+            Color color;
+            if (desplazamiento.getDesplazamientoH() >= key) {
+              color = new Color(0, 255, 0, (int) (desplazamiento.getProbabilidadControl() * 255));
+            } else {
+              color = new Color(255, 0, 0, (int) (desplazamiento.getProbabilidadControl() * 255));
+            }
+            frame.getCanvas().addDrawableXY(new CirculoDrawable(
+                new Circulo(new Punto(0, desplazamiento.getDesplazamientoH()),
+                            Constants.RADIO_BALON * 2), color));
+            frame.getCanvas().addDrawableXZ(new CirculoDrawable(
+                new Circulo(new Punto(0, desplazamiento.getDesplazamientoV()),
+                            Constants.RADIO_BALON * 2), color));
+            frame.getCanvas().addDrawableZY(new CirculoDrawable(new Circulo(
+                new Punto(desplazamiento.getDesplazamientoV(), desplazamiento.getDesplazamientoH()),
+                Constants.RADIO_BALON * 2), color));
+          }
+          frame.getCanvas().repaint();
         }
+      });
 
     }
+
+  }
 }

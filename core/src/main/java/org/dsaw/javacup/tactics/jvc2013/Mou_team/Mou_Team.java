@@ -10,40 +10,45 @@ import java.util.List;
 
 public class Mou_Team implements Tactic {
 
-    public Mou_Team() {
-        this.laTactica = new Tactica_Mou_Team();
-        this.detalle = new TacticaDetalleImpl();
-    }
+  public Mou_Team() {
+    this.laTactica = new Tactica_Mou_Team();
+    this.detalle = new TacticaDetalleImpl();
+  }
 
-    public Mou_Team(double prob,double prob2) {
-        this.laTactica = new Tactica_Mou_Team(prob,prob2);
-        this.detalle = new TacticaDetalleImpl();
-    }
-    private Tactica_Mou_Team laTactica;
-    private TacticDetail detalle;
+  public Mou_Team(double prob, double prob2) {
+    this.laTactica = new Tactica_Mou_Team(prob, prob2);
+    this.detalle = new TacticaDetalleImpl();
+  }
 
-    public TacticDetail getDetail() {
-        return detalle;
-    }
+  private Tactica_Mou_Team laTactica;
+  private TacticDetail detalle;
 
-    public Position[] getStartPositions(GameSituations sp) {
-        return laTactica.getStartPositions(sp);
-    }
+  @Override
+  public TacticDetail getDetail() {
+    return detalle;
+  }
 
-    public Position[] getNoStartPositions(GameSituations sp) {
-        return laTactica.getNoStartPositions(sp);
-    }
+  @Override
+  public Position[] getStartPositions(GameSituations sp) {
+    return laTactica.getStartPositions(sp);
+  }
 
-    public List<Command> execute(GameSituations sp) {
-        return laTactica.generarTactica(sp);
-    }
+  @Override
+  public Position[] getNoStartPositions(GameSituations sp) {
+    return laTactica.getNoStartPositions(sp);
+  }
 
-    public int getGolesCulpaDistancia() {
-        return laTactica.golCulpaMiaDistancia;
-    }
+  @Override
+  public List<Command> execute(GameSituations sp) {
+    return laTactica.generarTactica(sp);
+  }
 
-    public int getGolesCulpaAltura() {
-        return laTactica.golCulpaMiaAltura;
+  public int getGolesCulpaDistancia() {
+    return laTactica.golCulpaMiaDistancia;
+  }
 
-    }
+  public int getGolesCulpaAltura() {
+    return laTactica.golCulpaMiaAltura;
+
+  }
 }
