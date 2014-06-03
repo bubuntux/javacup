@@ -447,7 +447,7 @@ public class TacticaMagallanes implements Tactic {
 
     @Override
     public String getTacticName() {
-      return "Republica Independiente de Magallanes";
+      return "Rep. de Magallanes";
     }
 
     @Override

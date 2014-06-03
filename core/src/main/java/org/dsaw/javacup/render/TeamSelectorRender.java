@@ -21,6 +21,7 @@ public final class TeamSelectorRender {
   private final float width;
   private final float height;
 
+  //TODO crate wrapper
   private final Rectangle prevCountryBounds;
   private final Rectangle nextCountryBounds;
   private float countryTextX;
