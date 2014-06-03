@@ -26,6 +26,11 @@ public final class TeamSelectorRender {
   private float countryTextX;
   private float countryTextY;
 
+  private final Rectangle prevTacticBounds;
+  private final Rectangle nextTacticBounds;
+  private float tacticTextX;
+  private float tacticTextY;
+
 
   public TeamSelectorRender(JavaCup game, TacticSelector tacticSelector, float x, float y,
                             float width, float height) {
@@ -39,9 +44,13 @@ public final class TeamSelectorRender {
 
     prevCountryBounds = new Rectangle(x + 10, y + 50, 20, 20);
     nextCountryBounds = new Rectangle(x + width - 30, y + 50, 20, 20);
-
     countryTextX = prevCountryBounds.x + prevCountryBounds.width + 10;
     countryTextY = y + 65;
+
+    prevTacticBounds = new Rectangle(x + 10, y + 20, 20, 20);
+    nextTacticBounds = new Rectangle(x + width - 30, y + 20, 20, 20);
+    tacticTextX = prevTacticBounds.x + prevTacticBounds.width + 10;
+    tacticTextY = y + 35;
   }
 
   public void draw() {
@@ -57,6 +66,12 @@ public final class TeamSelectorRender {
     shapeRenderer
         .rect(prevCountryBounds.x, prevCountryBounds.y, prevCountryBounds.width,
               prevCountryBounds.height);
+
+    shapeRenderer.rect(nextTacticBounds.x, nextTacticBounds.y, nextTacticBounds.width,
+                       nextTacticBounds.height);
+    shapeRenderer
+        .rect(prevTacticBounds.x, prevTacticBounds.y, prevTacticBounds.width,
+              prevTacticBounds.height);
     shapeRenderer.end();
 
     shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
@@ -74,11 +89,27 @@ public final class TeamSelectorRender {
                        prevCountryBounds.y + prevCountryBounds.height,
                        prevCountryBounds.x,
                        prevCountryBounds.y + prevCountryBounds.height / 2);
+
+    shapeRenderer.line(nextTacticBounds.x, nextTacticBounds.y,
+                       nextTacticBounds.x + nextTacticBounds.width,
+                       nextTacticBounds.y + nextTacticBounds.height / 2);
+    shapeRenderer.line(nextTacticBounds.x, nextTacticBounds.y + nextTacticBounds.height,
+                       nextTacticBounds.x + nextTacticBounds.width,
+                       nextTacticBounds.y + nextTacticBounds.height / 2);
+    shapeRenderer.line(prevTacticBounds.x + prevTacticBounds.width, prevTacticBounds.y,
+                       prevTacticBounds.x,
+                       prevTacticBounds.y + prevTacticBounds.height / 2);
+    shapeRenderer.line(prevTacticBounds.x + prevTacticBounds.width,
+                       prevTacticBounds.y + prevTacticBounds.height,
+                       prevTacticBounds.x,
+                       prevTacticBounds.y + prevTacticBounds.height / 2);
     shapeRenderer.end();
 
     SpriteBatch batch = game.batch;
     batch.begin();
     game.font.draw(batch, tacticSelector.currentCountry().getName(), countryTextX, countryTextY);
+    game.font.draw(batch, tacticSelector.currentTactic().getDetail().getTacticName(), tacticTextX,
+                   tacticTextY);
     batch.end();
   }
 
@@ -89,6 +120,14 @@ public final class TeamSelectorRender {
 
     if (nextCountryBounds.contains(x, y)) {
       tacticSelector.nextCountry();
+    }
+
+    if (prevTacticBounds.contains(x, y)) {
+      tacticSelector.prevTactic();
+    }
+
+    if (nextTacticBounds.contains(x, y)) {
+      tacticSelector.nextTactic();
     }
   }
 
