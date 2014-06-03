@@ -6,7 +6,7 @@ import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 
 import org.dsaw.javacup.JavaCup;
-import org.dsaw.javacup.render.TeamSelector;
+import org.dsaw.javacup.render.TeamSelectorRender;
 
 /**
  * @author Julio Gutierrez (29/05/2014)
@@ -14,55 +14,47 @@ import org.dsaw.javacup.render.TeamSelector;
 public class TeamSelectionScreen implements Screen {
 
   private final JavaCup game;
-  private final TeamSelector localTeamSelector;
-  private final TeamSelector visitorTeamSelector;
+  private final TeamSelectorRender localTeamSelectorRender;
+  private final TeamSelectorRender visitorTeamSelectorRender;
   private final OrthographicCamera camera;
 
   public TeamSelectionScreen(JavaCup game) {
     this.game = game;
 
-    localTeamSelector = new TeamSelector(game, 50, 200, 200, 200);// TODO generalize
-    visitorTeamSelector = new TeamSelector(game, 400, 200, 200, 200);
+    localTeamSelectorRender =
+        new TeamSelectorRender(game, game.localTacticSelector, 50, 200, 200, 200);// TODO generalize
+    visitorTeamSelectorRender =
+        new TeamSelectorRender(game, game.visitorTacticSelector, 400, 200, 200, 200);
 
     camera = new OrthographicCamera();
     camera.setToOrtho(false, 800, 480);
   }
 
-  private void update() {
+  private void update(float delta) {
     if (Gdx.input.justTouched()) {
       int x = Gdx.input.getX();
       int y = Gdx.graphics.getHeight() - Gdx.input.getY();
       Gdx.app.log("some", "X:" + x + "  Y:" + y);
-      localTeamSelector.touch(x, y);
-      visitorTeamSelector.touch(x, y);
+      localTeamSelectorRender.touch(x, y);
+      visitorTeamSelectorRender.touch(x, y);
     }
 
-  /*  if (game.getScreen() != this) { //TODO?
-      dispose();
-    }*/
+    camera.update();
   }
 
   private void draw() {
     Gdx.gl.glClearColor(0, 0, 0, 1);
     Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
-    camera.update();
-
     //TODO background
 
-    localTeamSelector.draw();
-    visitorTeamSelector.draw();
-
-    game.batch.setProjectionMatrix(camera.combined);
-    game.batch.begin();
-    game.font.draw(game.batch, "Welcome to Drop!!! ", 100, 150);
-    game.font.draw(game.batch, "Tap anywhere to begin!", 100, 100);
-    game.batch.end();
+    localTeamSelectorRender.draw();
+    visitorTeamSelectorRender.draw();
   }
 
   @Override
   public void render(float delta) {
-    update();
+    update(delta);
     draw();
   }
 

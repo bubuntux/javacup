@@ -15,13 +15,31 @@ import java.util.Map;
  */
 public class TacticSelector {
 
-  private static Map<CountryCode, List<Tactic>> tactics;
+  private static final Map<CountryCode, List<Tactic>> tactics = loadTactics();
+  private static final List<CountryCode> countryCodeList = new LinkedList<>(tactics.keySet());
 
-  public Map<CountryCode, List<Tactic>> getTactics() {
-    if (tactics == null) {
-      tactics = loadTactics();
+  private int countryIndex;
+
+  public TacticSelector() {
+    countryIndex = 0;
+  }
+
+  public void prevCountry() {
+    countryIndex--;
+    if (countryIndex < 0) {
+      countryIndex = countryCodeList.size() - 1;
     }
-    return tactics;
+  }
+
+  public void nextCountry() {
+    countryIndex++;
+    if (countryIndex >= countryCodeList.size()) {
+      countryIndex = 0;
+    }
+  }
+
+  public CountryCode currentCountry() {
+    return countryCodeList.get(countryIndex);
   }
 
   private static Map<CountryCode, List<Tactic>> loadTactics() {
@@ -45,5 +63,6 @@ public class TacticSelector {
 
     return tactics;
   }
+
 
 }

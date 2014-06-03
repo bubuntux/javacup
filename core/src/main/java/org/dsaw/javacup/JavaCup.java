@@ -3,7 +3,9 @@ package org.dsaw.javacup;
 import com.badlogic.gdx.Game;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
+import org.dsaw.javacup.model.TacticSelector;
 import org.dsaw.javacup.screen.TeamSelectionScreen;
 
 /**
@@ -13,14 +15,19 @@ public class JavaCup extends Game {
 
   //TODO public?
   public SpriteBatch batch;
+  public ShapeRenderer shapeRenderer;
   public BitmapFont font;
-  //public Map<Version, Map<CountryCode, Tactic>> tactics;
+
+  public TacticSelector localTacticSelector;
+  public TacticSelector visitorTacticSelector;
 
   @Override
   public void create() {
-    //tactics = loadTactics();
+    localTacticSelector = new TacticSelector();
+    visitorTacticSelector = new TacticSelector();
 
     batch = new SpriteBatch();
+    shapeRenderer = new ShapeRenderer();
     font = new BitmapFont();
     setScreen(new TeamSelectionScreen(this));
   }
@@ -33,7 +40,8 @@ public class JavaCup extends Game {
   @Override
   public void dispose() {
     super.dispose();
-    // tactics.clear();
+
+    shapeRenderer.dispose();
     batch.dispose();
     font.dispose();
   }
