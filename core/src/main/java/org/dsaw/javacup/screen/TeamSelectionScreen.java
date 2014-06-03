@@ -3,7 +3,6 @@ package org.dsaw.javacup.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
-import com.badlogic.gdx.graphics.OrthographicCamera;
 
 import org.dsaw.javacup.JavaCup;
 import org.dsaw.javacup.render.TeamSelectorRender;
@@ -16,7 +15,6 @@ public class TeamSelectionScreen implements Screen {
   private final JavaCup game;
   private final TeamSelectorRender localTeamSelectorRender;
   private final TeamSelectorRender visitorTeamSelectorRender;
-  private final OrthographicCamera camera;
 
   public TeamSelectionScreen(JavaCup game) {
     this.game = game;
@@ -26,8 +24,6 @@ public class TeamSelectionScreen implements Screen {
     visitorTeamSelectorRender =
         new TeamSelectorRender(game, game.visitorTacticSelector, 400, 200, 200, 200);
 
-    camera = new OrthographicCamera();
-    camera.setToOrtho(false, 800, 480);
   }
 
   private void update(float delta) {
@@ -39,7 +35,6 @@ public class TeamSelectionScreen implements Screen {
       visitorTeamSelectorRender.touch(x, y);
     }
 
-    camera.update();
   }
 
   private void draw() {
