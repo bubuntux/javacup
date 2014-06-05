@@ -257,16 +257,13 @@ public final class StoredMatch implements MatchInterface, Serializable { //TODO 
     FileOutputStream fout = new FileOutputStream(file);
     ZipOutputStream zout = new ZipOutputStream(fout);
     zout.setLevel(java.util.zip.Deflater.BEST_SPEED);
-    FileInputStream fin = new FileInputStream(entry);
-    try {
+    try (FileInputStream fin = new FileInputStream(entry)) {
       zout.putNextEntry(new ZipEntry(entry));
       byte[] buffer = new byte[4096];
       int read;
       while ((read = fin.read(buffer)) > -1) {
         zout.write(buffer, 0, read);
       }
-    } finally {
-      fin.close();
     }
     zout.close();
   }

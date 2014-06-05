@@ -2,7 +2,10 @@ package org.dsaw.javacup.screen;
 
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+import com.badlogic.gdx.math.Rectangle;
 
 import org.dsaw.javacup.JavaCup;
 import org.dsaw.javacup.render.TeamSelectorRender;
@@ -16,6 +19,8 @@ public class TeamSelectionScreen implements Screen {
   private final TeamSelectorRender localTeamSelectorRender;
   private final TeamSelectorRender visitorTeamSelectorRender;
 
+  private Rectangle button;
+
   public TeamSelectionScreen(JavaCup game) {
     this.game = game;
 
@@ -24,6 +29,7 @@ public class TeamSelectionScreen implements Screen {
     visitorTeamSelectorRender =
         new TeamSelectorRender(game, game.visitorTacticSelector, 400, 200, 200, 200);
 
+    button = new Rectangle(300, 50, 50, 50);
   }
 
   private void update(float delta) {
@@ -33,6 +39,9 @@ public class TeamSelectionScreen implements Screen {
       Gdx.app.log("some", "X:" + x + "  Y:" + y);
       localTeamSelectorRender.touch(x, y);
       visitorTeamSelectorRender.touch(x, y);
+      if (button.contains(x, y)) {
+        //TODO start match!!
+      }
     }
 
   }
@@ -45,6 +54,12 @@ public class TeamSelectionScreen implements Screen {
 
     localTeamSelectorRender.draw();
     visitorTeamSelectorRender.draw();
+
+    ShapeRenderer shapeRenderer = game.shapeRenderer;
+    shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+    shapeRenderer.setColor(new Color(0, 0, 1, 1));
+    shapeRenderer.rect(button.x, button.y, button.width, button.height);
+    shapeRenderer.end();
   }
 
   @Override
