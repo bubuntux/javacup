@@ -4,6 +4,7 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
+import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import org.dsaw.javacup.JavaCup;
 import org.dsaw.javacup.model.engine.StoredMatch;
@@ -29,9 +30,9 @@ public class MatchScreen implements Screen {
     this.width = width;
     this.height = height;
 
-    fieldRender = new FieldRenderV2(game);
+    fieldRender = new FieldRenderV2();
     camera = new OrthographicCamera();
-    camera.zoom = 0.15f;
+    camera.zoom = 15f;
     camera.setToOrtho(true);
   }
 
@@ -43,9 +44,9 @@ public class MatchScreen implements Screen {
     Gdx.gl.glClearColor(0, 0, 0, 1);
     Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
-    game.shapeRenderer.setProjectionMatrix(camera.combined);
-
-    fieldRender.draw();
+    ShapeRenderer shapeRenderer = game.shapeRenderer;
+    shapeRenderer.setProjectionMatrix(camera.combined);
+    fieldRender.draw(shapeRenderer);
   }
 
   @Override

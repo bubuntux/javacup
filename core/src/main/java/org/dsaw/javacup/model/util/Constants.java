@@ -3,7 +3,7 @@ package org.dsaw.javacup.model.util;
 /**
  * Constants
  */
-public final class Constants {
+public class Constants {
 
   //##############################################################################//
   //###### Dimensiones del campo de juego (en metros) #######//
