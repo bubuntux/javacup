@@ -40,17 +40,23 @@ public class MatchScreen implements Screen {
   private void update(float delta) {
     camera.update();
 
-    if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
-      camera.position.y += 10;
+    if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
+      camera.position.y += 10f;
     }
-    if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
-      camera.position.y -= 10;
+    if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
+      camera.position.y -= 10f;
     }
-    if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
-      camera.position.x -= 10;
+    if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
+      camera.position.x -= 10f;
     }
-    if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
-      camera.position.x += 10;
+    if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
+      camera.position.x += 10f;
+    }
+    if (Gdx.input.isKeyPressed(Input.Keys.PLUS) || Gdx.input.isKeyPressed(Input.Keys.Q)) {
+      camera.zoom -= 0.1f;
+    }
+    if (Gdx.input.isKeyPressed(Input.Keys.MINUS) || Gdx.input.isKeyPressed(Input.Keys.E)) {
+      camera.zoom += 0.1f;
     }
   }
 
