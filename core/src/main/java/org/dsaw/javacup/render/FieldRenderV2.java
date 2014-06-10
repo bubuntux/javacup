@@ -1,5 +1,6 @@
 package org.dsaw.javacup.render;
 
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import static org.dsaw.javacup.model.util.ConstantsV2.BIG_AREA_HEIGHT;
@@ -50,16 +51,18 @@ public class FieldRenderV2 {
   private static final float GOAL_AREA_Y = GAME_FIELD_Y + GAME_FIELD_HEIGHT;
   private static final float GOAL_AREA_Y2 = GAME_FIELD_Y - GOAL_AREA_HEIGHT;
 
+  private static final Color GREEN = new Color(0.3f, 0.7f, 0.3f, 1);
+
   public void draw(ShapeRenderer shapeRenderer) { //TODO different green grass
     //Render all the grass
     shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-    shapeRenderer.setColor(0, 1, 0, 1);
+    shapeRenderer.setColor(GREEN);
     shapeRenderer.rect(0, 0, FIELD_WIDTH, FIELD_HEIGHT);
     shapeRenderer.end();
 
     //Render game field
     shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-    shapeRenderer.setColor(1, 1, 1, 1);
+    shapeRenderer.setColor(Color.WHITE);
     shapeRenderer.rect(GAME_FIELD_X, GAME_FIELD_Y, GAME_FIELD_WIDTH, GAME_FIELD_HEIGHT);
 
     //Penalty circle
@@ -69,7 +72,7 @@ public class FieldRenderV2 {
 
     //Filled big area (so remove inside penalty circle)
     shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-    shapeRenderer.setColor(0, 1, 0, 1);
+    shapeRenderer.setColor(GREEN);
 
     shapeRenderer.rect(BIG_AREA_X, GAME_FIELD_Y, BIG_AREA_WIDTH, BIG_AREA_HEIGHT);
     shapeRenderer.rect(BIG_AREA_X, BIG_AREA_Y, BIG_AREA_WIDTH, BIG_AREA_HEIGHT);
@@ -77,7 +80,7 @@ public class FieldRenderV2 {
     shapeRenderer.end();
 
     shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-    shapeRenderer.setColor(1, 1, 1, 1);
+    shapeRenderer.setColor(Color.WHITE);
 
     //Render small area
     shapeRenderer.rect(SMALL_AREA_X, GAME_FIELD_Y, SMALL_AREA_WIDTH, SMALL_AREA_HEIGHT);

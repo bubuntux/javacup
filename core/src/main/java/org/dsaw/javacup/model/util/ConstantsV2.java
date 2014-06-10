@@ -20,9 +20,9 @@ public final class ConstantsV2 extends Constants {
 
   public final static float PENALTY_DISTANCE = (float) (DISTANCIA_PENAL * METER_TO_CENTIMETER);
   public final static float PENALTY_MARK_RADIUS = 0.15f * METER_TO_CENTIMETER; //TODO research
+  public final static float PENALTY_RADIUS = (float) (RADIO_PENAL * METER_TO_CENTIMETER);
 
   public final static float CENTRAL_CIRCLE_MARK_RADIUS = PENALTY_MARK_RADIUS; //TODO research
-  public final static float PENALTY_RADIUS = (float) (RADIO_PENAL * METER_TO_CENTIMETER);
   public final static float CENTRAL_CIRCLE_RADIUS = PENALTY_RADIUS;
 
   public final static float CORNER_MARK_RADIUS = METER_TO_CENTIMETER;

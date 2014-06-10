@@ -32,7 +32,7 @@ public class MatchScreen implements Screen {
 
     fieldRender = new FieldRenderV2();
     camera = new OrthographicCamera();
-    camera.zoom = 15f;
+    camera.zoom = 10f;
     camera.setToOrtho(true);
   }
 
