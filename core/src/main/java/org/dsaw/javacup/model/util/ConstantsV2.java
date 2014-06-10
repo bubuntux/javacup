@@ -3,7 +3,7 @@ package org.dsaw.javacup.model.util;
 /**
  * Created by Julio Gutierrez on 6/9/14.
  */
-public final class ConstantsV2 extends Constants {
+public final class ConstantsV2 extends Constants { //Everything is on centimeters
 
   public final static int METER_TO_CENTIMETER = 100; // 1 meter = 100 cm
 
@@ -19,7 +19,7 @@ public final class ConstantsV2 extends Constants {
   public final static float GAME_FIELD_HEIGHT_HALF = GAME_FIELD_HEIGHT / 2;
 
   public final static float PENALTY_DISTANCE = (float) (DISTANCIA_PENAL * METER_TO_CENTIMETER);
-  public final static float PENALTY_MARK_RADIUS = 0.15f * METER_TO_CENTIMETER; //TODO research
+  public final static float PENALTY_MARK_RADIUS = 15f; //TODO research
   public final static float PENALTY_RADIUS = (float) (RADIO_PENAL * METER_TO_CENTIMETER);
 
   public final static float CENTRAL_CIRCLE_MARK_RADIUS = PENALTY_MARK_RADIUS; //TODO research
@@ -41,4 +41,6 @@ public final class ConstantsV2 extends Constants {
   public final static float BIG_AREA_WIDTH_HALF = BIG_AREA_WIDTH / 2;
   public final static float BIG_AREA_HEIGHT = (float) (ANCHO_AREA_GRANDE * METER_TO_CENTIMETER);
   public final static float BIG_AREA_HEIGHT_HALF = BIG_AREA_HEIGHT / 2;
+
+  public final static float BALL_RADIUS = 11f;
 }
