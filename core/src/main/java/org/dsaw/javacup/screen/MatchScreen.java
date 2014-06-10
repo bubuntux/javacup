@@ -1,6 +1,7 @@
 package org.dsaw.javacup.screen;
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
@@ -38,6 +39,19 @@ public class MatchScreen implements Screen {
 
   private void update(float delta) {
     camera.update();
+
+    if (Gdx.input.isKeyPressed(Input.Keys.DOWN)) {
+      camera.position.y += 10;
+    }
+    if (Gdx.input.isKeyPressed(Input.Keys.UP)) {
+      camera.position.y -= 10;
+    }
+    if (Gdx.input.isKeyPressed(Input.Keys.LEFT)) {
+      camera.position.x -= 10;
+    }
+    if (Gdx.input.isKeyPressed(Input.Keys.RIGHT)) {
+      camera.position.x += 10;
+    }
   }
 
   private void draw() {
