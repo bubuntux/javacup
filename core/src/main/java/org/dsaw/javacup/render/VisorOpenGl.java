@@ -63,7 +63,7 @@ public class VisorOpenGl implements Game {
   private PrincipalFrame principal;
   private MatchInterface partido = null;
   private int sx, sy;
-  private FieldRender pc = null;
+  private FieldRender fieldRender = null;
   private PlayerRender pjLocal, pjVisita = null;
   private BallRender pb = null;
   private ScoreboardRender pm = null;
@@ -257,7 +257,7 @@ public class VisorOpenGl implements Game {
     }
     gc.setAlwaysRender(true); //TODO config
     gc.setShowFPS(false);
-    pc = new FieldRender(gc.getWidth() / 2, gc.getHeight() / 2, estadioIdx);
+    fieldRender = new FieldRender(gc.getWidth() / 2, gc.getHeight() / 2, estadioIdx);
     if (partido != null) {
       if (jugador3d) {
         pjLocal = new PlayerRenderNew();
@@ -680,9 +680,9 @@ public class VisorOpenGl implements Game {
     }
     Position p = new Position(px, py);
     if (entorno) {
-      pc.pintaEntorno(g, p, escala);
+      fieldRender.pintaEntorno(g, p, escala);
     }
-    pc.pintaCancha(g, p, escala);
+    fieldRender.pintaCancha(g, p, escala);
     Position[][] pos = partido.getPosiciones();
     if (!partido.esGol() && partido.estanSacando()) {
       double zoom = 1 * escala * (1 + 0.02 * (double) iterSaca);
@@ -817,9 +817,9 @@ public class VisorOpenGl implements Game {
     if (partido.getAlturaBalon() > 2) {
       pb.renderBall((int) (giro), ang, escala, rel[0], rel[1], z * 2, g);
     }
-    pc.pintaArcos(g, p, escala);
+    fieldRender.pintaArcos(g, p, escala);
     if (estadio) {
-      pc.pintaEstadio(g, p, escala);
+      fieldRender.pintaEstadio(g, p, escala);
     }
     if (marcador) {
       pm.pintaMarcador(partido.getGolesLocal(), partido.getGolesVisita(), partido.getIteration(),

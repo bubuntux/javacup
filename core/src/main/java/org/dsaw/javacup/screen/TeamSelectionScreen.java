@@ -41,6 +41,7 @@ public class TeamSelectionScreen implements Screen {
       visitorTeamSelectorRender.touch(x, y);
       if (button.contains(x, y)) {
         //TODO start match!!
+        game.setScreen(new MatchScreen(game, null, 0, 0));
       }
     }
 
