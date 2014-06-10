@@ -33,22 +33,22 @@ public class FieldRenderV2 {
   private static final float GAME_FIELD_X = (FIELD_WIDTH - GAME_FIELD_WIDTH) / 2;
   private static final float GAME_FIELD_X2 = GAME_FIELD_X + GAME_FIELD_WIDTH;
   private static final float GAME_FIELD_X_HALF = GAME_FIELD_X + GAME_FIELD_WIDTH_HALF;
-  private static final float BIG_AREA_X = GAME_FIELD_X_HALF - BIG_AREA_WIDTH_HALF;
-  private static final float SMALL_AREA_X = GAME_FIELD_X_HALF - SMALL_AREA_WIDTH_HALF;
-  private static final float GOAL_AREA_X = GAME_FIELD_X_HALF - GOAL_AREA_WIDTH_HALF;
   private static final float GAME_FIELD_Y = (FIELD_HEIGHT - GAME_FIELD_HEIGHT) / 2;
   private static final float GAME_FIELD_Y2 = GAME_FIELD_Y + GAME_FIELD_HEIGHT;
   private static final float GAME_FIELD_Y_HALF = GAME_FIELD_Y + GAME_FIELD_HEIGHT_HALF;
+
   private static final float PENALTY_MARK_Y1 = GAME_FIELD_Y + PENALTY_DISTANCE;
   private static final float PENALTY_MARK_Y2 = GAME_FIELD_Y + GAME_FIELD_HEIGHT - PENALTY_DISTANCE;
+
+  private static final float BIG_AREA_X = GAME_FIELD_X_HALF - BIG_AREA_WIDTH_HALF;
   private static final float BIG_AREA_Y = GAME_FIELD_Y + GAME_FIELD_HEIGHT - BIG_AREA_HEIGHT;
+
+  private static final float SMALL_AREA_X = GAME_FIELD_X_HALF - SMALL_AREA_WIDTH_HALF;
   private static final float SMALL_AREA_Y = GAME_FIELD_Y + GAME_FIELD_HEIGHT - SMALL_AREA_HEIGHT;
+
+  private static final float GOAL_AREA_X = GAME_FIELD_X_HALF - GOAL_AREA_WIDTH_HALF;
   private static final float GOAL_AREA_Y = GAME_FIELD_Y + GAME_FIELD_HEIGHT;
   private static final float GOAL_AREA_Y2 = GAME_FIELD_Y - GOAL_AREA_HEIGHT;
-
-  public FieldRenderV2() {
-
-  }
 
   public void draw(ShapeRenderer shapeRenderer) {
     //Render all the grass
@@ -60,8 +60,7 @@ public class FieldRenderV2 {
     //Render game field
     shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
     shapeRenderer.setColor(1, 1, 1, 1);
-    shapeRenderer.rect(GAME_FIELD_X, GAME_FIELD_Y, GAME_FIELD_WIDTH,
-                       GAME_FIELD_HEIGHT);
+    shapeRenderer.rect(GAME_FIELD_X, GAME_FIELD_Y, GAME_FIELD_WIDTH, GAME_FIELD_HEIGHT);
 
     //Penalty circle
     shapeRenderer.circle(GAME_FIELD_X_HALF, PENALTY_MARK_Y1, PENALTY_RADIUS);
