@@ -8,7 +8,7 @@ import org.dsaw.javacup.model.util.Constants;
 /**
  * Created by jgutierrez on 6/9/14.
  */
-public class FieldRenderV2 {
+public class FieldRenderV2 { //TODO i don't like the 1px per meter scale
 
   private final JavaCup game;
 
@@ -88,7 +88,7 @@ public class FieldRenderV2 {
               (float) (gameFieldY + Constants.LARGO_CAMPO_JUEGO - Constants.ANCHO_AREA_GRANDE),
               (float) Constants.LARGO_AREA_GRANDE, (float) Constants.ANCHO_AREA_GRANDE);
 
-    float penaltyMarkRadio = 0.1f;
+    float penaltyMarkRadio = 0.25f;
     shapeRenderer.circle(halfFieldX, penaltyY1, penaltyMarkRadio);
     shapeRenderer.circle(halfFieldX, penaltyY2, penaltyMarkRadio);
 
