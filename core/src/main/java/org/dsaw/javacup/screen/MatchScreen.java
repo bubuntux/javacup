@@ -19,7 +19,6 @@ import org.dsaw.javacup.render.FieldRenderV2;
  */
 public class MatchScreen implements Screen {
 
-
   private final JavaCup game;
   private final StoredMatch match;
 
@@ -76,7 +75,11 @@ public class MatchScreen implements Screen {
     shapeRenderer.setColor(Color.ORANGE);
     Position ball = match.getPosVisibleBalon();
     shapeRenderer
-        .circle((float) ball.getX() * 100, (float) ball.getY() * 100, ConstantsV2.BALL_RADIUS * 5);
+        .circle((float) (ball.getX() * 100) + ConstantsV2.GAME_FIELD_WIDTH_HALF
+                + ((ConstantsV2.FIELD_WIDTH - ConstantsV2.GAME_FIELD_WIDTH) / 2),
+                (float) (ball.getY() * 100) + ConstantsV2.GAME_FIELD_HEIGHT_HALF
+                + ((ConstantsV2.FIELD_HEIGHT - ConstantsV2.GAME_FIELD_HEIGHT) / 2),
+                ConstantsV2.BALL_RADIUS * 2);
     shapeRenderer.end();
   }
 
