@@ -26,7 +26,7 @@ import static org.dsaw.javacup.model.util.ConstantsV2.SMALL_AREA_WIDTH_HALF;
 
 
 /**
- * Created by jgutierrez on 6/9/14.
+ * Created by Julio Gutierrez on 6/9/14.
  */
 public class FieldRenderV2 {
 
@@ -50,7 +50,7 @@ public class FieldRenderV2 {
   private static final float GOAL_AREA_Y = GAME_FIELD_Y + GAME_FIELD_HEIGHT;
   private static final float GOAL_AREA_Y2 = GAME_FIELD_Y - GOAL_AREA_HEIGHT;
 
-  public void draw(ShapeRenderer shapeRenderer) {
+  public void draw(ShapeRenderer shapeRenderer) { //TODO different green grass
     //Render all the grass
     shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
     shapeRenderer.setColor(0, 1, 0, 1);

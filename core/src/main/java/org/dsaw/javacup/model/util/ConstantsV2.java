@@ -1,7 +1,7 @@
 package org.dsaw.javacup.model.util;
 
 /**
- * Created by jgutierrez on 6/9/14.
+ * Created by Julio Gutierrez on 6/9/14.
  */
 public final class ConstantsV2 extends Constants {
 
