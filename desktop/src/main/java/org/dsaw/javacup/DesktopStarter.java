@@ -12,6 +12,8 @@ public class DesktopStarter {
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
     config.title = "JavaCup";
     config.useGL30 = true;
+    config.width = 1024;
+    config.height = 600;
     new LwjglApplication(new JavaCup(), config);
   }
 }
