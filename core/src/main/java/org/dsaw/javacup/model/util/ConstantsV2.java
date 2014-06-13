@@ -1,76 +1,156 @@
 package org.dsaw.javacup.model.util;
 
+import com.badlogic.gdx.math.Circle;
+import com.badlogic.gdx.math.Rectangle;
+
 /**
  * Created by Julio Gutierrez on 6/9/14.
  */
 public final class ConstantsV2 extends Constants { //Everything is on centimeters
 
-  ////// DIMENSIONS
   public final static int METER_TO_CENTIMETER = 100; // 1 meter = 100 cm
+
+
+  public final static Rect FIELD = new Rect((float) (ANCHO_CAMPO * METER_TO_CENTIMETER),
+                                            (float) (LARGO_CAMPO * METER_TO_CENTIMETER));
+
+  public final static Rect GAME_FIELD = new Rect((float) (ANCHO_CAMPO_JUEGO * METER_TO_CENTIMETER),
+                                                 (float) (LARGO_CAMPO_JUEGO * METER_TO_CENTIMETER));
+
+  public final static Rect GAME_FIELD_1 =
+      new Rect(GAME_FIELD.getX(), GAME_FIELD.getY(), GAME_FIELD.getWidth(),
+               GAME_FIELD.getHeight() / 2
+      );
+  public final static Rect GAME_FIELD_2 =
+      new Rect(GAME_FIELD_1.getX(), GAME_FIELD_1.getY() + GAME_FIELD_1.getHeight(),
+               GAME_FIELD_1.getWidth(), GAME_FIELD_1.getHeight()
+      );
+
+  public final static Rect GOAL_AREA_1 =
+      new Rect(GAME_FIELD.getY() - 2.44f * METER_TO_CENTIMETER, 7.32f * METER_TO_CENTIMETER,
+               2.44f * METER_TO_CENTIMETER
+      );
+  public final static Rect GOAL_AREA_2 =
+      new Rect(GOAL_AREA_1.getX(),
+               GOAL_AREA_1.getY() + GAME_FIELD.getHeight() + GOAL_AREA_1.getHeight(),
+               GOAL_AREA_1.getWidth(), GOAL_AREA_1.getHeight()
+      );
+
+  public final static Rect SMALL_AREA_1 =
+      new Rect(GAME_FIELD.getY(), (float) (LARGO_AREA_CHICA * METER_TO_CENTIMETER),
+               (float) (ANCHO_AREA_CHICA * METER_TO_CENTIMETER)
+      );
+  public final static Rect SMALL_AREA_2 =
+      new Rect(SMALL_AREA_1.getX(),
+               SMALL_AREA_1.getY() + GAME_FIELD.getHeight() - SMALL_AREA_1.getHeight(),
+               SMALL_AREA_1.getWidth(), SMALL_AREA_1.getHeight()
+      );
+
+  public final static Rect BIG_AREA_1 =
+      new Rect(GAME_FIELD.getY(), (float) (LARGO_AREA_GRANDE * METER_TO_CENTIMETER),
+               (float) (ANCHO_AREA_GRANDE * METER_TO_CENTIMETER)
+      );
+  public final static Rect BIG_AREA_2 =
+      new Rect(BIG_AREA_1.getX(),
+               BIG_AREA_1.getY() + GAME_FIELD.getHeight() - BIG_AREA_1.getHeight(),
+               BIG_AREA_1.getWidth(), BIG_AREA_1.getHeight()
+      );
 
   public final static float BALL_RADIUS = 11f;
 
-  //TODO just space between game_field and advertise_field
-  public final static float FIELD_WIDTH = (float) (ANCHO_CAMPO * METER_TO_CENTIMETER);
-  public final static float FIELD_WIDTH_HALF = FIELD_WIDTH / 2;
-  public final static float FIELD_HEIGHT = (float) (LARGO_CAMPO * METER_TO_CENTIMETER);
-  public final static float FIELD_HEIGHT_HALF = FIELD_HEIGHT / 2;
 
-  public final static float GAME_FIELD_WIDTH = (float) (ANCHO_CAMPO_JUEGO * METER_TO_CENTIMETER);
-  public final static float GAME_FIELD_WIDTH_HALF = GAME_FIELD_WIDTH / 2;
-  public final static float GAME_FIELD_HEIGHT = (float) (LARGO_CAMPO_JUEGO * METER_TO_CENTIMETER);
-  public final static float GAME_FIELD_HEIGHT_HALF = GAME_FIELD_HEIGHT / 2;
+  public final static Circ PENALTY_MARK_1 =
+      new Circ(GAME_FIELD.getY() + (float) (DISTANCIA_PENAL * METER_TO_CENTIMETER), BALL_RADIUS);
+  public final static Circ PENALTY_MARK_2 =
+      new Circ(PENALTY_MARK_1.getX(),
+               GAME_FIELD.getY() + GAME_FIELD.getHeight() - (float) (DISTANCIA_PENAL
+                                                                     * METER_TO_CENTIMETER),
+               PENALTY_MARK_1.getRadius());
 
-  public final static float PENALTY_DISTANCE = (float) (DISTANCIA_PENAL * METER_TO_CENTIMETER);
-  public final static float PENALTY_MARK_RADIUS = BALL_RADIUS; //TODO research
-  public final static float PENALTY_RADIUS = (float) (RADIO_PENAL * METER_TO_CENTIMETER);
+  public final static Circ PENALTY_AREA_1 =
+      new Circ(PENALTY_MARK_1.getX(), PENALTY_MARK_1.getY(),
+               (float) (RADIO_PENAL * METER_TO_CENTIMETER));
+  public final static Circ PENALTY_AREA_2 =
+      new Circ(PENALTY_MARK_2.getX(), PENALTY_MARK_2.getY(),
+               PENALTY_AREA_1.getRadius());
 
-  public final static float CENTRAL_CIRCLE_MARK_RADIUS = BALL_RADIUS; //TODO research
-  public final static float CENTRAL_CIRCLE_RADIUS = PENALTY_RADIUS;
+  public final static Circ CENTRAL_CIRCLE_MARK = new Circ(BALL_RADIUS);
+  public final static Circ CENTRAL_CIRCLE_AREA =
+      new Circ((float) (RADIO_CIRCULO_CENTRAL * METER_TO_CENTIMETER));
 
-  public final static float CORNER_MARK_RADIUS = METER_TO_CENTIMETER;
+  public final static Circ CORNER_AREA_1 =
+      new Circ(GAME_FIELD.getX(), GAME_FIELD.getY() + GAME_FIELD.getHeight(),
+               METER_TO_CENTIMETER);
+  public final static Circ CORNER_AREA_2 =
+      new Circ(GAME_FIELD.getX(), GAME_FIELD.getY(), CORNER_AREA_1.getRadius());
+  public final static Circ CORNER_AREA_3 =
+      new Circ(GAME_FIELD.getX() + GAME_FIELD.getWidth(),
+               GAME_FIELD.getY(), CORNER_AREA_1.getRadius());
+  public final static Circ CORNER_AREA_4 =
+      new Circ(GAME_FIELD.getX() + GAME_FIELD.getWidth(),
+               GAME_FIELD.getY() + GAME_FIELD.getHeight(), CORNER_AREA_1.getRadius());
 
-  public final static float GOAL_AREA_WIDTH = 7.32f * METER_TO_CENTIMETER;
-  public final static float GOAL_AREA_WIDTH_HALF = GOAL_AREA_WIDTH / 2;
-  public final static float GOAL_AREA_HEIGHT = 2.44f * METER_TO_CENTIMETER;
-  public final static float GOAL_AREA_HEIGHT_HALF = GOAL_AREA_HEIGHT / 2;
+  public final static class Rect { //TODO relocate?
 
-  public final static float SMALL_AREA_WIDTH = (float) (LARGO_AREA_CHICA * METER_TO_CENTIMETER);
-  public final static float SMALL_AREA_WIDTH_HALF = SMALL_AREA_WIDTH / 2;
-  public final static float SMALL_AREA_HEIGHT = (float) (ANCHO_AREA_CHICA * METER_TO_CENTIMETER);
-  public final static float SMALL_AREA_HEIGHT_HALF = SMALL_AREA_HEIGHT / 2;
+    private final Rectangle rectangle;
 
-  public final static float BIG_AREA_WIDTH = (float) (LARGO_AREA_GRANDE * METER_TO_CENTIMETER);
-  public final static float BIG_AREA_WIDTH_HALF = BIG_AREA_WIDTH / 2;
-  public final static float BIG_AREA_HEIGHT = (float) (ANCHO_AREA_GRANDE * METER_TO_CENTIMETER);
-  public final static float BIG_AREA_HEIGHT_HALF = BIG_AREA_HEIGHT / 2;
-  ////// DIMENSIONS
+    private Rect(float x, float y, float width, float height) {
+      rectangle = new Rectangle(x, y, width, height);
+    }
 
-  // POSITIONS
-  public static final float GAME_FIELD_X_INIT = (FIELD_WIDTH - GAME_FIELD_WIDTH) / 2;
-  public static final float GAME_FIELD_X_HALF = GAME_FIELD_X_INIT + GAME_FIELD_WIDTH_HALF;
-  public static final float GAME_FIELD_X_END = GAME_FIELD_X_INIT + GAME_FIELD_WIDTH;
-  public static final float GAME_FIELD_Y_INIT = (FIELD_HEIGHT - GAME_FIELD_HEIGHT) / 2;
-  public static final float GAME_FIELD_Y_HALF = GAME_FIELD_Y_INIT + GAME_FIELD_HEIGHT_HALF;
-  public static final float GAME_FIELD_Y_END = GAME_FIELD_Y_INIT + GAME_FIELD_HEIGHT;
+    private Rect(float y, float width, float height) {
+      this(width / -2f, y, width, height);
+    }
 
-  public static final float PENALTY_MARK_Y1 = GAME_FIELD_Y_INIT + PENALTY_DISTANCE;
-  public static final float PENALTY_MARK_Y2 =
-      GAME_FIELD_Y_INIT + GAME_FIELD_HEIGHT - PENALTY_DISTANCE;
+    private Rect(float width, float height) {
+      this(height / -2f, width, height);
+    }
 
-  public static final float BIG_AREA_X_INIT = GAME_FIELD_X_HALF - BIG_AREA_WIDTH_HALF;
-  public static final float
-      BIG_AREA_Y_INIT =
-      GAME_FIELD_Y_INIT + GAME_FIELD_HEIGHT - BIG_AREA_HEIGHT;
+    public float getX() {
+      return rectangle.x;
+    }
 
-  public static final float SMALL_AREA_X_INIT = GAME_FIELD_X_HALF - SMALL_AREA_WIDTH_HALF;
-  public static final float
-      SMALL_AREA_Y_INIT =
-      GAME_FIELD_Y_INIT + GAME_FIELD_HEIGHT - SMALL_AREA_HEIGHT;
+    public float getY() {
+      return rectangle.y;
+    }
 
-  public static final float GOAL_AREA_X_INIT = GAME_FIELD_X_HALF - GOAL_AREA_WIDTH_HALF;
-  public static final float GOAL_AREA_Y_INIT = GAME_FIELD_Y_INIT + GAME_FIELD_HEIGHT;
-  public static final float GOAL_AREA_Y2_INIT = GAME_FIELD_Y_INIT - GOAL_AREA_HEIGHT;
-  // POSITIONS
+    public float getWidth() {
+      return rectangle.width;
+    }
+
+    public float getHeight() {
+      return rectangle.height;
+    }
+  }
+
+  public final static class Circ {
+
+    private final Circle circle;
+
+    private Circ(float x, float y, float radius) {
+      circle = new Circle(x, y, radius);
+    }
+
+    private Circ(float y, float radius) {
+      this(0f, y, radius);
+    }
+
+    private Circ(float radius) {
+      this(0f, radius);
+    }
+
+    public float getX() {
+      return circle.x;
+    }
+
+    public float getY() {
+      return circle.y;
+    }
+
+    public float getRadius() {
+      return circle.radius;
+    }
+
+  }
 
 }

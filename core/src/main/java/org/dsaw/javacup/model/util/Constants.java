@@ -3,7 +3,8 @@ package org.dsaw.javacup.model.util;
 /**
  * Constants
  */
-public class Constants {
+@Deprecated
+public class Constants { //TODO remove!
 
   //##############################################################################//
   //###### Dimensiones del campo de juego (en metros) #######//

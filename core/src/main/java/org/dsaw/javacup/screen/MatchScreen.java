@@ -13,8 +13,6 @@ import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.BallRenderV2;
 import org.dsaw.javacup.render.FieldRenderV2;
 
-import static org.dsaw.javacup.model.util.ConstantsV2.GAME_FIELD_X_HALF;
-import static org.dsaw.javacup.model.util.ConstantsV2.GAME_FIELD_Y_HALF;
 import static org.dsaw.javacup.model.util.ConstantsV2.METER_TO_CENTIMETER;
 
 /**
@@ -78,12 +76,12 @@ public class MatchScreen implements Screen {
     fieldRender.draw(shapeRenderer);
 
     Position ballPosition = match.getPosVisibleBalon();
-    float ballX = (float) (ballPosition.getX() * METER_TO_CENTIMETER) + GAME_FIELD_X_HALF;
-    float ballY = (float) (ballPosition.getY() * METER_TO_CENTIMETER) + GAME_FIELD_Y_HALF;
+    float ballX = (float) (ballPosition.getX() * METER_TO_CENTIMETER);
+    float ballY = (float) (ballPosition.getY() * METER_TO_CENTIMETER);
     ballRender.draw(shapeRenderer, ballX, ballY);
 
-    camera.position.x = ballX;
-    camera.position.y = ballY;
+    // camera.position.x = ballX;
+    //  camera.position.y = ballY;
   }
 
   @Override
