@@ -3,6 +3,7 @@ package org.dsaw.javacup.screen;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Input;
 import com.badlogic.gdx.Screen;
+import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -80,8 +81,33 @@ public class MatchScreen implements Screen {
     float ballY = (float) (ballPosition.getY() * METER_TO_CENTIMETER);
     ballRender.draw(shapeRenderer, ballX, ballY);
 
-    // camera.position.x = ballX;
-    //  camera.position.y = ballY;
+    shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+    for (int i = 0; i < match.getPosiciones().length; i++) {
+      switch (i) {
+        case 0:
+          shapeRenderer.setColor(Color.BLUE);
+          break;
+        case 1:
+          shapeRenderer.setColor(Color.RED);
+          break;
+        case 2:
+          continue;
+      }
+
+      Position[] positions = match.getPosiciones()[i]; //TODO WTF!!!!
+      for (Position position : positions) {
+        if (position != null) {
+          shapeRenderer.circle((float) (position.getX() * METER_TO_CENTIMETER),
+                               (float) (position.getY() * METER_TO_CENTIMETER),
+                               METER_TO_CENTIMETER / 2);
+        }
+      }
+    }
+
+    shapeRenderer.end();
+    camera.position.x = ballX;
+    camera.position.y = ballY;
   }
 
   @Override
