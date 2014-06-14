@@ -76,13 +76,7 @@ public class MatchScreen implements Screen {
     shapeRenderer.setProjectionMatrix(camera.combined);
     fieldRender.draw(shapeRenderer);
 
-    Position ballPosition = match.getPosVisibleBalon();
-    float ballX = (float) (ballPosition.getX() * METER_TO_CENTIMETER);
-    float ballY = (float) (ballPosition.getY() * METER_TO_CENTIMETER);
-    ballRender.draw(shapeRenderer, ballX, ballY);
-
     shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
     for (int i = 0; i < match.getPosiciones().length; i++) {
       switch (i) {
         case 0:
@@ -104,8 +98,13 @@ public class MatchScreen implements Screen {
         }
       }
     }
-
     shapeRenderer.end();
+
+    Position ballPosition = match.getPosVisibleBalon();
+    float ballX = (float) (ballPosition.getX() * METER_TO_CENTIMETER);
+    float ballY = (float) (ballPosition.getY() * METER_TO_CENTIMETER);
+
+    ballRender.draw(shapeRenderer, ballX, ballY);
     camera.position.x = ballX;
     camera.position.y = ballY;
   }
