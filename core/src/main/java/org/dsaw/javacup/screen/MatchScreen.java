@@ -13,6 +13,7 @@ import org.dsaw.javacup.model.engine.StoredMatch;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.BallRenderV2;
 import org.dsaw.javacup.render.FieldRenderV2;
+import org.dsaw.javacup.render.ScoreboardRenderV2;
 
 import static org.dsaw.javacup.model.util.ConstantsV2.METER_TO_CENTIMETER;
 
@@ -21,23 +22,32 @@ import static org.dsaw.javacup.model.util.ConstantsV2.METER_TO_CENTIMETER;
  */
 public class MatchScreen implements Screen {
 
+  private static final float CAMERA_ZOOM_MAX = 10f;
+  private static final float CAMERA_ZOOM_MIN = 3f;
+  private static final float CAMERA_ZOOM_SPEED = 0.1f;
+
   private final JavaCup game;
   private final StoredMatch match;
 
   private final OrthographicCamera camera;
   private final FieldRenderV2 fieldRender;
   private final BallRenderV2 ballRender;
+  private final ScoreboardRenderV2 scoreboardRender;
+
+  private boolean cameraFollowing = true;
+
 
   public MatchScreen(JavaCup game, StoredMatch match) { //TODO no nulls
     this.game = game;
     this.match = match;
 
     camera = new OrthographicCamera();
-    camera.zoom = 10f;
+    camera.zoom = CAMERA_ZOOM_MAX;
     camera.setToOrtho(true);
 
     fieldRender = new FieldRenderV2();
     ballRender = new BallRenderV2();
+    scoreboardRender = new ScoreboardRenderV2();
   }
 
   private void update(float delta) {
@@ -46,25 +56,37 @@ public class MatchScreen implements Screen {
     } catch (Exception e) {
       Gdx.app.error("rendering", e.getMessage(), e);
     }
-    camera.update();
 
     if (Gdx.input.isKeyPressed(Input.Keys.UP) || Gdx.input.isKeyPressed(Input.Keys.W)) {
       camera.position.y -= 25f;
+      cameraFollowing = false;
     }
     if (Gdx.input.isKeyPressed(Input.Keys.DOWN) || Gdx.input.isKeyPressed(Input.Keys.S)) {
       camera.position.y += 25f;
+      cameraFollowing = false;
     }
     if (Gdx.input.isKeyPressed(Input.Keys.LEFT) || Gdx.input.isKeyPressed(Input.Keys.A)) {
       camera.position.x -= 25f;
+      cameraFollowing = false;
     }
     if (Gdx.input.isKeyPressed(Input.Keys.RIGHT) || Gdx.input.isKeyPressed(Input.Keys.D)) {
       camera.position.x += 25f;
+      cameraFollowing = false;
     }
     if (Gdx.input.isKeyPressed(Input.Keys.PLUS) || Gdx.input.isKeyPressed(Input.Keys.Q)) {
-      camera.zoom -= 0.1f;
+      camera.zoom -= CAMERA_ZOOM_SPEED;
+      if (camera.zoom < CAMERA_ZOOM_MIN) {
+        camera.zoom = CAMERA_ZOOM_MIN;
+      }
     }
     if (Gdx.input.isKeyPressed(Input.Keys.MINUS) || Gdx.input.isKeyPressed(Input.Keys.E)) {
-      camera.zoom += 0.1f;
+      camera.zoom += CAMERA_ZOOM_SPEED;
+      if (camera.zoom > CAMERA_ZOOM_MAX) {
+        camera.zoom = CAMERA_ZOOM_MAX;
+      }
+    }
+    if (Gdx.input.isKeyPressed(Input.Keys.ESCAPE)) {
+      cameraFollowing = true;
     }
   }
 
@@ -105,14 +127,23 @@ public class MatchScreen implements Screen {
     float ballY = (float) (ballPosition.getY() * METER_TO_CENTIMETER);
 
     ballRender.draw(shapeRenderer, ballX, ballY);
-    camera.position.x = ballX;
-    camera.position.y = ballY;
+    if (cameraFollowing) { //TODO
+      camera.position.x = ballX;
+      camera.position.y = ballY;
+    }
+
+    scoreboardRender
+        .draw(shapeRenderer, game.batch, game.font, match.getDetalleLocal().getTacticName(),
+              match.getGolesLocal(), match.getDetalleVisita().getTacticName(),
+              match.getGolesVisita(), match.getTiempo());
   }
 
   @Override
   public void render(float delta) {
     update(delta);
     draw();
+    camera.update(); //TODO
+
   }
 
   @Override
