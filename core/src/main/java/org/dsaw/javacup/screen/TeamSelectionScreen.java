@@ -8,6 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 import org.dsaw.javacup.JavaCup;
+import org.dsaw.javacup.model.TacticSelector;
 import org.dsaw.javacup.model.engine.Match;
 import org.dsaw.javacup.render.TeamSelectorRender;
 
@@ -21,14 +22,18 @@ public class TeamSelectionScreen implements Screen {
   private final TeamSelectorRender visitorTeamSelectorRender;
 
   private Rectangle button;
+  public TacticSelector localTacticSelector;
+  public TacticSelector visitorTacticSelector;
 
   public TeamSelectionScreen(JavaCup game) {
     this.game = game;
+    localTacticSelector = new TacticSelector();
+    visitorTacticSelector = new TacticSelector();
 
     localTeamSelectorRender =
-        new TeamSelectorRender(game, game.localTacticSelector, 50, 200, 200, 200);// TODO generalize
+        new TeamSelectorRender(game, localTacticSelector, 50, 200, 200, 200);// TODO generalize
     visitorTeamSelectorRender =
-        new TeamSelectorRender(game, game.visitorTacticSelector, 400, 200, 200, 200);
+        new TeamSelectorRender(game, visitorTacticSelector, 400, 200, 200, 200);
 
     button = new Rectangle(300, 50, 50, 50);
   }
@@ -45,8 +50,9 @@ public class TeamSelectionScreen implements Screen {
         Match
             match = null;
         try {
-          match = new Match(game.localTacticSelector.currentTactic(),
-                            game.visitorTacticSelector.currentTactic(), false);
+          match =
+              new Match(localTacticSelector.currentTactic(), visitorTacticSelector.currentTactic(),
+                        false);
         } catch (Exception e) {
           e.printStackTrace();
         }

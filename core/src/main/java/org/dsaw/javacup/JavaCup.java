@@ -5,7 +5,6 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-import org.dsaw.javacup.model.TacticSelector;
 import org.dsaw.javacup.screen.TeamSelectionScreen;
 
 /**
@@ -18,13 +17,8 @@ public class JavaCup extends Game {
   public ShapeRenderer shapeRenderer;
   public BitmapFont font;
 
-  public TacticSelector localTacticSelector;
-  public TacticSelector visitorTacticSelector;
-
   @Override
   public void create() {
-    localTacticSelector = new TacticSelector();
-    visitorTacticSelector = new TacticSelector();
 
     batch = new SpriteBatch();
     shapeRenderer = new ShapeRenderer();
