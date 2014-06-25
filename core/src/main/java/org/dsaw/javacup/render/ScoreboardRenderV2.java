@@ -46,7 +46,11 @@ public class ScoreboardRenderV2 {
     font.draw(batch, Integer.toString(localScore), x + 50, y + 40);
     font.draw(batch, Integer.toString(visitorScore), x + 130, y + 40);
 
-    font.draw(batch, Integer.toString(time), x + 100, y + 20);
+    int seg = time / Gdx.graphics.getFramesPerSecond(); //TODO!
+    int min = seg / 60;
+    seg = seg % 60;
+
+    font.draw(batch, String.format("%s:%s", min, seg), x + 100, y + 20); //
 
     batch.end();
 

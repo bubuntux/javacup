@@ -8,10 +8,8 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 import org.dsaw.javacup.JavaCup;
-import org.dsaw.javacup.model.engine.StoredMatch;
+import org.dsaw.javacup.model.engine.Match;
 import org.dsaw.javacup.render.TeamSelectorRender;
-
-import java.net.URL;
 
 /**
  * @author Julio Gutierrez (29/05/2014)
@@ -43,10 +41,21 @@ public class TeamSelectionScreen implements Screen {
       localTeamSelectorRender.touch(x, y);
       visitorTeamSelectorRender.touch(x, y);
       if (button.contains(x, y)) {
-        //TODO start match!!
-        URL resource = getClass().getResource("/savedGame.zip");
+
+        Match
+            match = null;
         try {
-          game.setScreen(new MatchScreen(game, new StoredMatch(resource)));
+          match = new Match(game.localTacticSelector.currentTactic(),
+                            game.visitorTacticSelector.currentTactic(), false);
+        } catch (Exception e) {
+          e.printStackTrace();
+        }
+
+        //TODO start match!!
+        /*URL resource = getClass().getResource("/savedGame.zip");
+        new StoredMatch(resource);*/
+        try {
+          game.setScreen(new MatchScreen(game, match));
         } catch (Exception e) {
           Gdx.app.error("rendering", e.getMessage(), e);
         }

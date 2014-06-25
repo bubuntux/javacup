@@ -9,7 +9,7 @@ import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
 import org.dsaw.javacup.JavaCup;
-import org.dsaw.javacup.model.engine.StoredMatch;
+import org.dsaw.javacup.model.engine.MatchInterface;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.BallRenderV2;
 import org.dsaw.javacup.render.FieldRenderV2;
@@ -27,7 +27,7 @@ public class MatchScreen implements Screen {
   private static final float CAMERA_ZOOM_SPEED = 0.1f;
 
   private final JavaCup game;
-  private final StoredMatch match;
+  private final MatchInterface match;
 
   private final OrthographicCamera camera;
   private final FieldRenderV2 fieldRender;
@@ -37,7 +37,7 @@ public class MatchScreen implements Screen {
   private boolean cameraFollowing = true;
 
 
-  public MatchScreen(JavaCup game, StoredMatch match) { //TODO no nulls
+  public MatchScreen(JavaCup game, MatchInterface match) { //TODO no nulls
     this.game = game;
     this.match = match;
 
@@ -135,7 +135,7 @@ public class MatchScreen implements Screen {
     scoreboardRender
         .draw(shapeRenderer, game.batch, game.font, match.getDetalleLocal().getTacticName(),
               match.getGolesLocal(), match.getDetalleVisita().getTacticName(),
-              match.getGolesVisita(), match.getTiempo());
+              match.getGolesVisita(), match.getIteration()); //TODO time!
   }
 
   @Override
@@ -143,7 +143,6 @@ public class MatchScreen implements Screen {
     update(delta);
     draw();
     camera.update(); //TODO
-
   }
 
   @Override
