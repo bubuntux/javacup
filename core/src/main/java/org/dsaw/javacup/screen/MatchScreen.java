@@ -15,6 +15,7 @@ import org.dsaw.javacup.render.BallRenderV2;
 import org.dsaw.javacup.render.FieldRenderV2;
 import org.dsaw.javacup.render.ScoreboardRenderV2;
 
+import static org.dsaw.javacup.model.util.ConstantsV2.CENTRAL_CIRCLE_MARK;
 import static org.dsaw.javacup.model.util.ConstantsV2.METER_TO_CENTIMETER;
 
 /**
@@ -44,6 +45,7 @@ public class MatchScreen implements Screen {
     camera = new OrthographicCamera();
     camera.zoom = CAMERA_ZOOM_MAX;
     camera.setToOrtho(true);
+    camera.position.x = CENTRAL_CIRCLE_MARK.getX();
 
     fieldRender = new FieldRenderV2();
     ballRender = new BallRenderV2();
@@ -128,7 +130,7 @@ public class MatchScreen implements Screen {
 
     ballRender.draw(shapeRenderer, ballX, ballY);
     if (cameraFollowing) { //TODO
-      camera.position.x = ballX;
+      // camera.position.x = ballX;
       camera.position.y = ballY;
     }
 
