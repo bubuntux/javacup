@@ -37,7 +37,6 @@ public class MatchScreen implements Screen {
 
   private boolean cameraFollowing = true;
 
-
   public MatchScreen(JavaCup game, MatchInterface match) { //TODO no nulls
     this.game = game;
     this.match = match;

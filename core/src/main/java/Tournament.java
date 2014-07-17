@@ -331,7 +331,7 @@ public class Tournament {
   }
 
   //tacticas ordenadas segun su resultado en la liguilla previa
-  private static Class[] tactics = new Class[]{
+  private static Class[] tactics = new Class[]{/*
       org.dsaw.javacup.tactics.jvc2012.romedal.TacticaRomedalusTeam.class,//32 puntos.
       org.dsaw.javacup.tactics.jvc2012.masia2012.Masia.class,//32 puntos.
       org.dsaw.javacup.tactics.jvc2012.hortalezablamers.HortalezaBlamers.class,//31 puntos.
@@ -368,11 +368,11 @@ public class Tournament {
       org.dsaw.javacup.tactics.jvc2012.sotilezos.Sotilezos.class,//3 puntos.
       org.dsaw.javacup.tactics.jvc2012.celta.Celta.class,//3 puntos.
       org.dsaw.javacup.tactics.jvc2012.tomatesmecanicos.tomates.class,//2 puntos.
-  };
+  */};
 
   //array de grupos de la primera fase
   private static Class[][] gruposPublicados() {
-    return new Class[][]{
+    return new Class[][]{/*
         {org.dsaw.javacup.tactics.jvc2012.hortalezablamers.HortalezaBlamers.class,
          org.dsaw.javacup.tactics.jvc2012.sotilezos.Sotilezos.class,
          org.dsaw.javacup.tactics.jvc2012.evolution.SanMarinoEvolution.class,
@@ -406,7 +406,7 @@ public class Tournament {
          org.dsaw.javacup.tactics.jvc2012.dbonilla.Millos.class,
          org.dsaw.javacup.tactics.jvc2012.vnavarro.Pequeo.class,
          org.dsaw.javacup.tactics.jvc2012.moleteam.MoleTeam.class,
-         org.dsaw.javacup.tactics.jvc2012.tomatesmecanicos.tomates.class,},};
+         org.dsaw.javacup.tactics.jvc2012.tomatesmecanicos.tomates.class,},*/};
   }
 
   static Random r = new Random();
@@ -536,7 +536,7 @@ public class Tournament {
   //array de equipos clasificados en la fase uno
   static Class[][] clasificados = new Class[][]{
       {
-          //GRUPO A
+        /*  //GRUPO A
           org.dsaw.javacup.tactics.jvc2012.hortalezablamers.HortalezaBlamers.class,
           org.dsaw.javacup.tactics.jvc2012.evolution.SanMarinoEvolution.class,}, {
           //GRUPO B
@@ -559,7 +559,7 @@ public class Tournament {
           org.dsaw.javacup.tactics.jvc2012.fortega.Frioleros.class,}, {
           //GRUPO H
           org.dsaw.javacup.tactics.jvc2012.team2012.Team2312.class,
-          org.dsaw.javacup.tactics.jvc2012.moleteam.MoleTeam.class,}
+          org.dsaw.javacup.tactics.jvc2012.moleteam.MoleTeam.class,*/}
   };
 
   //ejecuta la segunda fase (eliminatorias)... guarda los partidos en path
