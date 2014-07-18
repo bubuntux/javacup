@@ -3,7 +3,7 @@ package org.dsaw.javacup.tactics.jvc2013.jmv;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
@@ -239,7 +239,7 @@ public class KapriFC implements Tactic {
       return UniformStyle.FRANJA_VERTICAL;
     }
 
-    class JugadorImpl implements Player {
+    class JugadorImpl implements PlayerI {
 
       String nombre;
       int numero;
@@ -303,8 +303,8 @@ public class KapriFC implements Tactic {
     }
 
     @Override
-    public Player[] getPlayers() {
-      return new Player[]{
+    public PlayerI[] getPlayers() {
+      return new PlayerI[]{
           new JugadorImpl("Casillas", 1, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 0.98d,
                           1.0d, true),
           new JugadorImpl("Puyol", 2, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 0.78d,

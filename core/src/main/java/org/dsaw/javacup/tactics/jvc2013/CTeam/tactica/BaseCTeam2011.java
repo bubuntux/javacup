@@ -1,6 +1,6 @@
 package org.dsaw.javacup.tactics.jvc2013.CTeam.tactica;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
@@ -74,7 +74,7 @@ public abstract class BaseCTeam2011 implements ICTeam2011 {
       // f2.setVisible(true);
       // f2.setLocation(325, 0);
       for (int i = 0; i < 11; i++) {
-        Player detalleMio = sp.myPlayersDetail()[i];
+        PlayerI detalleMio = sp.myPlayersDetail()[i];
         if (detalleMio.isGoalKeeper()) {
           jugadores.add(new PorteroCT(PROPIO, i, detalleMio, this));
         } else {
@@ -90,7 +90,7 @@ public abstract class BaseCTeam2011 implements ICTeam2011 {
           jugadores.add(new JugadorCT(PROPIO, i, detalleMio, this, tipo));
         }
 
-        Player detalleRival = sp.rivalPlayersDetail()[i];
+        PlayerI detalleRival = sp.rivalPlayersDetail()[i];
         if (detalleMio.isGoalKeeper()) {
           rivales.add(new PorteroRivalCT(RIVAL, i, detalleRival, this));
         } else {

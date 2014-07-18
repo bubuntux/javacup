@@ -10,7 +10,7 @@ package org.dsaw.javacup.tactics.jvc2013.tukutuku;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
@@ -333,7 +333,7 @@ public class Tactica implements Tactic {
       return UniformStyle.FRANJA_HORIZONTAL;
     }
 
-    class JugadorImpl implements Player {
+    class JugadorImpl implements PlayerI {
 
       String nombre;
       int numero;
@@ -397,8 +397,8 @@ public class Tactica implements Tactic {
     }
 
     @Override
-    public Player[] getPlayers() {
-      return new Player[]{
+    public PlayerI[] getPlayers() {
+      return new PlayerI[]{
           new JugadorImpl("Bambino", 1, new Color(255, 200, 150), new Color(255, 204, 0), 1.0d,
                           1.0d, 0.0d, true),
           new JugadorImpl("Sparrowhawk", 2, new Color(255, 200, 150), new Color(153, 102, 0), 1.0d,

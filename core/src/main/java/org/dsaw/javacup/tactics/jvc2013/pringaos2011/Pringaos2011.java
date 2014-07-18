@@ -7,7 +7,7 @@ package org.dsaw.javacup.tactics.jvc2013.pringaos2011;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
@@ -137,7 +137,7 @@ public class Pringaos2011 implements Tactic {
       return UniformStyle.SIN_ESTILO;
     }
 
-    class JugadorImpl implements Player {
+    class JugadorImpl implements PlayerI {
 
       String nombre;
       int numero;
@@ -201,8 +201,8 @@ public class Pringaos2011 implements Tactic {
     }
 
     @Override
-    public Player[] getPlayers() {
-      return new Player[]{
+    public PlayerI[] getPlayers() {
+      return new PlayerI[]{
           new JugadorImpl("Calamardo", 1, new Color(255, 200, 150), new Color(255, 200, 150), 1.0d,
                           1.0d, 0.67d, true),
           new JugadorImpl("Bob", 2, new Color(255, 102, 102), new Color(255, 200, 150), 1.0d, 1.0d,
@@ -270,8 +270,8 @@ public class Pringaos2011 implements Tactic {
                                  TIPO_JUGADOR_ATAQUE};
   public Position[] misJugadores;
   public Position[] rivales;
-  public Player[] detalleMisJugadores;
-  public Player[] detalleRivales;
+  public PlayerI[] detalleMisJugadores;
+  public PlayerI[] detalleRivales;
   public LinkedList<Command> comandos = new LinkedList<>();
   public boolean[] rivales_defendidos = new boolean[11];
   public double[][] posicionesPase;

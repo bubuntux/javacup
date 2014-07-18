@@ -2,7 +2,7 @@ package org.dsaw.javacup.tactics.jvc2013.meerkats;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.render.UniformStyle;
 
@@ -89,7 +89,7 @@ public class TacticaDetalleImpl implements Team {
   }
 
   @Override
-  public Player[] getPlayers() {
+  public PlayerI[] getPlayers() {
     return Alineacion.getJugadores();
   }
 

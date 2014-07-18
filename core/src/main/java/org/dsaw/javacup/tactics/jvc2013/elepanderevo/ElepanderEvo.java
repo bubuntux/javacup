@@ -2,7 +2,7 @@ package org.dsaw.javacup.tactics.jvc2013.elepanderevo;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
@@ -177,7 +177,7 @@ public class ElepanderEvo implements Tactic {
       return UniformStyle.FRANJA_HORIZONTAL;
     }
 
-    class JugadorImpl implements Player {
+    class JugadorImpl implements PlayerI {
 
       String nombre;
       int numero;
@@ -240,8 +240,8 @@ public class ElepanderEvo implements Tactic {
     }
 
     @Override
-    public Player[] getPlayers() {
-      return new Player[]{
+    public PlayerI[] getPlayers() {
+      return new PlayerI[]{
           new JugadorImpl("Juan", 1, new Color(255, 200, 150), new Color(50, 0, 0), 0.94d, 0.89d,
                           0.98d, true),
           new JugadorImpl("Alvaro", 2, new Color(255, 200, 150), new Color(50, 0, 0), 0.9d, 0.89d,
@@ -347,8 +347,8 @@ public class ElepanderEvo implements Tactic {
     final Position[] posicionmisJugadores = sp.myPlayers();
     final Position[] posicionRivales = sp.rivalPlayers();
 
-    Player[] detalleJugadoresRivales = sp.rivalPlayersDetail();
-    for (Player detalleJugadorRival : detalleJugadoresRivales) {
+    PlayerI[] detalleJugadoresRivales = sp.rivalPlayersDetail();
+    for (PlayerI detalleJugadorRival : detalleJugadoresRivales) {
       int numero = detalleJugadorRival.getNumber();
       if (detalleJugadorRival.isGoalKeeper()) {
         if (numero >= 0 && numero < 11) {
@@ -481,7 +481,7 @@ public class ElepanderEvo implements Tactic {
     int[] indiceRivalesCubiertos = obtenerDelanterosRivalesCubiertos(sp);
     List rivalesCubiertos = new ArrayList();
     List nuestrosCubriendo = new ArrayList();
-    Player[] misJugadoresDetalle = sp.myPlayersDetail();
+    PlayerI[] misJugadoresDetalle = sp.myPlayersDetail();
     comandos.clear();
     //Obtiene las posiciones de tus jugadores
     Position[] posicionJugadores = sp.myPlayers();

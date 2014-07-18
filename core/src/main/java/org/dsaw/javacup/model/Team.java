@@ -17,7 +17,7 @@ public interface Team {
 
   public String getCoachName();
 
-  public Player[] getPlayers(); //TODO array or collection???
+  public PlayerI[] getPlayers(); //TODO array or collection???
 
   //// TODO Merge into a class  *******************
   public Color getShirtColor();

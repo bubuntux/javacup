@@ -1,6 +1,6 @@
 package org.dsaw.javacup.tactics.jvc2013.absolutsport.tactica;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
@@ -2767,7 +2767,7 @@ public class TacticaAbsolutSport implements Tactic {
     // Si encontramos iteraciones en la trayectoria vamos a calcular hacia donde dirigirnos.
     if (listaTrayectoria.size() > 0) {
 
-      Player jd = sp.myPlayersDetail()[jugador.getIndice()];
+      PlayerI jd = sp.myPlayersDetail()[jugador.getIndice()];
       double
           alcanceXY =
           jd.isGoalKeeper() ? Constants.DISTANCIA_CONTROL_BALON_PORTERO
@@ -2838,7 +2838,7 @@ public class TacticaAbsolutSport implements Tactic {
     // Si encontramos iteraciones en la trayectoria vamos a calcular hacia donde dirigirnos.
     if (listaTrayectoria.size() > 0) {
 
-      Player rd = sp.rivalPlayersDetail()[rival.getIndice()];
+      PlayerI rd = sp.rivalPlayersDetail()[rival.getIndice()];
       double alcanceXY = Constants.DISTANCIA_CONTROL_BALON;
       double alcanceZ = rd.isGoalKeeper() ? Constants.ALTO_ARCO : Constants.ALTURA_CONTROL_BALON;
 

@@ -1,6 +1,6 @@
 package org.dsaw.javacup.tactics.jvc2013.Rajaos;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
@@ -34,8 +34,8 @@ public class Rajaos11 implements Tactic {
   int jugMinIter[] = new int[11];
   int posMinIter = 0;
 
-  Player[] detBuenos = new Player[11];
-  Player[] detMalos = new Player[11];
+  PlayerI[] detBuenos = new PlayerI[11];
+  PlayerI[] detMalos = new PlayerI[11];
   int porteroMalo = -1;
 
   Position balon = null;

@@ -21,7 +21,7 @@ package org.dsaw.javacup.tactics.jvc2013.rabobong;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
@@ -200,7 +200,7 @@ public class Rabobong implements Tactic {
       return UniformStyle.SIN_ESTILO;
     }
 
-    class JugadorImpl implements Player {
+    class JugadorImpl implements PlayerI {
 
       String nombre;
       int numero;
@@ -264,8 +264,8 @@ public class Rabobong implements Tactic {
     }
 
     @Override
-    public Player[] getPlayers() {
-      return new Player[]{
+    public PlayerI[] getPlayers() {
+      return new PlayerI[]{
           new JugadorImpl("Oscor Feyde", 20, new Color(102, 51, 0), new Color(50, 0, 0), 1.0d, 1.0d,
                           0.58d, true),
           new JugadorImpl("Haymen", 21, new Color(204, 153, 0), new Color(50, 0, 0), 1.0d, 0.69d,
@@ -518,7 +518,7 @@ public class Rabobong implements Tactic {
   private void EncontrarPorteroRival(GameSituations sp) {
     if (indPorteroRival == -1) {
       indPorteroRival = 0;
-      Player[] detallesRivales = sp.rivalPlayersDetail();
+      PlayerI[] detallesRivales = sp.rivalPlayersDetail();
       for (int j = 0; j < detallesRivales.length; j++) {
         if (detallesRivales[j].isGoalKeeper()) {
           indPorteroRival = j;
@@ -663,7 +663,7 @@ public class Rabobong implements Tactic {
     double dist0, dist;
     int idxFound = -1;
     LinkedList<Double> founds = new LinkedList<>();
-    Player detalles[] = sp.rivalPlayersDetail();
+    PlayerI detalles[] = sp.rivalPlayersDetail();
     while (!found) {
       double[] posBalon = sp.getTrajectory(it);
       if (!(new Position(posBalon[0], posBalon[1])).isInsideGameField(2)) {

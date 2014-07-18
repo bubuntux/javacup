@@ -2,7 +2,7 @@ package org.dsaw.javacup.tactics.jvc2013.robertiano;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
@@ -146,7 +146,7 @@ public class Loberos implements Tactic {
       return UniformStyle.SIN_ESTILO;
     }
 
-    class JugadorImpl implements Player {
+    class JugadorImpl implements PlayerI {
 
       String nombre;
       int numero;
@@ -210,8 +210,8 @@ public class Loberos implements Tactic {
     }
 
     @Override
-    public Player[] getPlayers() {
-      return new Player[]{
+    public PlayerI[] getPlayers() {
+      return new PlayerI[]{
           new JugadorImpl("Portero", 1, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 0.7d,
                           0.83d, true),
           new JugadorImpl("Jugador", 2, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 1.0d,
@@ -573,7 +573,7 @@ public class Loberos implements Tactic {
    * Comprueba donde está el portero. Calcula la mejor posición a la que rematar.
    */
   private Position getADondeRematar(Position pRematador, Position[] rivales,
-                                    Player[] detalleJugadoresRivales) {
+                                    PlayerI[] detalleJugadoresRivales) {
     Position dondeRematar = null;
     boolean porteroEncontrado = false;
     int contador = 0;

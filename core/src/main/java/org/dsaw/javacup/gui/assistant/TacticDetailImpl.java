@@ -4,7 +4,7 @@ import com.neovisionaries.i18n.CountryCode;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
@@ -415,7 +415,7 @@ public final class TacticDetailImpl implements Team {
   }
 
   @Override
-  public Player[] getPlayers() {
+  public PlayerI[] getPlayers() {
     return jugadores;
   }
 

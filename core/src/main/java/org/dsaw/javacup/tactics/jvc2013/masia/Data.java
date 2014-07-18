@@ -1,6 +1,6 @@
 package org.dsaw.javacup.tactics.jvc2013.masia;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
@@ -33,7 +33,7 @@ public class Data {
     Position pJug;
     double dist0, dist;
     opponentIterToBall = -1;
-    Player detalles[] = sp.rivalPlayersDetail();
+    PlayerI detalles[] = sp.rivalPlayersDetail();
     Position[] rivales = sp.rivalPlayers();
     while (!found) {
       Position posBalon = getPosBall(it);
@@ -88,7 +88,7 @@ public class Data {
     Position pJug;
     double dist0, dist;
     iterToBall = -1;
-    Player detalles[] = sp.myPlayersDetail();
+    PlayerI detalles[] = sp.myPlayersDetail();
     Position[] jugadores = sp.myPlayers();
     while (!found) {
       Position posBalon = getPosBall(it);
@@ -121,7 +121,7 @@ public class Data {
   }
 
   public int calculateIterToBall(Position position, double z, Position[] players,
-                                 Player[] details, int[] iterToShoot) {
+                                 PlayerI[] details, int[] iterToShoot) {
     int it, best = Constants.ITERACIONES;
     for (int i = 0; i < players.length; i++) {
       if ((details[i].isGoalKeeper() ? Constants.ALTO_ARCO : Constants.ALTURA_CONTROL_BALON) >= z) {

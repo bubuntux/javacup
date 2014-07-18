@@ -4,7 +4,7 @@
  */
 package org.dsaw.javacup.tactics.jvc2013.Sag;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -22,12 +22,12 @@ public class Central extends Jugador {
 
   private boolean isPaseAtras = false;
 
-  public Central(int idx, Player detalle, Position posRef) {
+  public Central(int idx, PlayerI detalle, Position posRef) {
     super(idx, detalle, posRef);
     this.setTipo(Jugador.TIPO_CENTRAL);
   }
 
-  public Central(int idx, Player detalle) {
+  public Central(int idx, PlayerI detalle) {
     super(idx, detalle);
     this.setTipo(Jugador.TIPO_CENTRAL);
   }

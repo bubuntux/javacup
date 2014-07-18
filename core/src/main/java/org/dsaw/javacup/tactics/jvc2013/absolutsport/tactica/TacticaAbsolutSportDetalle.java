@@ -2,7 +2,7 @@ package org.dsaw.javacup.tactics.jvc2013.absolutsport.tactica;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
@@ -94,7 +94,7 @@ public class TacticaAbsolutSportDetalle implements Team {
   }
 
 
-  class JugadorImpl implements Player {
+  class JugadorImpl implements PlayerI {
 
     String nombre;
     int numero;
@@ -158,9 +158,9 @@ public class TacticaAbsolutSportDetalle implements Team {
   }
 
   @Override
-  public Player[] getPlayers() {
+  public PlayerI[] getPlayers() {
     // velocidad, remate, presicion
-    return new Player[]{
+    return new PlayerI[]{
         new JugadorImpl("Jugador 1", 1, new Color(255, 200, 150), new Color(204, 204, 0), 1.0d,
                         1.0d, 1.0d, true),
         new JugadorImpl("Jugador 2", 2, new Color(255, 200, 150), new Color(0, 0, 0), 1.0d, 0.50d,

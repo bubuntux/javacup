@@ -1,6 +1,6 @@
 package org.dsaw.javacup.tactics.jvc2013.CTeam.jugador;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -21,7 +21,7 @@ public class JugadorCT extends AbstractJugador {
 
   protected final Tipo tipo;
 
-  public JugadorCT(Equipo equipo, int indice, Player detalle, ICTeam2011 tactica, Tipo tipo) {
+  public JugadorCT(Equipo equipo, int indice, PlayerI detalle, ICTeam2011 tactica, Tipo tipo) {
     super(equipo, indice, detalle, tactica);
     this.tipo = tipo;
   }

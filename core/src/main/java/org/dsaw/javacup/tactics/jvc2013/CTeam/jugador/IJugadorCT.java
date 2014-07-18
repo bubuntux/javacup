@@ -1,6 +1,6 @@
 package org.dsaw.javacup.tactics.jvc2013.CTeam.jugador;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.tactics.jvc2013.CTeam.tactica.PosicionCT;
@@ -20,7 +20,7 @@ public interface IJugadorCT {
 
   public Deque<PosicionCT> getPosiciones();
 
-  public Player getDetalle();
+  public PlayerI getDetalle();
 
   public int getIndice();
 

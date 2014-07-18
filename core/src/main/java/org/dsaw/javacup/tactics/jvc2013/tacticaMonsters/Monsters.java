@@ -7,7 +7,7 @@ package org.dsaw.javacup.tactics.jvc2013.tacticaMonsters;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
@@ -214,7 +214,7 @@ public class Monsters implements Tactic {
       return UniformStyle.FRANJA_VERTICAL;
     }
 
-    class JugadorImpl implements Player {
+    class JugadorImpl implements PlayerI {
 
       String nombre;
       int numero;
@@ -278,8 +278,8 @@ public class Monsters implements Tactic {
     }
 
     @Override
-    public Player[] getPlayers() {
-      return new Player[]{
+    public PlayerI[] getPlayers() {
+      return new PlayerI[]{
           new JugadorImpl("Mark Lenders", 1, new Color(51, 0, 0), new Color(255, 255, 255), 1.0d,
                           1.0d, 1.0d, true),
           new JugadorImpl("Michael Jordan", 2, new Color(51, 51, 51), new Color(255, 255, 255),
@@ -493,7 +493,7 @@ public class Monsters implements Tactic {
 
   }
 
-  public Simulador.datosTiro calcularPase(Position posAct, int jugador, Player jd) {
+  public Simulador.datosTiro calcularPase(Position posAct, int jugador, PlayerI jd) {
 
     Simulador.datosTiro mejorTiro = null;
 

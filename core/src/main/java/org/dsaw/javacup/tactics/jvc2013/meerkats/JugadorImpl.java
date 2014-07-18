@@ -1,6 +1,6 @@
 package org.dsaw.javacup.tactics.jvc2013.meerkats;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.util.Position;
 
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * Implementación de PlayerDetail.
  */
-public class JugadorImpl implements Player {
+public class JugadorImpl implements PlayerI {
 
   // ATRIBUTOS =================================================================================//
 

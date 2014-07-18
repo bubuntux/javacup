@@ -2,7 +2,7 @@ package org.dsaw.javacup.tactics.jvc2013.arturo8a;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
@@ -225,7 +225,7 @@ public class TacticaPulgarcitos implements Tactic {
       return UniformStyle.FRANJA_VERTICAL;
     }
 
-    class JugadorImpl implements Player {
+    class JugadorImpl implements PlayerI {
 
       String nombre;
       int numero;
@@ -289,8 +289,8 @@ public class TacticaPulgarcitos implements Tactic {
     }
 
     @Override
-    public Player[] getPlayers() {
-      return new Player[]{
+    public PlayerI[] getPlayers() {
+      return new PlayerI[]{
           new JugadorImpl("Jones", 1, new Color(255, 200, 150), new Color(50, 0, 0), 1d, 1d, 1d,
                           true),
           new JugadorImpl("Hamon", 2, new Color(255, 200, 150), new Color(50, 0, 0), 1d, 0.625d,
@@ -342,8 +342,8 @@ public class TacticaPulgarcitos implements Tactic {
   MyPosition[] myPlayers;
   List<Integer> dangerousEnemies;
   int[] ableToShot;
-  Player[] myPlayersDetails;
-  Player[] enemiesDetails;
+  PlayerI[] myPlayersDetails;
+  PlayerI[] enemiesDetails;
   int[] myPlayersCantShoot;
   int[] enemiesCantShoot;
   MyPosition ballwithZ, theNextBall;
@@ -660,7 +660,7 @@ public class TacticaPulgarcitos implements Tactic {
 
     }
 
-    public boolean isReachable(MyPosition ball, Player jd, MyPosition currentPos,
+    public boolean isReachable(MyPosition ball, PlayerI jd, MyPosition currentPos,
                                int cantShoot, int turn) {
       if (cantShoot <= turn) {
         double maxHeight = Constants.ALTURA_CONTROL_BALON;

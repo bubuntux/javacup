@@ -1,11 +1,11 @@
 package org.dsaw.javacup.tactics.jvc2013.emandem.configuracion;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.util.Position;
 
 import java.awt.*;
 
-class JugadorImpl implements Player {
+class JugadorImpl implements PlayerI {
 
   String nombre;
   int numero;

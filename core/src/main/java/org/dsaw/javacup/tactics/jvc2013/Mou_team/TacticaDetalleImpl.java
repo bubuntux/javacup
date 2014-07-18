@@ -6,7 +6,7 @@ package org.dsaw.javacup.tactics.jvc2013.Mou_team;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
@@ -93,7 +93,7 @@ class TacticaDetalleImpl implements Team {
     return UniformStyle.LINEAS_HORIZONTALES;
   }
 
-  class JugadorImpl implements Player {
+  class JugadorImpl implements PlayerI {
 
     String nombre;
     int numero;
@@ -156,8 +156,8 @@ class TacticaDetalleImpl implements Team {
   }
 
   @Override
-  public Player[] getPlayers() {
-    return new Player[]{
+  public PlayerI[] getPlayers() {
+    return new PlayerI[]{
         new JugadorImpl("Jugador", 1, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 1.0d,
                         1.0d, false), //delantero,
         new JugadorImpl("Jugador", 2, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 0.8d,

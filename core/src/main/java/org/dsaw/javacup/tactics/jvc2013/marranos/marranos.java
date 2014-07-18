@@ -7,7 +7,7 @@ package org.dsaw.javacup.tactics.jvc2013.marranos;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerI;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
@@ -190,7 +190,7 @@ public class marranos implements Tactic {
       return UniformStyle.FRANJA_HORIZONTAL;
     }
 
-    class JugadorImpl implements Player {
+    class JugadorImpl implements PlayerI {
 
       String nombre;
       int numero;
@@ -254,8 +254,8 @@ public class marranos implements Tactic {
     }
 
     @Override
-    public Player[] getPlayers() {
-      return new Player[]{
+    public PlayerI[] getPlayers() {
+      return new PlayerI[]{
           new JugadorImpl("Jugador", 1, new Color(255, 200, 150), new Color(50, 0, 0), 0.5d, 0.5d,
                           0.5d, true),
           new JugadorImpl("Jugador", 2, new Color(255, 200, 150), new Color(50, 0, 0), 0.5d, 0.5d,
