@@ -7,9 +7,9 @@ package org.dsaw.javacup.tactics.jvc2013.ChelseaMillos2;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -149,21 +149,21 @@ public class ChelseaMillos2 implements Tactic {
       new Position(22.580152671755727, -1.3059701492537314)
   };
 
-  class TacticaDetalleImpl implements TacticDetail {
+  class TacticaDetalleImpl implements Team {
 
     @Override
-    public String getTacticName() {
+    public String getName() {
       return "chelsea-millos";
     }
 
 
     @Override
-    public CountryCode getCountry() {
+    public CountryCode getCountryCode() {
       return CountryCode.CO;
     }
 
     @Override
-    public String getCoach() {
+    public String getCoachName() {
       return "Bruteiker";
     }
 
@@ -227,7 +227,7 @@ public class ChelseaMillos2 implements Tactic {
       return UniformStyle.FRANJA_DIAGONAL;
     }
 
-    class JugadorImpl implements PlayerDetail {
+    class JugadorImpl implements Player {
 
       String nombre;
       int numero;
@@ -249,7 +249,7 @@ public class ChelseaMillos2 implements Tactic {
       }
 
       @Override
-      public String getPlayerName() {
+      public String getName() {
         return nombre;
       }
 
@@ -305,8 +305,8 @@ public class ChelseaMillos2 implements Tactic {
 //                        new JugadorImpl("Alexis", 11, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 1.0d, 1.0d, false)
 //                    };
 //        }
-    public PlayerDetail[] getPlayers() {
-      return new PlayerDetail[]{
+    public Player[] getPlayers() {
+      return new Player[]{
           new JugadorImpl("cech", 1, new Color(255, 200, 150), new Color(50, 0, 0), 1d, 1d, 1d,
                           true),
           new JugadorImpl("ferreira", 2, new Color(255, 200, 150), new Color(50, 0, 0), 1d, 0.625d,
@@ -333,10 +333,10 @@ public class ChelseaMillos2 implements Tactic {
     }
   }
 
-  TacticDetail detalle = new TacticaDetalleImpl();
+  Team detalle = new TacticaDetalleImpl();
 
   @Override
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return detalle;
   }
 
@@ -359,8 +359,8 @@ public class ChelseaMillos2 implements Tactic {
   MyPosition[] myPlayers;
   List<Integer> dangerousEnemies;
   int[] ableToShot;
-  PlayerDetail[] myPlayersDetails;
-  PlayerDetail[] enemiesDetails;
+  Player[] myPlayersDetails;
+  Player[] enemiesDetails;
   int[] myPlayersCantShoot;
   int[] enemiesCantShoot;
   MyPosition ballwithZ, theNextBall;
@@ -697,7 +697,7 @@ public class ChelseaMillos2 implements Tactic {
 
     }
 
-    public boolean isReachable(MyPosition ball, PlayerDetail jd, MyPosition currentPos,
+    public boolean isReachable(MyPosition ball, Player jd, MyPosition currentPos,
                                int cantShoot, int turn) {
       if (cantShoot <= turn) {
         double maxHeight = Constants.ALTURA_CONTROL_BALON;

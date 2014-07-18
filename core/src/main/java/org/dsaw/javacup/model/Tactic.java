@@ -16,7 +16,7 @@ public interface Tactic { //TODO rename?
   /**
    * Returns the detail of the tactic
    */
-  public TacticDetail getDetail();
+  public Team getDetail();
   /**Retorna lista de comandos
    * que los jugadores intentaran ejecutar en la siguiente iteración,
    * en base a la información entregada por la situación del partido*/

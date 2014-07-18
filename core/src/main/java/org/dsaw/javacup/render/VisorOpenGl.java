@@ -286,8 +286,8 @@ public class VisorOpenGl implements Game {
     gc.setTargetFrameRate(VisorOpenGl.fps);
     gc.setVSync(false);
     pm =
-        new ScoreboardRender(partido.getDetalleLocal().getTacticName(),
-                             partido.getDetalleVisita().getTacticName());
+        new ScoreboardRender(partido.getDetalleLocal().getName(),
+                             partido.getDetalleVisita().getName());
     gc.setMouseGrabbed(false);
   }
 
@@ -879,13 +879,13 @@ public class VisorOpenGl implements Game {
     if (showTexto) {
       if (partido.getIteration() < 50) {
         g.setColor(Color.black);
-        g.drawString(partido.getDetalleVisita().getTacticName() + " (Visita)", sx2 + 11, sy2 + 11);
+        g.drawString(partido.getDetalleVisita().getName() + " (Visita)", sx2 + 11, sy2 + 11);
         g.drawString("vs", sx2 + 41, sy2 + 41);
-        g.drawString(partido.getDetalleLocal().getTacticName() + " (Local)", sx2 + 71, sy2 + 71);
+        g.drawString(partido.getDetalleLocal().getName() + " (Local)", sx2 + 71, sy2 + 71);
         g.setColor(Color.white);
-        g.drawString(partido.getDetalleVisita().getTacticName() + " (Visita)", sx2 + 10, sy2 + 10);
+        g.drawString(partido.getDetalleVisita().getName() + " (Visita)", sx2 + 10, sy2 + 10);
         g.drawString("vs", sx2 + 40, sy2 + 40);
-        g.drawString(partido.getDetalleLocal().getTacticName() + " (Local)", sx2 + 70, sy2 + 70);
+        g.drawString(partido.getDetalleLocal().getName() + " (Local)", sx2 + 70, sy2 + 70);
       }
     }
     if (showTexto) {
@@ -895,18 +895,18 @@ public class VisorOpenGl implements Game {
         if ((partido.getGolesLocal() > partido.getGolesVisita()) ||
             (partido.getGolesLocal() == partido.getGolesVisita()
              && partido.getPosesionBalonLocal() >= .5d)) {
-          g.drawString(partido.getDetalleLocal().getTacticName(), sx2 + 41, sy2 + 41);
+          g.drawString(partido.getDetalleLocal().getName(), sx2 + 41, sy2 + 41);
         } else {
-          g.drawString(partido.getDetalleVisita().getTacticName(), sx2 + 41, sy2 + 41);
+          g.drawString(partido.getDetalleVisita().getName(), sx2 + 41, sy2 + 41);
         }
         g.setColor(Color.white);
         g.drawString("Gana", sx2 + 10, sy2 + 10);
         if ((partido.getGolesLocal() > partido.getGolesVisita()) ||
             (partido.getGolesLocal() == partido.getGolesVisita()
              && partido.getPosesionBalonLocal() >= .5d)) {
-          g.drawString(partido.getDetalleLocal().getTacticName(), sx2 + 40, sy2 + 40);
+          g.drawString(partido.getDetalleLocal().getName(), sx2 + 40, sy2 + 40);
         } else {
-          g.drawString(partido.getDetalleVisita().getTacticName(), sx2 + 40, sy2 + 40);
+          g.drawString(partido.getDetalleVisita().getName(), sx2 + 40, sy2 + 40);
         }
       }
     }

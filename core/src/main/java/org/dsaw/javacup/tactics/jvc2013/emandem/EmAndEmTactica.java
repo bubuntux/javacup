@@ -1,7 +1,7 @@
 package org.dsaw.javacup.tactics.jvc2013.emandem;
 
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
@@ -16,11 +16,11 @@ import java.util.List;
 public class EmAndEmTactica implements Tactic {
 
   private Alineaciones alineaciones = new Alineaciones();
-  private TacticDetail detalle = new TacticaDetalleImpl();
+  private Team detalle = new TacticaDetalleImpl();
   private CPU cpu = new CPU();
 
   @Override
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return detalle;
   }
 

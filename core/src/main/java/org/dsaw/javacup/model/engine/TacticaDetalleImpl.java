@@ -2,8 +2,8 @@ package org.dsaw.javacup.model.engine;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.render.UniformStyle;
 
 import java.awt.*;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * Implementación de TacticDetail, usada internamente
  */
-final class TacticaDetalleImpl implements TacticDetail, Serializable {
+final class TacticaDetalleImpl implements Team, Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -36,10 +36,10 @@ final class TacticaDetalleImpl implements TacticDetail, Serializable {
   /**
    * Copia el detalle y deja inmutables sus valores
    */
-  TacticaDetalleImpl(TacticDetail impl) {
-    this.nombre = impl.getTacticName();
-    this.pais = impl.getCountry();
-    this.entrenador = impl.getCoach();
+  TacticaDetalleImpl(Team impl) {
+    this.nombre = impl.getName();
+    this.pais = impl.getCountryCode();
+    this.entrenador = impl.getCoachName();
     this.colorCamiseta = impl.getShirtColor();
     this.colorPantalon = impl.getShortsColor();
     this.colorCalcetas = impl.getSocksColor();
@@ -58,17 +58,17 @@ final class TacticaDetalleImpl implements TacticDetail, Serializable {
   }
 
   @Override
-  public String getTacticName() {
+  public String getName() {
     return nombre;
   }
 
   @Override
-  public CountryCode getCountry() {
+  public CountryCode getCountryCode() {
     return pais;
   }
 
   @Override
-  public String getCoach() {
+  public String getCoachName() {
     return entrenador;
   }
 
@@ -98,7 +98,7 @@ final class TacticaDetalleImpl implements TacticDetail, Serializable {
   }
 
   @Override
-  public PlayerDetail[] getPlayers() {
+  public Player[] getPlayers() {
     return jugadores;
   }
 

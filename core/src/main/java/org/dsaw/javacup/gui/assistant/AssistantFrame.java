@@ -2,7 +2,7 @@ package org.dsaw.javacup.gui.assistant;
 
 import com.thoughtworks.xstream.XStream;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.util.TacticValidate;
@@ -180,7 +180,7 @@ public class AssistantFrame extends JFrame implements Runnable {
     jComboBox1.setModel(new DefaultComboBoxModel(paises));
     jComboBox7.setModel(new DefaultComboBoxModel(estilos));
 
-    for (PlayerDetail jug : impl.getPlayers()) {
+    for (Player jug : impl.getPlayers()) {
       model.addElement(jug);
     }
     jList1.setModel(model);
@@ -231,7 +231,7 @@ public class AssistantFrame extends JFrame implements Runnable {
 
       @Override
       public void render(GameContainer gc, org.newdawn.slick.Graphics g) throws SlickException {
-        PlayerDetail j = getJugador();
+        Player j = getJugador();
         double vel = Constants.getVelocidad(j.getSpeed()) * 3;
         deg = deg + vel;
         x = x - 4f * vel * Math.sin(2f * Math.PI * (float) deg / 360f);
@@ -244,7 +244,7 @@ public class AssistantFrame extends JFrame implements Runnable {
 
         g.setColor(org.newdawn.slick.Color.yellow);
         g.drawString("" + getJugador().getNumber(), 122, 3);
-        g.drawString(getJugador().getPlayerName(), 4, 80);
+        g.drawString(getJugador().getName(), 4, 80);
         jp.pintaJugador(jList1.getSelectedIndex(), (int) deg, (int) deg, 20, 55, 50, g);
       }
 
@@ -1073,7 +1073,7 @@ public class AssistantFrame extends JFrame implements Runnable {
   private boolean repintaCreditos() {
     double cre = Constants.CREDITOS_INICIALES;
     jProgressBar1.setMaximum((int) (cre * 10));
-    for (PlayerDetail j : impl.getPlayers()) {
+    for (Player j : impl.getPlayers()) {
       cre = cre - j.getSpeed();
       cre = cre - j.getPower();
       cre = cre - j.getPrecision();
@@ -1096,7 +1096,7 @@ public class AssistantFrame extends JFrame implements Runnable {
       ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
     int i;
     for (i = 0; i < model.getSize(); i++) {
-      impl.getPlayers()[i] = (PlayerDetail) model.get(i);
+      impl.getPlayers()[i] = (Player) model.get(i);
     }
     if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
       try {
@@ -1141,7 +1141,7 @@ public class AssistantFrame extends JFrame implements Runnable {
       codalin = codalin + "    Position alineacion" + (idx + 1) + "[]=new Position[]{\n";
       int i = 0;
       Position[] Positiones = impl.getAlineacion(idx);
-      for (PlayerDetail j : impl.getPlayers()) {
+      for (Player j : impl.getPlayers()) {
         i++;
         codalin =
             codalin + "        new Position(" + Positiones[i - 1].getX() + "," + Positiones[i - 1]
@@ -1186,11 +1186,11 @@ public class AssistantFrame extends JFrame implements Runnable {
           + "public class " + clase +
           " implements Tactic {\n\n" + codalin
           + "    class TacticDetailImpl implements TacticDetail {\n\n" +
-          "        public String getTacticName() {\n" + "            return \"" + impl
-              .getTacticName() + "\";\n" + "        }\n\n" +
-          "        public String getCountry() {\n" + "            return \"" + impl.getCountry()
+          "        public String getName() {\n" + "            return \"" + impl
+              .getName() + "\";\n" + "        }\n\n" +
+          "        public String getCountryCode() {\n" + "            return \"" + impl.getCountryCode()
           + "\";\n" + "        }\n\n" +
-          "        public String getCoach() {\n" + "            return \"" + impl.getCoach()
+          "        public String getCoachName() {\n" + "            return \"" + impl.getCoachName()
           + "\";\n" + "        }\n\n" +
           "        public Color getShirtColor() {\n" + "            return new Color(" + impl
               .getShirtColor().getRed() + ", " +
@@ -1298,7 +1298,7 @@ public class AssistantFrame extends JFrame implements Runnable {
           + "                this.remate=remate;\n" +
           "                this.presicion=presicion;\n" + "                this.portero=portero;\n"
           + "            }\n\n" +
-          "            public String getPlayerName() {\n" + "                return nombre;\n"
+          "            public String getName() {\n" + "                return nombre;\n"
           + "            }\n\n" +
           "            public Color getSkinColor() {\n" + "                return piel;\n"
           + "            }\n\n" +
@@ -1317,10 +1317,10 @@ public class AssistantFrame extends JFrame implements Runnable {
           "        public PlayerDetail[] getPlayers() {\n"
           + "            return new PlayerDetail[]{\n";
       int i = 0;
-      for (PlayerDetail j : impl.getPlayers()) {
+      for (Player j : impl.getPlayers()) {
         i++;
         codigo =
-            codigo + "                new JugadorImpl(\"" + j.getPlayerName() + "\", " + j
+            codigo + "                new JugadorImpl(\"" + j.getName() + "\", " + j
                 .getNumber() + ", new Color(" +
             j.getSkinColor().getRed() + "," + j.getSkinColor().getGreen() + "," + j.getSkinColor()
                 .getBlue() + "), new Color(" +
@@ -1375,7 +1375,7 @@ public class AssistantFrame extends JFrame implements Runnable {
         codalin = codalin + "    Position alineacion" + (idx + 1) + "[]=new Position[]{\n";
         int i = 0;
         Position[] Positiones = impl.getAlineacion(idx);
-        for (PlayerDetail j : impl.getPlayers()) {
+        for (Player j : impl.getPlayers()) {
           i++;
           codalin =
               codalin + "        new Position(" + Positiones[i - 1].getX() + "," + Positiones[i - 1]
@@ -1417,11 +1417,11 @@ public class AssistantFrame extends JFrame implements Runnable {
       ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
     String codigo =
         "public class TacticDetailImpl implements TacticDetail {\n\n"
-        + "        public String getTacticName() {\n" + "            return \"" +
-        impl.getTacticName() + "\";\n" + "        }\n\n" + "        public String getCountry() {\n"
+        + "        public String getName() {\n" + "            return \"" +
+        impl.getName() + "\";\n" + "        }\n\n" + "        public String getCountryCode() {\n"
         + "            return \"" +
-        impl.getCountry() + "\";\n" + "        }\n\n" + "        public String getCoach() {\n"
-        + "            return \"" + impl.getCoach() +
+        impl.getCountryCode() + "\";\n" + "        }\n\n" + "        public String getCoachName() {\n"
+        + "            return \"" + impl.getCoachName() +
         "\";\n" + "        }\n\n" + "        public Color getShirtColor() {\n"
         + "            return new Color(" +
         impl.getShirtColor().getRed() + ", " + impl.getShirtColor().getGreen() + ", " + impl
@@ -1529,7 +1529,7 @@ public class AssistantFrame extends JFrame implements Runnable {
         "                this.velocidad=velocidad;\n" + "                this.remate=remate;\n"
         + "                this.presicion=presicion;\n" +
         "                this.portero=portero;\n" + "            }\n\n"
-        + "            public String getPlayerName() {\n" +
+        + "            public String getName() {\n" +
         "                return nombre;\n" + "            }\n\n"
         + "            public Color getSkinColor() {\n" +
         "                return piel;\n" + "            }\n\n"
@@ -1547,10 +1547,10 @@ public class AssistantFrame extends JFrame implements Runnable {
         "        public PlayerDetail[] getPlayers() {\n"
         + "            return new PlayerDetail[]{\n";
     int i = 0;
-    for (PlayerDetail j : impl.getPlayers()) {
+    for (Player j : impl.getPlayers()) {
       i++;
       codigo =
-          codigo + "                new JugadorImpl(\"" + j.getPlayerName() + "\", " + j.getNumber()
+          codigo + "                new JugadorImpl(\"" + j.getName() + "\", " + j.getNumber()
           + ", new Color(" +
           j.getSkinColor().getRed() + "," + j.getSkinColor().getGreen() + "," + j.getSkinColor()
               .getBlue() + "), new Color(" +
@@ -1582,7 +1582,7 @@ public class AssistantFrame extends JFrame implements Runnable {
       codalin = codalin + "    Position alineacion" + (idx + 1) + "[]=new Position[]{\n";
       int i = 0;
       Position[] Positiones = impl.getAlineacion(idx);
-      for (PlayerDetail j : impl.getPlayers()) {
+      for (Player j : impl.getPlayers()) {
         i++;
         codalin =
             codalin + "        new Position(" + Positiones[i - 1].getX() + "," + Positiones[i - 1]
@@ -1598,10 +1598,10 @@ public class AssistantFrame extends JFrame implements Runnable {
   }//GEN-LAST:event_jMenuItem6ActionPerformed
 
   private void jButton9ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-    PlayerDetail j = getJugador();
+    Player j = getJugador();
     Color piel = j.getSkinColor();
     Color pelo = j.getHairColor();
-    for (PlayerDetail jj : impl.getPlayers()) {
+    for (Player jj : impl.getPlayers()) {
       ((PlayerDetailImpl) jj).setColorPelo(pelo);
       ((PlayerDetailImpl) jj).setColorPiel(piel);
     }
@@ -1894,7 +1894,7 @@ public class AssistantFrame extends JFrame implements Runnable {
 
   private void repinta() {
     pintando = true;
-    PlayerDetail j = jList1.getSelectedValue();
+    Player j = jList1.getSelectedValue();
     for (int i = 0; i < model.getSize(); i++) {
       model.set(i, impl.getPlayers()[i]);
     }
@@ -1930,15 +1930,15 @@ public class AssistantFrame extends JFrame implements Runnable {
         jComboBox7.setSelectedIndex(idx);
       }
     }
-    jTextField1.setText(impl.getTacticName());
-    jComboBox1.setSelectedItem(impl.getCountry());
-    jTextField2.setText(impl.getCoach());
+    jTextField1.setText(impl.getName());
+    jComboBox1.setSelectedItem(impl.getCountryCode());
+    jTextField2.setText(impl.getCoachName());
     int num = ((UniformStyle) jComboBox7.getSelectedItem()).getNumero();
     PoligonosData d = data[num - 1];
     intx = d.intx;
     inty = d.inty;
     cols = d.cols;
-    jTextField3.setText(j.getPlayerName());
+    jTextField3.setText(j.getName());
     jTextField4.setText("" + j.getNumber());
     jButton6.setBackground(j.getSkinColor());
     jButton7.setBackground(j.getHairColor());

@@ -6,8 +6,8 @@ package org.dsaw.javacup.tactics.jvc2013.mansporting;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.render.UniformStyle;
 
 import java.awt.*;
@@ -18,7 +18,7 @@ import java.util.List;
 /**
  * @author MaN
  */
-public class MSGTacticaDetalle implements TacticDetail {
+public class MSGTacticaDetalle implements Team {
 
   private static final String NOMBRE = "Mansporting de Gijón";
   private static final CountryCode PAIS = CountryCode.ES;
@@ -43,17 +43,17 @@ public class MSGTacticaDetalle implements TacticDetail {
   }
 
   @Override
-  public String getTacticName() {
+  public String getName() {
     return NOMBRE;
   }
 
   @Override
-  public CountryCode getCountry() {
+  public CountryCode getCountryCode() {
     return PAIS;
   }
 
   @Override
-  public String getCoach() {
+  public String getCoachName() {
     return ENTRENADOR;
   }
 
@@ -118,7 +118,7 @@ public class MSGTacticaDetalle implements TacticDetail {
   }
 
   @Override
-  public PlayerDetail[] getPlayers() {
+  public Player[] getPlayers() {
     return MSGUtils.convertJugadores(jugadoresDetalle);
   }
 }

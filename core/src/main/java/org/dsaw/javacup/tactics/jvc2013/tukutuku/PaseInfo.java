@@ -9,7 +9,7 @@ package org.dsaw.javacup.tactics.jvc2013.tukutuku;
  */
 
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.trajectory.AirTrajectory;
@@ -233,7 +233,7 @@ public class PaseInfo {
 
     //En caso contrario calculamos a ver si puede alcanzar el balon dependiendo de su velocidad
 
-    PlayerDetail
+    Player
         detJugador = (esRival) ? Gs.rivalPlayersDetail()[jugador] : Gs.myPlayersDetail()[jugador];
 
     Position

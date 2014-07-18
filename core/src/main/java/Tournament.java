@@ -1,5 +1,5 @@
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.engine.Match;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.TacticValidate;
@@ -24,9 +24,9 @@ public class Tournament {
 
   String instancia;
   Tactic local;
-  TacticDetail localDetalle;
+  Team localDetalle;
   Tactic visita;
-  TacticDetail visitaDetalle;
+  Team visitaDetalle;
   Match partido;
 
   /**
@@ -47,9 +47,9 @@ public class Tournament {
     this.instancia = instancia;
     localDetalle = local.getDetail();
     visitaDetalle = visita.getDetail();
-    frame.setTitle(localDetalle.getTacticName() + " v/s " + visitaDetalle.getTacticName());
-    TacticValidate.validateDetail(localDetalle.getTacticName(), localDetalle);
-    TacticValidate.validateDetail(visitaDetalle.getTacticName(), visitaDetalle);
+    frame.setTitle(localDetalle.getName() + " v/s " + visitaDetalle.getName());
+    TacticValidate.validateDetail(localDetalle.getName(), localDetalle);
+    TacticValidate.validateDetail(visitaDetalle.getName(), visitaDetalle);
     this.local = local;
     this.visita = visita;
     partido = new Match(local, visita, true);
@@ -600,7 +600,7 @@ public class Tournament {
     for (int[] aCruce2 : cruce) {
       tl = instance(pasan.get(aCruce2[0]));
       tv = instance(pasan.get(aCruce2[1]));
-      String nl = tl.getDetail().getTacticName(), nv = tv.getDetail().getTacticName();
+      String nl = tl.getDetail().getName(), nv = tv.getDetail().getName();
       nl = nl.trim().toLowerCase();
       nl =
           nl.replaceAll(" ", "_").replaceAll("ñ", "n").replaceAll("á", "a").replaceAll("é", "e")
@@ -634,7 +634,7 @@ public class Tournament {
     for (int[] aCruce1 : cruce) {
       tl = instance(pasan2.get(aCruce1[0]));
       tv = instance(pasan2.get(aCruce1[1]));
-      String nl = tl.getDetail().getTacticName(), nv = tv.getDetail().getTacticName();
+      String nl = tl.getDetail().getName(), nv = tv.getDetail().getName();
       nl = nl.trim().toLowerCase();
       nl =
           nl.replaceAll(" ", "_").replaceAll("ñ", "n").replaceAll("á", "a").replaceAll("é", "e")
@@ -668,7 +668,7 @@ public class Tournament {
     for (int[] aCruce : cruce) {
       tl = instance(pasan.get(aCruce[0]));
       tv = instance(pasan.get(aCruce[1]));
-      String nl = tl.getDetail().getTacticName(), nv = tv.getDetail().getTacticName();
+      String nl = tl.getDetail().getName(), nv = tv.getDetail().getName();
       nl = nl.trim().toLowerCase();
       nl =
           nl.replaceAll(" ", "_").replaceAll("ñ", "n").replaceAll("á", "a").replaceAll("é", "e")
@@ -702,7 +702,7 @@ public class Tournament {
     for (int i = 0; i < cruce.length; i++) {
       tl = instance(pasan2.get(cruce[i][0]));
       tv = instance(pasan2.get(cruce[i][1]));
-      String nl = tl.getDetail().getTacticName(), nv = tv.getDetail().getTacticName();
+      String nl = tl.getDetail().getName(), nv = tv.getDetail().getName();
       nl = nl.trim().toLowerCase();
       nl =
           nl.replaceAll(" ", "_").replaceAll("ñ", "n").replaceAll("á", "a").replaceAll("é", "e")
@@ -759,7 +759,7 @@ public class Tournament {
     for (int i = 0; i < grupos.length; i++) {
       System.out.println("Grupo " + (i + 1));
       for (int j = 0; j < grupos[i].length && grupos[i][j] != null; j++) {
-        System.out.println("\t" + instance(grupos[i][j]).getDetail().getTacticName());
+        System.out.println("\t" + instance(grupos[i][j]).getDetail().getName());
       }
     }
     File dir = new File(path);
@@ -781,7 +781,7 @@ public class Tournament {
           Class cv = grupos[k][partidos[i][j][1]];
           tl = instance(cl);
           tv = instance(cv);
-          String nl = tl.getDetail().getTacticName(), nv = tv.getDetail().getTacticName();
+          String nl = tl.getDetail().getName(), nv = tv.getDetail().getName();
           nl = nl.trim().toLowerCase();
           nl =
               nl.replaceAll(" ", "_").replaceAll("ñ", "n").replaceAll("á", "a").replaceAll("é", "e")
@@ -838,7 +838,7 @@ public class Tournament {
           Class c = grupos[k][j];
           if (c != null) {
             System.out.println(
-                instance(c).getDetail().getTacticName() + " partidos:" + juegos.get(c) + " puntos:"
+                instance(c).getDetail().getName() + " partidos:" + juegos.get(c) + " puntos:"
                 + puntos.get(c) + " diferencia de goles:" + goles.get(c) + " goles a favor:"
                 + golesafavor.get(c));
           }

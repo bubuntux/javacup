@@ -1,6 +1,6 @@
 package org.dsaw.javacup.gui.assistant;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.util.Constants;
@@ -237,7 +237,7 @@ public class FormationAndSimulationTab {
         Position[] posiciones = _tacticDetail.getAlineacion(jComboBox3.getSelectedIndex());
         double remate = 0, error = 0;
         double x = 0, y = 0;
-        for (PlayerDetail j : _tacticDetail.getPlayers()) {
+        for (Player j : _tacticDetail.getPlayers()) {
           p = posiciones[i];
           boolean ok = true;
           int idx = jComboBox2.getSelectedIndex();
@@ -268,7 +268,7 @@ public class FormationAndSimulationTab {
           g.drawOval((int) p.getX() - 3, (int) p.getY() - 3, 6, 6);
           g.drawString("" + num, (int) p.getX() + 4, (int) p.getY());
           if (j.equals(getJugador())) {
-            g.drawString(j.getPlayerName(), (int) p.getX() - 6 * j.getPlayerName().length() / 2,
+            g.drawString(j.getName(), (int) p.getX() - 6 * j.getName().length() / 2,
                          (int) p.getY() + 10);
           }
           if (!ok) {

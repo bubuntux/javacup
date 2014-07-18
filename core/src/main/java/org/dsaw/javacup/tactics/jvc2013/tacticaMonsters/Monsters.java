@@ -7,9 +7,9 @@ package org.dsaw.javacup.tactics.jvc2013.tacticaMonsters;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -137,20 +137,20 @@ public class Monsters implements Tactic {
     }
   }
 
-  class TacticaDetalleImpl implements TacticDetail {
+  class TacticaDetalleImpl implements Team {
 
     @Override
-    public String getTacticName() {
+    public String getName() {
       return "Monsters";
     }
 
     @Override
-    public CountryCode getCountry() {
+    public CountryCode getCountryCode() {
       return CountryCode.DE;
     }
 
     @Override
-    public String getCoach() {
+    public String getCoachName() {
       return "Maicky Materson";
     }
 
@@ -214,7 +214,7 @@ public class Monsters implements Tactic {
       return UniformStyle.FRANJA_VERTICAL;
     }
 
-    class JugadorImpl implements PlayerDetail {
+    class JugadorImpl implements Player {
 
       String nombre;
       int numero;
@@ -236,7 +236,7 @@ public class Monsters implements Tactic {
       }
 
       @Override
-      public String getPlayerName() {
+      public String getName() {
         return nombre;
       }
 
@@ -278,8 +278,8 @@ public class Monsters implements Tactic {
     }
 
     @Override
-    public PlayerDetail[] getPlayers() {
-      return new PlayerDetail[]{
+    public Player[] getPlayers() {
+      return new Player[]{
           new JugadorImpl("Mark Lenders", 1, new Color(51, 0, 0), new Color(255, 255, 255), 1.0d,
                           1.0d, 1.0d, true),
           new JugadorImpl("Michael Jordan", 2, new Color(51, 51, 51), new Color(255, 255, 255),
@@ -306,10 +306,10 @@ public class Monsters implements Tactic {
     }
   }
 
-  TacticDetail detalle = new TacticaDetalleImpl();
+  Team detalle = new TacticaDetalleImpl();
 
   @Override
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return detalle;
   }
 
@@ -493,7 +493,7 @@ public class Monsters implements Tactic {
 
   }
 
-  public Simulador.datosTiro calcularPase(Position posAct, int jugador, PlayerDetail jd) {
+  public Simulador.datosTiro calcularPase(Position posAct, int jugador, Player jd) {
 
     Simulador.datosTiro mejorTiro = null;
 

@@ -1,7 +1,7 @@
 package org.dsaw.javacup.tactics.jvc2013.Mou_team;
 
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
@@ -21,10 +21,10 @@ public class Mou_Team implements Tactic {
   }
 
   private Tactica_Mou_Team laTactica;
-  private TacticDetail detalle;
+  private Team detalle;
 
   @Override
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return detalle;
   }
 

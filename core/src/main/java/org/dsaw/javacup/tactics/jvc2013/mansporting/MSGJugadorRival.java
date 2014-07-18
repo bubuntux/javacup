@@ -4,19 +4,19 @@
  */
 package org.dsaw.javacup.tactics.jvc2013.mansporting;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 
 /**
  * @author MaN
  */
 public class MSGJugadorRival extends MSGAbstractJugadorDetalle {
 
-  public MSGJugadorRival(int indice, PlayerDetail jugador) {
+  public MSGJugadorRival(int indice, Player jugador) {
     super(
         indice,
         jugador.getHairColor(),
         jugador.getSkinColor(),
-        jugador.getPlayerName(),
+        jugador.getName(),
         jugador.getNumber(),
         new MSGEstadisticas.Builder().setPrecision(jugador.getPrecision())
             .setRemate(jugador.getPower()).setVelocidad(jugador.getSpeed()).getMSGEstadisticas(),

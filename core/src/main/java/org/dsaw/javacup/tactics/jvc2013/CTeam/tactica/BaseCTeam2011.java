@@ -1,7 +1,7 @@
 package org.dsaw.javacup.tactics.jvc2013.CTeam.tactica;
 
-import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.tactics.jvc2013.CTeam.jugador.IJugadorCT;
@@ -43,7 +43,7 @@ public abstract class BaseCTeam2011 implements ICTeam2011 {
 
   List<IJugadorCT> rivalesRecuperacion = new ArrayList<>();
 
-  TacticDetail detalle = new TacticaDetalleImpl();
+  Team detalle = new TacticaDetalleImpl();
 
   int itRecuperacion;
 
@@ -74,7 +74,7 @@ public abstract class BaseCTeam2011 implements ICTeam2011 {
       // f2.setVisible(true);
       // f2.setLocation(325, 0);
       for (int i = 0; i < 11; i++) {
-        PlayerDetail detalleMio = sp.myPlayersDetail()[i];
+        Player detalleMio = sp.myPlayersDetail()[i];
         if (detalleMio.isGoalKeeper()) {
           jugadores.add(new PorteroCT(PROPIO, i, detalleMio, this));
         } else {
@@ -90,7 +90,7 @@ public abstract class BaseCTeam2011 implements ICTeam2011 {
           jugadores.add(new JugadorCT(PROPIO, i, detalleMio, this, tipo));
         }
 
-        PlayerDetail detalleRival = sp.rivalPlayersDetail()[i];
+        Player detalleRival = sp.rivalPlayersDetail()[i];
         if (detalleMio.isGoalKeeper()) {
           rivales.add(new PorteroRivalCT(RIVAL, i, detalleRival, this));
         } else {
@@ -349,7 +349,7 @@ public abstract class BaseCTeam2011 implements ICTeam2011 {
     return new Triangle(new Pnt(-limite, -limite), new Pnt(limite, -limite), new Pnt(0, limite));
   }
 
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return detalle;
   }
 

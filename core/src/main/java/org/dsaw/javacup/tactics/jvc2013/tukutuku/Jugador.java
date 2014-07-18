@@ -8,7 +8,7 @@ package org.dsaw.javacup.tactics.jvc2013.tukutuku;
  *  
  */
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -331,7 +331,7 @@ public abstract class Jugador {
 
   }
 
-  private posicionTiro[] generarArrayPuntuacionesGol(double[] arrayAngulos, PlayerDetail jug,
+  private posicionTiro[] generarArrayPuntuacionesGol(double[] arrayAngulos, Player jug,
                                                      Position posBalon) {
 
     double distCubiertaPorDisparo;
@@ -379,7 +379,7 @@ public abstract class Jugador {
     return arrayPuntuaciones;
   }
 
-  private double calcularValorXLineaDeFondo(Position posBalon, PlayerDetail jug, double angulo) {
+  private double calcularValorXLineaDeFondo(Position posBalon, Player jug, double angulo) {
     double nuevaX = -1000;
     double remateJugador, vel, fuerzaRemate, time, desplazamientoHorizontal, nuevaY;
 

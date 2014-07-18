@@ -2,27 +2,27 @@ package org.dsaw.javacup.tactics.jvc2013.CTeam.tactica;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
 
 import java.awt.*;
 
-class TacticaDetalleImpl implements TacticDetail {
+class TacticaDetalleImpl implements Team {
 
   @Override
-  public String getTacticName() {
+  public String getName() {
     return "cTeam";
   }
 
   @Override
-  public CountryCode getCountry() {
+  public CountryCode getCountryCode() {
     return CountryCode.CO;
   }
 
   @Override
-  public String getCoach() {
+  public String getCoachName() {
     return "Con Tragos";
   }
 
@@ -86,7 +86,7 @@ class TacticaDetalleImpl implements TacticDetail {
     return UniformStyle.FRANJA_DIAGONAL;
   }
 
-  class JugadorImpl implements PlayerDetail {
+  class JugadorImpl implements Player {
 
     String nombre;
     int numero;
@@ -108,7 +108,7 @@ class TacticaDetalleImpl implements TacticDetail {
     }
 
     @Override
-    public String getPlayerName() {
+    public String getName() {
       return nombre;
     }
 
@@ -150,8 +150,8 @@ class TacticaDetalleImpl implements TacticDetail {
   }
 
   @Override
-  public PlayerDetail[] getPlayers() {
-    return new PlayerDetail[]{
+  public Player[] getPlayers() {
+    return new Player[]{
         new JugadorImpl("El Brincon", 1, new Color(252, 239, 227), new Color(50, 0, 0), 1.0d, 0.77d,
                         0.55d, true),
         new JugadorImpl("LaPared", 2, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 0.59d,

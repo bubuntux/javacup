@@ -134,8 +134,8 @@ public class MatchScreen implements Screen {
     }
 
     scoreboardRender
-        .draw(shapeRenderer, game.batch, game.font, match.getDetalleLocal().getTacticName(),
-              match.getGolesLocal(), match.getDetalleVisita().getTacticName(),
+        .draw(shapeRenderer, game.batch, game.font, match.getDetalleLocal().getName(),
+              match.getGolesLocal(), match.getDetalleVisita().getName(),
               match.getGolesVisita(), match.getIteration()); //TODO time!
   }
 

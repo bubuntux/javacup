@@ -7,9 +7,9 @@ package org.dsaw.javacup.tactics.jvc2013.pringaos2011;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -60,20 +60,20 @@ public class Pringaos2011 implements Tactic {
           new Position(15.0, -1.0)
       };
 
-  class TacticaDetalleImpl implements TacticDetail {
+  class TacticaDetalleImpl implements Team {
 
     @Override
-    public String getTacticName() {
+    public String getName() {
       return "Los Pringaos";
     }
 
     @Override
-    public CountryCode getCountry() {
+    public CountryCode getCountryCode() {
       return CountryCode.ES;
     }
 
     @Override
-    public String getCoach() {
+    public String getCoachName() {
       return "Sito";
     }
 
@@ -137,7 +137,7 @@ public class Pringaos2011 implements Tactic {
       return UniformStyle.SIN_ESTILO;
     }
 
-    class JugadorImpl implements PlayerDetail {
+    class JugadorImpl implements Player {
 
       String nombre;
       int numero;
@@ -159,7 +159,7 @@ public class Pringaos2011 implements Tactic {
       }
 
       @Override
-      public String getPlayerName() {
+      public String getName() {
         return nombre;
       }
 
@@ -201,8 +201,8 @@ public class Pringaos2011 implements Tactic {
     }
 
     @Override
-    public PlayerDetail[] getPlayers() {
-      return new PlayerDetail[]{
+    public Player[] getPlayers() {
+      return new Player[]{
           new JugadorImpl("Calamardo", 1, new Color(255, 200, 150), new Color(255, 200, 150), 1.0d,
                           1.0d, 0.67d, true),
           new JugadorImpl("Bob", 2, new Color(255, 102, 102), new Color(255, 200, 150), 1.0d, 1.0d,
@@ -236,10 +236,10 @@ public class Pringaos2011 implements Tactic {
     Position p;
   }
 
-  TacticDetail detalle = new TacticaDetalleImpl();
+  Team detalle = new TacticaDetalleImpl();
 
   @Override
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return detalle;
   }
 
@@ -270,8 +270,8 @@ public class Pringaos2011 implements Tactic {
                                  TIPO_JUGADOR_ATAQUE};
   public Position[] misJugadores;
   public Position[] rivales;
-  public PlayerDetail[] detalleMisJugadores;
-  public PlayerDetail[] detalleRivales;
+  public Player[] detalleMisJugadores;
+  public Player[] detalleRivales;
   public LinkedList<Command> comandos = new LinkedList<>();
   public boolean[] rivales_defendidos = new boolean[11];
   public double[][] posicionesPase;

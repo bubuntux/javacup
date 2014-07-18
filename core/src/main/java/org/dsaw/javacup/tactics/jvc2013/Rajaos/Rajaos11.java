@@ -1,8 +1,8 @@
 package org.dsaw.javacup.tactics.jvc2013.Rajaos;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -34,8 +34,8 @@ public class Rajaos11 implements Tactic {
   int jugMinIter[] = new int[11];
   int posMinIter = 0;
 
-  PlayerDetail[] detBuenos = new PlayerDetail[11];
-  PlayerDetail[] detMalos = new PlayerDetail[11];
+  Player[] detBuenos = new Player[11];
+  Player[] detMalos = new Player[11];
   int porteroMalo = -1;
 
   Position balon = null;
@@ -265,7 +265,7 @@ public class Rajaos11 implements Tactic {
   }
 
   @Override
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return detalle;
   }
 

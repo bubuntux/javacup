@@ -8,9 +8,9 @@ package org.dsaw.javacup.tactics.jvc2013.Arsenal;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -110,20 +110,20 @@ public class Arsenal implements Tactic {
   };
 
 
-  class TacticaDetalleImpl implements TacticDetail {
+  class TacticaDetalleImpl implements Team {
 
     @Override
-    public String getTacticName() {
+    public String getName() {
       return "Arsenal";
     }
 
     @Override
-    public CountryCode getCountry() {
+    public CountryCode getCountryCode() {
       return CountryCode.CO;
     }
 
     @Override
-    public String getCoach() {
+    public String getCoachName() {
       return "Tales";
     }
 
@@ -187,7 +187,7 @@ public class Arsenal implements Tactic {
       return UniformStyle.FRANJA_DIAGONAL;
     }
 
-    class JugadorImpl implements PlayerDetail {
+    class JugadorImpl implements Player {
 
       String nombre;
       int numero;
@@ -209,7 +209,7 @@ public class Arsenal implements Tactic {
       }
 
       @Override
-      public String getPlayerName() {
+      public String getName() {
         return nombre;
       }
 
@@ -250,8 +250,8 @@ public class Arsenal implements Tactic {
     }
 
     @Override
-    public PlayerDetail[] getPlayers() {
-      return new PlayerDetail[]{
+    public Player[] getPlayers() {
+      return new Player[]{
           new JugadorImpl("Christofer", 1, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d,
                           1.0d, 1.0d, true),
           new JugadorImpl("Ruben", 2, new Color(0, 0, 0), new Color(0, 0, 0), 1.0d, 0.53d, 0.78d,
@@ -278,10 +278,10 @@ public class Arsenal implements Tactic {
     }
   }
 
-  TacticDetail detalle = new TacticaDetalleImpl();
+  Team detalle = new TacticaDetalleImpl();
 
   @Override
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return detalle;
   }
 

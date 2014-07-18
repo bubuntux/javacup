@@ -6,8 +6,8 @@ package org.dsaw.javacup.tactics.jvc2013.Mou_team;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
 
@@ -16,20 +16,20 @@ import java.awt.*;
 /**
  * @author Administrador
  */
-class TacticaDetalleImpl implements TacticDetail {
+class TacticaDetalleImpl implements Team {
 
   @Override
-  public String getTacticName() {
+  public String getName() {
     return "Mou_Team";
   }
 
   @Override
-  public CountryCode getCountry() {
+  public CountryCode getCountryCode() {
     return CountryCode.ES;
   }
 
   @Override
-  public String getCoach() {
+  public String getCoachName() {
     return "Mou";
   }
 
@@ -93,7 +93,7 @@ class TacticaDetalleImpl implements TacticDetail {
     return UniformStyle.LINEAS_HORIZONTALES;
   }
 
-  class JugadorImpl implements PlayerDetail {
+  class JugadorImpl implements Player {
 
     String nombre;
     int numero;
@@ -115,7 +115,7 @@ class TacticaDetalleImpl implements TacticDetail {
     }
 
     @Override
-    public String getPlayerName() {
+    public String getName() {
       return nombre;
     }
 
@@ -156,8 +156,8 @@ class TacticaDetalleImpl implements TacticDetail {
   }
 
   @Override
-  public PlayerDetail[] getPlayers() {
-    return new PlayerDetail[]{
+  public Player[] getPlayers() {
+    return new Player[]{
         new JugadorImpl("Jugador", 1, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 1.0d,
                         1.0d, false), //delantero,
         new JugadorImpl("Jugador", 2, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 0.8d,

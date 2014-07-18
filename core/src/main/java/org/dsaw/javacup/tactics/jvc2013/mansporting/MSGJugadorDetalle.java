@@ -4,14 +4,14 @@
  */
 package org.dsaw.javacup.tactics.jvc2013.mansporting;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.tactics.jvc2013.mansporting.trig.Circulo;
 import org.dsaw.javacup.tactics.jvc2013.mansporting.trig.Punto;
 
 /**
  * @author MaN
  */
-public interface MSGJugadorDetalle extends PlayerDetail, MSGSituacionPartidoListener {
+public interface MSGJugadorDetalle extends Player, MSGSituacionPartidoListener {
 
   /**
    * Devuelve el indice del jugador.

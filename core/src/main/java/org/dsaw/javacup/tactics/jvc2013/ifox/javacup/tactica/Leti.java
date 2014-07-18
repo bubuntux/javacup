@@ -6,9 +6,9 @@ package org.dsaw.javacup.tactics.jvc2013.ifox.javacup.tactica;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
@@ -107,20 +107,20 @@ public class Leti implements Tactic {
       new Position(-1.4265734265734267, 23.28054298642534)
   };
 
-  class TacticaDetalleImpl implements TacticDetail {
+  class TacticaDetalleImpl implements Team {
 
     @Override
-    public String getTacticName() {
+    public String getName() {
       return "Leti";
     }
 
     @Override
-    public CountryCode getCountry() {
+    public CountryCode getCountryCode() {
       return CountryCode.CO;
     }
 
     @Override
-    public String getCoach() {
+    public String getCoachName() {
       return "Henrry Vallejo";
     }
 
@@ -184,7 +184,7 @@ public class Leti implements Tactic {
       return UniformStyle.FRANJA_VERTICAL;
     }
 
-    class JugadorImpl implements PlayerDetail {
+    class JugadorImpl implements Player {
 
       String nombre;
       int numero;
@@ -206,7 +206,7 @@ public class Leti implements Tactic {
       }
 
       @Override
-      public String getPlayerName() {
+      public String getName() {
         return nombre;
       }
 
@@ -247,8 +247,8 @@ public class Leti implements Tactic {
     }
 
     @Override
-    public PlayerDetail[] getPlayers() {
-      return new PlayerDetail[]{
+    public Player[] getPlayers() {
+      return new Player[]{
           new JugadorImpl("Lago", 10, new Color(70, 55, 27), new Color(50, 0, 0), 0.49d, 1.0d,
                           0.88d, true),
           new JugadorImpl("Fabio", 11, new Color(246, 194, 148), new Color(50, 0, 0), 0.9d, 0.85d,
@@ -275,7 +275,7 @@ public class Leti implements Tactic {
     }
   }
 
-  TacticDetail detalle = new TacticaDetalleImpl();
+  Team detalle = new TacticaDetalleImpl();
 
   private Equipo leti;
 
@@ -284,7 +284,7 @@ public class Leti implements Tactic {
   }
 
   @Override
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return detalle;
   }
 

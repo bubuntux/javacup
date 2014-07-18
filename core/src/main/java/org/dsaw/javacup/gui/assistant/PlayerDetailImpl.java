@@ -1,13 +1,13 @@
 package org.dsaw.javacup.gui.assistant;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 
 import java.awt.*;
 
 /**
  * Esta clase implementa PlayerDetail es usada internamente por el Asistente
  */
-class PlayerDetailImpl implements PlayerDetail {
+class PlayerDetailImpl implements Player {
 
   private PlayerDetailImpl() {
   }
@@ -34,7 +34,7 @@ class PlayerDetailImpl implements PlayerDetail {
   }
 
   @Override
-  public String getPlayerName() {
+  public String getName() {
     return nombre;
   }
 

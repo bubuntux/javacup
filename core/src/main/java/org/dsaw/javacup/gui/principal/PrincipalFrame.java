@@ -3,7 +3,7 @@ package org.dsaw.javacup.gui.principal;
 import com.thoughtworks.xstream.XStream;
 
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.engine.Match;
 import org.dsaw.javacup.model.engine.StoredMatch;
 import org.dsaw.javacup.model.util.Constants;
@@ -110,7 +110,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
   }
 
   LinkedList<File> directorios = new LinkedList<>();
-  final HashMap<Class, TacticDetail> tactics = new HashMap<>();
+  final HashMap<Class, Team> tactics = new HashMap<>();
 
   /**
    * Creates new form Principal
@@ -137,7 +137,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         Class tacticaClass = (Class) value;
         Object instance;
         @SuppressWarnings("element-type-mismatch")
-        TacticDetail d = tactics.get(value);
+        Team d = tactics.get(value);
         if (d == null) {
           try {
             instance = tacticaClass.getConstructor(new Class[]{}).newInstance(new Object[]{});
@@ -148,11 +148,11 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
             logger.error("Error al instanciar tactica " + value, e);
           }
         }
-        final String nombre = d.getTacticName();
+        final String nombre = d.getName();
         final String
             otros =
-            "clase(" + tacticaClass.getSimpleName() + ") pais(" + d.getCountry() + ") entrenador("
-            + d.getCoach() + ")";
+            "clase(" + tacticaClass.getSimpleName() + ") pais(" + d.getCountryCode() + ") entrenador("
+            + d.getCoachName() + ")";
         final Color camiseta = d.getShirtColor();
         final Color pantalones = d.getShortsColor();
         final boolean seleccionado = isSelected;

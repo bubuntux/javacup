@@ -5,7 +5,7 @@
 
 package org.dsaw.javacup.tactics.jvc2013.Sag;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.util.Position;
 
@@ -16,17 +16,17 @@ public class JRival extends Jugador {
 
   private boolean portero = false;
 
-  public JRival(int idx, PlayerDetail detalle, Position posRef) {
+  public JRival(int idx, Player detalle, Position posRef) {
     super(idx, detalle, posRef);
     this.setTipo(Jugador.TIPO_RIVAL);
   }
 
-  public JRival(int idx, PlayerDetail detalle) {
+  public JRival(int idx, Player detalle) {
     super(idx, detalle);
     this.setTipo(Jugador.TIPO_RIVAL);
   }
 
-  public JRival(int idx, PlayerDetail detalle, boolean portero) {
+  public JRival(int idx, Player detalle, boolean portero) {
     super(idx, detalle);
     this.setTipo(Jugador.TIPO_RIVAL);
     this.portero = portero;

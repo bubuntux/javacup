@@ -2,27 +2,27 @@ package org.dsaw.javacup.tactics.jvc2013.emandem.configuracion;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.render.UniformStyle;
 
 import java.awt.*;
 
-public class TacticaDetalleImpl implements TacticDetail {
+public class TacticaDetalleImpl implements Team {
 
   //Detalles del equipo
   @Override
-  public String getTacticName() {
+  public String getName() {
     return "EmAndEm";
   }
 
   @Override
-  public CountryCode getCountry() {
+  public CountryCode getCountryCode() {
     return CountryCode.MX;
   }
 
   @Override
-  public String getCoach() {
+  public String getCoachName() {
     return "Marcos E. Coronado B.";
   }
 
@@ -91,8 +91,8 @@ public class TacticaDetalleImpl implements TacticDetail {
 
   // Configuraci�n de los jugadores
   @Override
-  public PlayerDetail[] getPlayers() {
-    return new PlayerDetail[]{
+  public Player[] getPlayers() {
+    return new Player[]{
         new JugadorImpl("Heineken", 1, new Color(255, 204, 153), new Color(255, 204, 102), 1.0d,
                         1.0d, 1.0d, true),
         new JugadorImpl("Mort Subite", 2, new Color(255, 200, 150), new Color(255, 204, 102), 0.76d,

@@ -1,6 +1,6 @@
 package org.dsaw.javacup.tactics.jvc2013.CTeam.jugador;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.tactics.jvc2013.CTeam.tactica.ICTeam2011;
 
@@ -9,7 +9,7 @@ import java.util.Collection;
 
 public class PorteroRivalCT extends AbstractJugador {
 
-  public PorteroRivalCT(Equipo equipo, int indice, PlayerDetail detalle, ICTeam2011 tactica) {
+  public PorteroRivalCT(Equipo equipo, int indice, Player detalle, ICTeam2011 tactica) {
     super(equipo, indice, detalle, tactica);
   }
 

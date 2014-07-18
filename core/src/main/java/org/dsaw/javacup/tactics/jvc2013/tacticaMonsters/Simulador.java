@@ -5,7 +5,7 @@
 
 package org.dsaw.javacup.tactics.jvc2013.tacticaMonsters;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.trajectory.AirTrajectory;
@@ -110,7 +110,7 @@ public class Simulador {
       return 0;
     }
     Position[] posJugadores;
-    PlayerDetail[] detallesJugador;
+    Player[] detallesJugador;
     if (equipoPropio) {
       posJugadores = sp.myPlayers();
       detallesJugador = sp.myPlayersDetail();
@@ -145,7 +145,7 @@ public class Simulador {
 
   }
 
-  public datosTiro calcularPase(GameSituations sp, PlayerDetail jd, Position posAct,
+  public datosTiro calcularPase(GameSituations sp, Player jd, Position posAct,
                                 Position posObj) {
     datosTiro tiro = new datosTiro();
     tiro.tipo = PaseMalo;

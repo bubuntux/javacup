@@ -21,9 +21,9 @@ package org.dsaw.javacup.tactics.jvc2013.rabobong;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -123,20 +123,20 @@ public class Rabobong implements Tactic {
       new Position(12.363636363636363, 36.82126696832579)
   };
 
-  class TacticaDetalleImpl implements TacticDetail {
+  class TacticaDetalleImpl implements Team {
 
     @Override
-    public String getTacticName() {
+    public String getName() {
       return "Rabobong";
     }
 
     @Override
-    public CountryCode getCountry() {
+    public CountryCode getCountryCode() {
       return CountryCode.CO;
     }
 
     @Override
-    public String getCoach() {
+    public String getCoachName() {
       return "Freymam Vallejo";
     }
 
@@ -200,7 +200,7 @@ public class Rabobong implements Tactic {
       return UniformStyle.SIN_ESTILO;
     }
 
-    class JugadorImpl implements PlayerDetail {
+    class JugadorImpl implements Player {
 
       String nombre;
       int numero;
@@ -222,7 +222,7 @@ public class Rabobong implements Tactic {
       }
 
       @Override
-      public String getPlayerName() {
+      public String getName() {
         return nombre;
       }
 
@@ -264,8 +264,8 @@ public class Rabobong implements Tactic {
     }
 
     @Override
-    public PlayerDetail[] getPlayers() {
-      return new PlayerDetail[]{
+    public Player[] getPlayers() {
+      return new Player[]{
           new JugadorImpl("Oscor Feyde", 20, new Color(102, 51, 0), new Color(50, 0, 0), 1.0d, 1.0d,
                           0.58d, true),
           new JugadorImpl("Haymen", 21, new Color(204, 153, 0), new Color(50, 0, 0), 1.0d, 0.69d,
@@ -292,10 +292,10 @@ public class Rabobong implements Tactic {
     }
   }
 
-  TacticDetail detalle = new TacticaDetalleImpl();
+  Team detalle = new TacticaDetalleImpl();
 
   @Override
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return detalle;
   }
 
@@ -518,7 +518,7 @@ public class Rabobong implements Tactic {
   private void EncontrarPorteroRival(GameSituations sp) {
     if (indPorteroRival == -1) {
       indPorteroRival = 0;
-      PlayerDetail[] detallesRivales = sp.rivalPlayersDetail();
+      Player[] detallesRivales = sp.rivalPlayersDetail();
       for (int j = 0; j < detallesRivales.length; j++) {
         if (detallesRivales[j].isGoalKeeper()) {
           indPorteroRival = j;
@@ -663,7 +663,7 @@ public class Rabobong implements Tactic {
     double dist0, dist;
     int idxFound = -1;
     LinkedList<Double> founds = new LinkedList<>();
-    PlayerDetail detalles[] = sp.rivalPlayersDetail();
+    Player detalles[] = sp.rivalPlayersDetail();
     while (!found) {
       double[] posBalon = sp.getTrajectory(it);
       if (!(new Position(posBalon[0], posBalon[1])).isInsideGameField(2)) {

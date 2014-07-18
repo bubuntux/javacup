@@ -1,7 +1,7 @@
 package org.dsaw.javacup.tactics.jvc2013.masia;
 
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
@@ -84,7 +84,7 @@ public class Masia implements Tactic {
   }
 
   @Override
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return new MyTacticDetail();
   }
 

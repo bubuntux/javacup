@@ -1,6 +1,6 @@
 package org.dsaw.javacup.tactics.jvc2013.meerkats;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.util.Position;
 
 import java.awt.*;
@@ -8,7 +8,7 @@ import java.awt.*;
 /**
  * Implementación de PlayerDetail.
  */
-public class JugadorImpl implements PlayerDetail {
+public class JugadorImpl implements Player {
 
   // ATRIBUTOS =================================================================================//
 
@@ -52,7 +52,7 @@ public class JugadorImpl implements PlayerDetail {
   // MÉTODOS ===================================================================================//
 
   @Override
-  public String getPlayerName() {
+  public String getName() {
     return nombre;
   }
 

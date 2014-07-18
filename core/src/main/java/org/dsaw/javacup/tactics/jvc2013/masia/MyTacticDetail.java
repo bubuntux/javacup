@@ -2,27 +2,27 @@ package org.dsaw.javacup.tactics.jvc2013.masia;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
 
 import java.awt.*;
 
-public class MyTacticDetail implements TacticDetail {
+public class MyTacticDetail implements Team {
 
   @Override
-  public String getTacticName() {
+  public String getName() {
     return "La Masia";
   }
 
   @Override
-  public CountryCode getCountry() {
+  public CountryCode getCountryCode() {
     return CountryCode.CU;
   }
 
   @Override
-  public String getCoach() {
+  public String getCoachName() {
     return "Pep Ram�rez";
   }
 
@@ -86,7 +86,7 @@ public class MyTacticDetail implements TacticDetail {
     return UniformStyle.SIN_ESTILO;
   }
 
-  class PlayerDetailImpl implements PlayerDetail {
+  class PlayerDetailImpl implements Player {
 
     String nombre;
     int numero;
@@ -108,7 +108,7 @@ public class MyTacticDetail implements TacticDetail {
     }
 
     @Override
-    public String getPlayerName() {
+    public String getName() {
       return nombre;
     }
 
@@ -150,8 +150,8 @@ public class MyTacticDetail implements TacticDetail {
   }
 
   @Override
-  public PlayerDetail[] getPlayers() {
-    return new PlayerDetail[]{
+  public Player[] getPlayers() {
+    return new Player[]{
         new PlayerDetailImpl("Valdes", 1, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d,
                              0.75d, 1.0d, true),
         new PlayerDetailImpl("Pique", 2, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 0.35d,

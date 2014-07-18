@@ -5,7 +5,7 @@
 
 package org.dsaw.javacup.tactics.jvc2013.Sag;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -21,12 +21,12 @@ public class Portero extends Jugador {
 
   private Random rnd = new Random();
 
-  public Portero(int idx, PlayerDetail detalle, Position posRef) {
+  public Portero(int idx, Player detalle, Position posRef) {
     super(idx, detalle, posRef);
     this.setTipo(Jugador.TIPO_PORTERO);
   }
 
-  public Portero(int idx, PlayerDetail detalle) {
+  public Portero(int idx, Player detalle) {
     super(idx, detalle);
     this.setTipo(Jugador.TIPO_PORTERO);
   }

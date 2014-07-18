@@ -1,6 +1,6 @@
 package org.dsaw.javacup.model.util;
 
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.render.UniformStyle;
 
 import java.awt.*;
@@ -14,7 +14,7 @@ public final class TacticValidate {
   /**
    * Clase para Validar implementaciones tactica
    */
-  public static void validateDetail(String name, TacticDetail t) throws Exception {
+  public static void validateDetail(String name, Team t) throws Exception {
     if (t == null) {
       throw new Exception(name + "TacticDetail null");
     }
@@ -29,12 +29,12 @@ public final class TacticValidate {
     if (t.getStyle() == null) {
       throw new Exception(name + "TacticDetail: estilo es nulo");
     }
-    if (t.getCoach() == null || t.getTacticName() == null || t.getCountry() == null) {
+    if (t.getCoachName() == null || t.getName() == null || t.getCountryCode() == null) {
       throw new Exception(name + "TacticDetail: Entrenador, Nombre o Pais nulo");
     }
-    if (t.getCoach().trim().length() == 0 ||
-        t.getTacticName().trim().length() == 0 ||
-        t.getCountry() == null) {
+    if (t.getCoachName().trim().length() == 0 ||
+        t.getName().trim().length() == 0 ||
+        t.getCountryCode() == null) {
       throw new Exception(name + "TacticDetail: Entrenador, Nombre o Pais vacio");
     }
     if (t.getPlayers() == null) {
@@ -55,7 +55,7 @@ public final class TacticValidate {
       if (t.getPlayers()[i].getHairColor() == null || t.getPlayers()[i].getSkinColor() == null) {
         throw new Exception(name + "TacticDetail: Jugador[" + i + "] ColorPiel o ColorPelo nulo");
       }
-      if (t.getPlayers()[i].getPlayerName() == null) {
+      if (t.getPlayers()[i].getName() == null) {
         throw new Exception(name + "TacticDetail: Jugador[" + i + "] Nombre nulo");
       }
       if (t.getPlayers()[i].getNumber() <= 0 || t.getPlayers()[i].getNumber() > 99) {
@@ -180,7 +180,7 @@ public final class TacticValidate {
   /**
    * Indica true si es necesario que el equipo visita cambie a su uniforme alternativo
    */
-  public static boolean useAlternativeColors(TacticDetail local, TacticDetail visita) {
+  public static boolean useAlternativeColors(Team local, Team visita) {
     Color cl1, cv1, cv2;
     cl1 = mesclarColor(local.getShirtColor(), local.getShirtLineColor(), getP1(local.getStyle()));
     cv1 =
@@ -196,7 +196,7 @@ public final class TacticValidate {
   /**
    * Indica true si los dos unifermes de una tactica son muy parecidos
    */
-  public static boolean equalsColors(TacticDetail local) {
+  public static boolean equalsColors(Team local) {
     Color cl1, cl2;
     cl1 = mesclarColor(local.getShirtColor(), local.getShirtLineColor(), getP1(local.getStyle()));
     cl2 =

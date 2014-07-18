@@ -1,8 +1,8 @@
 package org.dsaw.javacup.model.engine;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.Command.CommandType;
 import org.dsaw.javacup.model.command.CommandHitBall;
@@ -199,9 +199,9 @@ public final class Match implements MatchInterface {
 
     posSaqueCentro = new Position[][]{p0[1], p1[1]};
     //guarda las caracteristicas de los jugadores en los objetos GameSituations*/
-    spLocal.set(new PlayerDetail[][]{tacticaLocal.getDetail().getPlayers(),
+    spLocal.set(new Player[][]{tacticaLocal.getDetail().getPlayers(),
                                      tacticaVisita.getDetail().getPlayers()});
-    spVisita.set(new PlayerDetail[][]{tacticaVisita.getDetail().getPlayers(),
+    spVisita.set(new Player[][]{tacticaVisita.getDetail().getPlayers(),
                                       tacticaLocal.getDetail().getPlayers()});
     if (save) {
       guardado =
@@ -1125,7 +1125,7 @@ public final class Match implements MatchInterface {
 
     double angulo = 0, error;//el angle y el error
     Position p, p0;
-    PlayerDetail j;//detalles del jugador para obtener sus aptitudes (remate y error)
+    Player j;//detalles del jugador para obtener sus aptitudes (remate y error)
     int idx;//indice;
 
     ////// Calcula el angle de movimiento para ser usado cuando se avanza con el ballPosition ////
@@ -1546,12 +1546,12 @@ public final class Match implements MatchInterface {
   }
 
   @Override
-  public TacticDetail getDetalleLocal() {
+  public Team getDetalleLocal() {
     return tacticaLocal.getDetail();
   }
 
   @Override
-  public TacticDetail getDetalleVisita() {
+  public Team getDetalleVisita() {
     return tacticaVisita.getDetail();
   }
 

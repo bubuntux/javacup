@@ -5,7 +5,7 @@
 package org.dsaw.javacup.tactics.jvc2013.mansporting;
 
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
@@ -32,7 +32,7 @@ public class MSGTactica implements Tactic {
   /**
    * Detalle de la táctica.
    */
-  private final TacticDetail tacticaDetalle;
+  private final Team tacticaDetalle;
   private final List<MSGJugadorPropio> jugadores;
   private MSGSituacionPartidoContext situacionPartidoContext;
   private final ThreadOperationManager threadOperationHandler;
@@ -152,7 +152,7 @@ public class MSGTactica implements Tactic {
   }
 
   @Override
-  public synchronized TacticDetail getDetail() {
+  public synchronized Team getDetail() {
     return tacticaDetalle;
   }
 

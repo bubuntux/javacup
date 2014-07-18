@@ -1,6 +1,6 @@
 package org.dsaw.javacup.tactics.jvc2013.CTeam.jugador;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.trajectory.AirTrajectory;
@@ -27,7 +27,7 @@ public abstract class AbstractJugador implements IJugadorCT {
 
   private final int indice;
 
-  private final PlayerDetail detalle;
+  private final Player detalle;
 
   private final Deque<PosicionCT> posiciones;
 
@@ -55,7 +55,7 @@ public abstract class AbstractJugador implements IJugadorCT {
 
   protected Disparo disparo;
 
-  public AbstractJugador(Equipo equipo, int indice, PlayerDetail detalle, ICTeam2011 tactica) {
+  public AbstractJugador(Equipo equipo, int indice, Player detalle, ICTeam2011 tactica) {
     this.equipo = equipo;
     this.indice = indice;
     this.detalle = detalle;
@@ -195,7 +195,7 @@ public abstract class AbstractJugador implements IJugadorCT {
   }
 
   @Override
-  public PlayerDetail getDetalle() {
+  public Player getDetalle() {
     return detalle;
   }
 

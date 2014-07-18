@@ -67,7 +67,7 @@ public abstract class MSGAbstractJugadorDetalle implements MSGJugadorDetalle {
   }
 
   @Override
-  public final String getPlayerName() {
+  public final String getName() {
     return nombre;
   }
 

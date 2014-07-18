@@ -2,8 +2,8 @@ package org.dsaw.javacup.tactics.jvc2013.meerkats;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.render.UniformStyle;
 
 import java.awt.*;
@@ -11,20 +11,20 @@ import java.awt.*;
 /**
  * Implementación de TacticDetail.
  */
-public class TacticaDetalleImpl implements TacticDetail {
+public class TacticaDetalleImpl implements Team {
 
   @Override
-  public String getTacticName() {
+  public String getName() {
     return "Meerkats FC";
   }
 
   @Override
-  public CountryCode getCountry() {
+  public CountryCode getCountryCode() {
     return CountryCode.CO;
   }
 
   @Override
-  public String getCoach() {
+  public String getCoachName() {
     return "Christian Ortega";
   }
 
@@ -89,7 +89,7 @@ public class TacticaDetalleImpl implements TacticDetail {
   }
 
   @Override
-  public PlayerDetail[] getPlayers() {
+  public Player[] getPlayers() {
     return Alineacion.getJugadores();
   }
 

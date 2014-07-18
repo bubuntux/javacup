@@ -4,7 +4,7 @@
  */
 package org.dsaw.javacup.tactics.jvc2013.Mou_team;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -668,7 +668,7 @@ public class Tactica_Mou_Team {
     return llega;
   }
 
-  private boolean interceptariaContrarioRegate(PlayerDetail jug, Position posJug,
+  private boolean interceptariaContrarioRegate(Player jug, Position posJug,
                                                Position posDestino) {
     if (this.sp.isStarts()) //para evitar que se regatee de saque de banda
     {
@@ -1259,7 +1259,7 @@ public class Tactica_Mou_Team {
 
   }
 
-  private posicionTiro[] generarArrayPuntuacionesGol(double[] arrayAngulos, PlayerDetail jug,
+  private posicionTiro[] generarArrayPuntuacionesGol(double[] arrayAngulos, Player jug,
                                                      Position posBalon) {
     double distCubiertaPorDisparo;
     int tamanio = arrayAngulos.length;
@@ -1310,7 +1310,7 @@ public class Tactica_Mou_Team {
     return arrayPuntuaciones;
   }
 
-  private double calcularValorXLineaDeFondo(Position posBalon, PlayerDetail jug, double angulo) {
+  private double calcularValorXLineaDeFondo(Position posBalon, Player jug, double angulo) {
     double nuevaX = -1000;
     double remateJugador, vel, fuerzaRemate, time, desplazamientoHorizontal, nuevaY;
 

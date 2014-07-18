@@ -4,7 +4,7 @@
  */
 package org.dsaw.javacup.tactics.jvc2013.Sag;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -22,12 +22,12 @@ public class Delantero extends Jugador {
 
   private boolean isPaseAtras = false;
 
-  public Delantero(int idx, PlayerDetail detalle, Position posRef) {
+  public Delantero(int idx, Player detalle, Position posRef) {
     super(idx, detalle, posRef);
     this.setTipo(Jugador.TIPO_DELANTERO);
   }
 
-  public Delantero(int idx, PlayerDetail detalle) {
+  public Delantero(int idx, Player detalle) {
     super(idx, detalle);
     this.setTipo(Jugador.TIPO_DELANTERO);
   }

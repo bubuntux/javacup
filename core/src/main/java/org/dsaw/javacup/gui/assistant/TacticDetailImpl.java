@@ -4,8 +4,8 @@ import com.neovisionaries.i18n.CountryCode;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ import java.util.Random;
  * Esta clase implementa TacticDetail es usada internamente por el Asistente, pero tambien puede
  * usarse para cargar dinamicamente desde un archivo guardado en el codigo, una clase TacticDetail
  */
-public final class TacticDetailImpl implements TacticDetail {
+public final class TacticDetailImpl implements Team {
 
   private static Logger logger = LoggerFactory.getLogger(TacticDetailImpl.class);
   private transient Position alineacion1[] = new Position[]{
@@ -371,17 +371,17 @@ public final class TacticDetailImpl implements TacticDetail {
   }
 
   @Override
-  public String getTacticName() {
+  public String getName() {
     return nombre;
   }
 
   @Override
-  public CountryCode getCountry() {
+  public CountryCode getCountryCode() {
     return CountryCode.ES; //TODO fix
   }
 
   @Override
-  public String getCoach() {
+  public String getCoachName() {
     return entrenador;
   }
 
@@ -415,7 +415,7 @@ public final class TacticDetailImpl implements TacticDetail {
   }
 
   @Override
-  public PlayerDetail[] getPlayers() {
+  public Player[] getPlayers() {
     return jugadores;
   }
 

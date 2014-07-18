@@ -2,8 +2,8 @@ package org.dsaw.javacup.tactics.jvc2013.absolutsport.tactica;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
 
@@ -14,20 +14,20 @@ import java.awt.*;
  *
  * @author Christian Onwuzor Mart�n (chr -> airchris01@yahoo.es)
  */
-public class TacticaAbsolutSportDetalle implements TacticDetail {
+public class TacticaAbsolutSportDetalle implements Team {
 
   @Override
-  public String getTacticName() {
+  public String getName() {
     return "C.D. Absolut Sport";
   }
 
   @Override
-  public CountryCode getCountry() {
+  public CountryCode getCountryCode() {
     return CountryCode.ES;
   }
 
   @Override
-  public String getCoach() {
+  public String getCoachName() {
     return "Don Christian Onwuzor";
   }
 
@@ -94,7 +94,7 @@ public class TacticaAbsolutSportDetalle implements TacticDetail {
   }
 
 
-  class JugadorImpl implements PlayerDetail {
+  class JugadorImpl implements Player {
 
     String nombre;
     int numero;
@@ -116,7 +116,7 @@ public class TacticaAbsolutSportDetalle implements TacticDetail {
     }
 
     @Override
-    public String getPlayerName() {
+    public String getName() {
       return nombre;
     }
 
@@ -158,9 +158,9 @@ public class TacticaAbsolutSportDetalle implements TacticDetail {
   }
 
   @Override
-  public PlayerDetail[] getPlayers() {
+  public Player[] getPlayers() {
     // velocidad, remate, presicion
-    return new PlayerDetail[]{
+    return new Player[]{
         new JugadorImpl("Jugador 1", 1, new Color(255, 200, 150), new Color(204, 204, 0), 1.0d,
                         1.0d, 1.0d, true),
         new JugadorImpl("Jugador 2", 2, new Color(255, 200, 150), new Color(0, 0, 0), 1.0d, 0.50d,

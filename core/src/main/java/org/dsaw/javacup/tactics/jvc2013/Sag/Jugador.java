@@ -5,7 +5,7 @@
 
 package org.dsaw.javacup.tactics.jvc2013.Sag;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Constants;
@@ -52,13 +52,13 @@ public abstract class Jugador {
 
   protected GameSituations sp;
 
-  public Jugador(int idx, PlayerDetail detalle, Position posRef) {
+  public Jugador(int idx, Player detalle, Position posRef) {
     this(idx, detalle);
     this.posReferencia = posRef;
     this.posDestino = posRef;
   }
 
-  public Jugador(int idx, PlayerDetail detalle) {
+  public Jugador(int idx, Player detalle) {
     this.idx = idx;
 
     this.velocidad = Constants.getVelocidad(detalle.getSpeed());

@@ -73,7 +73,7 @@ public class TacticSelector {
     for (Class<? extends Tactic> tacticClass : reflections.getSubTypesOf(Tactic.class)) {
       try {
         Tactic tactic = tacticClass.newInstance(); //TODO detail as a main class
-        CountryCode countryCode = tactic.getDetail().getCountry();
+        CountryCode countryCode = tactic.getDetail().getCountryCode();
         List<Tactic> tacticList = tactics.get(countryCode);
         if (tacticList == null) {
           tacticList = new ArrayList<>();
@@ -89,8 +89,8 @@ public class TacticSelector {
       Collections.sort(tacticList, new Comparator<Tactic>() {
         @Override
         public int compare(Tactic o1, Tactic o2) {
-          return o1.getDetail().getTacticName().toUpperCase().compareTo(
-              o2.getDetail().getTacticName().toUpperCase());
+          return o1.getDetail().getName().toUpperCase().compareTo(
+              o2.getDetail().getName().toUpperCase());
         }
       });
     }

@@ -10,9 +10,9 @@ package org.dsaw.javacup.tactics.jvc2013.tukutuku;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.engine.GameSituations;
 import org.dsaw.javacup.model.util.Position;
@@ -256,20 +256,20 @@ public class Tactica implements Tactic {
   public ArrayList<Position[]> alineaciones = new ArrayList<>();
 
 
-  class TacticDetailImpl implements TacticDetail {
+  class TacticDetailImpl implements Team {
 
     @Override
-    public String getTacticName() {
+    public String getName() {
       return "Tuku-Tuku";
     }
 
     @Override
-    public CountryCode getCountry() {
+    public CountryCode getCountryCode() {
       return CountryCode.ES;
     }
 
     @Override
-    public String getCoach() {
+    public String getCoachName() {
       return "Victor Revelationi";
     }
 
@@ -333,7 +333,7 @@ public class Tactica implements Tactic {
       return UniformStyle.FRANJA_HORIZONTAL;
     }
 
-    class JugadorImpl implements PlayerDetail {
+    class JugadorImpl implements Player {
 
       String nombre;
       int numero;
@@ -355,7 +355,7 @@ public class Tactica implements Tactic {
       }
 
       @Override
-      public String getPlayerName() {
+      public String getName() {
         return nombre;
       }
 
@@ -397,8 +397,8 @@ public class Tactica implements Tactic {
     }
 
     @Override
-    public PlayerDetail[] getPlayers() {
-      return new PlayerDetail[]{
+    public Player[] getPlayers() {
+      return new Player[]{
           new JugadorImpl("Bambino", 1, new Color(255, 200, 150), new Color(255, 204, 0), 1.0d,
                           1.0d, 0.0d, true),
           new JugadorImpl("Sparrowhawk", 2, new Color(255, 200, 150), new Color(153, 102, 0), 1.0d,
@@ -425,10 +425,10 @@ public class Tactica implements Tactic {
     }
   }
 
-  TacticDetail detalle = new TacticDetailImpl();
+  Team detalle = new TacticDetailImpl();
 
   @Override
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return detalle;
   }
 

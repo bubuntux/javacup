@@ -1,6 +1,6 @@
 package org.dsaw.javacup.tactics.jvc2013.meerkats;
 
-import org.dsaw.javacup.model.PlayerDetail;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -614,7 +614,7 @@ public class ControladorJugador {
   private double obtenerFuerzaDribbling(int jugador) {
     double CONSTANTE_GARZON = 1.9d;
 
-    PlayerDetail jugadorTemp = detalle.getPlayers()[jugador];
+    Player jugadorTemp = detalle.getPlayers()[jugador];
     double
         fuerzaDribbling =
         CONSTANTE_GARZON * (jugadorTemp.getSpeed() * 0.25d + 0.25d) / (jugadorTemp.getPower() * 1.2d
@@ -635,7 +635,7 @@ public class ControladorJugador {
     // una velodidad de remate máximo hipotética de 2.4 m/it.
     double CONSTANTE_GARZON = 0.045714285d;
 
-    PlayerDetail jugadorTemp = detalle.getPlayers()[jugador];
+    Player jugadorTemp = detalle.getPlayers()[jugador];
     Position origenPase = sp.myPlayers()[jugador];
     double distanciaPase = origenPase.distance(destinoPase);
     double remateJugador = Constants.getVelocidadRemate(jugadorTemp.getPower());

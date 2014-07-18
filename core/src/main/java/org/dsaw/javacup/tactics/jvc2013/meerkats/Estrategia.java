@@ -1,7 +1,7 @@
 package org.dsaw.javacup.tactics.jvc2013.meerkats;
 
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.TacticDetail;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandMoveTo;
 import org.dsaw.javacup.model.engine.GameSituations;
@@ -230,7 +230,7 @@ public class Estrategia implements Tactic {
   // MÉTODOS ===================================================================================//
 
   @Override
-  public TacticDetail getDetail() {
+  public Team getDetail() {
     return detalle;
   }
 
