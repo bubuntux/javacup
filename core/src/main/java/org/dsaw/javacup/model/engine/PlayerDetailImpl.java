@@ -1,6 +1,6 @@
 package org.dsaw.javacup.model.engine;
 
-import org.dsaw.javacup.model.PlayerI;
+import org.dsaw.javacup.model.Player;
 
 import java.awt.*;
 import java.io.Serializable;
@@ -8,7 +8,7 @@ import java.io.Serializable;
 /**
  * Implementacion de PlayerDetail que define la configuración de un jugador, uso interno
  */
-class PlayerDetailImpl implements PlayerI, Serializable {
+class PlayerDetailImpl implements Player, Serializable {
 
   private final String nombre;
   private final Color piel;
@@ -19,7 +19,7 @@ class PlayerDetailImpl implements PlayerI, Serializable {
   private final double presicion;
   private final boolean portero;
 
-  public PlayerDetailImpl(PlayerI det) {
+  public PlayerDetailImpl(Player det) {
     this.nombre = det.getName();
     this.numero = det.getNumber();
     this.piel = det.getSkinColor();

@@ -1,64 +1,33 @@
 package org.dsaw.javacup.model;
 
 import java.awt.*;
+import java.io.Serializable;
 
 /**
- * Created by Julio Gutierrez on 7/18/14.
+ * Player information
  */
-public class Player implements PlayerI {
+public interface Player extends Cloneable, Serializable {
 
-  private final String name;
-  private final int number;
-  private final boolean goalKeeper;
-  private final Color skin, hair;
-  private final float speed, power, precision;
+  public String getName();
 
-  public Player(String name, int number, boolean goalKeeper, Color skin, Color hair, float speed,
-                float power, float precision) {
-    this.name = name;
-    this.number = number;
-    this.goalKeeper = goalKeeper;
-    this.skin = skin;
-    this.hair = hair;
-    this.speed = speed;
-    this.power = power;
-    this.precision = precision;
-  }
+  public int getNumber();
 
-  public final String getName() {
-    return name;
-  }
+  public boolean isGoalKeeper();
 
-  public final int getNumber() {
-    return number;
-  }
+  //// TODO Merge into a class  *******************
+  public Color getSkinColor();
 
-  public final boolean isGoalKeeper() {
-    return goalKeeper;
-  }
+  public Color getHairColor();
+  //// TODO Merge into a class  *******************
 
-  @Override
-  public final Color getSkinColor() {
-    return skin;
-  }
 
-  @Override
-  public final Color getHairColor() {
-    return hair;
-  }
+  //// TODO Merge into a class  *******************
+  public double getSpeed();
 
-  @Override
-  public final double getSpeed() {
-    return speed;
-  }
+  public double getPower();
 
-  @Override
-  public final double getPower() {
-    return power;
-  }
+  public double getPrecision();
+  //// TODO Merge into a class  *******************
 
-  @Override
-  public final double getPrecision() {
-    return precision;
-  }
+  public Player clone() throws CloneNotSupportedException;
 }

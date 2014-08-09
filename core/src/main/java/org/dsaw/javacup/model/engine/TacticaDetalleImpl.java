@@ -2,7 +2,7 @@ package org.dsaw.javacup.model.engine;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.PlayerI;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.render.UniformStyle;
 
@@ -98,7 +98,7 @@ final class TacticaDetalleImpl implements Team, Serializable {
   }
 
   @Override
-  public PlayerI[] getPlayers() {
+  public Player[] getPlayers() {
     return jugadores;
   }
 
