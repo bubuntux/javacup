@@ -5,7 +5,7 @@ import java.awt.*;
 /**
  * Player information
  */
-public interface PlayerI {
+public interface PlayerI { //TODO delete me!!
 
   public String getName();
 
