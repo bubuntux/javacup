@@ -1,7 +1,7 @@
 package org.dsaw.javacup.render;
 
 import org.dsaw.javacup.gui.principal.PrincipalFrame;
-import org.dsaw.javacup.model.Team;
+import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.model.engine.MatchInterface;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
@@ -138,7 +138,7 @@ public class VisorBasico extends javax.swing.JFrame {
       imgVisita[i] =
           ImageIO.read(getClass().getResource("/imagenes/jugador/" + ev + "" + i + ".png"));
     }
-    Team impl = p.getDetalleLocal();
+    ITeam impl = p.getDetalleLocal();
     int upolera;
     int upantalon;
     int ucalcetas;

@@ -1,5 +1,5 @@
+import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.engine.Match;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.TacticValidate;
@@ -24,9 +24,9 @@ public class Tournament {
 
   String instancia;
   Tactic local;
-  Team localDetalle;
+  ITeam localDetalle;
   Tactic visita;
-  Team visitaDetalle;
+  ITeam visitaDetalle;
   Match partido;
 
   /**

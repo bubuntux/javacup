@@ -1,6 +1,6 @@
 package org.dsaw.javacup.gui.assistant;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.IPlayer;
 import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.trajectory.AirTrajectory;
 import org.dsaw.javacup.model.util.Constants;
@@ -34,7 +34,7 @@ public class FormationAndSimulationTab {
                      Constants.penalSup, Constants.centroArcoSup, Constants.posteDerArcoInf,
                      Constants.posteIzqArcoInf, Constants.cornerInfDer,
                      Constants.cornerInfIzq, Constants.penalInf, Constants.centroCampoJuego};
-  private final JList<PlayerDetailImpl> _playerList;
+  private final JList<IPlayerDetailImpl> _playerList;
   private final TacticDetailImpl _tacticDetail;
   boolean cupdate = true;
   JPanel jPanel4 = new JPanel();
@@ -60,7 +60,7 @@ public class FormationAndSimulationTab {
   private int _angleZ;
 
   public FormationAndSimulationTab(TacticDetailImpl tacticDetail,
-                                   JList<PlayerDetailImpl> playerList) {
+                                   JList<IPlayerDetailImpl> playerList) {
     _tacticDetail = tacticDetail;
     _playerList = playerList;
 
@@ -237,7 +237,7 @@ public class FormationAndSimulationTab {
         Position[] posiciones = _tacticDetail.getAlineacion(jComboBox3.getSelectedIndex());
         double remate = 0, error = 0;
         double x = 0, y = 0;
-        for (Player j : _tacticDetail.getPlayers()) {
+        for (IPlayer j : _tacticDetail.getPlayers()) {
           p = posiciones[i];
           boolean ok = true;
           int idx = jComboBox2.getSelectedIndex();
@@ -735,7 +735,7 @@ public class FormationAndSimulationTab {
     return sx * r / Constants.LARGO_CAMPO_JUEGO;
   }
 
-  private PlayerDetailImpl getJugador() {
+  private IPlayerDetailImpl getJugador() {
     return _playerList.getSelectedValue();
   }
 

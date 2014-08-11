@@ -1,6 +1,6 @@
 package org.dsaw.javacup.model.util;
 
-import org.dsaw.javacup.model.Team;
+import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.render.UniformStyle;
 
 import java.awt.*;
@@ -14,7 +14,7 @@ public final class TacticValidate {
   /**
    * Clase para Validar implementaciones tactica
    */
-  public static void validateDetail(String name, Team t) throws Exception {
+  public static void validateDetail(String name, ITeam t) throws Exception {
     if (t == null) {
       throw new Exception(name + "TacticDetail null");
     }
@@ -180,7 +180,7 @@ public final class TacticValidate {
   /**
    * Indica true si es necesario que el equipo visita cambie a su uniforme alternativo
    */
-  public static boolean useAlternativeColors(Team local, Team visita) {
+  public static boolean useAlternativeColors(ITeam local, ITeam visita) {
     Color cl1, cv1, cv2;
     cl1 = mesclarColor(local.getShirtColor(), local.getShirtLineColor(), getP1(local.getStyle()));
     cv1 =
@@ -196,7 +196,7 @@ public final class TacticValidate {
   /**
    * Indica true si los dos unifermes de una tactica son muy parecidos
    */
-  public static boolean equalsColors(Team local) {
+  public static boolean equalsColors(ITeam local) {
     Color cl1, cl2;
     cl1 = mesclarColor(local.getShirtColor(), local.getShirtLineColor(), getP1(local.getStyle()));
     cl2 =

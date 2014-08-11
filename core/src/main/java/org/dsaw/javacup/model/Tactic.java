@@ -16,7 +16,7 @@ public interface Tactic { //TODO rename?
   /**
    * Returns the detail of the tactic
    */
-  public Team getDetail();
+  public ITeam getDetail();
 
   /**Retorna lista de comandos
    * que los jugadores intentaran ejecutar en la siguiente iteración,

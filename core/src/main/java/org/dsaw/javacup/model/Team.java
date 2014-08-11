@@ -2,47 +2,60 @@ package org.dsaw.javacup.model;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.render.UniformStyle;
-
-import java.awt.*;
+import java.util.Arrays;
+import java.util.Collections;
+import java.util.List;
 
 /**
- * Team information
+ * Created by Julio Gutierrez on 8/10/14.
  */
-public interface Team {
+public abstract class Team {
 
-  public String getName();
+  private final String name;
+  private final CountryCode countryCode;
+  private final List<Player> players; //TODO collection?
+  private final TeamStyle style;
 
-  public CountryCode getCountryCode();
+  public static final List<Player>
+      PLAYERS_DEFAULT = Arrays.asList(Player.DEFAULT_GK, Player.DEFAULT,
+                                      Player.DEFAULT, Player.DEFAULT, Player.DEFAULT,
+                                      Player.DEFAULT, Player.DEFAULT, Player.DEFAULT,
+                                      Player.DEFAULT, Player.DEFAULT, Player.DEFAULT);
 
-  public String getCoachName();
+  public Team() {
+    name = name();
+    countryCode = countryCode();
+    List<Player> playerList = players();
+    players = Collections.unmodifiableList(playerList);
+    style = style();
+    //TODO validate and defaults!
+  }
 
-  public Player[] getPlayers(); //TODO array or collection???
+  public final String getName() {
+    return name;
+  }
 
-  //// TODO Merge into a class  *******************
-  public Color getShirtColor();
+  public final CountryCode getCountryCode() {
+    return countryCode;
+  }
 
-  public Color getShortsColor();
+  public final List<Player> getPlayers() {
+    return players;
+  }
 
-  public Color getShirtLineColor();
+  protected TeamStyle style() {
+    return null;
+  }
 
-  public Color getSocksColor();
+  protected List<Player> players() {
+    return PLAYERS_DEFAULT;
+  }
 
-  public Color getGoalKeeper();
+  //TODO check access
+  public abstract Tactic tactic(String teamName, CountryCode countryCode, List<Player> players);
 
-  public UniformStyle getStyle();
+  protected abstract String name();
 
-  public Color getShirtColor2();
-
-  public Color getShortsColor2();
-
-  public Color getShirtLineColor2();
-
-  public Color getSocksColor2();
-
-  public Color getGoalKeeper2();
-
-  public UniformStyle getStyle2();
-//// TODO  Merge into a class  *******************
+  protected abstract CountryCode countryCode();
 
 }

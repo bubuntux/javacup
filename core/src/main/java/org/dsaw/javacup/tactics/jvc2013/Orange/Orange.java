@@ -2,9 +2,9 @@ package org.dsaw.javacup.tactics.jvc2013.Orange;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.IPlayer;
+import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -63,7 +63,7 @@ public class Orange implements Tactic {
       new Position(-31.622377622377623, -3.800904977375566)
   };
 
-  class TacticaDetalleImpl implements Team {
+  class TacticaDetalleImpl implements ITeam {
 
     @Override
     public String getName() {
@@ -140,7 +140,7 @@ public class Orange implements Tactic {
       return UniformStyle.SIN_ESTILO;
     }
 
-    class JugadorImpl implements Player {
+    class JugadorImpl implements IPlayer {
 
       String nombre;
       int numero;
@@ -203,8 +203,8 @@ public class Orange implements Tactic {
     }
 
     @Override
-    public Player[] getPlayers() {
-      return new Player[]{
+    public IPlayer[] getPlayers() {
+      return new IPlayer[]{
           new JugadorImpl("Van Peten", 1, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 1.0d,
                           1.0d, true),
           new JugadorImpl("Van a Verle", 2, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d,
@@ -231,10 +231,10 @@ public class Orange implements Tactic {
     }
   }
 
-  Team detalle = new TacticaDetalleImpl();
+  ITeam detalle = new TacticaDetalleImpl();
 
   @Override
-  public Team getDetail() {
+  public ITeam getDetail() {
     return detalle;
   }
 

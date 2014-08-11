@@ -2,7 +2,7 @@ package org.dsaw.javacup.gui.assistant;
 
 import com.thoughtworks.xstream.XStream;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.IPlayer;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.model.util.TacticValidate;
@@ -139,7 +139,7 @@ public class AssistantFrame extends JFrame implements Runnable {
   private JLabel jLabel16;
   private JLabel jLabel17;
   private JLabel jLabel20;
-  private JList<PlayerDetailImpl> jList1;
+  private JList<IPlayerDetailImpl> jList1;
   private JPanel jPanel1;
   private JPanel jPanel7;
   private JProgressBar jProgressBar1;
@@ -180,7 +180,7 @@ public class AssistantFrame extends JFrame implements Runnable {
     jComboBox1.setModel(new DefaultComboBoxModel(paises));
     jComboBox7.setModel(new DefaultComboBoxModel(estilos));
 
-    for (Player jug : impl.getPlayers()) {
+    for (IPlayer jug : impl.getPlayers()) {
       model.addElement(jug);
     }
     jList1.setModel(model);
@@ -231,7 +231,7 @@ public class AssistantFrame extends JFrame implements Runnable {
 
       @Override
       public void render(GameContainer gc, org.newdawn.slick.Graphics g) throws SlickException {
-        Player j = getJugador();
+        IPlayer j = getJugador();
         double vel = Constants.getVelocidad(j.getSpeed()) * 3;
         deg = deg + vel;
         x = x - 4f * vel * Math.sin(2f * Math.PI * (float) deg / 360f);
@@ -1056,9 +1056,9 @@ public class AssistantFrame extends JFrame implements Runnable {
   private void updateSlider() {
 
     if (!pintando) {
-      PlayerDetailImpl[] jugs = (PlayerDetailImpl[]) impl.getPlayers();
+      IPlayerDetailImpl[] jugs = (IPlayerDetailImpl[]) impl.getPlayers();
       for (int i : jList1.getSelectedIndices()) {
-        PlayerDetailImpl j = jugs[i];
+        IPlayerDetailImpl j = jugs[i];
         j.setVelocidad(((double) jSlider1.getValue()) / 100d);
         j.setRemate(((double) jSlider2.getValue()) / 100d);
         j.setPresicion(((double) jSlider3.getValue()) / 100d);
@@ -1073,7 +1073,7 @@ public class AssistantFrame extends JFrame implements Runnable {
   private boolean repintaCreditos() {
     double cre = Constants.CREDITOS_INICIALES;
     jProgressBar1.setMaximum((int) (cre * 10));
-    for (Player j : impl.getPlayers()) {
+    for (IPlayer j : impl.getPlayers()) {
       cre = cre - j.getSpeed();
       cre = cre - j.getPower();
       cre = cre - j.getPrecision();
@@ -1096,7 +1096,7 @@ public class AssistantFrame extends JFrame implements Runnable {
       ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
     int i;
     for (i = 0; i < model.getSize(); i++) {
-      impl.getPlayers()[i] = (Player) model.get(i);
+      impl.getPlayers()[i] = (IPlayer) model.get(i);
     }
     if (jfc.showSaveDialog(this) == JFileChooser.APPROVE_OPTION) {
       try {
@@ -1141,7 +1141,7 @@ public class AssistantFrame extends JFrame implements Runnable {
       codalin = codalin + "    Position alineacion" + (idx + 1) + "[]=new Position[]{\n";
       int i = 0;
       Position[] Positiones = impl.getAlineacion(idx);
-      for (Player j : impl.getPlayers()) {
+      for (IPlayer j : impl.getPlayers()) {
         i++;
         codalin =
             codalin + "        new Position(" + Positiones[i - 1].getX() + "," + Positiones[i - 1]
@@ -1317,7 +1317,7 @@ public class AssistantFrame extends JFrame implements Runnable {
           "        public PlayerDetail[] getPlayers() {\n"
           + "            return new PlayerDetail[]{\n";
       int i = 0;
-      for (Player j : impl.getPlayers()) {
+      for (IPlayer j : impl.getPlayers()) {
         i++;
         codigo =
             codigo + "                new JugadorImpl(\"" + j.getName() + "\", " + j
@@ -1375,7 +1375,7 @@ public class AssistantFrame extends JFrame implements Runnable {
         codalin = codalin + "    Position alineacion" + (idx + 1) + "[]=new Position[]{\n";
         int i = 0;
         Position[] Positiones = impl.getAlineacion(idx);
-        for (Player j : impl.getPlayers()) {
+        for (IPlayer j : impl.getPlayers()) {
           i++;
           codalin =
               codalin + "        new Position(" + Positiones[i - 1].getX() + "," + Positiones[i - 1]
@@ -1547,7 +1547,7 @@ public class AssistantFrame extends JFrame implements Runnable {
         "        public PlayerDetail[] getPlayers() {\n"
         + "            return new PlayerDetail[]{\n";
     int i = 0;
-    for (Player j : impl.getPlayers()) {
+    for (IPlayer j : impl.getPlayers()) {
       i++;
       codigo =
           codigo + "                new JugadorImpl(\"" + j.getName() + "\", " + j.getNumber()
@@ -1582,7 +1582,7 @@ public class AssistantFrame extends JFrame implements Runnable {
       codalin = codalin + "    Position alineacion" + (idx + 1) + "[]=new Position[]{\n";
       int i = 0;
       Position[] Positiones = impl.getAlineacion(idx);
-      for (Player j : impl.getPlayers()) {
+      for (IPlayer j : impl.getPlayers()) {
         i++;
         codalin =
             codalin + "        new Position(" + Positiones[i - 1].getX() + "," + Positiones[i - 1]
@@ -1598,12 +1598,12 @@ public class AssistantFrame extends JFrame implements Runnable {
   }//GEN-LAST:event_jMenuItem6ActionPerformed
 
   private void jButton9ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton9ActionPerformed
-    Player j = getJugador();
+    IPlayer j = getJugador();
     Color piel = j.getSkinColor();
     Color pelo = j.getHairColor();
-    for (Player jj : impl.getPlayers()) {
-      ((PlayerDetailImpl) jj).setColorPelo(pelo);
-      ((PlayerDetailImpl) jj).setColorPiel(piel);
+    for (IPlayer jj : impl.getPlayers()) {
+      ((IPlayerDetailImpl) jj).setColorPelo(pelo);
+      ((IPlayerDetailImpl) jj).setColorPiel(piel);
     }
   }//GEN-LAST:event_jButton9ActionPerformed
 
@@ -1863,7 +1863,7 @@ public class AssistantFrame extends JFrame implements Runnable {
   }//GEN-LAST:event_formWindowClosing
 
   private void jButton18ActionPerformed(ActionEvent evt) {//GEN-FIRST:event_jButton18ActionPerformed
-    PlayerDetailImpl[] jugs = ((PlayerDetailImpl[]) (impl.getPlayers()));
+    IPlayerDetailImpl[] jugs = ((IPlayerDetailImpl[]) (impl.getPlayers()));
     int idx = jList1.getSelectedIndex();
     for (int i = 0; i < 11; i++) {
       jugs[i].setPortero(i == idx);
@@ -1872,7 +1872,7 @@ public class AssistantFrame extends JFrame implements Runnable {
     repaint();
   }//GEN-LAST:event_jButton18ActionPerformed
 
-  private PlayerDetailImpl getJugador() {
+  private IPlayerDetailImpl getJugador() {
     return jList1.getSelectedValue();
   }
 
@@ -1894,7 +1894,7 @@ public class AssistantFrame extends JFrame implements Runnable {
 
   private void repinta() {
     pintando = true;
-    Player j = jList1.getSelectedValue();
+    IPlayer j = jList1.getSelectedValue();
     for (int i = 0; i < model.getSize(); i++) {
       model.set(i, impl.getPlayers()[i]);
     }

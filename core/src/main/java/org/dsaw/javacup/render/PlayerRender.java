@@ -1,6 +1,6 @@
 package org.dsaw.javacup.render;
 
-import org.dsaw.javacup.model.Team;
+import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.model.util.Constants;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -17,9 +17,9 @@ public class PlayerRender {
   private Image img[][] = new Image[7][6];
   private Image imgJug[][] = new Image[11][14];
   private Image sombra;
-  private Team impl;
+  private ITeam impl;
 
-  public PlayerRender(Team impl, boolean uniformeAlternativo) throws SlickException {
+  public PlayerRender(ITeam impl, boolean uniformeAlternativo) throws SlickException {
     this();
     setImpl(impl);
     update(uniformeAlternativo);
@@ -142,7 +142,7 @@ public class PlayerRender {
     }
   }
 
-  public void setImpl(Team impl) {
+  public void setImpl(ITeam impl) {
     this.impl = impl;
   }
 

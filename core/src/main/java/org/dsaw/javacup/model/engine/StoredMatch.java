@@ -1,6 +1,6 @@
 package org.dsaw.javacup.model.engine;
 
-import org.dsaw.javacup.model.Team;
+import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
 import org.slf4j.Logger;
@@ -36,13 +36,13 @@ public final class StoredMatch implements MatchInterface, Serializable { //TODO 
    * Lista de iteraciones, uso interno
    */
   public ArrayList<Iteration> partido = new ArrayList<>(Constants.ITERACIONES);
-  private Team detalleLocal;
-  private Team detalleVisita;
+  private ITeam detalleLocal;
+  private ITeam detalleVisita;
 
   /**
    * Instancia un partido guardado indicando los detalles de el local y la visita
    */
-  public StoredMatch(Team detalleLocal, Team detalleVisita) {
+  public StoredMatch(ITeam detalleLocal, ITeam detalleVisita) {
     this.detalleLocal = detalleLocal;
     this.detalleVisita = detalleVisita;
   }
@@ -143,12 +143,12 @@ public final class StoredMatch implements MatchInterface, Serializable { //TODO 
   }
 
   @Override
-  public Team getDetalleLocal() {
+  public ITeam getDetalleLocal() {
     return detalleLocal;
   }
 
   @Override
-  public Team getDetalleVisita() {
+  public ITeam getDetalleVisita() {
     return detalleVisita;
   }
 

@@ -2,9 +2,9 @@ package org.dsaw.javacup.tactics.jvc2013.Tactica1A;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.IPlayer;
+import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -149,7 +149,7 @@ public class Tactica1A implements Tactic {
       new Position(22.580152671755727, -1.3059701492537314)
   };
 
-  class TacticaDetalleImpl implements Team {
+  class TacticaDetalleImpl implements ITeam {
 
     @Override
     public String getName() {
@@ -226,7 +226,7 @@ public class Tactica1A implements Tactic {
       return UniformStyle.SIN_ESTILO;
     }
 
-    class JugadorImpl implements Player {
+    class JugadorImpl implements IPlayer {
 
       String nombre;
       int numero;
@@ -290,8 +290,8 @@ public class Tactica1A implements Tactic {
     }
 
     @Override
-    public Player[] getPlayers() {
-      return new Player[]{
+    public IPlayer[] getPlayers() {
+      return new IPlayer[]{
           new JugadorImpl("Jones", 1, new Color(255, 200, 150), new Color(50, 0, 0), 1d, 1d, 1d,
                           true),
           new JugadorImpl("Hamon", 2, new Color(255, 200, 150), new Color(50, 0, 0), 1d, 0.625d,
@@ -318,10 +318,10 @@ public class Tactica1A implements Tactic {
     }
   }
 
-  Team detalle = new TacticaDetalleImpl();
+  ITeam detalle = new TacticaDetalleImpl();
 
   @Override
-  public Team getDetail() {
+  public ITeam getDetail() {
     return detalle;
   }
 
@@ -344,8 +344,8 @@ public class Tactica1A implements Tactic {
   MyPosition[] myPlayers;
   List<Integer> dangerousEnemies;
   int[] ableToShot;
-  Player[] myPlayersDetails;
-  Player[] enemiesDetails;
+  IPlayer[] myPlayersDetails;
+  IPlayer[] enemiesDetails;
   int[] myPlayersCantShoot;
   int[] enemiesCantShoot;
   MyPosition ballwithZ, theNextBall;
@@ -776,7 +776,7 @@ public class Tactica1A implements Tactic {
 
     }
 
-    public boolean isReachable(MyPosition ball, Player jd, MyPosition currentPos,
+    public boolean isReachable(MyPosition ball, IPlayer jd, MyPosition currentPos,
                                int cantShoot, int turn) {
       if (cantShoot <= turn) {
         double maxHeight = Constants.ALTURA_CONTROL_BALON;

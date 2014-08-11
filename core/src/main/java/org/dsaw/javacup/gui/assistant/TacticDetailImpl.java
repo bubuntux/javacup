@@ -4,8 +4,8 @@ import com.neovisionaries.i18n.CountryCode;
 import com.thoughtworks.xstream.XStream;
 import com.thoughtworks.xstream.io.xml.DomDriver;
 
-import org.dsaw.javacup.model.Player;
-import org.dsaw.javacup.model.Team;
+import org.dsaw.javacup.model.IPlayer;
+import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.UniformStyle;
 import org.slf4j.Logger;
@@ -25,7 +25,7 @@ import java.util.Random;
  * Esta clase implementa TacticDetail es usada internamente por el Asistente, pero tambien puede
  * usarse para cargar dinamicamente desde un archivo guardado en el codigo, una clase TacticDetail
  */
-public final class TacticDetailImpl implements Team {
+public final class TacticDetailImpl implements ITeam {
 
   private static Logger logger = LoggerFactory.getLogger(TacticDetailImpl.class);
   private transient Position alineacion1[] = new Position[]{
@@ -194,7 +194,7 @@ public final class TacticDetailImpl implements Team {
   private Color colorFranja2;
   private Color colorPortero2;
   private UniformStyle estilo2;
-  private PlayerDetailImpl[] jugadores = new PlayerDetailImpl[11];
+  private IPlayerDetailImpl[] jugadores = new IPlayerDetailImpl[11];
   private ArrayList<Position[]> alineaciones = new ArrayList<>();
   private ArrayList<Integer> tipoAlineacion = new ArrayList<>();
   private transient Random rand = new Random();
@@ -295,7 +295,7 @@ public final class TacticDetailImpl implements Team {
 
   TacticDetailImpl() {
     for (int i = 0; i < 11; i++) {
-      jugadores[i] = new PlayerDetailImpl("Jugador", i + 1);
+      jugadores[i] = new IPlayerDetailImpl("Jugador", i + 1);
     }
     jugadores[0].setPortero(true);
     alineaciones.add(alineacion1);
@@ -415,7 +415,7 @@ public final class TacticDetailImpl implements Team {
   }
 
   @Override
-  public Player[] getPlayers() {
+  public IPlayer[] getPlayers() {
     return jugadores;
   }
 

@@ -1,15 +1,15 @@
 package org.dsaw.javacup.gui.assistant;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.IPlayer;
 
 import java.awt.*;
 
 /**
  * Esta clase implementa PlayerDetail es usada internamente por el Asistente
  */
-class PlayerDetailImpl implements Player {
+class IPlayerDetailImpl implements IPlayer {
 
-  private PlayerDetailImpl() {
+  private IPlayerDetailImpl() {
   }
 
   static final Color cpiel = new Color(255, 200, 150);
@@ -23,7 +23,7 @@ class PlayerDetailImpl implements Player {
   private double presicion = .5;
   private boolean portero = false;
 
-  public PlayerDetailImpl(String nombre, int numero) {
+  public IPlayerDetailImpl(String nombre, int numero) {
     this.numero = numero;
     this.nombre = nombre;
   }

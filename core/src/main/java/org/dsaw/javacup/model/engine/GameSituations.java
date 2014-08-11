@@ -1,6 +1,6 @@
 package org.dsaw.javacup.model.engine;
 
-import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.IPlayer;
 import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
@@ -126,14 +126,14 @@ public final class GameSituations {
   /**
    * Retorna la configuración de mis jugadores
    */
-  public Player[] myPlayersDetail() {
+  public IPlayer[] myPlayersDetail() {
     return jugadores[0];
   }
 
   /**
    * Retorna la configuración de los jugadores rivalPlayers
    */
-  public Player[] rivalPlayersDetail() {
+  public IPlayer[] rivalPlayersDetail() {
     return jugadores[1];
   }
 
@@ -283,7 +283,7 @@ public final class GameSituations {
     double dist0, dist;
     int idxFound = -1;
     LinkedList<Double> founds = new LinkedList<>();
-    Player detalles[] = myPlayersDetail();
+    IPlayer detalles[] = myPlayersDetail();
 
     while (!found) {
       double[] posBalon = getTrajectory(it);//Posicion del balon en la iteraccion it
@@ -438,7 +438,7 @@ public final class GameSituations {
   /**
    * Usada internamente, para establecer los detalles de los jugadores
    */
-  protected void set(Player[][] jugadores) {
+  protected void set(IPlayer[][] jugadores) {
     this.jugadores = jugadores;
   }
 
@@ -492,7 +492,7 @@ public final class GameSituations {
   private Position[] misJugadores, rivales;
   private boolean saco, sacaRival;
   private ArrayList<Integer> quienes = new ArrayList<>(11);
-  private Player[][] jugadores;
+  private IPlayer[][] jugadores;
   private int[][] iteracionesParaRematar = new int[2][11];
   private boolean[] puedenRematar = new boolean[11];
   private boolean[] puedenRematarRival = new boolean[11];

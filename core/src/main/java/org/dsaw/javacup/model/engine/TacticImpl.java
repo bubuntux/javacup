@@ -1,8 +1,8 @@
 package org.dsaw.javacup.model.engine;
 
 
+import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.util.Position;
 
@@ -22,7 +22,7 @@ final class TacticImpl implements Tactic {
   }
 
   @Override
-  public Team getDetail() {
+  public ITeam getDetail() {
     return detalle;
   }
 

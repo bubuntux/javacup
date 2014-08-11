@@ -2,8 +2,8 @@ package org.dsaw.javacup.model.engine;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.Player;
-import org.dsaw.javacup.model.Team;
+import org.dsaw.javacup.model.IPlayer;
+import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.render.UniformStyle;
 
 import java.awt.*;
@@ -12,7 +12,7 @@ import java.io.Serializable;
 /**
  * Implementación de TacticDetail, usada internamente
  */
-final class TacticaDetalleImpl implements Team, Serializable {
+final class TacticaDetalleImpl implements ITeam, Serializable {
 
   private static final long serialVersionUID = 1L;
 
@@ -31,12 +31,12 @@ final class TacticaDetalleImpl implements Team, Serializable {
   private final Color colorFranja2;
   private final Color colorPortero2;
   private final UniformStyle estilo2;
-  private final PlayerDetailImpl[] jugadores = new PlayerDetailImpl[11];
+  private final IPlayerDetailImpl[] jugadores = new IPlayerDetailImpl[11];
 
   /**
    * Copia el detalle y deja inmutables sus valores
    */
-  TacticaDetalleImpl(Team impl) {
+  TacticaDetalleImpl(ITeam impl) {
     this.nombre = impl.getName();
     this.pais = impl.getCountryCode();
     this.entrenador = impl.getCoachName();
@@ -53,7 +53,7 @@ final class TacticaDetalleImpl implements Team, Serializable {
     this.colorPortero2 = impl.getGoalKeeper2();
     this.estilo2 = impl.getStyle2();
     for (int i = 0; i < 11; i++) {
-      this.jugadores[i] = new PlayerDetailImpl(impl.getPlayers()[i]);
+      this.jugadores[i] = new IPlayerDetailImpl(impl.getPlayers()[i]);
     }
   }
 
@@ -98,7 +98,7 @@ final class TacticaDetalleImpl implements Team, Serializable {
   }
 
   @Override
-  public Player[] getPlayers() {
+  public IPlayer[] getPlayers() {
     return jugadores;
   }
 
