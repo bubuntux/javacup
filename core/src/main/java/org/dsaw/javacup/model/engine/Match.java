@@ -1,7 +1,7 @@
 package org.dsaw.javacup.model.engine;
 
-import org.dsaw.javacup.model.IPlayer;
-import org.dsaw.javacup.model.ITeam;
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerStats;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.Command.CommandType;
@@ -31,7 +31,7 @@ public final class Match implements MatchInterface {
   private GameSituations spLocal = new GameSituations(),
       spVisita =
           new GameSituations();
-//situacion del partido, version local y visita
+  //situacion del partido, version local y visita
   private Position balon = new Position(Constants.centroCampoJuego);//posicion del ballPosition
   private double balonDx = 0, balonDy = 0, balonDz = 0;//velocidad del ballPosition
 
@@ -62,7 +62,7 @@ public final class Match implements MatchInterface {
   private int[][]
       golpeaBalonIter =
       new int[2][11];
-//cantidad de iteraciones desde la ultima vez que un jugador golpeo el ballPosition
+  //cantidad de iteraciones desde la ultima vez que un jugador golpeo el ballPosition
   private int ultEquipoGolpeoBalon = -1;//ultimo equipo que golpeo el ballPosition;
   private int estado = 0;//estados durante el juego
   private int estadoant;//estado anterior
@@ -75,19 +75,19 @@ public final class Match implements MatchInterface {
   private ArrayList<ComandoEquipo>
       listGolpearBalon =
       new ArrayList<>(88);
-//usado internamente para almacenar los comando golpearbalon
+  //usado internamente para almacenar los comando golpearbalon
   private ArrayList<ComandoEquipo>
       listIrA =
       new ArrayList<>(88);
-//usado internamente para almacenar los comando irA
+  //usado internamente para almacenar los comando irA
   private Position
       balonInv =
       new Position(Constants.centroCampoJuego);
-//usado internamente para guardar la posicion invertida del ballPosition
+  //usado internamente para guardar la posicion invertida del ballPosition
   private Position
       balonVisible =
       new Position(Constants.centroCampoJuego);
-//usado internamente para guardar la posicion del ballPosition cuando sale del campo
+  //usado internamente para guardar la posicion del ballPosition cuando sale del campo
   private Random rand = new Random();//random para la aleatoriedad
   private Position[] paLaFoto = new Position[11];//posicion donde se sacan la foto
   private Position[] paLaFoto2 = new Position[11];//posicion donde se sacan la foto
@@ -104,7 +104,7 @@ public final class Match implements MatchInterface {
   private boolean[]
       offSidePlayers =
       new boolean[11];
-      //Indica si un jugador estaba o no en fuera de juego en el ultimo pase
+  //Indica si un jugador estaba o no en fuera de juego en el ultimo pase
   private boolean isOffSide = false; //Indica si se a producido un fuera de juego
   private int lastPlayerKickIndex = -1; //Indice del ultimo jugador que golpeo el balon
 
@@ -114,16 +114,16 @@ public final class Match implements MatchInterface {
   private final int
       SAQUE_EN_RECEPCION =
       1;
-//El saque se ha realizado y se esta a la espera de la recepcion del balon por un jugador.
+  //El saque se ha realizado y se esta a la espera de la recepcion del balon por un jugador.
   private final int SAQUE_EJECUTADO = 2;// El saque se ha realizado en su totalidad.
 
   private Position
       posLibreIndirecto =
       new Position();
-      //Posici�n desde la que se debe sacar la falta.
+  //Posici�n desde la que se debe sacar la falta.
   private ArrayList<Integer>
       distanciaSaqueInsuficiente;
-      //Array que contiene los jugadores que se hallan demasiado pr�ximos al bal�n.
+  //Array que contiene los jugadores que se hallan demasiado pr�ximos al bal�n.
   private final int EQUIPO_LOCAL = 0;
   private final int EQUIPO_VISITANTE = 1;
 
@@ -199,10 +199,10 @@ public final class Match implements MatchInterface {
 
     posSaqueCentro = new Position[][]{p0[1], p1[1]};
     //guarda las caracteristicas de los jugadores en los objetos GameSituations*/
-    spLocal.set(new IPlayer[][]{tacticaLocal.getDetail().getPlayers(),
-                                     tacticaVisita.getDetail().getPlayers()});
-    spVisita.set(new IPlayer[][]{tacticaVisita.getDetail().getPlayers(),
-                                      tacticaLocal.getDetail().getPlayers()});
+    spLocal.set(new Player[][]{tacticaLocal.getDetail().getPlayers(),
+                               tacticaVisita.getDetail().getPlayers()});
+    spVisita.set(new Player[][]{tacticaVisita.getDetail().getPlayers(),
+                                tacticaLocal.getDetail().getPlayers()});
     if (save) {
       guardado =
           new StoredMatch(new TacticaDetalleImpl(tacticaLocal.getDetail()),
@@ -315,7 +315,7 @@ public final class Match implements MatchInterface {
     boolean esPortero;
     for (int i = 0; i < 11; i++) {
       if (!sacaVisita && golpeaBalonIter[0][i] == 0) {
-        esPortero = tacticaLocal.getDetail().getPlayers()[i].isGoalKeeper();
+        esPortero = tacticaLocal.getDetail().getPlayers()[i].isGoalkeeper();
         x = posLocal[i].getX();
         y = posLocal[i].getY();
         if (esPortero && Math.abs(x) <= Constants.LARGO_AREA_GRANDE / 2
@@ -336,7 +336,7 @@ public final class Match implements MatchInterface {
     }
     for (int i = 0; i < 11; i++) {
       if (!sacaLocal && golpeaBalonIter[1][i] == 0) {
-        esPortero = tacticaVisita.getDetail().getPlayers()[i].isGoalKeeper();
+        esPortero = tacticaVisita.getDetail().getPlayers()[i].isGoalkeeper();
         x = posVisita[i].getX();
         y = posVisita[i].getY();
         if (esPortero && Math.abs(x) <= Constants.LARGO_AREA_GRANDE / 2
@@ -1125,7 +1125,7 @@ public final class Match implements MatchInterface {
 
     double angulo = 0, error;//el angle y el error
     Position p, p0;
-    IPlayer j;//detalles del jugador para obtener sus aptitudes (remate y error)
+    Player j;//detalles del jugador para obtener sus aptitudes (remate y error)
     int idx;//indice;
 
     ////// Calcula el angle de movimiento para ser usado cuando se avanza con el ballPosition ////
@@ -1221,13 +1221,13 @@ public final class Match implements MatchInterface {
                 /* 2013-09-08 :: Modificado según comentarios foro:
                  * http://www.javahispano.org/foro-de-la-javacup/post/2192299
                  */
-        error =
-            j.getPrecision() * (((ce.eq == EQUIPO_LOCAL) ? spLocal
-                .getMyPlayerEnergy(cgp.getPlayerIndex()) : spLocal
-                                     .getRivalEnergy(cgp.getPlayerIndex())));
+        PlayerStats stats = j.getStats();
+        error = stats.getPrecision() * (((ce.eq == EQUIPO_LOCAL) ? spLocal.getMyPlayerEnergy(
+            cgp.getPlayerIndex()) : spLocal.getRivalEnergy(
+            cgp.getPlayerIndex())));
 
         if (cgp.isForwardBall()) {
-          double vel = Constants.getVelocidad(j.getSpeed()) + .2;
+          double vel = Constants.getVelocidad(stats.getSpeed()) + .2;
           vel *=
               (((ce.eq == EQUIPO_LOCAL) ? spLocal.getMyPlayerEnergy(cgp.getPlayerIndex()) : spLocal
                   .getRivalEnergy(
@@ -1286,7 +1286,7 @@ public final class Match implements MatchInterface {
         double
             vel =
             cgp.getHitPower() * Constants
-                .getVelocidadRemate(j.getPower());//calcula la velocidad del remate
+                .getVelocidadRemate(stats.getPower());//calcula la velocidad del remate
 
         //Reducimos la velocidad segun la energia del jugador
         double
@@ -1516,7 +1516,8 @@ public final class Match implements MatchInterface {
 
     double
         vel =
-        Constants.getVelocidad(t.getDetail().getPlayers()[indJugador].getSpeed()) * energia
+        Constants.getVelocidad(t.getDetail().getPlayers()[indJugador].getStats().getSpeed())
+        * energia
         * aceleracion * aceleracion_sprint;
 
     if (dist < vel) {

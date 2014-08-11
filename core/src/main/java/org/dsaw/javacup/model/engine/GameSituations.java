@@ -1,6 +1,6 @@
 package org.dsaw.javacup.model.engine;
 
-import org.dsaw.javacup.model.IPlayer;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.trajectory.AbstractTrajectory;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
@@ -126,14 +126,14 @@ public final class GameSituations {
   /**
    * Retorna la configuración de mis jugadores
    */
-  public IPlayer[] myPlayersDetail() {
+  public Player[] myPlayersDetail() {
     return jugadores[0];
   }
 
   /**
    * Retorna la configuración de los jugadores rivalPlayers
    */
-  public IPlayer[] rivalPlayersDetail() {
+  public Player[] rivalPlayersDetail() {
     return jugadores[1];
   }
 
@@ -248,7 +248,8 @@ public final class GameSituations {
         (isSprint && energiaIter > Constants.SPRINT_ENERGIA_MIN) ? Constants.SPRINT_ACEL : 1;
 
     //Obtenemos la distancia recorrida en la iteraccion
-    return Constants.getVelocidad(myPlayersDetail()[playerIndex].getSpeed()) * energiaIter
+    return Constants.getVelocidad(myPlayersDetail()[playerIndex].getStats().getSpeed())
+           * energiaIter
            * acelIter * sprint;
 
   }
@@ -283,7 +284,7 @@ public final class GameSituations {
     double dist0, dist;
     int idxFound = -1;
     LinkedList<Double> founds = new LinkedList<>();
-    IPlayer detalles[] = myPlayersDetail();
+    Player detalles[] = myPlayersDetail();
 
     while (!found) {
       double[] posBalon = getTrajectory(it);//Posicion del balon en la iteraccion it
@@ -292,7 +293,7 @@ public final class GameSituations {
       }
       if (posBalon[2] <= Constants.ALTO_ARCO) {
         for (int i = 0; i < misJugadores.length; i++) {
-          if (posBalon[2] <= (detalles[i].isGoalKeeper() ? Constants.ALTO_ARCO
+          if (posBalon[2] <= (detalles[i].isGoalkeeper() ? Constants.ALTO_ARCO
                                                          : Constants.ALTURA_CONTROL_BALON)) {
             pJug = misJugadores[i];
             dist0 =
@@ -338,42 +339,42 @@ public final class GameSituations {
    * Retorna la velocidad del jugador de indice idx
    */
   public double getMyPlayerSpeed(int idx) {
-    return myPlayersDetail()[idx].getSpeed();
+    return myPlayersDetail()[idx].getStats().getSpeed();
   }
 
   /**
    * Retorna la potencia del remate del jugador de indice idx
    */
   public double getMyPlayerPower(int idx) {
-    return myPlayersDetail()[idx].getPower();
+    return myPlayersDetail()[idx].getStats().getPower();
   }
 
   /**
    * Retorna el error del jugador de indice idx
    */
   public double getMyPlayerError(int idx) {
-    return myPlayersDetail()[idx].getPrecision();
+    return myPlayersDetail()[idx].getStats().getPrecision();
   }
 
   /**
    * Retorna la velocidad del rival de indice idx
    */
   public double getRivalPlayerSpeed(int idx) {
-    return rivalPlayersDetail()[idx].getSpeed();
+    return rivalPlayersDetail()[idx].getStats().getSpeed();
   }
 
   /**
    * Retorna  la potencia del remate del rival de indice idx
    */
   public double getRivalPlayerPower(int idx) {
-    return rivalPlayersDetail()[idx].getPower();
+    return rivalPlayersDetail()[idx].getStats().getPower();
   }
 
   /**
    * Retorna el error del rival de indice idx
    */
   public double getRivalPlayerError(int idx) {
-    return rivalPlayersDetail()[idx].getPrecision();
+    return rivalPlayersDetail()[idx].getStats().getPrecision();
   }
 
   /**
@@ -438,7 +439,7 @@ public final class GameSituations {
   /**
    * Usada internamente, para establecer los detalles de los jugadores
    */
-  protected void set(IPlayer[][] jugadores) {
+  protected void set(Player[][] jugadores) {
     this.jugadores = jugadores;
   }
 
@@ -492,7 +493,7 @@ public final class GameSituations {
   private Position[] misJugadores, rivales;
   private boolean saco, sacaRival;
   private ArrayList<Integer> quienes = new ArrayList<>(11);
-  private IPlayer[][] jugadores;
+  private Player[][] jugadores;
   private int[][] iteracionesParaRematar = new int[2][11];
   private boolean[] puedenRematar = new boolean[11];
   private boolean[] puedenRematarRival = new boolean[11];

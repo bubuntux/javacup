@@ -11,13 +11,6 @@ import java.util.List;
  */
 public interface Tactic { //TODO rename?
 
-  /**Retorna objeto TacticDetail
-   * que define la configuración de la táctica*/
-  /**
-   * Returns the detail of the tactic
-   */
-  public ITeam getDetail();
-
   /**Retorna lista de comandos
    * que los jugadores intentaran ejecutar en la siguiente iteración,
    * en base a la información entregada por la situación del partido*/

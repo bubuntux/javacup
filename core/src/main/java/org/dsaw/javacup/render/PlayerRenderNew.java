@@ -1,6 +1,8 @@
 package org.dsaw.javacup.render;
 
 import org.dsaw.javacup.model.ITeam;
+import org.dsaw.javacup.model.PlayerStyle;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.util.Constants;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -19,9 +21,9 @@ public final class PlayerRenderNew extends PlayerRender {
   private Image img[][] = new Image[56][6];
   private Image imgJug[][] = new Image[11][112];
   private Image sombra;
-  private ITeam impl;
+  private Team impl;
 
-  public PlayerRenderNew(ITeam impl, boolean uniformeAlternativo) throws SlickException {
+  public PlayerRenderNew(Team impl, boolean uniformeAlternativo) throws SlickException {
     this();
     setImpl(impl);
     update(uniformeAlternativo);
@@ -170,16 +172,17 @@ public final class PlayerRenderNew extends PlayerRender {
                                 impl.getShirtLineColor().getBlue());
 
     for (int i = 0; i < 11; i++) {
+      PlayerStyle style = impl.getPlayers()[i].getStyle();
       Color
           upelo =
-          new Color(impl.getPlayers()[i].getHairColor().getRed(),
-                    impl.getPlayers()[i].getHairColor().getGreen(),
-                    impl.getPlayers()[i].getHairColor().getBlue());
+          new Color(style.getHairColor().getRed(),
+                    style.getHairColor().getGreen(),
+                    style.getHairColor().getBlue());
       Color
           upiel =
-          new Color(impl.getPlayers()[i].getSkinColor().getRed(),
-                    impl.getPlayers()[i].getSkinColor().getGreen(),
-                    impl.getPlayers()[i].getSkinColor().getBlue());
+          new Color(style.getSkinColor().getRed(),
+                    style.getSkinColor().getGreen(),
+                    style.getSkinColor().getBlue());
       for (int j = 0; j < 14 * 8; j++) {
         if (j % 14 < 7) {
           idx = j % 14;
@@ -192,7 +195,7 @@ public final class PlayerRenderNew extends PlayerRender {
             img[7 * (j / 14) + idx][(alternativa ? impl.getStyle2() : impl.getStyle()).getNumero()
                                     - 1];
         float rd = 0.07f;
-        if (impl.getPlayers()[i].isGoalKeeper()) {
+        if (impl.getPlayers()[i].isGoalkeeper()) {
           imgJug[i][j] =
               changeColor(original, new float[]{rd, rd, rd, rd, rd, rd, rd},
                           new org.newdawn.slick.Color[]{
@@ -233,8 +236,7 @@ public final class PlayerRenderNew extends PlayerRender {
     }
   }
 
-  @Override
-  public void setImpl(ITeam impl) {
+  public void setImpl(Team impl) {
     this.impl = impl;
   }
 

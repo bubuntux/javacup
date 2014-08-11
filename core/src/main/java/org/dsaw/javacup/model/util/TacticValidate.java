@@ -1,6 +1,11 @@
 package org.dsaw.javacup.model.util;
 
 import org.dsaw.javacup.model.ITeam;
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.PlayerStats;
+import org.dsaw.javacup.model.PlayerStyle;
+import org.dsaw.javacup.model.Team;
+import org.dsaw.javacup.model.TeamStyle;
 import org.dsaw.javacup.render.UniformStyle;
 
 import java.awt.*;
@@ -9,31 +14,31 @@ import java.util.HashSet;
 /**
  * Clase usada para validar una tactica
  */
-public final class TacticValidate {
+public final class TacticValidate { //TODO remove
 
   /**
    * Clase para Validar implementaciones tactica
    */
-  public static void validateDetail(String name, ITeam t) throws Exception {
+  public static void validateDetail(String name, Team t) throws Exception {
     if (t == null) {
       throw new Exception(name + "TacticDetail null");
     }
-    if (t.getSocksColor() == null ||
-        t.getShirtColor() == null ||
-        t.getShirtLineColor() == null ||
-        t.getShortsColor() == null ||
-        t.getGoalKeeper() == null) {
-      throw new Exception(name
-                          + "TacticDetail: ColorCalcetas , ColorCamiseta , ColorFranja , ColorPantalon o ColorPortero es nulo");
-    }
+    TeamStyle teamStyle = t.getStyle();
     if (t.getStyle() == null) {
       throw new Exception(name + "TacticDetail: estilo es nulo");
     }
-    if (t.getCoachName() == null || t.getName() == null || t.getCountryCode() == null) {
+    if (teamStyle.getSocksColor() == null ||
+        teamStyle.getShirtColor() == null ||
+        teamStyle.getShirtLineColor() == null ||
+        teamStyle.getShortsColor() == null ||
+        teamStyle.getGoalkeeper() == null) {
+      throw new Exception(name
+                          + "TacticDetail: ColorCalcetas , ColorCamiseta , ColorFranja , ColorPantalon o ColorPortero es nulo");
+    }
+    if (t.getName() == null || t.getCountryCode() == null) {
       throw new Exception(name + "TacticDetail: Entrenador, Nombre o Pais nulo");
     }
-    if (t.getCoachName().trim().length() == 0 ||
-        t.getName().trim().length() == 0 ||
+    if (t.getName().trim().length() == 0 ||
         t.getCountryCode() == null) {
       throw new Exception(name + "TacticDetail: Entrenador, Nombre o Pais vacio");
     }
@@ -41,7 +46,7 @@ public final class TacticValidate {
       throw new Exception(name + "TacticDetail: Jugadores nulo");
     }
 
-    if (t.getPlayers().length != 11) {
+    if (t.getPlayers().size() != 11) {
       throw new Exception(name + "TacticDetail: Cantidad de Jugadores distinto de 11");
     }
 
@@ -49,41 +54,44 @@ public final class TacticValidate {
     double creditos = 0;
     HashSet<Integer> set = new HashSet<>();
     for (int i = 0; i < 11; i++) {
-      if (t.getPlayers()[i] == null) {
+      Player player = t.getPlayers().get(i);
+      if (player == null) {
         throw new Exception(name + "TacticDetail: Jugador[" + i + "] nulo");
       }
-      if (t.getPlayers()[i].getHairColor() == null || t.getPlayers()[i].getSkinColor() == null) {
+      PlayerStyle playerStyle = player.getStyle();
+      if (playerStyle.getHairColor() == null || playerStyle.getSkinColor() == null) {
         throw new Exception(name + "TacticDetail: Jugador[" + i + "] ColorPiel o ColorPelo nulo");
       }
-      if (t.getPlayers()[i].getName() == null) {
+      if (player.getName() == null) {
         throw new Exception(name + "TacticDetail: Jugador[" + i + "] Nombre nulo");
       }
-      if (t.getPlayers()[i].getNumber() <= 0 || t.getPlayers()[i].getNumber() > 99) {
+      if (player.getNumber() <= 0 || player.getNumber() > 99) {
         throw new Exception(
             name + "TacticDetail: Jugador[" + i + "] Numero fuera del rango [1,99]");
       }
-      if (set.contains(t.getPlayers()[i].getNumber())) {
+      if (set.contains(player.getNumber())) {
         throw new Exception(
-            name + "TacticDetail: Numero de jugador " + t.getPlayers()[i].getNumber()
+            name + "TacticDetail: Numero de jugador " + player.getNumber()
             + " repetido");
       }
-      set.add(t.getPlayers()[i].getNumber());
-      if (t.getPlayers()[i].getPrecision() < 0 || t.getPlayers()[i].getPrecision() > 1) {
+      set.add((int) player.getNumber());
+      PlayerStats stats = player.getStats();
+      if (stats.getPrecision() < 0 || stats.getPrecision() > 1) {
         throw new Exception(
             name + "TacticDetail: Jugador[" + i + "] con presicion fuera del rango [0,1]");
       }
-      if (t.getPlayers()[i].getPower() < 0 || t.getPlayers()[i].getPower() > 1) {
+      if (stats.getPower() < 0 || stats.getPower() > 1) {
         throw new Exception(
             name + "TacticDetail: Jugador[" + i + "] con remate fuera del rango [0,1]");
       }
-      if (t.getPlayers()[i].getSpeed() < 0 || t.getPlayers()[i].getSpeed() > 1) {
+      if (stats.getSpeed() < 0 || stats.getSpeed() > 1) {
         throw new Exception(
             name + "TacticDetail: Jugador[" + i + "] con velocidad fuera del rango [0,1]");
       }
-      creditos = creditos + t.getPlayers()[i].getPrecision();
-      creditos = creditos + t.getPlayers()[i].getSpeed();
-      creditos = creditos + t.getPlayers()[i].getPower();
-      if (t.getPlayers()[i].isGoalKeeper()) {
+      creditos = creditos + stats.getPrecision();
+      creditos = creditos + stats.getSpeed();
+      creditos = creditos + stats.getPower();
+      if (player.isGoalkeeper()) {
         porteros++;
       }
     }
@@ -95,9 +103,9 @@ public final class TacticValidate {
       throw new Exception(name + "TacticDetail: Uso " + creditos + " creditos, pero son permitidos "
                           + Constants.CREDITOS_INICIALES);
     }
-    if (equalsColors(t)) {
-      //throw new Exception(nombre + "TacticDetail: modificar colores de la camiseta, muy parecidos al uniforme alternativo ");
-    }
+    //if (equalsColors(t)) {
+    //throw new Exception(nombre + "TacticDetail: modificar colores de la camiseta, muy parecidos al uniforme alternativo ");
+    //}
   }
 
   /**
@@ -180,7 +188,7 @@ public final class TacticValidate {
   /**
    * Indica true si es necesario que el equipo visita cambie a su uniforme alternativo
    */
-  public static boolean useAlternativeColors(ITeam local, ITeam visita) {
+  public static boolean useAlternativeColors(Team local, Team visita) {
     Color cl1, cv1, cv2;
     cl1 = mesclarColor(local.getShirtColor(), local.getShirtLineColor(), getP1(local.getStyle()));
     cv1 =
@@ -196,7 +204,8 @@ public final class TacticValidate {
   /**
    * Indica true si los dos unifermes de una tactica son muy parecidos
    */
-  public static boolean equalsColors(ITeam local) {
+  public static boolean equalsColors(Team local) {
+
     Color cl1, cl2;
     cl1 = mesclarColor(local.getShirtColor(), local.getShirtLineColor(), getP1(local.getStyle()));
     cl2 =

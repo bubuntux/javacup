@@ -48,7 +48,7 @@ public abstract class Team {
   }
 
   protected List<Player> players() {
-    return PLAYERS_DEFAULT;
+    return PLAYERS_DEFAULT; //TODO remove ALL defaults and create a random generator
   }
 
   //TODO check access
@@ -58,4 +58,7 @@ public abstract class Team {
 
   protected abstract CountryCode countryCode();
 
+  public TeamStyle getStyle() {
+    return style;
+  }
 }

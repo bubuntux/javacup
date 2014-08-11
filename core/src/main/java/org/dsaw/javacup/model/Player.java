@@ -7,12 +7,18 @@ public class Player {
 
   private final String name;
   private final byte number;
-  private final boolean goalkeeper; //TODO check one word?
+  private final boolean goalkeeper;
   private final PlayerStats stats;
   private final PlayerStyle style;
 
+  //TODO remove
   public static final Player DEFAULT = new Player("Default", (byte) 42);
   public static final Player DEFAULT_GK = new Player("Default_GK", (byte) 24, true);
+
+  public Player(Player player) { //TODO remove
+    this(player.getName(), player.getNumber(), player.isGoalkeeper(), player.getStats(),
+         player.getStyle());
+  }
 
   public Player(String name, byte number) {
     this(name, number, false);

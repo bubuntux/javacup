@@ -1,6 +1,8 @@
 package org.dsaw.javacup.render;
 
 import org.dsaw.javacup.model.ITeam;
+import org.dsaw.javacup.model.PlayerStyle;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.util.Constants;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -17,9 +19,9 @@ public class PlayerRender {
   private Image img[][] = new Image[7][6];
   private Image imgJug[][] = new Image[11][14];
   private Image sombra;
-  private ITeam impl;
+  private Team impl;
 
-  public PlayerRender(ITeam impl, boolean uniformeAlternativo) throws SlickException {
+  public PlayerRender(Team impl, boolean uniformeAlternativo) throws SlickException {
     this();
     setImpl(impl);
     update(uniformeAlternativo);
@@ -82,16 +84,17 @@ public class PlayerRender {
                                 impl.getShirtLineColor().getBlue());
 
     for (int i = 0; i < 11; i++) {
+      PlayerStyle style = impl.getPlayers()[i].getStyle();
       Color
           upelo =
-          new Color(impl.getPlayers()[i].getHairColor().getRed(),
-                    impl.getPlayers()[i].getHairColor().getGreen(),
-                    impl.getPlayers()[i].getHairColor().getBlue());
+          new Color(style.getHairColor().getRed(),
+                    style.getHairColor().getGreen(),
+                    style.getHairColor().getBlue());
       Color
           upiel =
-          new Color(impl.getPlayers()[i].getSkinColor().getRed(),
-                    impl.getPlayers()[i].getSkinColor().getGreen(),
-                    impl.getPlayers()[i].getSkinColor().getBlue());
+          new Color(style.getSkinColor().getRed(),
+                    style.getSkinColor().getGreen(),
+                    style.getSkinColor().getBlue());
       for (int j = 0; j < 14; j++) {
         if (j < 7) {
           idx = j;
@@ -106,13 +109,13 @@ public class PlayerRender {
                     .getColor(x, y);
             c1 = null;
             if (c0.equals(franja)) {
-              if (impl.getPlayers()[i].isGoalKeeper()) {
+              if (impl.getPlayers()[i].isGoalkeeper()) {
                 c1 = uportero;
               } else {
                 c1 = ufranja;
               }
             } else if (c0.equals(polera)) {
-              if (impl.getPlayers()[i].isGoalKeeper()) {
+              if (impl.getPlayers()[i].isGoalkeeper()) {
                 c1 = uportero;
               } else {
                 c1 = upolera;
@@ -122,7 +125,7 @@ public class PlayerRender {
             } else if (c0.equals(pelo)) {
               c1 = upelo;
             } else if (c0.equals(pantalon)) {
-              if (impl.getPlayers()[i].isGoalKeeper()) {
+              if (impl.getPlayers()[i].isGoalkeeper()) {
                 c1 = uportero;
               } else {
                 c1 = upantalon;
@@ -142,7 +145,7 @@ public class PlayerRender {
     }
   }
 
-  public void setImpl(ITeam impl) {
+  public void setImpl(Team impl) {
     this.impl = impl;
   }
 

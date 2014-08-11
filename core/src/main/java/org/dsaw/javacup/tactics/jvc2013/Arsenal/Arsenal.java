@@ -8,8 +8,8 @@ package org.dsaw.javacup.tactics.jvc2013.Arsenal;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.IPlayer;
 import org.dsaw.javacup.model.ITeam;
+import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
@@ -187,73 +187,11 @@ public class Arsenal implements Tactic {
       return UniformStyle.FRANJA_DIAGONAL;
     }
 
-    class JugadorImpl implements IPlayer {
-
-      String nombre;
-      int numero;
-      Color piel, pelo;
-      double velocidad, remate, presicion;
-      boolean portero;
-      Position posicion;
-
-      public JugadorImpl(String nombre, int numero, Color piel, Color pelo,
-                         double velocidad, double remate, double presicion, boolean portero) {
-        this.nombre = nombre;
-        this.numero = numero;
-        this.piel = piel;
-        this.pelo = pelo;
-        this.velocidad = velocidad;
-        this.remate = remate;
-        this.presicion = presicion;
-        this.portero = portero;
-      }
-
-      @Override
-      public String getName() {
-        return nombre;
-      }
-
-      @Override
-      public Color getSkinColor() {
-        return piel;
-      }
-
-      @Override
-      public Color getHairColor() {
-        return pelo;
-      }
-
-      @Override
-      public int getNumber() {
-        return numero;
-      }
-
-      @Override
-      public boolean isGoalKeeper() {
-        return portero;
-      }
-
-      @Override
-      public double getSpeed() {
-        return velocidad;
-      }
-
-      @Override
-      public double getPower() {
-        return remate;
-      }
-
-      @Override
-      public double getPrecision() {
-        return presicion;
-      }
-    }
-
-    @Override
-    public IPlayer[] getPlayers() {
-      return new IPlayer[]{
-          new JugadorImpl("Christofer", 1, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d,
-                          1.0d, 1.0d, true),
+    /*@Override
+    public Player[] getPlayers() {
+      return new Player[]{
+          new Player("Christofer", (byte) 1, true, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d,
+                     1.0d, 1.0d),
           new JugadorImpl("Ruben", 2, new Color(0, 0, 0), new Color(0, 0, 0), 1.0d, 0.53d, 0.78d,
                           false),
           new JugadorImpl("Gabriel", 3, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 0.53d,
@@ -275,7 +213,7 @@ public class Arsenal implements Tactic {
           new JugadorImpl("Alexis", 11, new Color(255, 200, 150), new Color(50, 0, 0), 1.0d, 1.0d,
                           1.0d, false)
       };
-    }
+    }*/
   }
 
   ITeam detalle = new TacticaDetalleImpl();
