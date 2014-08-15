@@ -2,9 +2,10 @@ package org.dsaw.javacup.model;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import java.util.Arrays;
 import java.util.Collections;
+import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 /**
  * Created by Julio Gutierrez on 8/10/14.
@@ -16,11 +17,6 @@ public abstract class Team {
   private final List<Player> players; //TODO collection?
   private final TeamStyle style;
 
-  public static final List<Player>
-      PLAYERS_DEFAULT = Arrays.asList(Player.DEFAULT_GK, Player.DEFAULT,
-                                      Player.DEFAULT, Player.DEFAULT, Player.DEFAULT,
-                                      Player.DEFAULT, Player.DEFAULT, Player.DEFAULT,
-                                      Player.DEFAULT, Player.DEFAULT, Player.DEFAULT);
 
   public Team() {
     name = name();
@@ -43,12 +39,30 @@ public abstract class Team {
     return players;
   }
 
-  protected TeamStyle style() {
-    return null;
+  public final TeamStyle getStyle() {
+    return style;
   }
 
-  protected List<Player> players() {
-    return PLAYERS_DEFAULT; //TODO remove ALL defaults and create a random generator
+  protected List<Player> players() { //TODO list or collection?
+    List<Player> players = new LinkedList<>();
+    Random random = new Random();
+    String randomName = "Random"; //TODO some kind of name dict?
+    players.add(new Player(randomName, random.nextInt(), true));
+    players.add(new Player(randomName, random.nextInt()));
+    players.add(new Player(randomName, random.nextInt()));
+    players.add(new Player(randomName, random.nextInt()));
+    players.add(new Player(randomName, random.nextInt()));
+    players.add(new Player(randomName, random.nextInt()));
+    players.add(new Player(randomName, random.nextInt()));
+    players.add(new Player(randomName, random.nextInt()));
+    players.add(new Player(randomName, random.nextInt()));
+    players.add(new Player(randomName, random.nextInt()));
+    players.add(new Player(randomName, random.nextInt()));
+    return players;
+  }
+
+  protected TeamStyle style() {
+    return null;
   }
 
   //TODO check access
@@ -57,8 +71,4 @@ public abstract class Team {
   protected abstract String name();
 
   protected abstract CountryCode countryCode();
-
-  public TeamStyle getStyle() {
-    return style;
-  }
 }

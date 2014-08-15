@@ -19,17 +19,6 @@ public interface Tactic { //TODO rename?
    */
   public abstract List<Command> execute(GameSituations sp);
 
-  /**Retorna array de posiciones de los jugadores
-   * cuando tu equipo inicia el juego desde el centro de la cancha*/
-  /**
-   * Sets the positions of the players when starts with the ball
-   */
-  public abstract Position[] getStartPositions(GameSituations sp);
+  public abstract List<Player> getStartPositions(GameSituations sp);
 
-  /**Retorna array de posiciones de los jugadores
-   * cuando el adversario inicia el juego desde el centro de la cancha*/
-  /**
-   * Sets the positions of the players when don't starts with the ball
-   */
-  public abstract Position[] getNoStartPositions(GameSituations sp);
 }

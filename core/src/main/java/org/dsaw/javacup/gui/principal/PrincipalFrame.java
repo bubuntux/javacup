@@ -2,7 +2,7 @@ package org.dsaw.javacup.gui.principal;
 
 import com.thoughtworks.xstream.XStream;
 
-import org.dsaw.javacup.model.ITeam;
+
 import org.dsaw.javacup.model.Tactic;
 import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.engine.Match;
@@ -111,12 +111,12 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
   }
 
   LinkedList<File> directorios = new LinkedList<>();
-  final HashMap<Class, ITeam> tactics = new HashMap<>();
+  final HashMap<Class, Team> tactics = new HashMap<>();
 
   /**
    * Creates new form Principal
    */
-  public PrincipalFrame() throws Exception {
+  public PrincipalFrame() throws Exception /*{
     initComponents();
 
     final Font f = new Font("dialog", 1, 18);
@@ -201,6 +201,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
     jList3.setModel(guardados);
     tacticas.setModel(tacticasModel);
     setVisible(true);
+  }*/ {
   }
 
   void load() throws Exception {
@@ -1342,7 +1343,9 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
     if (tl != null && tv != null) {
       try {
         Tactic tlocal = (Tactic) tl.newInstance(), tvisita = (Tactic) tv.newInstance();
-        Match p = null; // TODO ! new Match(tlocal, tvisita, jCheckBox12.isSelected() || jCheckBox8.isSelected());
+        Match
+            p =
+            null; // TODO ! new Match(tlocal, tvisita, jCheckBox12.isSelected() || jCheckBox8.isSelected());
         if (!datos.entrada) {
           p.inicioRapido();
         }

@@ -11,43 +11,34 @@ public class Player {
   private final PlayerStats stats;
   private final PlayerStyle style;
 
-  //TODO remove
-  public static final Player DEFAULT = new Player("Default", (byte) 42);
-  public static final Player DEFAULT_GK = new Player("Default_GK", (byte) 24, true);
-
-  public Player(Player player) { //TODO remove
-    this(player.getName(), player.getNumber(), player.isGoalkeeper(), player.getStats(),
-         player.getStyle());
-  }
-
-  public Player(String name, byte number) {
+  public Player(String name, int number) {
     this(name, number, false);
   }
 
-  public Player(String name, byte number, boolean goalkeeper) {
+  public Player(String name, int number, boolean goalkeeper) {
     this(name, number, goalkeeper, PlayerStats.DEFAULT);
   }
 
-  public Player(String name, byte number, PlayerStats stats) {
+  public Player(String name, int number, PlayerStats stats) {
     this(name, number, false, stats);
   }
 
-  public Player(String name, byte number, boolean goalkeeper, PlayerStats stats) {
+  public Player(String name, int number, boolean goalkeeper, PlayerStats stats) {
     this(name, number, goalkeeper, stats, null);
   }
 
-  public Player(String name, byte number, PlayerStyle style) {
+  public Player(String name, int number, PlayerStyle style) {
     this(name, number, false, PlayerStats.DEFAULT, style);
   }
 
-  public Player(String name, byte number, boolean goalkeeper, PlayerStyle style) {
+  public Player(String name, int number, boolean goalkeeper, PlayerStyle style) {
     this(name, number, goalkeeper, PlayerStats.DEFAULT, style);
   }
 
-  public Player(String name, byte number, boolean goalkeeper, PlayerStats stats,
+  public Player(String name, int number, boolean goalkeeper, PlayerStats stats,
                 PlayerStyle style) {
     this.name = name;
-    this.number = number;
+    this.number = (byte) number;
     this.goalkeeper = goalkeeper;
     this.stats = stats;
     this.style = style;

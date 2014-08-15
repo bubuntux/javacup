@@ -1,12 +1,9 @@
 package org.dsaw.javacup.render;
 
 import org.dsaw.javacup.gui.principal.PrincipalFrame;
-import org.dsaw.javacup.model.ITeam;
-import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.engine.MatchInterface;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.model.util.TacticValidate;
 import org.newdawn.slick.Sound;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -21,7 +18,6 @@ import java.io.IOException;
 import java.text.DecimalFormat;
 import java.util.Random;
 
-import javax.imageio.ImageIO;
 import javax.swing.*;
 
 /**
@@ -105,6 +101,7 @@ public class VisorBasico extends javax.swing.JFrame {
   }
 
   private void loadImages() throws IOException {
+  }/*{
     boolean
         uniformeAlternativo =
         TacticValidate.useAlternativeColors(p.getDetalleLocal(), p.getDetalleVisita());
@@ -256,7 +253,7 @@ public class VisorBasico extends javax.swing.JFrame {
       imgLocal[i] = imgLocal[i].getScaledInstance(13, 13, Image.SCALE_SMOOTH);
       imgVisita[i] = imgVisita[i].getScaledInstance(13, 13, Image.SCALE_SMOOTH);
     }
-  }
+  }*/
 
   private MatchInterface p;
   private BufferedImage bimg = new BufferedImage(408, 628, BufferedImage.TYPE_INT_ARGB);
@@ -266,158 +263,6 @@ public class VisorBasico extends javax.swing.JFrame {
   private DecimalFormat df = new DecimalFormat("##.##");
 
   public void pinta(Graphics g) {
-    Graphics2D gr;
-
-    if (dobleBuffer) {
-      gr = (Graphics2D) bimg.getGraphics();
-    } else {
-      gr = (Graphics2D) g;
-    }
-    gr.setFont(f);
-    double altura = p.getAlturaBalon();
-    gr.drawImage(imgCampo, 0, 0, null);
-    int pp[], pb[];
-
-    pb = transformVisorBasico(p.getPosVisibleBalon());
-    gr.drawImage(balonSombra, pb[0] + (int) (altura * 2d), pb[1] + (int) (altura * 2d), null);
-    if (altura <= 2.9) {
-      gr.drawImage(balon, pb[0] - 2, pb[1] - 2, null);
-    }
-    if (dibujaJugadores) {
-      for (int i = 0; i < 11; i++) {
-        pp = transformVisorBasico(pos[0][i]);
-        gr.drawImage(sombra, pp[0], pp[1], null);
-        pp = transformVisorBasico(pos[1][i]);
-        gr.drawImage(sombra, pp[0], pp[1], null);
-      }
-      int it;
-      for (int i = 0; i < 11; i++) {
-        pp = transformVisorBasico(pos[0][i]);
-        gr.translate(pp[0], pp[1]);
-        gr.rotate(ang[0][i]);
-        it = iter[0][i];
-        if (it > 6) {
-          it = 13 - it;
-        }
-        gr.drawImage(imgLocal[it], -6, -6, null);
-        gr.rotate(-ang[0][i]);
-        if (numeros) {
-          gr.setColor(Color.yellow);
-          gr.drawString("" + p.getDetalleLocal().getPlayers()[i].getNumber(), -2, 18);
-        }
-        gr.translate(-pp[0], -pp[1]);
-        pp = transformVisorBasico(pos[1][i]);
-        gr.translate(pp[0], pp[1]);
-        gr.rotate(ang[1][i]);
-        it = iter[1][i];
-        if (it > 6) {
-          it = 13 - it;
-        }
-        gr.drawImage(imgVisita[it], -6, -6, null);
-        gr.rotate(-ang[1][i]);
-        if (numeros) {
-          gr.setColor(Color.yellow);
-          gr.drawString("" + p.getDetalleVisita().getPlayers()[i].getNumber(), -2, -10);
-        }
-        gr.translate(-pp[0], -pp[1]);
-      }
-    }
-    if (!dibujaJugadores) {
-      for (int i = 0; i < 11; i++) {
-        pp = transformVisorBasico(pos[0][i]);
-        gr.drawImage(imgLoc, pp[0] - 10, pp[1] - 10, null);
-        if (numeros) {
-          int num = p.getDetalleLocal().getPlayers()[i].getNumber();
-          gr.setColor(Color.black);
-          if (num < 10) {
-            gr.drawString("" + num, pp[0] - 2, pp[1] + 2);
-          } else {
-            gr.drawString("" + num, pp[0] - 5, pp[1] + 2);
-          }
-          if (num < 10) {
-            gr.drawString("" + num, pp[0] - 2, pp[1] + 4);
-          } else {
-            gr.drawString("" + num, pp[0] - 5, pp[1] + 4);
-          }
-          if (num < 10) {
-            gr.drawString("" + num, pp[0] - 3, pp[1] + 3);
-          } else {
-            gr.drawString("" + num, pp[0] - 6, pp[1] + 3);
-          }
-          if (num < 10) {
-            gr.drawString("" + num, pp[0] - 1, pp[1] + 3);
-          } else {
-            gr.drawString("" + num, pp[0] - 4, pp[1] + 3);
-          }
-          gr.setColor(Color.yellow);
-          if (num < 10) {
-            gr.drawString("" + num, pp[0] - 2, pp[1] + 3);
-          } else {
-            gr.drawString("" + num, pp[0] - 5, pp[1] + 3);
-          }
-        }
-        pp = transformVisorBasico(pos[1][i]);
-        gr.drawImage(imgVis, pp[0] - 10, pp[1] - 10, null);
-        if (numeros) {
-          int num = p.getDetalleVisita().getPlayers()[i].getNumber();
-          gr.setColor(Color.black);
-          if (num < 10) {
-            gr.drawString("" + num, pp[0] - 2, pp[1] + 2);
-          } else {
-            gr.drawString("" + num, pp[0] - 5, pp[1] + 2);
-          }
-          if (num < 10) {
-            gr.drawString("" + num, pp[0] - 2, pp[1] + 4);
-          } else {
-            gr.drawString("" + num, pp[0] - 5, pp[1] + 4);
-          }
-          if (num < 10) {
-            gr.drawString("" + num, pp[0] - 3, pp[1] + 3);
-          } else {
-            gr.drawString("" + num, pp[0] - 6, pp[1] + 3);
-          }
-          if (num < 10) {
-            gr.drawString("" + num, pp[0] - 1, pp[1] + 3);
-          } else {
-            gr.drawString("" + num, pp[0] - 4, pp[1] + 3);
-          }
-          gr.setColor(Color.yellow);
-          if (num < 10) {
-            gr.drawString("" + num, pp[0] - 2, pp[1] + 3);
-          } else {
-            gr.drawString("" + num, pp[0] - 5, pp[1] + 3);
-          }
-        }
-      }
-    }
-    gr.drawImage(imgArcoSup, posArcSup[0], posArcSup[1], null);
-    gr.drawImage(imgArcoInf, posArcInf[0], posArcInf[1], null);
-    if (p.getAlturaBalon() > 2.9) {
-      gr.drawImage(balon, pb[0] - 2, pb[1] - 2, null);
-    }
-    gr.setColor(Color.yellow);
-    String time = "0";
-    int sec = p.getIteration() * Constants.DELAY / 1000;
-    time = time + sec / 60 + ":";
-    sec = sec % 60;
-    if (sec < 10) {
-      time = time + "0";
-    }
-    time = time + sec;
-    gr.drawString(time, 30, 585);
-    time = p.getGolesLocal() + " - " + p.getGolesVisita();
-    gr.drawString(time, 195, 585);
-    time =
-        df.format(100d * p.getPosesionBalonLocal()) + "% - " + df
-            .format(100d * (1d - p.getPosesionBalonLocal())) + "%";
-    gr.drawString(time, 300, 585);
-    if (dobleBuffer) {
-      if (getWidth() == 408 && getHeight() == 600) {
-        g.drawImage(bimg, 0, 0, null);
-      } else {
-        g.drawImage(bimg.getScaledInstance(getWidth(), getHeight(), Image.SCALE_FAST), 0, 0, null);
-      }
-    }
   }
 
   private final Timer timer;
