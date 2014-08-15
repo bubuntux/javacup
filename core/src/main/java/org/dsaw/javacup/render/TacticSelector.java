@@ -1,8 +1,9 @@
-package org.dsaw.javacup.model;
+package org.dsaw.javacup.render;
 
 import com.badlogic.gdx.Gdx;
 import com.neovisionaries.i18n.CountryCode;
 
+import org.dsaw.javacup.model.Tactic;
 import org.reflections.Reflections;
 
 import java.util.ArrayList;
@@ -15,7 +16,7 @@ import java.util.Map;
 /**
  * @author Julio Gutierrez (30/05/2014)
  */
-public class TacticSelector {
+public class TacticSelector { //TODO move to render
 
   private static final Map<CountryCode, List<Tactic>> tactics = loadTactics();
   private static final List<CountryCode> countryCodeList = loadCountryCodeList();

@@ -3,6 +3,7 @@ package org.dsaw.javacup.model.engine;
 import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.PlayerStats;
 import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.Command.CommandType;
 import org.dsaw.javacup.model.command.CommandHitBall;
@@ -28,6 +29,7 @@ public final class Match implements MatchInterface {
 
   private static Logger logger = LoggerFactory.getLogger(Match.class);
   private Tactic tacticaLocal, tacticaVisita;//tactica local y visita
+  private Team local, visitor;
   private GameSituations spLocal = new GameSituations(),
       spVisita =
           new GameSituations();
@@ -176,15 +178,21 @@ public final class Match implements MatchInterface {
   /**
    * Instancia un nuevo partido, indicando la tactica local y la tactica visita
    */
-  public Match(Tactic tacticaLocal, Tactic tacticaVisita, boolean save) throws Exception {
+  public Match(Team local, Team visit, boolean save) throws Exception {
     this();
-    this.tacticaLocal =
-        new TacticImpl(tacticaLocal);//deja inmutables las aptitudes, colores, nombres, etc.
-    this.tacticaVisita =
-        new TacticImpl(tacticaVisita);//deja inmutables las aptitudes, colores, nombres, etc.
+    /*this.tacticaLocal = tacticaLocal;
+        //new TacticImpl(tacticaLocal);//deja inmutables las aptitudes, colores, nombres, etc.
+    this.tacticaVisita = tacticaVisita;
+         //new TacticImpl(tacticaVisita);//deja inmutables las aptitudes, colores, nombres, etc.*/
+    this.local = local;
+    this.visitor = visit;
     this.save = save;
-    TacticValidate.validateDetail("Tactica local:", tacticaLocal.getDetail());
-    TacticValidate.validateDetail("Tactica visita:", tacticaVisita.getDetail());
+    TacticValidate.validateDetail("Tactica local:", local);
+    TacticValidate.validateDetail("Tactica visita:", visit);
+
+    this.tacticaLocal =
+        local.tactic(visitor.getName(), visitor.getCountryCode(), visitor.getPlayers());
+    this.tacticaVisita = local.tactic(local.getName(), local.getCountryCode(), local.getPlayers());
 
     Position[][] i0;
     Position[][] i1;
@@ -199,14 +207,14 @@ public final class Match implements MatchInterface {
 
     posSaqueCentro = new Position[][]{p0[1], p1[1]};
     //guarda las caracteristicas de los jugadores en los objetos GameSituations*/
-    spLocal.set(new Player[][]{tacticaLocal.getDetail().getPlayers(),
-                               tacticaVisita.getDetail().getPlayers()});
-    spVisita.set(new Player[][]{tacticaVisita.getDetail().getPlayers(),
-                                tacticaLocal.getDetail().getPlayers()});
+    spLocal.set(new Player[][]{(Player[]) local.getPlayers().toArray(),
+                               (Player[]) visitor.getPlayers().toArray()});
+    spVisita.set(new Player[][]{(Player[]) visitor.getPlayers().toArray(),
+                                (Player[]) local.getPlayers().toArray()});
     if (save) {
-      guardado =
+      /*guardado =
           new StoredMatch(new TacticaDetalleImpl(tacticaLocal.getDetail()),
-                          new TacticaDetalleImpl(tacticaVisita.getDetail()));
+                          new TacticaDetalleImpl(tacticaVisita.getDetail()));*/
     }
     iterar();
   }
@@ -315,7 +323,7 @@ public final class Match implements MatchInterface {
     boolean esPortero;
     for (int i = 0; i < 11; i++) {
       if (!sacaVisita && golpeaBalonIter[0][i] == 0) {
-        esPortero = tacticaLocal.getDetail().getPlayers()[i].isGoalkeeper();
+        esPortero = local.getPlayers().get(i).isGoalkeeper();
         x = posLocal[i].getX();
         y = posLocal[i].getY();
         if (esPortero && Math.abs(x) <= Constants.LARGO_AREA_GRANDE / 2
@@ -336,7 +344,7 @@ public final class Match implements MatchInterface {
     }
     for (int i = 0; i < 11; i++) {
       if (!sacaLocal && golpeaBalonIter[1][i] == 0) {
-        esPortero = tacticaVisita.getDetail().getPlayers()[i].isGoalkeeper();
+        esPortero = visitor.getPlayers().get(i).isGoalkeeper();
         x = posVisita[i].getX();
         y = posVisita[i].getY();
         if (esPortero && Math.abs(x) <= Constants.LARGO_AREA_GRANDE / 2
@@ -464,12 +472,12 @@ public final class Match implements MatchInterface {
   private boolean toPosicion(Position[] posLoc, Position[] posVis) {
     boolean ok = true;
     for (int i = 0; i < 11; i++) {
-      Position p = irA(tacticaLocal, i, posLocal[i], posLoc[i], false);
+      Position p = irA(local, i, posLocal[i], posLoc[i], false);
       if (!p.equals(posLocal[i])) {
         posLocal[i] = p;
         ok = false;
       }
-      p = irA(tacticaVisita, i, posVisita[i], posVis[i], false);
+      p = irA(visitor, i, posVisita[i], posVis[i], false);
       if (!p.equals(posVisita[i])) {
         posVisita[i] = p;
         ok = false;
@@ -1210,9 +1218,9 @@ public final class Match implements MatchInterface {
         }
 
         if (ce.eq == EQUIPO_LOCAL) {//si el equipo que golpea el ballPosition es el local
-          j = tacticaLocal.getDetail().getPlayers()[cgp.getPlayerIndex()];//obtiene al jugador
+          j = local.getPlayers().get(cgp.getPlayerIndex());//obtiene al jugador
         } else {//sino el equipo que golpea el ballPosition es el visita
-          j = tacticaVisita.getDetail().getPlayers()[cgp.getPlayerIndex()];//obtiene al jugador
+          j = visitor.getPlayers().get(cgp.getPlayerIndex());//obtiene al jugador
         }
 
         //Obtiene el error de remate del jugador incrementado por el cansancio del jugador. A mas energia menos error.
@@ -1349,10 +1357,10 @@ public final class Match implements MatchInterface {
           == EQUIPO_LOCAL) //ejecuta los comandos irA para el local y para la visita
       {
         newPos[EQUIPO_LOCAL][indJugador] =
-            irA(tacticaLocal, indJugador, posLocal[indJugador], p, cia.getSprint());
+            irA(local, indJugador, posLocal[indJugador], p, cia.getSprint());
       } else {
         newPos[EQUIPO_VISITANTE][indJugador] =
-            irA(tacticaVisita, indJugador, posVisita[indJugador], p, cia.getSprint());
+            irA(visitor, indJugador, posVisita[indJugador], p, cia.getSprint());
       }
 
     }
@@ -1473,7 +1481,7 @@ public final class Match implements MatchInterface {
   /**
    * Mueve un jugador
    */
-  private Position irA(Tactic t, int indJugador, Position posicion, Position irA, boolean sprint) {
+  private Position irA(Team t, int indJugador, Position posicion, Position irA, boolean sprint) {
 
     double dist = irA.distance(posicion);
 
@@ -1516,7 +1524,7 @@ public final class Match implements MatchInterface {
 
     double
         vel =
-        Constants.getVelocidad(t.getDetail().getPlayers()[indJugador].getStats().getSpeed())
+        Constants.getVelocidad(t.getPlayers().get(indJugador).getStats().getSpeed())
         * energia
         * aceleracion * aceleracion_sprint;
 
@@ -1547,13 +1555,13 @@ public final class Match implements MatchInterface {
   }
 
   @Override
-  public ITeam getDetalleLocal() {
-    return tacticaLocal.getDetail();
+  public Team getDetalleLocal() {
+    return local;
   }
 
   @Override
-  public ITeam getDetalleVisita() {
-    return tacticaVisita.getDetail();
+  public Team getDetalleVisita() {
+    return visitor;
   }
 
   public boolean buffered = false;
@@ -1698,10 +1706,12 @@ public final class Match implements MatchInterface {
 
     Position[] posJugadoresSaca = (sacaLocal) ? posLocal : posVisita;
     Tactic tacticaSaca = (sacaLocal) ? tacticaLocal : tacticaVisita;
+    Team teamSaca = (sacaLocal) ? local : visitor;
     GameSituations spSaca = (sacaLocal) ? spLocal : spVisita;
 
     Position[] posJugadoresNoSaca = (sacaLocal) ? posVisita : posLocal;
     Tactic tacticaNoSaca = (sacaLocal) ? tacticaVisita : tacticaLocal;
+    Team teamNoSaca = (sacaLocal) ? visitor : local;
     Position posBalonNoSaca = (sacaLocal) ? balon.getInvertedPosition() : balon;
 
     //Movemos a los jugadores del equipo que no saca que se hallen dentro de la distancia m�nima para el saque
@@ -1748,7 +1758,7 @@ public final class Match implements MatchInterface {
 
       //modificamos la posicion del jugador
       posJugadoresNoSaca[jugIndex] =
-          irA(tacticaNoSaca, jugIndex, posJugadoresNoSaca[jugIndex], p, false);
+          irA(teamNoSaca, jugIndex, posJugadoresNoSaca[jugIndex], p, false);
     }
 
     //Ejecutamos comandos IrA de la tactica que tiene que sacar
@@ -1767,7 +1777,7 @@ public final class Match implements MatchInterface {
       //modificamos la posicion del jugador
 
       posJugadoresSaca[cmd.getPlayerIndex()] =
-          irA(tacticaSaca, cmd.getPlayerIndex(), posJugadoresSaca[cmd.getPlayerIndex()],
+          irA(teamSaca, cmd.getPlayerIndex(), posJugadoresSaca[cmd.getPlayerIndex()],
               ((CommandMoveTo) cmd).getMoveTo(), false);
 
     }

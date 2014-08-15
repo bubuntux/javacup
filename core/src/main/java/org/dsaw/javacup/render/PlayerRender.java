@@ -1,13 +1,9 @@
 package org.dsaw.javacup.render;
 
-import org.dsaw.javacup.model.ITeam;
-import org.dsaw.javacup.model.PlayerStyle;
 import org.dsaw.javacup.model.Team;
-import org.dsaw.javacup.model.util.Constants;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
 import org.newdawn.slick.Image;
-import org.newdawn.slick.ImageBuffer;
 import org.newdawn.slick.SlickException;
 import org.newdawn.slick.TrueTypeFont;
 
@@ -48,6 +44,7 @@ public class PlayerRender {
    * Actualiza los cambios sobre la implementacion en los graficos
    */
   public synchronized void update(boolean alternativa) throws SlickException {
+    /*
     int idx;
     Color c0, c1;
     Color
@@ -142,7 +139,7 @@ public class PlayerRender {
         }
         imgJug[i][j] = ib.getImage();
       }
-    }
+    }*/
   }
 
   public void setImpl(Team impl) {
@@ -162,17 +159,19 @@ public class PlayerRender {
   private TrueTypeFont font = new TrueTypeFont(new java.awt.Font("lucida console", 1, 12), false);
 
   public void pintaNumero(int jugador, double x, double y, Graphics g) {
-    g.setColor(Color.yellow);
+ /*   g.setColor(Color.yellow);
     g.setFont(font);
     g.drawString("" + impl.getPlayers()[jugador].getNumber(), (int) x - 6,
                  (int) y - (int) (3 * Constants.ESCALA));
+ */
   }
 
   public void pintaNombre(int jugador, double x, double y, Graphics g) {
-    g.setColor(Color.white);
+  /*  g.setColor(Color.white);
     g.setFont(font);
     String nombre = impl.getPlayers()[jugador].getName();
     g.drawString(nombre, (int) x - nombre.length() * 4, (int) y + (int) Constants.ESCALA);
+*/
   }
 
   public void pintaSombra(int jugador, int iter, double angulo, double escala, double x, double y,

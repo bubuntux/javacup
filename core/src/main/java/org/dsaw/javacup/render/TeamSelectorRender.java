@@ -6,7 +6,6 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 import org.dsaw.javacup.JavaCup;
-import org.dsaw.javacup.model.TacticSelector;
 
 /**
  * @author Julio Gutierrez (30/05/2014)

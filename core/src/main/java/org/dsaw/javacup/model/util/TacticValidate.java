@@ -1,6 +1,5 @@
 package org.dsaw.javacup.model.util;
 
-import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.PlayerStats;
 import org.dsaw.javacup.model.PlayerStyle;
@@ -190,12 +189,17 @@ public final class TacticValidate { //TODO remove
    */
   public static boolean useAlternativeColors(Team local, Team visita) {
     Color cl1, cv1, cv2;
-    cl1 = mesclarColor(local.getShirtColor(), local.getShirtLineColor(), getP1(local.getStyle()));
+    TeamStyle localStyle = local.getStyle();
+    cl1 =
+        mesclarColor(localStyle.getShirtColor(), localStyle.getShirtLineColor(),
+                     getP1(localStyle.getUniformStyle()));
+    TeamStyle visitaStyle = visita.getStyle();
     cv1 =
-        mesclarColor(visita.getShirtColor(), visita.getShirtLineColor(), getP1(visita.getStyle()));
+        mesclarColor(visitaStyle.getShirtColor(), visitaStyle.getShirtLineColor(),
+                     getP1(visitaStyle.getUniformStyle()));
     cv2 =
-        mesclarColor(visita.getShirtColor2(), visita.getShirtLineColor2(),
-                     getP1(visita.getStyle2()));
+        mesclarColor(visitaStyle.getShirtColor2(), visitaStyle.getShirtLineColor2(),
+                     getP1(visitaStyle.getUniformStyle2()));
     double d1 = distancia(cl1, cv1);
     double d2 = distancia(cl1, cv2);
     return d1 < umbral && d2 > d1;
@@ -207,9 +211,13 @@ public final class TacticValidate { //TODO remove
   public static boolean equalsColors(Team local) {
 
     Color cl1, cl2;
-    cl1 = mesclarColor(local.getShirtColor(), local.getShirtLineColor(), getP1(local.getStyle()));
+    TeamStyle localStyle = local.getStyle();
+    cl1 =
+        mesclarColor(localStyle.getShirtColor(), localStyle.getShirtLineColor(),
+                     getP1(localStyle.getUniformStyle()));
     cl2 =
-        mesclarColor(local.getShirtColor2(), local.getShirtLineColor2(), getP1(local.getStyle2()));
+        mesclarColor(localStyle.getShirtColor2(), localStyle.getShirtLineColor2(),
+                     getP1(localStyle.getUniformStyle2()));
     double d = distancia(cl1, cl2);
     return d < umbral;
   }

@@ -4,6 +4,7 @@ import com.thoughtworks.xstream.XStream;
 
 import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.engine.Match;
 import org.dsaw.javacup.model.engine.StoredMatch;
 import org.dsaw.javacup.model.util.Constants;
@@ -137,7 +138,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
         Class tacticaClass = (Class) value;
         Object instance;
         @SuppressWarnings("element-type-mismatch")
-        ITeam d = tactics.get(value);
+        Team d = tactics.get(value);
         if (d == null) {
           try {
             instance = tacticaClass.getConstructor(new Class[]{}).newInstance(new Object[]{});
@@ -1341,7 +1342,7 @@ public final class PrincipalFrame extends javax.swing.JFrame implements Runnable
     if (tl != null && tv != null) {
       try {
         Tactic tlocal = (Tactic) tl.newInstance(), tvisita = (Tactic) tv.newInstance();
-        Match p = new Match(tlocal, tvisita, jCheckBox12.isSelected() || jCheckBox8.isSelected());
+        Match p = null; // TODO ! new Match(tlocal, tvisita, jCheckBox12.isSelected() || jCheckBox8.isSelected());
         if (!datos.entrada) {
           p.inicioRapido();
         }

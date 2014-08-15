@@ -1,6 +1,6 @@
 package org.dsaw.javacup.model.engine;
 
-import org.dsaw.javacup.model.ITeam;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.util.Position;
 
 /**
@@ -61,12 +61,12 @@ public interface MatchInterface {
   /**
    * Retorna la TacticDetail del local
    */
-  public ITeam getDetalleLocal();
+  public Team getDetalleLocal();
 
   /**
    * Retorna la TacticDetail de la visita
    */
-  public ITeam getDetalleVisita();
+  public Team getDetalleVisita();
 
   /**
    * Retorna el partido guardado

@@ -8,7 +8,7 @@ import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
 import org.dsaw.javacup.JavaCup;
-import org.dsaw.javacup.model.TacticSelector;
+import org.dsaw.javacup.render.TacticSelector;
 import org.dsaw.javacup.model.engine.Match;
 import org.dsaw.javacup.render.TeamSelectorRender;
 

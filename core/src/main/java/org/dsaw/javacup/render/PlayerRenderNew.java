@@ -1,8 +1,8 @@
 package org.dsaw.javacup.render;
 
-import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.model.PlayerStyle;
 import org.dsaw.javacup.model.Team;
+import org.dsaw.javacup.model.TeamStyle;
 import org.dsaw.javacup.model.util.Constants;
 import org.newdawn.slick.Color;
 import org.newdawn.slick.Graphics;
@@ -118,7 +118,9 @@ public final class PlayerRenderNew extends PlayerRender {
   @Override
   public synchronized void update(boolean alternativa) throws SlickException {
     Image all;
-    if (impl.getStyle() == UniformStyle.SIN_ESTILO) {
+
+    TeamStyle teamStyle = impl.getStyle();
+    if (teamStyle.getUniformStyle() == UniformStyle.SIN_ESTILO) {
       all = new Image("imagenes/running plain.png");
     } else {
       all = new Image("imagenes/running lines.png");
@@ -140,49 +142,57 @@ public final class PlayerRenderNew extends PlayerRender {
     Color c0, c1 = null;
     Color
         upolera =
-        alternativa ? new Color(impl.getShirtColor2().getRed(), impl.getShirtColor2().getGreen(),
-                                impl.getShirtColor2().getBlue())
-                    : new Color(impl.getShirtColor().getRed(), impl.getShirtColor().getGreen(),
-                                impl.getShirtColor().getBlue());
+        alternativa ? new Color(teamStyle.getShirtColor2().getRed(),
+                                teamStyle.getShirtColor2().getGreen(),
+                                teamStyle.getShirtColor2().getBlue())
+                    : new Color(teamStyle.getShirtColor().getRed(),
+                                teamStyle.getShirtColor().getGreen(),
+                                teamStyle.getShirtColor().getBlue());
     Color
         upantalon =
-        alternativa ? new Color(impl.getShortsColor2().getRed(), impl.getShortsColor2().getGreen(),
-                                impl.getShortsColor2().getBlue())
-                    : new Color(impl.getShortsColor().getRed(), impl.getShortsColor().getGreen(),
-                                impl.getShortsColor().getBlue());
+        alternativa ? new Color(teamStyle.getShortsColor2().getRed(),
+                                teamStyle.getShortsColor2().getGreen(),
+                                teamStyle.getShortsColor2().getBlue())
+                    : new Color(teamStyle.getShortsColor().getRed(),
+                                teamStyle.getShortsColor().getGreen(),
+                                teamStyle.getShortsColor().getBlue());
     Color
         ucalcetas =
-        alternativa ? new Color(impl.getSocksColor2().getRed(), impl.getSocksColor2().getGreen(),
-                                impl.getSocksColor2().getBlue())
-                    : new Color(impl.getSocksColor().getRed(), impl.getSocksColor().getGreen(),
-                                impl.getSocksColor().getBlue());
+        alternativa ? new Color(teamStyle.getSocksColor2().getRed(),
+                                teamStyle.getSocksColor2().getGreen(),
+                                teamStyle.getSocksColor2().getBlue())
+                    : new Color(teamStyle.getSocksColor().getRed(),
+                                teamStyle.getSocksColor().getGreen(),
+                                teamStyle.getSocksColor().getBlue());
     Color
         uportero =
-        alternativa ? new Color(impl.getGoalKeeper2().getRed(), impl.getGoalKeeper2().getGreen(),
-                                impl.getGoalKeeper2().getBlue())
-                    : new Color(impl.getGoalKeeper().getRed(), impl.getGoalKeeper().getGreen(),
-                                impl.getGoalKeeper().getBlue());
+        alternativa ? new Color(teamStyle.getGoalkeeper2().getRed(),
+                                teamStyle.getGoalkeeper2().getGreen(),
+                                teamStyle.getGoalkeeper2().getBlue())
+                    : new Color(teamStyle.getGoalkeeper().getRed(),
+                                teamStyle.getGoalkeeper().getGreen(),
+                                teamStyle.getGoalkeeper().getBlue());
     Color
         ufranja =
-        alternativa ? new Color(impl.getShirtLineColor2().getRed(),
-                                impl.getShirtLineColor2().getGreen(),
-                                impl.getShirtLineColor2().getBlue())
-                    : new Color(impl.getShirtLineColor().getRed(),
-                                impl.getShirtLineColor().getGreen(),
-                                impl.getShirtLineColor().getBlue());
+        alternativa ? new Color(teamStyle.getShirtLineColor2().getRed(),
+                                teamStyle.getShirtLineColor2().getGreen(),
+                                teamStyle.getShirtLineColor2().getBlue())
+                    : new Color(teamStyle.getShirtLineColor().getRed(),
+                                teamStyle.getShirtLineColor().getGreen(),
+                                teamStyle.getShirtLineColor().getBlue());
 
     for (int i = 0; i < 11; i++) {
-      PlayerStyle style = impl.getPlayers()[i].getStyle();
+      PlayerStyle playerStyle = impl.getPlayers().get(i).getStyle();
       Color
           upelo =
-          new Color(style.getHairColor().getRed(),
-                    style.getHairColor().getGreen(),
-                    style.getHairColor().getBlue());
+          new Color(playerStyle.getHairColor().getRed(),
+                    playerStyle.getHairColor().getGreen(),
+                    playerStyle.getHairColor().getBlue());
       Color
           upiel =
-          new Color(style.getSkinColor().getRed(),
-                    style.getSkinColor().getGreen(),
-                    style.getSkinColor().getBlue());
+          new Color(playerStyle.getSkinColor().getRed(),
+                    playerStyle.getSkinColor().getGreen(),
+                    playerStyle.getSkinColor().getBlue());
       for (int j = 0; j < 14 * 8; j++) {
         if (j % 14 < 7) {
           idx = j % 14;
@@ -192,10 +202,12 @@ public final class PlayerRenderNew extends PlayerRender {
         boolean flip = (j / 14) < 2 || (j / 14) == 7;
         Image
             original =
-            img[7 * (j / 14) + idx][(alternativa ? impl.getStyle2() : impl.getStyle()).getNumero()
-                                    - 1];
+            img[7 * (j / 14) + idx][
+                (alternativa ? teamStyle.getUniformStyle2() : teamStyle.getUniformStyle())
+                    .getNumero()
+                - 1];
         float rd = 0.07f;
-        if (impl.getPlayers()[i].isGoalkeeper()) {
+        if (impl.getPlayers().get(i).isGoalkeeper()) {
           imgJug[i][j] =
               changeColor(original, new float[]{rd, rd, rd, rd, rd, rd, rd},
                           new org.newdawn.slick.Color[]{
@@ -280,7 +292,7 @@ public final class PlayerRenderNew extends PlayerRender {
   public void pintaNumero(int jugador, double x, double y, Graphics g) {
     g.setColor(Color.yellow);
     g.setFont(font);
-    g.drawString("" + impl.getPlayers()[jugador].getNumber(), (int) x - 6,
+    g.drawString("" + impl.getPlayers().get(jugador).getNumber(), (int) x - 6,
                  (int) y - (int) (3 * Constants.ESCALA));
   }
 
@@ -288,7 +300,7 @@ public final class PlayerRenderNew extends PlayerRender {
   public void pintaNombre(int jugador, double x, double y, Graphics g) {
     g.setColor(Color.white);
     g.setFont(font);
-    String nombre = impl.getPlayers()[jugador].getName();
+    String nombre = impl.getPlayers().get(jugador).getName();
     g.drawString(nombre, (int) x - nombre.length() * 4, (int) y + (int) Constants.ESCALA);
   }
 

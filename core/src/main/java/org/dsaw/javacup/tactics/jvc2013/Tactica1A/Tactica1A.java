@@ -5,6 +5,7 @@ import com.neovisionaries.i18n.CountryCode;
 import org.dsaw.javacup.model.IPlayer;
 import org.dsaw.javacup.model.ITeam;
 import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -149,23 +150,20 @@ public class Tactica1A implements Tactic {
       new Position(22.580152671755727, -1.3059701492537314)
   };
 
-  class TacticaDetalleImpl implements ITeam {
+  class TacticaDetalleImpl extends Team {
 
     @Override
-    public String getName() {
-      return "1A";
+    public String name() {
+      return "1-A";
     }
 
     @Override
-    public CountryCode getCountryCode() {
+    public CountryCode countryCode() {
       return CountryCode.FR;
     }
 
-    @Override
-    public String getCoachName() {
-      return "Omar Masmoudi";
-    }
 
+/*
     @Override
     public Color getShirtColor() {
       return new Color(0, 0, 255);
@@ -252,7 +250,7 @@ public class Tactica1A implements Tactic {
           new JugadorImpl("Vizzari", 11, new Color(255, 200, 150), new Color(50, 0, 0), 1d, 1d, 1d,
                           false)
       };
-    }
+    }*/
   }
 
   ITeam detalle = new TacticaDetalleImpl();

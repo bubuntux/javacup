@@ -8,9 +8,10 @@ package org.dsaw.javacup.tactics.jvc2013.Arsenal;
 
 import com.neovisionaries.i18n.CountryCode;
 
-import org.dsaw.javacup.model.ITeam;
+
 import org.dsaw.javacup.model.Player;
 import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.Team;
 import org.dsaw.javacup.model.command.Command;
 import org.dsaw.javacup.model.command.CommandHitBall;
 import org.dsaw.javacup.model.command.CommandMoveTo;
@@ -110,23 +111,19 @@ public class Arsenal implements Tactic {
   };
 
 
-  class TacticaDetalleImpl implements ITeam {
+  class TacticaDetalleImpl extends Team {
 
     @Override
-    public String getName() {
+    public String name() {
       return "Arsenal";
     }
 
     @Override
-    public CountryCode getCountryCode() {
+    public CountryCode countryCode() {
       return CountryCode.CO;
     }
 
-    @Override
-    public String getCoachName() {
-      return "Tales";
-    }
-
+    /*
     @Override
     public Color getShirtColor() {
       return new Color(255, 51, 0);
@@ -186,7 +183,7 @@ public class Arsenal implements Tactic {
     public UniformStyle getStyle2() {
       return UniformStyle.FRANJA_DIAGONAL;
     }
-
+*/
     /*@Override
     public Player[] getPlayers() {
       return new Player[]{
