@@ -6,25 +6,9 @@
 package org.dsaw.javacup.tactics.jvc2013.Arsenal3;
 
 
-import com.neovisionaries.i18n.CountryCode;
+public class Arsenal3 {
 
-import org.dsaw.javacup.model.IPlayer;
-import org.dsaw.javacup.model.ITeam;
-import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.command.Command;
-import org.dsaw.javacup.model.command.CommandHitBall;
-import org.dsaw.javacup.model.command.CommandMoveTo;
-import org.dsaw.javacup.model.engine.GameSituations;
-import org.dsaw.javacup.model.util.Constants;
-import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.render.UniformStyle;
-
-import java.awt.*;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Random;
-
-public class Arsenal3 implements Tactic {
+} /* implements Tactic {
 
   Position alineacion1[] = new Position[]{
       new Position(0.951048951048951, -49.64932126696832),
@@ -310,3 +294,4 @@ public class Arsenal3 implements Tactic {
     return comandos;
   }
 }
+*/

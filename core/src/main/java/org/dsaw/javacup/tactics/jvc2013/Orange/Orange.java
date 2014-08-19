@@ -1,27 +1,8 @@
 package org.dsaw.javacup.tactics.jvc2013.Orange;
 
-import com.neovisionaries.i18n.CountryCode;
+public class Orange {
 
-import org.dsaw.javacup.model.IPlayer;
-import org.dsaw.javacup.model.ITeam;
-import org.dsaw.javacup.model.Tactic;
-import org.dsaw.javacup.model.command.Command;
-import org.dsaw.javacup.model.command.CommandHitBall;
-import org.dsaw.javacup.model.command.CommandMoveTo;
-import org.dsaw.javacup.model.engine.GameSituations;
-import org.dsaw.javacup.model.util.Constants;
-import org.dsaw.javacup.model.util.Position;
-import org.dsaw.javacup.render.UniformStyle;
-
-import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Random;
-
-public class Orange implements Tactic {
+}/*implements Tactic {
 
   Position alineacion1[] = new Position[]{
       new Position(0.2595419847328244, -50.41044776119403),
@@ -742,4 +723,4 @@ public class Orange implements Tactic {
     }
     return angulo;
   }
-}
+}*/

@@ -51,7 +51,7 @@ public class TeamSelectionScreen implements Screen {
             match = null;
         try {
           match =
-              new Match(localTacticSelector.currentTactic(), visitorTacticSelector.currentTactic(),
+              new Match(localTacticSelector.currentTeam(), visitorTacticSelector.currentTeam(),
                         false);
         } catch (Exception e) {
           e.printStackTrace();

@@ -108,7 +108,7 @@ public final class TeamSelectorRender {
     SpriteBatch batch = game.batch;
     batch.begin();
     game.font.draw(batch, tacticSelector.currentCountry().getName(), countryTextX, countryTextY);
-    game.font.draw(batch, tacticSelector.currentTactic().getDetail().getName(), tacticTextX,
+    game.font.draw(batch, tacticSelector.currentTeam().getName(), tacticTextX,
                    tacticTextY);
     batch.end();
   }

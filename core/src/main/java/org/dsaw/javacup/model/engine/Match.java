@@ -197,11 +197,12 @@ public final class Match implements MatchInterface {
     Position[][] i0;
     Position[][] i1;
     i0 =
-        new Position[][]{tacticaLocal.getNoStartPositions(spLocal),
-                         tacticaVisita.getNoStartPositions(spVisita)};
+        new Position[][]{(Position[]) tacticaLocal.getStartPositions(spLocal).toArray(),
+                         (Position[]) tacticaVisita.getStartPositions(spVisita).toArray()};
     i1 =
-        new Position[][]{tacticaLocal.getStartPositions(spLocal),
-                         tacticaVisita.getStartPositions(spVisita)};//solo para validar
+        new Position[][]{(Position[]) tacticaLocal.getStartPositions(spLocal).toArray(),
+                         (Position[]) tacticaVisita.getStartPositions(spVisita)
+                             .toArray()};//solo para validar
     Position p0[][] = TacticValidate.validatePositions("Valida sacaVisita", i1[1], i0[0]);
     Position p1[][] = TacticValidate.validatePositions("Valida sacaLocal", i1[0], i0[1]);
 
@@ -507,9 +508,9 @@ public final class Match implements MatchInterface {
         silbato = true;
       }
       if (iniciaLocal) {
-        toPosicion(posLocal, tacticaVisita.getNoStartPositions(spVisita));
+        toPosicion(posLocal, (Position[]) tacticaVisita.getStartPositions(spVisita).toArray());
       } else {
-        toPosicion(tacticaLocal.getNoStartPositions(spLocal), posVisita);
+        toPosicion((Position[]) tacticaLocal.getStartPositions(spLocal).toArray(), posVisita);
       }
       iteracionesFoto++;
     } else {
@@ -527,16 +528,16 @@ public final class Match implements MatchInterface {
       alturaBalon = 0;
       if (iniciaLocal) {
         posSaqueCentro =
-            new Position[][]{tacticaLocal.getStartPositions(spLocal),
-                             tacticaVisita.getNoStartPositions(spVisita)};
+            new Position[][]{(Position[]) tacticaLocal.getStartPositions(spLocal).toArray(),
+                             (Position[]) tacticaVisita.getStartPositions(spVisita).toArray()};
         Position[][]
             fixed =
             TacticValidate.validatePositions("sacaLocal", posSaqueCentro[0], posSaqueCentro[1]);
         posSaqueCentro = new Position[][]{fixed[0], fixed[1]};
       } else {
         posSaqueCentro =
-            new Position[][]{tacticaLocal.getNoStartPositions(spLocal),
-                             tacticaVisita.getStartPositions(spVisita)};
+            new Position[][]{(Position[]) tacticaLocal.getStartPositions(spLocal).toArray(),
+                             (Position[]) tacticaVisita.getStartPositions(spVisita).toArray()};
         Position[][]
             fixed =
             TacticValidate.validatePositions("sacaVisita", posSaqueCentro[1], posSaqueCentro[0]);
@@ -589,8 +590,8 @@ public final class Match implements MatchInterface {
    * Al llamar este metodo no se ejecutara la entrada al estadio
    */
   public void inicioRapido() {
-    Position tl[] = tacticaLocal.getNoStartPositions(spLocal);
-    Position tv[] = tacticaVisita.getNoStartPositions(spVisita);
+    Position tl[] = (Position[]) tacticaLocal.getStartPositions(spLocal).toArray();
+    Position tv[] = (Position[]) tacticaVisita.getStartPositions(spVisita).toArray();
     for (int i = 0; i < 11; i++) {
       posLocal[i] = new Position(tl[i]);
       posVisita[i] = new Position(tv[i]);
