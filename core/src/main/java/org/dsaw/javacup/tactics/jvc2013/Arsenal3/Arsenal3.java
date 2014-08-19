@@ -6,23 +6,41 @@
 package org.dsaw.javacup.tactics.jvc2013.Arsenal3;
 
 
-public class Arsenal3 {
+import com.neovisionaries.i18n.CountryCode;
 
-} /* implements Tactic {
+import org.dsaw.javacup.model.Player;
+import org.dsaw.javacup.model.Tactic;
+import org.dsaw.javacup.model.Team;
+import org.dsaw.javacup.model.command.Command;
+import org.dsaw.javacup.model.command.CommandHitBall;
+import org.dsaw.javacup.model.command.CommandMoveTo;
+import org.dsaw.javacup.model.engine.GameSituations;
+import org.dsaw.javacup.model.util.Constants;
+import org.dsaw.javacup.model.util.Position;
 
-  Position alineacion1[] = new Position[]{
-      new Position(0.951048951048951, -49.64932126696832),
-      new Position(-19.020979020979023, -31.59502262443439),
-      new Position(0.7132867132867133, -28.50678733031674),
-      new Position(19.25874125874126, -31.59502262443439),
-      new Position(1.6643356643356644, -7.126696832579185),
-      new Position(-15.692307692307693, -7.364253393665159),
-      new Position(-23.3006993006993, 11.877828054298643),
-      new Position(17.594405594405593, 12.115384615384617),
-      new Position(-26.867132867132867, 35.8710407239819),
-      new Position(-5.468531468531468, 16.628959276018097),
-      new Position(-1.188811188811189, 40.38461538461539)
-  };
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Random;
+
+public class Arsenal3 extends Team {
+
+  @Override
+  public Tactic tactic(String teamName, CountryCode countryCode, List<Player> players) {
+    return null;
+  }
+
+  @Override
+  protected String name() {
+    return "Arsenal";
+  }
+
+  @Override
+  protected CountryCode countryCode() {
+    return CountryCode.CO;
+  }
+ /* implements Tactic {
+
+
   Position alineacion2[] = new Position[]{
       new Position(0.2595419847328244, -50.41044776119403),
       new Position(-11.16030534351145, -31.082089552238806),
@@ -90,21 +108,6 @@ public class Arsenal3 {
   };
 
   class TacticaDetalleImpl implements ITeam {
-
-    @Override
-    public String getName() {
-      return "Arsenal";
-    }
-
-    @Override
-    public CountryCode getCountryCode() {
-      return CountryCode.CO;
-    }
-
-    @Override
-    public String getCoachName() {
-      return "Tales";
-    }
 
     @Override
     public Color getShirtColor() {
@@ -213,85 +216,109 @@ public class Arsenal3 {
   }
 
   //Lista de comandos
-  LinkedList<Command> comandos = new LinkedList<>();
 
-  @Override
-  public List<Command> execute(GameSituations sp) {
-    //Limpia la lista de comandos
-    comandos.clear();
-    //Obtiene las posiciones de tus jugadores
-    Position[] jugadores = sp.myPlayers();
-    Position posicionPorteroContrario = sp.rivalPlayers()[0];
-    for (int i = 0; i < jugadores.length; i++) {
-      //Ordena a cada jugador que se ubique segun la alineacion1
-      if (i != 10) {
-        comandos.add(new CommandMoveTo(i, alineacion1[i]));
-      } else {
-        Position posicionBalon = new Position(sp.getTrajectory(i)[0], sp.getTrajectory(i)[1]);
-        //  comandos.add(new ComandoIrA(i,Posicion.media(posicionPorteroContrario, posicionBalon)));
-        Position posicionMedia = Position.medium(posicionPorteroContrario, jugadores[8]);
-        posicionMedia = Position.medium(posicionPorteroContrario, posicionMedia);
-        comandos
-            .add(new CommandMoveTo(i, Position.medium(posicionPorteroContrario, posicionMedia)));
-      }
+*/
 
-    }
-    //Si no saca el rival
-    if (!sp.isRivalStarts()) {
-      //Obtiene los datos de recuperacion del ballPosition
-      int[] recuperadores = sp.getRecoveryBall();
-      //Si existe posibilidad de recuperar el ballPosition
-      if (recuperadores.length > 1) {
-        //Obtiene las coordenadas del ballPosition en el instante donde
-        //se puede recuperar el ballPosition
-        double[] posRecuperacion = sp.getTrajectory(recuperadores[0]);
-        //Recorre la lista de jugadores que pueden recuperar
-        for (int i = 1; i < 2; i++) {
-          //Ordena a los jugadores recuperadores que se ubique
-          //en la posicion de recuperacion
-          comandos.add(new CommandMoveTo(recuperadores[i],
-                                         new Position(posRecuperacion[0], posRecuperacion[1])));
+  private class TacticaDetalleImpl implements Tactic {
+
+    LinkedList<Command> comandos = new LinkedList<>();
+
+    Position alineacion1[] = new Position[]{
+        new Position(0.951048951048951, -49.64932126696832),
+        new Position(-19.020979020979023, -31.59502262443439),
+        new Position(0.7132867132867133, -28.50678733031674),
+        new Position(19.25874125874126, -31.59502262443439),
+        new Position(1.6643356643356644, -7.126696832579185),
+        new Position(-15.692307692307693, -7.364253393665159),
+        new Position(-23.3006993006993, 11.877828054298643),
+        new Position(17.594405594405593, 12.115384615384617),
+        new Position(-26.867132867132867, 35.8710407239819),
+        new Position(-5.468531468531468, 16.628959276018097),
+        new Position(-1.188811188811189, 40.38461538461539)
+    };
+
+    @Override
+    public List<Command> execute(GameSituations sp) {
+      //Limpia la lista de comandos
+      comandos.clear();
+      //Obtiene las posiciones de tus jugadores
+      Position[] jugadores = sp.myPlayers();
+      Position posicionPorteroContrario = sp.rivalPlayers()[0];
+      for (int i = 0; i < jugadores.length; i++) {
+        //Ordena a cada jugador que se ubique segun la alineacion1
+        if (i != 10) {
+          comandos.add(new CommandMoveTo(i, alineacion1[i]));
+        } else {
+          Position posicionBalon = new Position(sp.getTrajectory(i)[0], sp.getTrajectory(i)[1]);
+          //  comandos.add(new ComandoIrA(i,Posicion.media(posicionPorteroContrario, posicionBalon)));
+          Position posicionMedia = Position.medium(posicionPorteroContrario, jugadores[8]);
+          posicionMedia = Position.medium(posicionPorteroContrario, posicionMedia);
+          comandos
+              .add(new CommandMoveTo(i, Position.medium(posicionPorteroContrario, posicionMedia)));
         }
+
       }
-    }
-    //Instancia un generador aleatorio
-    Random r = new Random();
-    //Recorre la lista de mis jugadores que pueden rematar
-    for (int i : sp.canKick()) {
-      //Si el jugador es de indice 8 o 10
-      if (i == 8 || i == 10) {
-        comandos.add(new CommandHitBall(i, Position.medium(posicionPorteroContrario,
-                                                           Constants.posteIzqArcoSup), 1,
-                                        12 + r.nextInt(6)));
-      } else {
-        //inicia contador en cero
-        int count = 0;
-        int jugadorDestino;
-        //Repetir mientras el jugador destino sea igual al jugador que remata
-        while (((jugadorDestino = r.nextInt(11)) == i
-                //o mientras la coordenada y del jugador que remata
-                //es mayor que la coordenada y del que recibe
-                || jugadores[i].getY() > jugadores[jugadorDestino].getY())
-               //Y mientras el contador es menor a 20
-               && count < 20) {
-          //incrementa el contador
-          count++;
-        }
-        //Si el receptor del ballPosition es el que remata
-        if (i == jugadorDestino) {
-          while ((jugadorDestino = r.nextInt(jugadores.length)) == i) {
+      //Si no saca el rival
+      if (!sp.isRivalStarts()) {
+        //Obtiene los datos de recuperacion del ballPosition
+        int[] recuperadores = sp.getRecoveryBall();
+        //Si existe posibilidad de recuperar el ballPosition
+        if (recuperadores.length > 1) {
+          //Obtiene las coordenadas del ballPosition en el instante donde
+          //se puede recuperar el ballPosition
+          double[] posRecuperacion = sp.getTrajectory(recuperadores[0]);
+          //Recorre la lista de jugadores que pueden recuperar
+          for (int i = 1; i < 2; i++) {
+            //Ordena a los jugadores recuperadores que se ubique
+            //en la posicion de recuperacion
+            comandos.add(new CommandMoveTo(recuperadores[i],
+                                           new Position(posRecuperacion[0], posRecuperacion[1])));
           }
         }
-        //Ordena que el jugador que puede rematar que de un pase
-        //al jugador destino
-        double anguloZ = 45;
-        jugadorDestino = 8;
-        //System.out.println("posicion 9 y 11 "+i+" a "+jugadores[8]+" "+jugadores[10]);
-        comandos.add(new CommandHitBall(i, jugadores[jugadorDestino], 1, anguloZ));
       }
+      //Instancia un generador aleatorio
+      Random r = new Random();
+      //Recorre la lista de mis jugadores que pueden rematar
+      for (int i : sp.canKick()) {
+        //Si el jugador es de indice 8 o 10
+        if (i == 8 || i == 10) {
+          comandos.add(new CommandHitBall(i, Position.medium(posicionPorteroContrario,
+                                                             Constants.posteIzqArcoSup), 1,
+                                          12 + r.nextInt(6)));
+        } else {
+          //inicia contador en cero
+          int count = 0;
+          int jugadorDestino;
+          //Repetir mientras el jugador destino sea igual al jugador que remata
+          while (((jugadorDestino = r.nextInt(11)) == i
+                  //o mientras la coordenada y del jugador que remata
+                  //es mayor que la coordenada y del que recibe
+                  || jugadores[i].getY() > jugadores[jugadorDestino].getY())
+                 //Y mientras el contador es menor a 20
+                 && count < 20) {
+            //incrementa el contador
+            count++;
+          }
+          //Si el receptor del ballPosition es el que remata
+          if (i == jugadorDestino) {
+            while ((jugadorDestino = r.nextInt(jugadores.length)) == i) {
+            }
+          }
+          //Ordena que el jugador que puede rematar que de un pase
+          //al jugador destino
+          double anguloZ = 45;
+          jugadorDestino = 8;
+          //System.out.println("posicion 9 y 11 "+i+" a "+jugadores[8]+" "+jugadores[10]);
+          comandos.add(new CommandHitBall(i, jugadores[jugadorDestino], 1, anguloZ));
+        }
+      }
+      //Retorna la lista de comandos
+      return comandos;
     }
-    //Retorna la lista de comandos
-    return comandos;
+
+    @Override
+    public List<Player> getStartPositions(GameSituations sp) {
+      return null; //Arrays.asList(alineacion1); //TODO
+    }
   }
 }
-*/

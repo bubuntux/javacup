@@ -3,6 +3,7 @@ config.xml
 props
 
 .temp
+hs_err_pid*.log
 
 # Idea Files #
 *.iml

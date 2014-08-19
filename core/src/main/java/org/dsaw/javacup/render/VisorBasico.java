@@ -1,6 +1,5 @@
 package org.dsaw.javacup.render;
 
-import org.dsaw.javacup.gui.principal.PrincipalFrame;
 import org.dsaw.javacup.model.engine.MatchInterface;
 import org.dsaw.javacup.model.util.Constants;
 import org.dsaw.javacup.model.util.Position;
@@ -29,7 +28,7 @@ public class VisorBasico extends javax.swing.JFrame {
    * variable estatica para setear los Frames por segundo
    */
   public static int fps = Constants.FPS;
-  private PrincipalFrame principal = null;
+ // private PrincipalFrame principal = null;
   private static Logger logger = LoggerFactory.getLogger(VisorBasico.class);
   /**
    * variable estatica para setear si se dibujaran los jugadores o las esferas
@@ -279,9 +278,9 @@ public class VisorBasico extends javax.swing.JFrame {
   /**
    * Instancia un visor basicom indicando el partido y jframe principal(dejar nulo)
    */
-  public VisorBasico(MatchInterface partido, PrincipalFrame principal) throws IOException {
+  public VisorBasico(MatchInterface partido/*, PrincipalFrame principal*/) throws IOException {
 
-    this.principal = principal;
+ //   this.principal = principal;
     p = partido;
     loadImages();
     if (sonidos) {
@@ -393,9 +392,9 @@ public class VisorBasico extends javax.swing.JFrame {
     setVisible(true);
     pack();
     setLocationRelativeTo(null);
-    if (principal != null) {
+   /* if (principal != null) {
       principal.setVisible(false);
-    }
+    }*/
   }
 
   Thread thread;
@@ -455,19 +454,19 @@ public class VisorBasico extends javax.swing.JFrame {
     timer.stop();
     dispose();
     if (p.fueGrabado()) {
-      if (JOptionPane.showConfirmDialog(principal, "Desea guardar el partido?", "Guardar Partido",
+      /*if (JOptionPane.showConfirmDialog(principal, "Desea guardar el partido?", "Guardar Partido",
                                         JOptionPane.YES_NO_OPTION) == 0) {
         if (jfc.showSaveDialog(principal) == JFileChooser.APPROVE_OPTION) {
           try {
             p.getPartidoGuardado().save(jfc.getSelectedFile());
-            if (principal != null) {
+           *//* if (principal != null) {
               principal.addGuardadoLocal(new File[]{jfc.getSelectedFile()});
-            }
+            }*//*
           } catch (Exception ex) {
             logger.error("Error al guardar partido", ex);
           }
         }
-      }
+      }*/
     }
     if (sonidos) {
       for (Sound s : ambiente) {
@@ -486,11 +485,11 @@ public class VisorBasico extends javax.swing.JFrame {
         s.stop();
       }
     }
-    if (principal == null) {
+   /* if (principal == null) {
       System.exit(0);
     } else {
       principal.setVisible(true);
-    }
+    }*/
   }
 
   private void formWindowClosing(

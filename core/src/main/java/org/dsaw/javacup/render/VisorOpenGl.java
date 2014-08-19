@@ -1,6 +1,5 @@
 package org.dsaw.javacup.render;
 
-import org.dsaw.javacup.gui.principal.PrincipalFrame;
 import org.dsaw.javacup.model.engine.Match;
 import org.dsaw.javacup.model.engine.MatchInterface;
 import org.dsaw.javacup.model.engine.StoredMatch;
@@ -21,7 +20,6 @@ import org.newdawn.slick.opengl.InternalTextureLoader;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.Random;
 
@@ -60,7 +58,7 @@ public class VisorOpenGl implements Game {
   double escalaGradual = 0;
   boolean noAutoEscalar = false;
   ArrayList<Object[]> lista = new ArrayList<>();
-  private PrincipalFrame principal;
+  //  private PrincipalFrame principal;
   private MatchInterface partido = null;
   private int sx, sy;
   private FieldRender fieldRender = null;
@@ -112,7 +110,8 @@ public class VisorOpenGl implements Game {
    * (sx,sy), si Se ejecuta en pantalla completa(fullscreen), e indicando la instancia del jframe
    * Principal(dejar nulo)
    */
-  public VisorOpenGl(Match partido, int sx, int sy, boolean fullscreen, PrincipalFrame principal)
+  public VisorOpenGl(Match partido, int sx, int sy,
+                     boolean fullscreen/*, PrincipalFrame principal*/)
       throws SlickException {
     this.partido = partido;
     this.sx = sx;
@@ -120,7 +119,7 @@ public class VisorOpenGl implements Game {
     this.dxsaque = (sx + 300 * 2) / 75;
     sx2 = sx / 2;
     sy2 = sy / 2;
-    this.principal = principal;
+    //this.principal = principal;
     AppGameContainer container = new AppGameContainer(this);
     container.setForceExit(false);
     container.setDisplayMode(sx, sy, fullscreen);
@@ -134,8 +133,8 @@ public class VisorOpenGl implements Game {
    * pantalla (sx,sy), si Se ejecuta en pantalla completa(fullscreen), e indicando la instancia del
    * jframe Principal(dejar nulo)
    */
-  public VisorOpenGl(StoredMatch partido, int sx, int sy, boolean fullscreen,
-                     PrincipalFrame principal) throws SlickException {
+  public VisorOpenGl(StoredMatch partido, int sx, int sy, boolean fullscreen/*,
+                     PrincipalFrame principal*/) throws SlickException {
     pg = partido;
     guardado = true;
     progreso = true;
@@ -148,7 +147,7 @@ public class VisorOpenGl implements Game {
     this.dxsaque = (sx + 300 * 2) / 75;
     sx2 = sx / 2;
     sy2 = sy / 2;
-    this.principal = principal;
+    //   this.principal = principal;
     AppGameContainer container = new AppGameContainer(this);
     container.setForceExit(false);
     container.setDisplayMode(sx, sy, fullscreen);
@@ -295,7 +294,7 @@ public class VisorOpenGl implements Game {
     SoundStore.get().clear();
     InternalTextureLoader.get().clear();
     if (partido.fueGrabado()) {
-      if (JOptionPane.showConfirmDialog(principal, "Desea guardar el partido?", "Guardar Partido",
+      /*if (JOptionPane.showConfirmDialog(principal, "Desea guardar el partido?", "Guardar Partido",
                                         JOptionPane.YES_NO_OPTION) == 0) {
         if (jfc.showSaveDialog(principal) == JFileChooser.APPROVE_OPTION) {
           try {
@@ -307,7 +306,7 @@ public class VisorOpenGl implements Game {
             logger.error("Error al guardar partido", ex);
           }
         }
-      }
+      }*/
     }
     if (sonidos) {
       for (Sound s : ambiente) {
@@ -323,10 +322,11 @@ public class VisorOpenGl implements Game {
       rebote.stop();
       silbato.stop();
     }
-    if (principal != null) {
+  /*  if (principal != null) {
       principal.setVisible(true);
       principal.requestFocus();
-    } else {
+    } else */
+    {
       System.exit(0);
     }
   }
@@ -460,12 +460,12 @@ public class VisorOpenGl implements Game {
             pg.save(jfc.getSelectedFile());
           } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Error al guardar partido...");
-            if (principal != null) {
+            /*if (principal != null) {
               try {
                 principal.addGuardadoLocal(new File[]{jfc.getSelectedFile()});
               } catch (Exception ex) {
               }
-            }
+            }*/
           }
         }
       }

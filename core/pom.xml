@@ -39,26 +39,13 @@
             <version>1.12</version>
         </dependency>
 
-
-        <dependency>
-            <groupId>com.thoughtworks.xstream</groupId>
-            <artifactId>xstream</artifactId>
-            <version>1.4.4</version>
-        </dependency>
-
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.5</version>
         </dependency>
 
-        <dependency> <!-- TODO remove -->
-            <groupId>org.netbeans</groupId>
-            <artifactId>awtextra</artifactId>
-            <version>0.0.1</version>
-        </dependency>
-
-        <dependency> <!-- TODO change for playN or libGDX -->
+        <dependency> <!-- TODO change for libGDX -->
             <groupId>org.newdawn</groupId>
             <artifactId>slick</artifactId>
             <version>237</version>
@@ -78,33 +65,6 @@
             <scope>runtime</scope>
         </dependency>
 
-        <dependency>
-            <groupId>org.lwjgl.lwjgl</groupId>
-            <artifactId>lwjgl</artifactId>
-            <version>2.9.0</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.lwjgl.lwjgl</groupId>
-            <artifactId>lwjgl_util</artifactId>
-            <version>2.9.0</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.googlecode.soundlibs</groupId>
-            <artifactId>jorbis</artifactId>
-            <version>0.0.17-2</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>xpp3</groupId>
-            <artifactId>xpp3_min</artifactId>
-            <version>1.1.4c</version>
-            <scope>runtime</scope>
-        </dependency>
     </dependencies>
 
     <build>
@@ -119,22 +79,6 @@
                         <phase>generate-resources</phase>
                         <goals>
                             <goal>jar-no-fork</goal>
-                        </goals>
-                    </execution>
-                </executions>
-            </plugin>
-            <plugin>
-                <!-- TODO remove plugin -->
-                <!-- for now just include this parameter when launch the program -Djava.library.path=target/natives  -->
-                <groupId>com.googlecode.mavennatives</groupId>
-                <artifactId>maven-nativedependencies-plugin</artifactId>
-                <version>0.0.7</version>
-                <executions>
-                    <execution>
-                        <id>unpacknatives</id>
-                        <phase>generate-resources</phase>
-                        <goals>
-                            <goal>copy</goal>
                         </goals>
                     </execution>
                 </executions>

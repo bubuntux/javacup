@@ -19,7 +19,6 @@ public class JavaCup extends Game {
 
   @Override
   public void create() {
-
     batch = new SpriteBatch();
     shapeRenderer = new ShapeRenderer();
     font = new BitmapFont();
