@@ -27,43 +27,31 @@
             <version>${gdx.version}</version>
         </dependency>
 
-        <dependency>
+        <dependency> <!-- Country codes -->
+            <groupId>com.neovisionaries</groupId>
+            <artifactId>nv-i18n</artifactId>
+            <version>1.13</version>
+        </dependency>
+
+        <dependency> <!-- TODO remove?  -->
             <groupId>org.reflections</groupId>
             <artifactId>reflections</artifactId>
             <version>0.9.9-RC1</version>
         </dependency>
 
-        <dependency>
-            <groupId>com.neovisionaries</groupId>
-            <artifactId>nv-i18n</artifactId>
-            <version>1.12</version>
-        </dependency>
 
+        <!-- TODO remove-->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-api</artifactId>
             <version>1.7.5</version>
         </dependency>
-
-        <dependency> <!-- TODO change for libGDX -->
+        <dependency>
             <groupId>org.newdawn</groupId>
             <artifactId>slick</artifactId>
             <version>237</version>
         </dependency>
-
-        <dependency>
-            <groupId>org.slf4j</groupId>
-            <artifactId>slf4j-simple</artifactId>
-            <version>1.7.5</version>
-            <scope>runtime</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>com.jtattoo</groupId>
-            <artifactId>JTattoo</artifactId>
-            <version>1.6.9</version>
-            <scope>runtime</scope>
-        </dependency>
+        <!-- TODO remove-->
 
     </dependencies>
 
