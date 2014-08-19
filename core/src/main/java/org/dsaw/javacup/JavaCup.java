@@ -5,7 +5,8 @@ import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 
-import org.dsaw.javacup.screen.TeamSelectionScreen;
+import org.dsaw.javacup.render.CompositeRenderer;
+import org.dsaw.javacup.screen.VersusScreen;
 
 /**
  * @author Julio Gutierrez (29/05/2014)
@@ -13,29 +14,24 @@ import org.dsaw.javacup.screen.TeamSelectionScreen;
 public class JavaCup extends Game {
 
   //TODO public?
-  public SpriteBatch batch;
-  public ShapeRenderer shapeRenderer;
-  public BitmapFont font;
+  public CompositeRenderer cRenderer;
+  //TODO configs or something...
+
 
   @Override
   public void create() {
-    batch = new SpriteBatch();
-    shapeRenderer = new ShapeRenderer();
-    font = new BitmapFont();
-    setScreen(new TeamSelectionScreen(this));
-  }
+    SpriteBatch spriteBatch = new SpriteBatch();
+    ShapeRenderer shapeRenderer = new ShapeRenderer();
+    BitmapFont bitmapFont = new BitmapFont();
+    cRenderer = new CompositeRenderer(spriteBatch, shapeRenderer, bitmapFont);
 
-  @Override
-  public void render() {
-    super.render();
+    setScreen(new VersusScreen(this));
   }
 
   @Override
   public void dispose() {
     super.dispose();
 
-    shapeRenderer.dispose();
-    batch.dispose();
-    font.dispose();
+    cRenderer.dispose();
   }
 }

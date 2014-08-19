@@ -16,15 +16,16 @@ import java.util.Map;
 /**
  * @author Julio Gutierrez (30/05/2014)
  */
-public class TacticSelector {
+public class TeamSelector {
 
+  //TODO load and dispose?
   private static final Map<CountryCode, List<Team>> teams = loadTactics();
   private static final List<CountryCode> countryCodeList = loadCountryCodeList();
 
   private int countryIndex;
   private int teamIndex;
 
-  public TacticSelector() {
+  public TeamSelector() {
     countryIndex = 0;
     teamIndex = 0;
   }
@@ -37,6 +38,10 @@ public class TacticSelector {
     teamIndex = 0;
   }
 
+  public CountryCode getCountry() {
+    return countryCodeList.get(countryIndex);
+  }
+
   public void nextCountry() {
     countryIndex++;
     if (countryIndex >= countryCodeList.size()) {
@@ -45,35 +50,31 @@ public class TacticSelector {
     teamIndex = 0;
   }
 
-  public CountryCode currentCountry() {
-    return countryCodeList.get(countryIndex);
-  }
-
-  public void prevTactic() {
+  public void prevTeam() {
     teamIndex--;
     if (teamIndex < 0) {
-      teamIndex = teams.get(currentCountry()).size() - 1;
+      teamIndex = teams.get(getCountry()).size() - 1;
     }
   }
 
-  public void nextTactic() {
+  public Team getTeam() {
+    return teams.get(getCountry()).get(teamIndex);
+  }
+
+  public void nextTeam() {
     teamIndex++;
-    if (teamIndex >= teams.get(currentCountry()).size()) {
+    if (teamIndex >= teams.get(getCountry()).size()) {
       teamIndex = 0;
     }
-  }
-
-  public Team currentTeam() {
-    return teams.get(currentCountry()).get(teamIndex);
   }
 
   private static Map<CountryCode, List<Team>> loadTactics() {
     Map<CountryCode, List<Team>> teams = new EnumMap<>(CountryCode.class);
 
-    Reflections reflections = new Reflections("org.dsaw.javacup.tactics.jvc2013");
+    Reflections reflections = new Reflections("org.dsaw.javacup.tactics.jvc2013"); //TODO
     for (Class<? extends Team> tacticClass : reflections.getSubTypesOf(Team.class)) {
       try {
-        Team team = tacticClass.newInstance(); //TODO detail as a main class
+        Team team = tacticClass.newInstance();
         CountryCode countryCode = team.getCountryCode();
         List<Team> tactteamListList = teams.get(countryCode);
         if (tactteamListList == null) {
@@ -109,6 +110,5 @@ public class TacticSelector {
     });
     return countryCodesList;
   }
-
 
 }

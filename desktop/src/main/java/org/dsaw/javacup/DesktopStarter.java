@@ -1,5 +1,6 @@
 package org.dsaw.javacup;
 
+import com.badlogic.gdx.Application;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplication;
 import com.badlogic.gdx.backends.lwjgl.LwjglApplicationConfiguration;
 
@@ -12,8 +13,10 @@ public class DesktopStarter {
     LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
     config.title = "JavaCup";
     config.useGL30 = false; //TODO :(
-    config.width = 1024;
-    config.height = 600;
-    new LwjglApplication(new JavaCup(), config);
+    //config.width = 1024;
+    //config.height = 600;
+
+    LwjglApplication app = new LwjglApplication(new JavaCup(), config);
+    app.setLogLevel(Application.LOG_DEBUG);
   }
 }

@@ -1,7 +1,6 @@
 package org.dsaw.javacup.screen;
 
 import com.badlogic.gdx.Gdx;
-import com.badlogic.gdx.Screen;
 import com.badlogic.gdx.graphics.Color;
 import com.badlogic.gdx.graphics.GL30;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
@@ -9,50 +8,46 @@ import com.badlogic.gdx.math.Rectangle;
 
 import org.dsaw.javacup.JavaCup;
 import org.dsaw.javacup.model.engine.Match;
-import org.dsaw.javacup.render.TacticSelector;
+import org.dsaw.javacup.render.TeamSelector;
 import org.dsaw.javacup.render.TeamSelectorRender;
 
 /**
  * @author Julio Gutierrez (29/05/2014)
  */
-public class TeamSelectionScreen implements Screen {
+public class VersusScreen extends AbstractScreen {
 
   private final JavaCup game;
-  private final TeamSelectorRender localTeamSelectorRender;
-  private final TeamSelectorRender visitorTeamSelectorRender;
+  public final TeamSelector localTS;
+  public final TeamSelector visitorTS;
 
-  private Rectangle button;
-  public TacticSelector localTacticSelector;
-  public TacticSelector visitorTacticSelector;
+  private final TeamSelectorRender localTSR;
+  private final TeamSelectorRender visitorTSR;
+  private final Rectangle button;
 
-  public TeamSelectionScreen(JavaCup game) {
+  public VersusScreen(JavaCup game) {
     this.game = game;
-    localTacticSelector = new TacticSelector();
-    visitorTacticSelector = new TacticSelector();
+    localTS = new TeamSelector();
+    visitorTS = new TeamSelector();
 
-    localTeamSelectorRender =
-        new TeamSelectorRender(game, localTacticSelector, 50, 200, 200, 200);// TODO generalize
-    visitorTeamSelectorRender =
-        new TeamSelectorRender(game, visitorTacticSelector, 400, 200, 200, 200);
+    localTSR = new TeamSelectorRender(localTS, 50, 200, 200, 200);// TODO generalize
+    visitorTSR = new TeamSelectorRender(visitorTS, 400, 200, 200, 200);
 
     button = new Rectangle(300, 50, 50, 50);
   }
 
-  private void update(float delta) {
+  @Override
+  public void update(float delta) {
     if (Gdx.input.justTouched()) {
       int x = Gdx.input.getX();
-      int y = Gdx.graphics.getHeight() - Gdx.input.getY();
-      Gdx.app.log("some", "X:" + x + "  Y:" + y);
-      localTeamSelectorRender.touch(x, y);
-      visitorTeamSelectorRender.touch(x, y);
+      int y = Gdx.input.getY();
+      Gdx.app.debug("justTouched", "X:" + x + "  Y:" + y);
+      localTSR.touch(x, y);
+      visitorTSR.touch(x, y);
       if (button.contains(x, y)) {
 
-        Match
-            match = null;
+        Match match = null;
         try {
-          match =
-              new Match(localTacticSelector.currentTeam(), visitorTacticSelector.currentTeam(),
-                        false);
+          match = new Match(localTS.getTeam(), visitorTS.getTeam(), false);
         } catch (Exception e) {
           e.printStackTrace();
         }
@@ -70,16 +65,17 @@ public class TeamSelectionScreen implements Screen {
 
   }
 
-  private void draw() {
+  @Override
+  public void render() {
     Gdx.gl.glClearColor(0, 0, 0, 1);
     Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
     //TODO background
 
-    localTeamSelectorRender.draw();
-    visitorTeamSelectorRender.draw();
+    localTSR.draw(game.cRenderer);
+    visitorTSR.draw(game.cRenderer);
 
-    ShapeRenderer shapeRenderer = game.shapeRenderer;
+    ShapeRenderer shapeRenderer = game.cRenderer.shape;
     shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
     shapeRenderer.setColor(new Color(0, 0, 1, 1));
     shapeRenderer.rect(button.x, button.y, button.width, button.height);
@@ -87,38 +83,32 @@ public class TeamSelectionScreen implements Screen {
   }
 
   @Override
-  public void render(float delta) {
-    update(delta);
-    draw();
-  }
-
-  @Override
   public void resize(int width, int height) {
-
+    Gdx.app.debug("resize", "resize");
   }
 
   @Override
   public void show() {
-
+    Gdx.app.debug("show", "show");
   }
 
   @Override
   public void hide() {
-
+    Gdx.app.debug("hide", "hide");
   }
 
   @Override
   public void pause() {
-
+    Gdx.app.debug("pause", "pause");
   }
 
   @Override
   public void resume() {
-
+    Gdx.app.debug("resume", "resume");
   }
 
   @Override
   public void dispose() {
-
+    Gdx.app.debug("dispose", "dispose");
   }
 }

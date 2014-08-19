@@ -12,6 +12,7 @@ import org.dsaw.javacup.JavaCup;
 import org.dsaw.javacup.model.engine.MatchInterface;
 import org.dsaw.javacup.model.util.Position;
 import org.dsaw.javacup.render.BallRenderV2;
+import org.dsaw.javacup.render.CompositeRenderer;
 import org.dsaw.javacup.render.FieldRenderV2;
 import org.dsaw.javacup.render.ScoreboardRenderV2;
 
@@ -95,7 +96,9 @@ public class MatchScreen implements Screen {
     Gdx.gl.glClearColor(0, 0, 0, 1);
     Gdx.gl.glClear(GL30.GL_COLOR_BUFFER_BIT);
 
-    ShapeRenderer shapeRenderer = game.shapeRenderer;
+    CompositeRenderer cRenderer = game.cRenderer;
+
+    ShapeRenderer shapeRenderer = cRenderer.shape;
     shapeRenderer.setProjectionMatrix(camera.combined);
     fieldRender.draw(shapeRenderer);
 
@@ -134,7 +137,7 @@ public class MatchScreen implements Screen {
     }
 
     scoreboardRender
-        .draw(shapeRenderer, game.batch, game.font, match.getDetalleLocal().getName(),
+        .draw(shapeRenderer, cRenderer.batch, cRenderer.font, match.getDetalleLocal().getName(),
               match.getGolesLocal(), match.getDetalleVisita().getName(),
               match.getGolesVisita(), match.getIteration()); //TODO time!
   }

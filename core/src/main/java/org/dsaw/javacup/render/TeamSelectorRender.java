@@ -1,24 +1,23 @@
 package org.dsaw.javacup.render;
 
 import com.badlogic.gdx.graphics.Color;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
-
-import org.dsaw.javacup.JavaCup;
 
 /**
  * @author Julio Gutierrez (30/05/2014)
  */
 public final class TeamSelectorRender {
 
-  private final JavaCup game;
-  private final TacticSelector tacticSelector;
 
-  private final float x;
-  private final float y;
-  private final float width;
-  private final float height;
+  private final TeamSelector teamSelector;
+
+  private float x;
+  private float y;
+  private float width;
+  private float height;
 
   //TODO crate wrapper
   private final Rectangle prevCountryBounds;
@@ -32,10 +31,9 @@ public final class TeamSelectorRender {
   private float tacticTextY;
 
 
-  public TeamSelectorRender(JavaCup game, TacticSelector tacticSelector, float x, float y,
+  public TeamSelectorRender(TeamSelector teamSelector, float x, float y,
                             float width, float height) {
-    this.game = game;
-    this.tacticSelector = tacticSelector;
+    this.teamSelector = teamSelector;
 
     this.x = x;
     this.y = y;
@@ -53,81 +51,83 @@ public final class TeamSelectorRender {
     tacticTextY = y + 35;
   }
 
-  public void draw() {
-    ShapeRenderer shapeRenderer = game.shapeRenderer;
-    shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+  public void draw(CompositeRenderer cRenderer) {
+    ShapeRenderer shape = cRenderer.shape;
 
-    shapeRenderer.setColor(new Color(0, 0, 1, 1));
-    shapeRenderer.rect(x, y, width, height);
+    shape.begin(ShapeRenderer.ShapeType.Filled);
 
-    shapeRenderer.setColor(new Color(1, 1, 1, 1)); //country buttons
-    shapeRenderer.rect(nextCountryBounds.x, nextCountryBounds.y, nextCountryBounds.width,
-                       nextCountryBounds.height);
-    shapeRenderer
+    shape.setColor(new Color(0, 0, 1, 1));
+    shape.rect(x, y, width, height);
+
+    shape.setColor(new Color(1, 1, 1, 1)); //country buttons
+    shape.rect(nextCountryBounds.x, nextCountryBounds.y, nextCountryBounds.width,
+               nextCountryBounds.height);
+    shape
         .rect(prevCountryBounds.x, prevCountryBounds.y, prevCountryBounds.width,
               prevCountryBounds.height);
 
-    shapeRenderer.rect(nextTacticBounds.x, nextTacticBounds.y, nextTacticBounds.width,
-                       nextTacticBounds.height);
-    shapeRenderer
+    shape.rect(nextTacticBounds.x, nextTacticBounds.y, nextTacticBounds.width,
+               nextTacticBounds.height);
+    shape
         .rect(prevTacticBounds.x, prevTacticBounds.y, prevTacticBounds.width,
               prevTacticBounds.height);
-    shapeRenderer.end();
+    shape.end();
 
-    shapeRenderer.begin(ShapeRenderer.ShapeType.Line);
-    shapeRenderer.setColor(new Color(0, 0, 0, 1)); //country lines inside "buttons"
-    shapeRenderer.line(nextCountryBounds.x, nextCountryBounds.y,
-                       nextCountryBounds.x + nextCountryBounds.width,
-                       nextCountryBounds.y + nextCountryBounds.height / 2);
-    shapeRenderer.line(nextCountryBounds.x, nextCountryBounds.y + nextCountryBounds.height,
-                       nextCountryBounds.x + nextCountryBounds.width,
-                       nextCountryBounds.y + nextCountryBounds.height / 2);
-    shapeRenderer.line(prevCountryBounds.x + prevCountryBounds.width, prevCountryBounds.y,
-                       prevCountryBounds.x,
-                       prevCountryBounds.y + prevCountryBounds.height / 2);
-    shapeRenderer.line(prevCountryBounds.x + prevCountryBounds.width,
-                       prevCountryBounds.y + prevCountryBounds.height,
-                       prevCountryBounds.x,
-                       prevCountryBounds.y + prevCountryBounds.height / 2);
+    shape.begin(ShapeRenderer.ShapeType.Line);
+    shape.setColor(new Color(0, 0, 0, 1)); //country lines inside "buttons"
+    shape.line(nextCountryBounds.x, nextCountryBounds.y,
+               nextCountryBounds.x + nextCountryBounds.width,
+               nextCountryBounds.y + nextCountryBounds.height / 2);
+    shape.line(nextCountryBounds.x, nextCountryBounds.y + nextCountryBounds.height,
+               nextCountryBounds.x + nextCountryBounds.width,
+               nextCountryBounds.y + nextCountryBounds.height / 2);
+    shape.line(prevCountryBounds.x + prevCountryBounds.width, prevCountryBounds.y,
+               prevCountryBounds.x,
+               prevCountryBounds.y + prevCountryBounds.height / 2);
+    shape.line(prevCountryBounds.x + prevCountryBounds.width,
+               prevCountryBounds.y + prevCountryBounds.height,
+               prevCountryBounds.x,
+               prevCountryBounds.y + prevCountryBounds.height / 2);
 
-    shapeRenderer.line(nextTacticBounds.x, nextTacticBounds.y,
-                       nextTacticBounds.x + nextTacticBounds.width,
-                       nextTacticBounds.y + nextTacticBounds.height / 2);
-    shapeRenderer.line(nextTacticBounds.x, nextTacticBounds.y + nextTacticBounds.height,
-                       nextTacticBounds.x + nextTacticBounds.width,
-                       nextTacticBounds.y + nextTacticBounds.height / 2);
-    shapeRenderer.line(prevTacticBounds.x + prevTacticBounds.width, prevTacticBounds.y,
-                       prevTacticBounds.x,
-                       prevTacticBounds.y + prevTacticBounds.height / 2);
-    shapeRenderer.line(prevTacticBounds.x + prevTacticBounds.width,
-                       prevTacticBounds.y + prevTacticBounds.height,
-                       prevTacticBounds.x,
-                       prevTacticBounds.y + prevTacticBounds.height / 2);
-    shapeRenderer.end();
+    shape.line(nextTacticBounds.x, nextTacticBounds.y,
+               nextTacticBounds.x + nextTacticBounds.width,
+               nextTacticBounds.y + nextTacticBounds.height / 2);
+    shape.line(nextTacticBounds.x, nextTacticBounds.y + nextTacticBounds.height,
+               nextTacticBounds.x + nextTacticBounds.width,
+               nextTacticBounds.y + nextTacticBounds.height / 2);
+    shape.line(prevTacticBounds.x + prevTacticBounds.width, prevTacticBounds.y,
+               prevTacticBounds.x,
+               prevTacticBounds.y + prevTacticBounds.height / 2);
+    shape.line(prevTacticBounds.x + prevTacticBounds.width,
+               prevTacticBounds.y + prevTacticBounds.height,
+               prevTacticBounds.x,
+               prevTacticBounds.y + prevTacticBounds.height / 2);
+    shape.end();
 
-    SpriteBatch batch = game.batch;
+    SpriteBatch batch = cRenderer.batch;
+    BitmapFont font = cRenderer.font;
     batch.begin();
-    game.font.draw(batch, tacticSelector.currentCountry().getName(), countryTextX, countryTextY);
-    game.font.draw(batch, tacticSelector.currentTeam().getName(), tacticTextX,
-                   tacticTextY);
+    font.draw(batch, teamSelector.getCountry().getName(), countryTextX, countryTextY);
+    font.draw(batch, teamSelector.getTeam().getName(), tacticTextX,
+              tacticTextY);
     batch.end();
   }
 
   public void touch(float x, float y) {
     if (prevCountryBounds.contains(x, y)) {
-      tacticSelector.prevCountry();
+      teamSelector.prevCountry();
     }
 
     if (nextCountryBounds.contains(x, y)) {
-      tacticSelector.nextCountry();
+      teamSelector.nextCountry();
     }
 
     if (prevTacticBounds.contains(x, y)) {
-      tacticSelector.prevTactic();
+      teamSelector.prevTeam();
     }
 
     if (nextTacticBounds.contains(x, y)) {
-      tacticSelector.nextTactic();
+      teamSelector.nextTeam();
     }
   }
 
