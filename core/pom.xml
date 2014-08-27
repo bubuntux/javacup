@@ -53,6 +53,21 @@
         </dependency>
         <!-- TODO remove-->
 
+        <dependency>
+            <groupId>junit</groupId>
+            <artifactId>junit</artifactId>
+            <version>4.11</version>
+            <scope>test</scope>
+        </dependency>
+
+
+        <dependency>  <!-- Move to a general project -->
+            <groupId>com.google.guava</groupId>
+            <artifactId>guava-testlib</artifactId>
+            <version>17.0</version>
+            <scope>test</scope>
+        </dependency>
+
     </dependencies>
 
     <build>

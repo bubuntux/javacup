@@ -71,4 +71,38 @@ public abstract class Team {
   protected abstract String name();
 
   protected abstract CountryCode countryCode();
+
+  @Override
+  public final boolean equals(Object o) {
+    if (this == o) {
+      return true;
+    }
+    if (o == null || getClass() != o.getClass()) {
+      return false;
+    }
+
+    Team team = (Team) o;
+    if (countryCode != team.countryCode) {
+      return false;
+    }
+    if (name != null ? !name.equals(team.name) : team.name != null) {
+      return false;
+    }
+
+    return true;
+  }
+
+  @Override
+  public final int hashCode() {
+    int result = name != null ? name.hashCode() : 0;
+    result = 31 * result + (countryCode != null ? countryCode.hashCode() : 0);
+    return result;
+  }
+
+  @Override
+  public String toString() { //TODO remove
+    return "Team{" +
+           "name='" + name + '\'' +
+           '}';
+  }
 }

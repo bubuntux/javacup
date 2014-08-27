@@ -6,13 +6,14 @@ import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.math.Rectangle;
 
+
 /**
  * @author Julio Gutierrez (30/05/2014)
  */
-public final class TeamSelectorRender {
+public final class TeamSelectorRender {/*
 
 
-  private final TeamSelector teamSelector;
+  private final TeamLoader teamLoader;
 
   private float x;
   private float y;
@@ -31,9 +32,9 @@ public final class TeamSelectorRender {
   private float tacticTextY;
 
 
-  public TeamSelectorRender(TeamSelector teamSelector, float x, float y,
+  public TeamSelectorRender(TeamLoader teamLoader, float x, float y,
                             float width, float height) {
-    this.teamSelector = teamSelector;
+    this.teamLoader = teamLoader;
 
     this.x = x;
     this.y = y;
@@ -107,28 +108,28 @@ public final class TeamSelectorRender {
     SpriteBatch batch = cRenderer.batch;
     BitmapFont font = cRenderer.font;
     batch.begin();
-    font.draw(batch, teamSelector.getCountry().getName(), countryTextX, countryTextY);
-    font.draw(batch, teamSelector.getTeam().getName(), tacticTextX,
+    font.draw(batch, teamLoader.getCountry().getName(), countryTextX, countryTextY);
+    font.draw(batch, teamLoader.getTeam().getName(), tacticTextX,
               tacticTextY);
     batch.end();
   }
 
   public void touch(float x, float y) {
     if (prevCountryBounds.contains(x, y)) {
-      teamSelector.prevCountry();
+      teamLoader.prevCountry();
     }
 
     if (nextCountryBounds.contains(x, y)) {
-      teamSelector.nextCountry();
+      teamLoader.nextCountry();
     }
 
     if (prevTacticBounds.contains(x, y)) {
-      teamSelector.prevTeam();
+      teamLoader.prevTeam();
     }
 
     if (nextTacticBounds.contains(x, y)) {
-      teamSelector.nextTeam();
+      teamLoader.nextTeam();
     }
   }
-
+*/
 }
