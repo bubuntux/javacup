@@ -39,7 +39,7 @@ public class VersusScreen implements Screen {
     stage.addActor(b);
 
     TeamSelector local = new TeamSelector(game.teams, game.skin);
-    local.setX(340);
+    local.setX(150);
     local.setY(200);
     stage.addActor(local);
 

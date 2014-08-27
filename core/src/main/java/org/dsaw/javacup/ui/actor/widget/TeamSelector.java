@@ -1,13 +1,14 @@
 package org.dsaw.javacup.ui.actor.widget;
 
+import com.badlogic.gdx.scenes.scene2d.Actor;
 import com.badlogic.gdx.scenes.scene2d.ui.SelectBox;
 import com.badlogic.gdx.scenes.scene2d.ui.Skin;
 import com.badlogic.gdx.scenes.scene2d.ui.VerticalGroup;
+import com.badlogic.gdx.scenes.scene2d.utils.ChangeListener;
 import com.neovisionaries.i18n.CountryCode;
 
 import org.dsaw.javacup.model.Team;
 
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.EnumMap;
 import java.util.LinkedList;
@@ -47,15 +48,26 @@ public class TeamSelector extends VerticalGroup {
 
     countries = new SelectBox<>(skin);
     CountryCode[] c = new CountryCode[countryCodes.size()];
-    countries.setItems(countryCodes.toArray(c));
+    countries.setItems(countryCodes.toArray(c)); //TODO clean up
+    countries.addListener(new ChangeListener() {
+      @Override
+      @SuppressWarnings({"unchecked"})
+      public void changed(ChangeEvent event, Actor actor) {
+        updateTeams((SelectBox<CountryCode>) actor);
+      }
+    });
     addActor(countries);
 
     teamsSC = new SelectBox<>(skin);
-    Team[] c2 = new Team[teams.size()];
-    ArrayList<Team> list = new ArrayList<>(teams);
-    teamsSC.setItems(list.toArray(c2));
+    updateTeams(countries);
     addActor(teamsSC);
   }
 
+  private void updateTeams(SelectBox<CountryCode> actor) {
+    CountryCode countryCode = actor.getSelected();
+    List<Team> teams1 = teamsMappedByCountryCode.get(countryCode);
+    Team[] t = new Team[teams1.size()];
+    teamsSC.setItems(teams1.toArray(t)); //TODO clean up
+  }
 
 }
